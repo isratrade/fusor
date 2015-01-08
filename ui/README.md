@@ -2,11 +2,15 @@
 
 Fusor_ui is a rails engine that is added to [Foreman](https://github.com/theforeman/foreman/).
 
-Fusor_ui is essentially the output from the [/dist/](https://github.com/fusor/fusor-demo/dist/) directory of [https://github.com/fusor/fusor-demo/](https://github.com/fusor/fusor-demo/) which is an [ember-cli](http://www.ember-cli.com/) project that contains assets such as javascript, stylesheets, images, and fonts.
+Fusor_ui is essentially the output from the /dist directory of [https://github.com/fusor/fusor-demo/](https://github.com/fusor/fusor-demo/) which is an [ember-cli](http://www.ember-cli.com/) project that contains assets such as javascript, stylesheets, images, and fonts.
 
 ## Important Note
 
-Do not work on the files in [app/assets](https://github.com/fusor/fusor/tree/master/ui/app/assets) directly. These files will be overwritten by future commits when the code in [fusor-demo](https://github.com/fusor/fusor-demo/) changes.
+Do NOT work directly on the files in [app/assets](https://github.com/fusor/fusor/tree/master/ui/app/assets). These files will be overwritten by future commits when the code in [fusor-demo](https://github.com/fusor/fusor-demo/) changes.
+
+The /dist directory is listed in the [.gitignore](https://github.com/fusor/fusor-demo/blob/master/.gitignore) file of [fusor-demo](https://github.com/fusor/fusor-demo/) so you wont find it in the [fusor-demo](https://github.com/fusor/fusor-demo/) repository.
+
+The /dist distory is generated automatically by [ember-cli](http://www.ember-cli.com/) if you run `ember server` locally or inside the project or `ember build`
 
 ## Workflow
 
