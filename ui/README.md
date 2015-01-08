@@ -1,13 +1,22 @@
-# FusorUi
+# fusor_ui
 
-FusorUi is a rails engine that is added to [Foreman](https://github.com/theforeman/foreman/).
+Fusor_ui is a rails engine that is added to [Foreman](https://github.com/theforeman/foreman/).
 
-It is currently just adds assets (javascript, stylesheets, images, fonts) from an ember-cli project entitled [fuser-demo](https://github.com/fusor/fusor-demo/)
+Fusor_ui is essentially the output from the /dist directory of [https://github.com/fusor/fusor-demo/](https://github.com/fusor/fusor-demo/) which is an [ember-cli](http://www.ember-cli.com/) that contains assets such as javascript, stylesheets, images, and fonts.
+
+## Important Note
+
+Do not work on the files in [app/assets](https://github.com/fusor/fusor/tree/master/ui/app/assets) directly. These files will be overwritten by future commits when the code in [fusor-demo](https://github.com/fusor/fusor-demo/) changes.
+
+## Workflow
+
+- Clone [fusor-demo](https://github.com/fusor/fusor-demo/) to your local computer
+- Clone [fusor](https://github.com/fusor/) to your local computer
 
 ## Installation
 
 ```ruby
-gem 'fusor_ui', :git => 'https://github.com/isratrade/fusor_ui.git
+gem 'fusor_ui', :git => 'https://github.com/fusor/ui.git
 ```
 
 ## Usage
