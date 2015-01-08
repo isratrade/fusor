@@ -16,11 +16,11 @@ Follow the workflow below the next steps.
 
 ## Workflow
 
-1. Clone [fusor-demo](https://github.com/fusor/fusor-demo/) to your HOME directory on your local computer. I use `cp ~/fusor-demo/` in the [prep](https://github.com/fusor/fusor/blob/master/ui/prep) script.
+1. Clone [fusor-demo](https://github.com/fusor/fusor-demo/) to your HOME directory (cd ~) on your local computer. If not in home directory, you will need to modify the [prep](https://github.com/fusor/fusor/blob/master/ui/prep) script.
 2. Clone [fusor](https://github.com/fusor/) to your local computer
-3. cd fusor/ui directory
+3. `cd fusor/ui`
 4. run script `./prep` which copies files from `fusor-demo/dist` to the `fusor/ui` repo
-5. cd ../ to return to local fusor directory
+5. `cd ../` to return to local `fusor` directory
 6. git push changes to your forked repo or fusor and create PR
 
 ## Installation
