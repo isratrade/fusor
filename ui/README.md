@@ -10,12 +10,18 @@ Do NOT work directly on the files in [app/assets](https://github.com/fusor/fusor
 
 The /dist directory is listed in the [.gitignore](https://github.com/fusor/fusor-demo/blob/master/.gitignore) file of [fusor-demo](https://github.com/fusor/fusor-demo/) so you wont find it in the [fusor-demo](https://github.com/fusor/fusor-demo/) repository.
 
-The /dist distory is generated automatically by [ember-cli](http://www.ember-cli.com/) if you run `ember server` locally or inside the project or `ember build`
+The /dist distory is generated automatically by [ember-cli](http://www.ember-cli.com/) if you run `ember server` locally or inside the project or `ember build`.
+
+Follow the workflow below the next steps.
 
 ## Workflow
 
-- Clone [fusor-demo](https://github.com/fusor/fusor-demo/) to your local computer
-- Clone [fusor](https://github.com/fusor/) to your local computer
+1. Clone [fusor-demo](https://github.com/fusor/fusor-demo/) to your HOME directory on your local computer. I use `cp ~/fusor-demo/` in the [prep](https://github.com/fusor/fusor/blob/master/ui/prep) script.
+2. Clone [fusor](https://github.com/fusor/) to your local computer
+3. cd fusor/ui directory
+4. run script `./prep` which copies files from `fusor-demo/dist` to the `fusor/ui` repo
+5. cd ../ to return to local fusor directory
+6. git push changes to your forked repo or fusor and create PR
 
 ## Installation
 
