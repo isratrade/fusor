@@ -2,7 +2,7 @@
 
 Fusor_ui is a rails engine that is added to [Foreman](https://github.com/theforeman/foreman/).
 
-Fusor_ui is essentially the output from the /dist directory of [https://github.com/fusor/fusor-demo/](https://github.com/fusor/fusor-demo/) which is an [ember-cli](http://www.ember-cli.com/) that contains assets such as javascript, stylesheets, images, and fonts.
+Fusor_ui is essentially the output from the [/dist/](https://github.com/fusor/fusor-demo/dist/) directory of [https://github.com/fusor/fusor-demo/](https://github.com/fusor/fusor-demo/) which is an [ember-cli](http://www.ember-cli.com/) project that contains assets such as javascript, stylesheets, images, and fonts.
 
 ## Important Note
 
