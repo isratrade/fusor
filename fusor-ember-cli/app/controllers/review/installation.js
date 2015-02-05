@@ -110,7 +110,7 @@ export default Ember.Controller.extend({
       });
 
       //engine's hypervisor hostAddress
-     if (self.get('controllers.rhev-options.engineAdminPassword')) {
+     if (self.get('hostAddress')) {
       Ember.$.ajax({
           url: '/api/v2/smart_class_parameters/' + self.get('engineHostAddressLookupKeyId') + '/override_values',
           type: "POST",
@@ -133,6 +133,8 @@ export default Ember.Controller.extend({
             reject(response);
           }
       });
+
+     }
       //engine admin password
      if (self.get('controllers.rhev-options.engineAdminPassword')) {
       Ember.$.ajax({
