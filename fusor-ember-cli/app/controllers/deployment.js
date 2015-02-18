@@ -16,6 +16,12 @@ export default Ember.ObjectController.extend({
 
   deploymentName: Ember.computed.alias("controllers.satellite/index.name"),
 
+  isDisabledRhev: false,
+  isDisabledOpenstack: false,
+  isDisabledCloudForms: false,
+  isDisabledReview: false,
+  isDisabledSubscriptions: false,
+
   disableReview: false, //Ember.computed.alias("controllers.subscriptions.disableNext"),
   stepNumberRhev: 2,
 
