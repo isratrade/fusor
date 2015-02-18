@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
-  needs: ['rhci', 'subscriptions', 'satellite/index'],
+  needs: ['rhci', 'subscriptions', 'satellite/index', 'configure-environment'],
 
   isSatellite: Ember.computed.alias("controllers.rhci.isSatellite"),
   isRhev: Ember.computed.alias("controllers.rhci.isRhev"),
@@ -16,7 +16,8 @@ export default Ember.ObjectController.extend({
 
   deploymentName: Ember.computed.alias("controllers.satellite/index.name"),
 
-  isDisabledRhev: false,
+  isDisabledRhev: Ember.computed.alias("controllers.configure-environment.disable1CNext"),
+
   isDisabledOpenstack: false,
   isDisabledCloudForms: false,
   isDisabledReview: false,
