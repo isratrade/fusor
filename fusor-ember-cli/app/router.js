@@ -18,6 +18,10 @@ Router.map(function() {
 
   this.resource('deployment', function() {
 
+    this.resource('containers', function() {
+      this.route('master');
+    });
+
     this.resource('satellite', function() {
       this.resource('configure-organization');
       this.resource('configure-environment');
