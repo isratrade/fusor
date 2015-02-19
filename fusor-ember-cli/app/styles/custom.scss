@@ -352,6 +352,69 @@ label.env_path_active:after {
 
 /* WIZARD stuff */
 
+/*.wizard li {
+  padding: 7px 7px 10px;
+  margin-right: 5px;
+  margin-bottom: 30px;
+  background: #fff;
+  position: relative;
+  display: inline-block;
+}
+
+/* deleting wizard.css works, but when plugin, it's there, so it messes things up
+I need to overwrite what causes the blue square */
+
+.wizard li {
+  padding: 7px 7px 10px; /*default 8px 12px 8px;*/
+  margin-right: 5px;
+  margin-bottom: 30px;
+  background: #fff;
+  position: relative;
+  display: inline-block;
+  &:before {
+    width: 0;
+    height: 0;
+    border-top: 0px inset transparent;
+    border-bottom: 0px inset transparent;
+    border-left: 0px solid #fff;
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+ }
+ &:after {
+   width: 0;
+   height: 0;
+   border-top: 0px inset transparent;
+   border-bottom: 0px inset transparent;
+   border-left: 0px solid #fff;
+   position: absolute;
+   content: "";
+   top: 0;
+   right: 0px;
+   z-index: 2;
+ }
+}
+
+.wizard .badge {
+  margin: 0 5px 0 18px;
+  position: relative;
+  top: -1px;
+}
+.wizard a:first-child .badge {
+  margin-left: 0;
+}
+.wizard .active {
+  background: #007ACC;
+  color: #fff;
+  &:after {
+    border-left-color: #007ACC;
+ }
+}
+
+
+/***********/
+
 .wizard-block {
   display: inline-block;
 }
@@ -373,14 +436,7 @@ label.env_path_active:after {
   color: #555;
 }
 
-.wizard li {
-  padding: 7px 7px 10px;
-  margin-right: 5px;
-  margin-bottom: 30px;
-  background: #fff;
-  position: relative;
-  display: inline-block;
-}
+
 
 .wizard li.disabled {
   color: #ddd !important;
