@@ -1906,7 +1906,8 @@ define('fusor-ember-cli/controllers/satellite/index', ['exports', 'ember'], func
 
   exports['default'] = Ember['default'].ObjectController.extend({
 
-    name: "",
+    name: null,
+    description: null,
 
     disable1B: (function () {
       return this.get("name.length") === 0;
@@ -3492,14 +3493,41 @@ define('fusor-ember-cli/templates/application', ['exports', 'ember'], function (
   exports['default'] = Ember['default'].Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
   helpers = this.merge(helpers, Ember['default'].Handlebars.helpers); data = data || {};
-    var buffer = '', stack1, helper, options, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
+    var buffer = '', stack1, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, self=this;
 
+  function program1(depth0,data) {
+    
+    var buffer = '', stack1;
+    data.buffer.push("\n  ");
+    stack1 = helpers['if'].call(depth0, "isLoggedIn", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0],types:["ID"],data:data});
+    if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+    data.buffer.push("\n\n  ");
+    stack1 = helpers['if'].call(depth0, "showMainMenu", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],data:data});
+    if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+    data.buffer.push("\n");
+    return buffer;
+    }
+  function program2(depth0,data) {
+    
+    var buffer = '', helper, options;
+    data.buffer.push("\n    ");
+    data.buffer.push(escapeExpression((helper = helpers.partial || (depth0 && depth0.partial),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "topbar", options) : helperMissing.call(depth0, "partial", "topbar", options))));
+    data.buffer.push("\n  ");
+    return buffer;
+    }
 
-    data.buffer.push("\n  \n    \n  \n\n  \n    \n  \n\n\n\n\n<div class=\"pull-right\">\n      <a ");
-    data.buffer.push(escapeExpression(helpers.action.call(depth0, "toggleSideMenu", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-    data.buffer.push(" class=\"uxnotes\">\n      UX Notes &nbsp;<i class=\"fa fa-bars fa-lg white\"></i>\n      </a>\n</div>\n\n");
-    data.buffer.push(escapeExpression((helper = helpers.render || (depth0 && depth0.render),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "side-menu", options) : helperMissing.call(depth0, "render", "side-menu", options))));
-    data.buffer.push("\n\n<div ");
+  function program4(depth0,data) {
+    
+    var buffer = '', helper, options;
+    data.buffer.push("\n    ");
+    data.buffer.push(escapeExpression((helper = helpers.partial || (depth0 && depth0.partial),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "mainmenu", options) : helperMissing.call(depth0, "partial", "mainmenu", options))));
+    data.buffer.push("\n  ");
+    return buffer;
+    }
+
+    stack1 = helpers['if'].call(depth0, "isEmberCliMode", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+    if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+    data.buffer.push("\n\n\n\n<!-- <div class=\"pull-right\">\n      <a  class=\"uxnotes\">\n      UX Notes &nbsp;<i class=\"fa fa-bars fa-lg white\"></i>\n      </a>\n</div>\n -->\n\n\n<div ");
     data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
       'class': ("isContainer:container:container-fluid")
     },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},contexts:[],types:[],data:data})));
@@ -7802,7 +7830,7 @@ define('fusor-ember-cli/templates/topbar', ['exports', 'ember'], function (expor
   function program3(depth0,data) {
     
     
-    data.buffer.push("\n          <a href=\"/\">RED HAT SATELLITE</a>\n        ");
+    data.buffer.push("\n          <a href=\"/\">\n            <img alt=\"Header-logotype\" src=\"assets/Header-logotype.png\">\n          </a>\n        ");
     }
 
   function program5(depth0,data) {
@@ -7822,24 +7850,12 @@ define('fusor-ember-cli/templates/topbar', ['exports', 'ember'], function (expor
     },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},contexts:[],types:[],data:data})));
     data.buffer.push(">\n  <div class=\"navbar-header\">\n    <div ");
     data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
-      'class': ("isUpstream:container:container-fluid")
+      'class': ("isUpstream:container:container")
     },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},contexts:[],types:[],data:data})));
     data.buffer.push(">\n\n      <div class=\"navbar-brand\">\n        ");
     stack1 = helpers['if'].call(depth0, "isUpstream", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
     if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-    data.buffer.push("\n      </div>\n\n      <ul class=\"nav navbar-nav navbar-right navbar-header-menu navbar-collapse collapse\">\n\n        <li class=\"dropdown menu_tab_dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">\n            \n            ");
-    stack1 = helpers._triageMustache.call(depth0, "session.content.provider", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-    if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-    data.buffer.push("\n            ");
-    stack1 = helpers._triageMustache.call(depth0, "session.authType", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-    if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-    data.buffer.push("&nbsp;\n            ");
-    stack1 = helpers._triageMustache.call(depth0, "session.basicAuthToken", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-    if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-    data.buffer.push("\n            ");
-    stack1 = helpers._triageMustache.call(depth0, "session.access_token", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-    if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-    data.buffer.push("&nbsp;\n            <img alt=\"Change your avatar at gravatar.com\" class=\"avatar small\" src=\"assets/user.jpg\">");
+    data.buffer.push("\n      </div>\n\n      <ul class=\"nav navbar-nav navbar-right navbar-header-menu navbar-collapse collapse\">\n\n        <li class=\"dropdown menu_tab_dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">\n            \n            \n            &nbsp;\n            \n            &nbsp;\n            <img alt=\"Change your avatar at gravatar.com\" class=\"avatar small\" src=\"assets/user.jpg\">");
     stack1 = helpers._triageMustache.call(depth0, "loginUsername", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
     if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
     data.buffer.push(" <span class=\"caret\"></span>\n          </a>\n\n          <ul class=\"dropdown-menu pull-right\">\n\n            ");
