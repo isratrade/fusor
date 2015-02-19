@@ -1,14 +1,14 @@
-{{#if isEmberCliMode}}
-  {{#if isLoggedIn}}
-    {{partial "topbar"}}
-  {{/if}}
+{{!#if isEmberCliMode}}
+  {{!#if isLoggedIn}}
+    {{!partial "topbar"}}
+  {{!/if}}
 
-  {{#if showMainMenu}}
-    {{partial "mainmenu"}}
-  {{/if}}
-{{/if}}
+  {{!#if showMainMenu}}
+    {{!partial "mainmenu"}}
+  {{!/if}}
+{{!/if}}
 
-{{upstream-downstream isUpstream=isUpstream}}
+{{!upstream-downstream isUpstream=isUpstream}}
 
 <div class="pull-right">
       <a {{action 'toggleSideMenu'}} class="uxnotes">

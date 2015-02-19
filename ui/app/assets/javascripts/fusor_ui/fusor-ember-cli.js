@@ -3492,45 +3492,10 @@ define('fusor-ember-cli/templates/application', ['exports', 'ember'], function (
   exports['default'] = Ember['default'].Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
   helpers = this.merge(helpers, Ember['default'].Handlebars.helpers); data = data || {};
-    var buffer = '', stack1, helper, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, self=this;
+    var buffer = '', stack1, helper, options, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
 
-  function program1(depth0,data) {
-    
-    var buffer = '', stack1;
-    data.buffer.push("\n  ");
-    stack1 = helpers['if'].call(depth0, "isLoggedIn", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0],types:["ID"],data:data});
-    if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-    data.buffer.push("\n\n  ");
-    stack1 = helpers['if'].call(depth0, "showMainMenu", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],data:data});
-    if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-    data.buffer.push("\n");
-    return buffer;
-    }
-  function program2(depth0,data) {
-    
-    var buffer = '', helper, options;
-    data.buffer.push("\n    ");
-    data.buffer.push(escapeExpression((helper = helpers.partial || (depth0 && depth0.partial),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "topbar", options) : helperMissing.call(depth0, "partial", "topbar", options))));
-    data.buffer.push("\n  ");
-    return buffer;
-    }
 
-  function program4(depth0,data) {
-    
-    var buffer = '', helper, options;
-    data.buffer.push("\n    ");
-    data.buffer.push(escapeExpression((helper = helpers.partial || (depth0 && depth0.partial),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "mainmenu", options) : helperMissing.call(depth0, "partial", "mainmenu", options))));
-    data.buffer.push("\n  ");
-    return buffer;
-    }
-
-    stack1 = helpers['if'].call(depth0, "isEmberCliMode", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
-    if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-    data.buffer.push("\n\n");
-    data.buffer.push(escapeExpression((helper = helpers['upstream-downstream'] || (depth0 && depth0['upstream-downstream']),options={hash:{
-      'isUpstream': ("isUpstream")
-    },hashTypes:{'isUpstream': "ID"},hashContexts:{'isUpstream': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "upstream-downstream", options))));
-    data.buffer.push("\n\n<div class=\"pull-right\">\n      <a ");
+    data.buffer.push("\n  \n    \n  \n\n  \n    \n  \n\n\n\n\n<div class=\"pull-right\">\n      <a ");
     data.buffer.push(escapeExpression(helpers.action.call(depth0, "toggleSideMenu", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
     data.buffer.push(" class=\"uxnotes\">\n      UX Notes &nbsp;<i class=\"fa fa-bars fa-lg white\"></i>\n      </a>\n</div>\n\n");
     data.buffer.push(escapeExpression((helper = helpers.render || (depth0 && depth0.render),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "side-menu", options) : helperMissing.call(depth0, "render", "side-menu", options))));
