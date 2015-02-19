@@ -2,7 +2,8 @@ import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
 
-  name: '',
+  name: null,
+  description: null,
 
   disable1B: function() {
     return (this.get('name.length') === 0);

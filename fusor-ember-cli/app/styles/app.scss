@@ -30,7 +30,7 @@
 @import "downstream/topbar";
 @import "downstream/typography";
 @import "downstream/wizard";
-@import "custom";
+@import "custom"; /*overwrites some wizard stuff*/
 
 /*
 @import "katello";
