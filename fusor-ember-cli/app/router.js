@@ -14,7 +14,7 @@ Router.map(function() {
   this.route('loggedin');
 
   this.route('rhci', { path: '/deployments/new' });
-  this.route('deployments');
+  this.resource('deployments');
 
   this.resource('deployment', function() {
 

@@ -14,11 +14,11 @@
     </thead>
 
   <tbody>
-  {{#each controller.model itemController="deployment"}}
+  {{#each deployment in controller.model itemController="deployment"}}
     <tr>
-      <td> {{name}} </td>
-      <td> {{environment_id}} </td>
-      <td> {{organization_id}} </td>
+      <td> {{deployment.name}} </td>
+      <td> {{deployment.lifecycle_environment_id}} </td>
+      <td> {{deployment.organization_id}} </td>
     </tr>
   {{/each}}
   </tbody>
