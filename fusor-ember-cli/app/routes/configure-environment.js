@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
   model: function() {
+//    TODO after here selectOrganizationId
     return this.store.find('lifecycle-environment');
   },
 
