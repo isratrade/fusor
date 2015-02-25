@@ -2,8 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-  selectedOrgId: 1, //MAKE NULL WHEN PACKAGING
-
   isChecked: function () {
     var org = this.get('org');
     var org_name = org.get('name');
@@ -55,7 +53,8 @@ export default Ember.Component.extend({
   click: function(event) {
     //this.set('color', 'blue');
     var org = this.get('org');
-    var org_name = org.get('name');
-    this.set('selectedOrganzation', org_name);
+//    this.set('selectedOrganzation', org);
+    this.sendAction('action', org);
+
   },
 });

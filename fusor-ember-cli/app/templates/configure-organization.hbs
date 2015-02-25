@@ -4,9 +4,9 @@
     <p>
       Choose an organization for this deployment. Organizations divide hosts into logical groups based on ownership, purpose, content, security level, or other divisions.
     </p>
-
+    <br />
     {{#each org in model itemController="organization"}}
-      {{tr-organization org=org selectedOrganzation=selectedOrganzation selectedOrgId=selectedOrgId}}
+      {{tr-organization org=org action="selectOrganization"}}
     {{/each}}
     <div style='margin-top:15px;margin-bottom:15px;'>
      <button class='btn btn-default' {{action 'showModal' 'newOrganizationModal'}}>New Organization</button>
@@ -16,7 +16,7 @@
     <br />
     <div style='float:right'>
         {{#link-to 'satellite' class='btn btn-default'}}Back{{/link-to}}
-        {{#link-to 'configure-environment' (query-params organization_id=organizationId) class='btn btn-primary' disabled=disable1BNext}}Next{{/link-to}}
+        {{#link-to 'configure-environment' (query-params organization_id=selectedOrganzationId) class='btn btn-primary' disabled=disable1BNext}}Next{{/link-to}}
     </div>
   </div>
 </div>
