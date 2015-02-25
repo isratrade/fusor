@@ -3,7 +3,7 @@ import DS from 'ember-data';
 export default DS.Model.extend({
   name: DS.attr('string'),
   organization: DS.belongsTo('organization')
-  lifecycle_environment: DS.belongsTo('lifecycle_environment')
+  lifecycle_environment: DS.belongsTo('lifecycle_environment'),
 
   deploy_rhev: DS.attr('boolean'),
   deploy_cfme: DS.attr('boolean'),
