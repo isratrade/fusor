@@ -4,6 +4,8 @@ export default DS.Model.extend({
   name: DS.attr('string'),
   label: DS.attr('string'),
   description: DS.attr('string'),
-  prior: DS.attr('string')
-//  organization: DS.belongsTo('organization')
+  library: DS.attr('boolean'),
+  created_at: DS.attr('date'),
+  updated_at: DS.attr('date'),
+  organization: DS.belongsTo('organization')
 });
