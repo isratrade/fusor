@@ -3,8 +3,8 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
   model: function() {
-//    TODO after here selectOrganizationId
-    return this.store.find('lifecycle-environment');
+    var orgId = this.controllerFor('configure-organization').get('selectedOrganzationId');
+    return this.store.find('lifecycle-environment', {organization_id: orgId});
   },
 
   activate: function() {
