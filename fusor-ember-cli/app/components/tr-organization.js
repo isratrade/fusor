@@ -53,8 +53,6 @@ export default Ember.Component.extend({
   click: function(event) {
     //this.set('color', 'blue');
     var org = this.get('org');
-//    this.set('selectedOrganzation', org);
     this.sendAction('action', org);
-
   },
 });

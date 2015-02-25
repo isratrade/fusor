@@ -1,12 +1,14 @@
 <div class="row">
   <div class='col-md-6'>
-
+{{selectedOrganzationId}}
     <p>
       Choose an organization for this deployment. Organizations divide hosts into logical groups based on ownership, purpose, content, security level, or other divisions.
     </p>
     <br />
     {{#each org in model itemController="organization"}}
-      {{tr-organization org=org action="selectOrganization"}}
+      {{tr-organization org=org
+                        selectedOrganzationId=selectedOrganzationId
+                        action="selectOrganization"}}
     {{/each}}
     <div style='margin-top:15px;margin-bottom:15px;'>
      <button class='btn btn-default' {{action 'showModal' 'newOrganizationModal'}}>New Organization</button>

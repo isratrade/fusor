@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
 
-  name: '',  //MAKE '' WHEN PACKAGING
+  name: 'dddd',  //MAKE '' WHEN PACKAGING
   description: '',
 
   disable1B: function() {
