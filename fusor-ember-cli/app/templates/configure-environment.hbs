@@ -1,7 +1,7 @@
 <div class="row">
   <div class='col-md-9'>
 
-    {{#each env in model itemController="lifecycle-environment"}}
+    {{#each env in nonLibraryEnvironments itemController="lifecycle-environment"}}
     <div class="path-selector">
       <ul class="path-list">
         <li class="path-list-item">
@@ -28,6 +28,8 @@
         New Environment Path
       </button>
     </div>
+
+    TODO API to create Lifecycle Env
 
     <br />
     <br />

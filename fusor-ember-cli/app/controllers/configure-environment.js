@@ -6,16 +6,7 @@ export default Ember.ArrayController.extend({
 
   organization_id: null,
 
-  filteredEnvironments: function() {
-    var organization_id = this.get('organization_id');
-    var environments = this.get('model');
-
-    if (organization_id) {
-      return environments.filterBy('organization_id', organization_id);
-    } else {
-      return environments;
-    }
-  }.property('organization_id', 'model'),
+  nonLibraryEnvironments: Ember.computed.filterBy('model', 'library', false),
 
   disable1CNext: function() {
     return (this.get('selectedEnvironment.length') === 0);
