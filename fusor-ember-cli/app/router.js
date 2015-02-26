@@ -24,12 +24,12 @@ Router.map(function() {
     this.route('deployment', { path: '/:deployment_id' });
   });
 
-  // this.resource('new-deployment', { path: '/deployments/:deployment_id' }, function() {
-  //   this.resource('satellite', function() {
-  //     this.resource('configure-organization');
-  //     this.resource('configure-environment');
-  //   });
-  // });
+  this.resource('new-deployment', { path: '/deploy/new' }, function() {
+    this.route('satellite', function() {
+      this.route('configure-organization');
+      this.route('configure-environment');
+    });
+  });
 
   this.resource('deployment', { path: '/deployments/:deployment_id' }, function() {
 

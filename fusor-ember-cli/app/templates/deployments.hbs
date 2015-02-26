@@ -16,7 +16,7 @@
   <tbody>
   {{#each deployment in controller.model itemController="deployment"}}
     <tr>
-      <td> {{#link-to 'single-deployment' deployment}} {{deployment.name}} {{/link-to}}</td>
+      <td> {{#link-to 'deployment' deployment}} {{deployment.name}} {{/link-to}}</td>
       <td> {{deployment.lifecycle_environment.name}} </td>
       <td> {{deployment.organization.name}} </td>
     </tr>

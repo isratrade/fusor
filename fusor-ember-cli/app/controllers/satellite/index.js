@@ -1,9 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
+  needs: ['deployment'],
 
-  name: '',
-  description: '',
+  name: Ember.computed.alias("controllers.deployment.name"),
+  description: Ember.computed.alias("controllers.deployment.description"),
 
   disable1B: function() {
     return (this.get('name.length') === 0);

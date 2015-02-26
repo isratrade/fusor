@@ -5,8 +5,8 @@ export default Ember.Route.extend({
   setupController: function(controller, model) {
     controller.set('model', model);
     //Comment out lines below - DEV only to save time
-    controller.set('name', 'default deployment name');
-//    this.controllerFor('configure-organization').set('selectedOrganization', model.sortBy('id').objectAt(1));
+    // controller.set('name', 'default deployment name');
+    // this.controllerFor('configure-organization').set('selectedOrganization', model.sortBy('id').objectAt(1));
   },
 
   activate: function() {

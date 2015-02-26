@@ -1,21 +1,13 @@
 import Ember from 'ember';
 
-export default Ember.ObjectController.extend({
-  needs: ['rhci', 'subscriptions', 'satellite/index',
-          'configure-organization', 'configure-environment',
-          'subscriptions/select-subscriptions'],
+export default Ember.Controller.extend({
 
-  organization: Ember.computed.alias("controllers.configure-organization.selectedOrganization"),
-  lifecycle_environment: Ember.computed.alias("controllers.configure-environment.selectedEnvironment"),
+  needs: ['rhci', 'subscriptions', 'satellite/index', 'configure-environment', 'subscriptions/select-subscriptions'],
 
   isSatellite: Ember.computed.alias("controllers.rhci.isSatellite"),
   isRhev: Ember.computed.alias("controllers.rhci.isRhev"),
   isOpenStack: Ember.computed.alias("controllers.rhci.isOpenStack"),
   isCloudForms: Ember.computed.alias("controllers.rhci.isCloudForms"),
-
-  deploy_rhev: Ember.computed.alias("controllers.rhci.isSatellite"),
-  deploy_cfme: Ember.computed.alias("controllers.rhci.isCloudForms"),
-  deploy_openstack: Ember.computed.alias("controllers.rhci.isOpenStack"),
 
   nameRHCI: Ember.computed.alias("controllers.rhci.nameRHCI"),
   nameRhev: Ember.computed.alias("controllers.rhci.nameRhev"),
