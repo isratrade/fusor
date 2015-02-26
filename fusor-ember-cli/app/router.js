@@ -14,7 +14,17 @@ Router.map(function() {
   this.route('loggedin');
 
   this.route('rhci', { path: '/deployments/new' });
-  this.resource('deployments');
+  this.resource('deployments', function() {
+    this.route('deployment', { path: '/:deployment_id' });
+  });
+
+  this.resource('single-deployment', { path: '/:deployment_id' }, function() {
+    this.resource('satellite', function() {
+      this.resource('configure-organization');
+      this.resource('configure-environment');
+    });
+  });
+
 
   this.resource('deployment', function() {
 
