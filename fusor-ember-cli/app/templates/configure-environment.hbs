@@ -1,6 +1,14 @@
 <div class="row">
   <div class='col-md-9'>
 
+    <p>
+    Select a lifecycle environment for this RHCI deployment. The application lifecycle is divided into lifecycle environments, which mimic each stage of the lifecycle. These lifecycle environments are linked in an environment path. You can promote content along the environment path to the next stage when required. For example, if development completes on a particular version of an application, you can promote this version to the testing environment and start development on the next version.
+    </p>
+
+    <p>
+        {{selectedOrganzation}}
+        {{controllers.configure-organization.selectedOrganzation}}
+    </p>
     {{#each env in nonLibraryEnvironments itemController="lifecycle-environment"}}
     <div class="path-selector">
       <ul class="path-list">

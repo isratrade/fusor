@@ -7,6 +7,8 @@ export default Ember.ArrayController.extend({
 
   selectedOrganzation: null,
 
+  showAlertMessage: false,
+
   disable1BNext: function() {
     if (this.get('selectedOrganzation')) {
       return (this.get('selectedOrganzation.name.length') === 0);
@@ -36,6 +38,14 @@ export default Ember.ArrayController.extend({
     }
   }.property('selectedOrganzation'),
 
+  selectedOrganzationName: function() {
+    if (this.get('selectedOrganzation')) {
+      return this.get('selectedOrganzation').get('name');
+    } else {
+      return '';
+    }
+  }.property('selectedOrganzation'),
+
   rhciModalButtons: [
       Ember.Object.create({title: 'Cancel', clicked:"cancel", dismiss: 'modal'}),
       Ember.Object.create({title: 'Create', clicked:"createOrganization", type: 'primary'})
@@ -43,6 +53,7 @@ export default Ember.ArrayController.extend({
 
   actions: {
     selectOrganization: function(organization) {
+      this.set('showAlertMessage', false);
       return this.set('selectedOrganzation', organization )
     },
 
@@ -52,10 +63,12 @@ export default Ember.ArrayController.extend({
         this.set('fields_org.name', this.get('defaultOrgName'));
         var organization = this.store.createRecord('organization', this.get('fields_org'));
         self.set('fields_org',{});
+        self.set('defaultOrgName', null);
         self.set('selectedOrganzation', organization);
         if (this.get('controllers.application.isLiveBackendMode')) {
           organization.save().then(function() {
             //success
+            return self.set('showAlertMessage', true);
           }, function(response) {
             alert('error saving organization');
           //organization.destroyRecord();
