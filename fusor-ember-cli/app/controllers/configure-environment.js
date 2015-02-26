@@ -19,7 +19,7 @@ export default Ember.ArrayController.extend({
 
   fields_env: {},
 
-  selectedEnvironment: '',   //MAKE '' WHEN PACKAGING
+  showAlertMessage: false,
 
   rhciNewEnvButtons: [
       Ember.Object.create({title: 'Cancel', clicked:"cancel", dismiss: 'modal'}),
@@ -37,10 +37,18 @@ export default Ember.ArrayController.extend({
   // }.property('model.@each.[]'),
 
   actions: {
+
+    selectEnvironment: function(environment) {
+      console.log(environment.get('name'));
+      this.set('showAlertMessage', false);
+      return this.set('selectedEnvironment', environment)
+    },
+
     createEnvironment: function() {
       var self = this;
+      this.set('fields_env.prior', 1); ///GET LIBRARY ID FOR ORG AND MAKE THIS DYNAMIC
       var environment = this.store.createRecord('lifecycle-environment', this.get('fields_env'));
-      this.set('selectedEnvironment', environment.get('name'));
+      this.set('selectedEnvironment', environment);
       this.set('fields_env',{});
       if (this.get('controllers.application.isLiveBackendMode')) {
         environment.save().then(function() {

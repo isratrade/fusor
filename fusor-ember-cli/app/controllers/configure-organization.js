@@ -8,11 +8,7 @@ export default Ember.ArrayController.extend({
   showAlertMessage: false,
 
   disable1BNext: function() {
-    if (this.get('selectedOrganization')) {
-      return (this.get('selectedOrganization.name.length') === 0);
-    } else {
-      return true
-    }
+    return (!(this.get('selectedOrganization')));
   }.property('selectedOrganization'),
 
   deploymentName: Ember.computed.alias("controllers.satellite/index.name"),

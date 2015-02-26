@@ -1,6 +1,12 @@
 <div class="row">
   <div class='col-md-9'>
-
+    {{#if showAlertMessage}}
+      <div class='alert alert-success'>
+          <i class="fa fa-2x fa-check-circle-o green-circle"></i>
+          &nbsp;
+          {{selectedOrganization.name}} added successfully.
+      </div>
+    {{/if}}
     <p>
     Select a lifecycle environment for this RHCI deployment. The application lifecycle is divided into lifecycle environments, which mimic each stage of the lifecycle. These lifecycle environments are linked in an environment path. You can promote content along the environment path to the next stage when required. For example, if development completes on a particular version of an application, you can promote this version to the testing environment and start development on the next version.
     </p>
@@ -16,7 +22,9 @@
             Library
           </label>
         </li>
-        {{env-path-list-item env=env selectedEnvironment=selectedEnvironment}}
+        {{env-path-list-item env=env
+                             selectedEnvironment=selectedEnvironment
+                             action="selectEnvironment"}}
         <li class="path-list-item">
           <label class="path-list-item-label" style='color:gray;'>
             &nbsp;
