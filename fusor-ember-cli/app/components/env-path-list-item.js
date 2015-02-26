@@ -20,5 +20,4 @@ export default Ember.Component.extend({
     this.sendAction('action', this.get('env'));
   }
 
-
 });

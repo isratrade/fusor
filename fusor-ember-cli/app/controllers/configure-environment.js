@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
-  needs: ['satellite', 'application', 'configure-organization'],
+  needs: ['satellite', 'satellite/index', 'application', 'configure-organization'],
 
   organization_id: null,
 
@@ -10,7 +10,7 @@ export default Ember.ArrayController.extend({
   selectedOrganization: Ember.computed.alias("controllers.configure-organization.selectedOrganization"),
 
   disable1CNext: function() {
-    return (this.get('selectedEnvironment.length') === 0);
+    return (this.get('selectedEnvironment.name.length') === 0);
   }.property('selectedEnvironment'),
 
   disableAll: Ember.computed.alias("controllers.satellite.disableAll"),
@@ -31,10 +31,6 @@ export default Ember.ArrayController.extend({
       return this.get('fields_env.name').underscore();
     }
   }.property('fields_env.name'),
-
-  // hasEnvironments: function() {
-  //   return (this.get('length') > 0);
-  // }.property('model.@each.[]'),
 
   actions: {
 
@@ -58,7 +54,21 @@ export default Ember.ArrayController.extend({
         });
       }
       return Bootstrap.ModalManager.hide('newEnvironmentModal');
-    }
+    },
+
+    saveDeployment: function() {
+      var deployment = this.store.createRecord('deployment', {name: this.get('controllers.satellite/index.name'),
+                                    organization: this.get('selectedOrganization'),
+                                    lifecycle_environment: this.get('selectedEnvironment') });
+      if (this.get('controllers.application.isLiveBackendMode')) {
+        deployment.save().then(function() {
+          //success
+          console.log('saved deployment');
+        }, function(response) {
+          alert('error saving deployment');
+        });
+      }
+    },
 
   }
 

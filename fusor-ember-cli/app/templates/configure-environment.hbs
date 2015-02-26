@@ -1,3 +1,4 @@
+{{selectedEnvironment.name}} - {{selectedEnvironment}}
 <div class="row">
   <div class='col-md-9'>
     {{#if showAlertMessage}}
@@ -14,7 +15,7 @@
     <p>
       Lifecycle environments in organization: {{selectedOrganization.name}}
     </p>
-    {{#each env in nonLibraryEnvironments itemController="lifecycle-environment"}}
+    {{#each env in nonLibraryEnvironments}}
     <div class="path-selector">
       <ul class="path-list">
         <li class="path-list-item">
@@ -44,6 +45,8 @@
       </button>
     </div>
 
+    <br />
+    <button {{action 'saveDeployment'}}>Save Deployment</button>
     <br />
     <br />
     <div style='float:right'>
