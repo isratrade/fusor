@@ -13,6 +13,6 @@ export default Ember.ObjectController.extend({
 
   disableAll: Ember.computed.any("disable1B", "disable1BNext", "disable1CNext"),
 
-  selectedOrganzationId: Ember.computed.alias("controllers.configure-organization.selectedOrganzationId"),
+  selectedOrganzationId: Ember.computed.alias("controllers.configure-organization.selectedOrganzation.id"),
 
 });

@@ -2,15 +2,12 @@ import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
   needs: ['satellite', 'application', 'configure-organization'],
-  queryParams: ['organization_id'],
 
   organization_id: null,
 
   nonLibraryEnvironments: Ember.computed.filterBy('model', 'library', false),
 
-  selectedOrganzation: Ember.computed.alias("controllers.configure-organization.selectedOrganzation"),
-  selectedOrganzationId: Ember.computed.alias("controllers.configure-organization.selectedOrganzationId"),
-  selectedOrganzationName: Ember.computed.alias("controllers.configure-organization.selectedOrganzationName"),
+  selectedOrganization: Ember.computed.alias("controllers.configure-organization.selectedOrganization"),
 
   disable1CNext: function() {
     return (this.get('selectedEnvironment.length') === 0);

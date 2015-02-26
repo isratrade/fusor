@@ -1,19 +1,19 @@
+{{!selectedOrganization}}
 <div class="row">
   <div class='col-md-9'>
-
     {{#if showAlertMessage}}
       <div class='alert alert-success'>
           <i class="fa fa-2x fa-check-circle-o green-circle"></i>
           &nbsp;
-          {{selectedOrganzation.name}} added successfully.
+          {{selectedOrganization.name}} added successfully.
       </div>
     {{/if}}
     <p>
       Select an organization for this RHCI deployment. Organizations divide hosts into logical groups based on ownership, purpose, content, security level, or other divisions.
     </p>
-    {{#each org in model itemController="organization"}}
+    {{#each org in model}}
       {{tr-organization org=org
-                        selectedOrganzationId=selectedOrganzationId
+                        selectedOrganization=selectedOrganization
                         action="selectOrganization"}}
     {{/each}}
     <div style='margin-top:15px;margin-bottom:15px;'>
@@ -24,13 +24,13 @@
     <br />
     <div style='float:right'>
         {{#link-to 'satellite' class='btn btn-default'}}Back{{/link-to}}
-        {{#link-to 'configure-environment' (query-params organization_id=selectedOrganzationId) class='btn btn-primary' disabled=disable1BNext}}Next{{/link-to}}
+        {{#link-to 'configure-environment' class='btn btn-primary' disabled=disable1BNext}}
+          Next
+        {{/link-to}}
     </div>
   </div>
 </div>
 
-
 {{#bs-modal name="newOrganizationModal" fade=true footerButtonsBinding="rhciModalButtons" title="Create New Organization"}}
   {{partial 'new-organization'}}
 {{/bs-modal}}
-{{selectedOrganzation.name}}

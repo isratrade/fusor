@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
   model: function() {
-    var orgId = this.controllerFor('configure-organization').get('selectedOrganzationId');
+    var orgId = this.controllerFor('configure-organization').get('selectedOrganization.id');
     return this.store.find('lifecycle-environment', {organization_id: orgId});
   },
 

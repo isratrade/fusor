@@ -5,17 +5,15 @@ export default Ember.ArrayController.extend({
 
   fields_org: {},
 
-  selectedOrganzation: null,
-
   showAlertMessage: false,
 
   disable1BNext: function() {
-    if (this.get('selectedOrganzation')) {
-      return (this.get('selectedOrganzation.name.length') === 0);
+    if (this.get('selectedOrganization')) {
+      return (this.get('selectedOrganization.name.length') === 0);
     } else {
       return true
     }
-  }.property('selectedOrganzation'),
+  }.property('selectedOrganization'),
 
   deploymentName: Ember.computed.alias("controllers.satellite/index.name"),
 
@@ -30,22 +28,6 @@ export default Ember.ArrayController.extend({
     }
   }.property('defaultOrgName'),
 
-  selectedOrganzationId: function() {
-    if (this.get('selectedOrganzation')) {
-      return this.get('selectedOrganzation').get('id');
-    } else {
-      return 0;
-    }
-  }.property('selectedOrganzation'),
-
-  selectedOrganzationName: function() {
-    if (this.get('selectedOrganzation')) {
-      return this.get('selectedOrganzation').get('name');
-    } else {
-      return '';
-    }
-  }.property('selectedOrganzation'),
-
   rhciModalButtons: [
       Ember.Object.create({title: 'Cancel', clicked:"cancel", dismiss: 'modal'}),
       Ember.Object.create({title: 'Create', clicked:"createOrganization", type: 'primary'})
@@ -54,7 +36,7 @@ export default Ember.ArrayController.extend({
   actions: {
     selectOrganization: function(organization) {
       this.set('showAlertMessage', false);
-      return this.set('selectedOrganzation', organization )
+      return this.set('selectedOrganization', organization )
     },
 
     createOrganization: function() {
@@ -64,7 +46,7 @@ export default Ember.ArrayController.extend({
         var organization = this.store.createRecord('organization', this.get('fields_org'));
         self.set('fields_org',{});
         self.set('defaultOrgName', null);
-        self.set('selectedOrganzation', organization);
+        self.set('selectedOrganization', organization);
         if (this.get('controllers.application.isLiveBackendMode')) {
           organization.save().then(function() {
             //success

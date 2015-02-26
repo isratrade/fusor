@@ -2,17 +2,17 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-  isChecked: function () {
-    var org = this.get('org');
-    var org_name = org.get('name');
-    return (this.get('selectedOrganzation') == org_name);
-  }.property('selectedOrganzation', 'org'),
+// isChecked: function () {
+  //   var org = this.get('org');
+  //   var org_name = org.get('name');
+  //   return (this.get('selectedOrganzation') == org_name);
+  // }.property('selectedOrganzation', 'org'),
 
-  showCheckMark: function () {
-    if (this.get('isChecked')) {
-      return '✔';
-    }
-  }.property('isChecked'),
+  // showCheckMark: function () {
+  //   if (this.get('isChecked')) {
+  //     return '✔';
+  //   }
+  // }.property('isChecked'),
 
   // classNameBindings: ['bgColor', 'fontColor'],
   // bgColor: function () {
@@ -50,9 +50,16 @@ export default Ember.Component.extend({
   //     this.set('color', null);
   //   }
   // },
-  click: function(event) {
-    //this.set('color', 'blue');
-    var org = this.get('org');
-    this.sendAction('action', org);
-  },
+  // click: function(event) {
+  //   //this.set('color', 'blue');
+  //   var org = this.get('org');
+  //   this.sendAction('action', org);
+  // },
+
+  actions: {
+    organizationChanged: function(event) {
+      var org = this.get('org');
+      this.sendAction('action', org);
+    }
+  }
 });

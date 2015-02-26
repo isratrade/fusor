@@ -1,2 +1,3 @@
-{{radio-button name='deployment-organization' value=org.id checked=selectedOrganzationId}}
-{{org.name}}
+{{#radio-button value=org groupValue=selectedOrganization changed="organizationChanged"}}
+  {{org.name}}
+{{/radio-button}}
