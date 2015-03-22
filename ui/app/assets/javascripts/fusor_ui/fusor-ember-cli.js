@@ -576,7 +576,7 @@ define('fusor-ember-cli/controllers/application', ['exports', 'ember'], function
     needs: ["side-menu", "deployment"],
 
     isLiveBackendMode: true,
-    deployAsPlugin: false,
+    deployAsPlugin: true,
     isEmberCliMode: Ember['default'].computed.not("deployAsPlugin"),
     isUpstream: false,
 
@@ -999,6 +999,16 @@ define('fusor-ember-cli/controllers/discovered-host', ['exports', 'ember'], func
     selectedRhevEngineHost: Ember['default'].computed.alias("controllers.engine/discovered-host.model"),
 
     rhev_engine_hostname: Ember['default'].computed.alias("controllers.deployment.rhev_engine_hostname"),
+    isAllChecked: Ember['default'].computed.alias("controllers.hypervisor/discovered-host.isAllChecked"),
+    allChecked: Ember['default'].computed.alias("controllers.hypervisor/discovered-host.allChecked"),
+
+    addOrRemoveHypervisor: (function (row) {
+      if (row.get("isSelectedAsHypervisor")) {
+        this.get("controllers.hypervisor/discovered-host.model").addObject(row.get("model"));
+      } else {
+        this.get("controllers.hypervisor/discovered-host.model").removeObject(row.get("model"));
+      }
+    }).observes("isSelectedAsHypervisor"),
 
     isSelectedAsHypervisor: (function () {
       if (this.get("selectedRhevHypervisorHosts")) {
@@ -1007,7 +1017,7 @@ define('fusor-ember-cli/controllers/discovered-host', ['exports', 'ember'], func
       } else {
         return false;
       }
-    }).property("allDiscoveredHosts"),
+    }).property("selectedRhevHypervisorHosts.[]"),
 
     isSelectedAsEngine: (function () {
       return this.get("selectedRhevEngineHost.id") === this.get("id");
@@ -1046,11 +1056,19 @@ define('fusor-ember-cli/controllers/engine/discovered-host', ['exports', 'ember'
     needs: ["deployment", "hypervisor/discovered-host"],
 
     selectedRhevEngineHost: Ember['default'].computed.alias("model"),
+    hypervisorModelIds: Ember['default'].computed.alias("controllers.hypervisor/discovered-host.hypervisorModelIds"),
+
+    // Set by route's setupController. Needed since hypervisorModelIds is
+    // only available after route hypervisor/discovered hosts is activated
+    selectedHypervisors: [],
+    allDiscoveredHosts: [],
 
     // Filter out hosts selected as Hypervisor
-    availableHosts: Ember['default'].computed.filter("allDiscoveredHosts", function (host, index, array) {
-      return host.get("id") != "TODO aray of host ids";
-    }).property("allDiscoveredHosts") });
+    availableHosts: Ember['default'].computed.filter("allDiscoveredHosts", function (item, index, array) {
+      var hypervisorsIds = this.get("selectedHypervisors").getEach("id");
+      console.log(hypervisorsIds);
+      return !hypervisorsIds.contains(item.get("id"));
+    }).property("selectedHypervisors", "allDiscoveredHosts") });
 
 });
 define('fusor-ember-cli/controllers/host', ['exports', 'ember'], function (exports, Ember) {
@@ -1079,10 +1097,10 @@ define('fusor-ember-cli/controllers/hypervisor/discovered-host', ['exports', 'em
 
   'use strict';
 
-  exports['default'] = Ember['default'].Controller.extend({
+  exports['default'] = Ember['default'].ArrayController.extend({
     needs: ["deployment"],
 
-    //discovered_hosts: Ember.computed.alias("controllers.deployment.discovered_hosts"),
+    itemController: ["discovered-host"],
 
     selectedRhevEngine: Ember['default'].computed.alias("controllers.deployment.discovered_host"),
 
@@ -1091,36 +1109,66 @@ define('fusor-ember-cli/controllers/hypervisor/discovered-host', ['exports', 'em
       return host.get("id") != this.get("selectedRhevEngine.id");
     }).property("allDiscoveredHosts", "selectedRhevEngine"),
 
-    selectedHosts: Em.computed.filterBy("model", "isSelectedAsHypervisor", true),
+    hypervisorModelIds: (function () {
+      if (this.get("model")) {
+        var allIds = this.get("model").getEach("id");
+        return allIds.removeObject(this.get("selectedRhevEngine").get("id"));
+      } else {
+        return [];
+      }
+    }).property("model.[]", "selectedRhevEngine"),
 
-    modelIds: (function () {
-      return this.get("model").getEach("id");
-    }).property("model"),
-
-    cntSelectedHosts: Em.computed.alias("selectedHosts.length"),
+    cntSelectedHypervisorHosts: Ember['default'].computed.alias("hypervisorModelIds.length"),
 
     hostInflection: (function () {
-      return this.get("cntSelectedHosts") === 1 ? "host" : "hosts";
-    }).property("cntSelectedHosts"),
+      return this.get("cntSelectedHypervisorHosts") === 1 ? "host" : "hosts";
+    }).property("cntSelectedHypervisorHosts"),
+
+    isAllChecked: (function (key, value) {
+      if (this.get("cntSelectedHypervisorHosts") === this.get("availableHosts.length")) {
+        return this.set("allChecked", true);
+      } else {
+        return this.set("allChecked", false);
+      }
+    }).property("availableHosts.@each.isSelectedAsHypervisor", "cntSelectedHypervisorHosts"),
 
     allChecked: (function (key, value) {
+      // get
       if (arguments.length === 1) {
-        var model = this.get("model");
-        return model && model.isEvery("isSelectedAsHypervisor");
+        var availableHosts = this.get("availableHosts");
+        var isAllChecked = this.get("model.length") === this.get("availableHosts.length");
+        return availableHosts && isAllChecked;
+        // setter
+      } else {}
+    }).property("model.@each.isSelectedAsHypervisor", "model.[]", "availableHosts"),
+
+    checkAll: (function (row) {
+      // TODO
+      if (this.get("allChecked")) {
+        // var hosts = this.get('model');
+        // hosts.clear();
+        // hosts.addObjects(this.get('availableHosts'));
+        // return true;
+        console.log("all checked true");
       } else {
-        this.get("model").setEach("isSelectedAsHypervisor", value);
-        return value;
+        // var hosts = this.get('model');
+        // return hosts.clear();
+        // return false;
+        console.log("all checked FALSE");
       }
-    }).property("model.@each.isSelectedAsHypervisor"),
+    }).observes("allChecked"),
 
     idsChecked: (function (key) {
       var model = this.get("model");
       if (model && model.isAny("isSelectedAsHypervisor")) {
-        return this.get("selectedHosts").getEach("id"); //this.//   return model && model.isEvery('isSelectedAsHypervisor');
+        return this.get("model").getEach("id");
       } else {
         return "";
       }
-    }).property("model.@each.isSelectedAsHypervisor", "selectedHosts") });
+    }).property("model.@each.isSelectedAsHypervisor") });
+  // TODO - this is running when each host is individually checked as well????
+  // Problem because isSelectedAsHypervisor is on the itemController and not model ???
+  // console.log('setter only');
 
 });
 define('fusor-ember-cli/controllers/lifecycle-environment', ['exports', 'ember'], function (exports, Ember) {
@@ -1532,15 +1580,11 @@ define('fusor-ember-cli/controllers/review/installation', ['exports', 'ember'], 
     isOpenStack: Ember['default'].computed.alias("controllers.deployment.isOpenStack"),
     isCloudForms: Ember['default'].computed.alias("controllers.deployment.isCloudForms"),
 
-    hypervisorSelectedHosts: Ember['default'].computed.alias("controllers.hypervisor/discovered-host.selectedHosts"),
-    engineSelectedHosts: Ember['default'].computed.alias("controllers.engine/discovered-host.selectedHosts"),
-
-    hypervisorSelectedId: Ember['default'].computed.alias("controllers.hypervisor/discovered-host.idsChecked"),
-    engineSelectedId: Ember['default'].computed.alias("controllers.engine/discovered-host.idsChecked"),
     isSelfHosted: Ember['default'].computed.alias("controllers.deployment.rhev_is_self_hosted"),
-    rhev_engine_host: Ember['default'].computed.alias("controllers.deployment.rhev_engine_host"),
-    selectedRhevEngine: Ember['default'].computed.alias("controllers.engine/discovered-host.selectedRhevEngine"),
+    selectedHypervisorHosts: Ember['default'].computed.alias("controllers.deployment.discovered_hosts"),
 
+    rhev_engine_host: Ember['default'].computed.alias("controllers.deployment.discovered_host"),
+    selectedRhevEngine: Ember['default'].computed.alias("controllers.deployment.discovered_host"),
 
     nameRHCI: Ember['default'].computed.alias("controllers.rhci.nameRHCI"),
     nameRhev: Ember['default'].computed.alias("controllers.rhci.nameRhev"),
@@ -2662,26 +2706,6 @@ define('fusor-ember-cli/models/coordinator', ['exports', 'ember', './obj-hash'],
   });
 
 });
-define('fusor-ember-cli/models/deployable', ['exports', 'ember-data'], function (exports, DS) {
-
-  'use strict';
-
-  exports['default'] = DS['default'].Model.extend({
-    deployment: DS['default'].belongsTo("deployment", { inverse: "rhev_engine_host", async: true }),
-    discovered_host: DS['default'].belongsTo("discovered-host", { inverse: "rhev_engine_host", async: true })
-  });
-
-});
-define('fusor-ember-cli/models/deployment-host', ['exports', 'ember-data'], function (exports, DS) {
-
-  'use strict';
-
-  exports['default'] = DS['default'].Model.extend({
-    deployment: DS['default'].belongsTo("deployment"), //, {async: true}
-    discovered_host: DS['default'].belongsTo("discovered-host")
-  });
-
-});
 define('fusor-ember-cli/models/deployment', ['exports', 'ember-data'], function (exports, DS) {
 
   'use strict';
@@ -2698,13 +2722,6 @@ define('fusor-ember-cli/models/deployment', ['exports', 'ember-data'], function 
 
     rhev_is_self_hosted: DS['default'].attr("boolean"),
 
-    // one-to-one: One deployment has one rhev engine host. One host has one deployment
-    rhev_engine_host: DS['default'].belongsTo("discovered-host", { inverse: "rhev_deployments", async: true }), //TODO error if I added
-    discovered_host: DS['default'].belongsTo("discovered-host", { inverse: "deployment", async: true }), //TODO error if I added
-    discovered_hosts: DS['default'].hasMany("discovered-host", { inverse: "deployments", async: true }), //TODO error if I added
-
-    // rhev_hypervisors: DS.hasMany('discovered-host', {async: true}),
-
     rhev_engine_hostname: DS['default'].attr("string"),
 
     rhev_engine_admin_password: DS['default'].attr("string"),
@@ -2719,7 +2736,13 @@ define('fusor-ember-cli/models/deployment', ['exports', 'ember-data'], function 
     cfme_install_loc: DS['default'].attr("string"),
 
     created_at: DS['default'].attr("date"),
-    updated_at: DS['default'].attr("date") });
+    updated_at: DS['default'].attr("date"),
+
+    // has one Engine
+    discovered_host: DS['default'].belongsTo("discovered-host", { inverse: "deployment", async: true }),
+
+    // has many Hypervisors
+    discovered_hosts: DS['default'].hasMany("discovered-host", { inverse: "deployments", async: true }) });
 
 });
 define('fusor-ember-cli/models/discovered-host', ['exports', 'ember-data'], function (exports, DS) {
@@ -2740,9 +2763,11 @@ define('fusor-ember-cli/models/discovered-host', ['exports', 'ember-data'], func
     disks_size: DS['default'].attr("string"),
     cpus: DS['default'].attr("string"),
 
-    rhev_deployments: DS['default'].hasMany("deployment", { inverse: "rhev_engine_host", async: true }),
+    // relationship to Engine
     deployment: DS['default'].belongsTo("deployment", { inverse: "discovered_host", async: true }),
-    deployments: DS['default'].belongsTo("deployment", { inverse: "discovered_hosts", async: true }),
+
+    // relationship to Hypervisors
+    deployments: DS['default'].hasMany("deployment", { inverse: "discovered_hosts", async: true }),
 
     created_at: DS['default'].attr("date"),
     updated_at: DS['default'].attr("date") });
@@ -3445,6 +3470,7 @@ define('fusor-ember-cli/routes/engine/discovered-host', ['exports', 'ember'], fu
     setupController: function (controller, model) {
       controller.set("model", model);
       controller.set("allDiscoveredHosts", this.store.find("discovered-host"));
+      controller.set("selectedHypervisors", this.modelFor("deployment").get("discovered_hosts"));
     },
 
     deactivate: function () {
@@ -3572,18 +3598,29 @@ define('fusor-ember-cli/routes/hypervisor/discovered-host', ['exports', 'ember']
     },
 
     actions: {
-      saveHyperVisors: function () {
+      saveHyperVisors: function (hosts) {
         var self = this;
-        var dep = this.modelFor("deployment");
-        //TODO - now working
-        // this.store.find('discovered-host').then(function(discoveredHostsToAdd) {
-        //   dep.get('discovered_hosts').then(function(discoveredHosts) {
-        //     discoveredHosts.addObjects(discoveredHostsToAdd);
-        //     dep.save().then(function() {
-        //       discoveredHostsToAdd.save();
-        //     });
-        //   });
-        // });
+        var deployment = this.modelFor("deployment");
+        var hypervisorModelIds = this.controllerFor("hypervisor/discovered-host").get("hypervisorModelIds");
+        return new Ember['default'].RSVP.Promise(function (resolve, reject) {
+          Ember['default'].$.ajax({
+            url: "/fusor/api/v21/deployments/" + deployment.get("id"),
+            type: "PUT",
+            data: JSON.stringify({ deployment: { discovered_host_ids: hypervisorModelIds } }),
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              Authorization: "Basic " + self.get("session.basicAuthToken")
+            },
+            success: function (response) {
+              resolve(response);
+            },
+
+            error: function (response) {
+              reject(response);
+            }
+          });
+        });
       }
     }
 
@@ -6024,7 +6061,7 @@ define('fusor-ember-cli/templates/engine/discovered-host', ['exports', 'ember'],
       'groupValue': ("selectedRhevEngineHost"),
       'changed': ("engineHostChanged")
     },hashTypes:{'value': "ID",'groupValue': "ID",'changed': "STRING"},hashContexts:{'value': depth0,'groupValue': depth0,'changed': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "radio-button", options))));
-    data.buffer.push("  \n      </td>\n      <td>\n           ");
+    data.buffer.push(" \n      </td>\n      <td>\n           ");
     stack1 = helpers['if'].call(depth0, "host.isSelectedAsEngine", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0],types:["ID"],data:data});
     if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
     data.buffer.push("\n      </td>\n      <td> ");
@@ -6064,22 +6101,22 @@ define('fusor-ember-cli/templates/engine/discovered-host', ['exports', 'ember'],
     data.buffer.push("Next");
     }
 
-    data.buffer.push("\n \n\n<br />\n<table class=\"table table-bordered table-striped small\">\n<thead>\n    <tr>\n      <th> </th>\n      <th> Name </th>\n      <th> MAC </th>\n      <th> CPU's </th>\n      <th> Memory </th>\n    </tr>\n  </thead>\n\n  <tbody>\n  ");
-    stack1 = helpers.each.call(depth0, "host", "in", "allDiscoveredHosts", {hash:{
+    data.buffer.push("\n\n\n<br />\n<table class=\"table table-bordered table-striped small\">\n<thead>\n    <tr>\n      <th> </th>\n      <th> Name </th>\n      <th> MAC </th>\n      <th> CPU's </th>\n      <th> Memory </th>\n    </tr>\n  </thead>\n\n  <tbody>\n  ");
+    stack1 = helpers.each.call(depth0, "host", "in", "availableHosts", {hash:{
       'itemController': ("discovered-host")
     },hashTypes:{'itemController': "STRING"},hashContexts:{'itemController': depth0},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
     if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-    data.buffer.push("\n  </tbody>\n</table>\n\n\n    <div class='pull-right'>\n      <br />\n      ");
+    data.buffer.push("\n  </tbody>\n</table>\n\n<div class='pull-right'>\n  <br />\n  ");
     stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{
       'class': ("btn btn-default")
     },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "deployments", options) : helperMissing.call(depth0, "link-to", "deployments", options));
     if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-    data.buffer.push("\n      ");
+    data.buffer.push("\n  ");
     stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{
       'class': ("btn btn-primary")
     },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "hypervisor.discovered-host", options) : helperMissing.call(depth0, "link-to", "hypervisor.discovered-host", options));
     if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-    data.buffer.push("\n    </div>\n");
+    data.buffer.push("\n</div>\n");
     return buffer;
     
   });
@@ -6235,10 +6272,7 @@ define('fusor-ember-cli/templates/hypervisor/discovered-host', ['exports', 'embe
       'name': ("isSelectedAsHypervisor"),
       'checked': ("host.isSelectedAsHypervisor")
     },hashTypes:{'type': "STRING",'name': "STRING",'checked': "ID"},hashContexts:{'type': depth0,'name': depth0,'checked': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
-    data.buffer.push("\n        ");
-    stack1 = helpers._triageMustache.call(depth0, "host.id", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-    if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-    data.buffer.push("\n      </td>\n      <td>\n        ");
+    data.buffer.push("\n         \n      </td>\n      <td>\n        ");
     stack1 = helpers['if'].call(depth0, "host.isSelectedAsHypervisor", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0],types:["ID"],data:data});
     if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
     data.buffer.push("\n      </td>\n      <td> ");
@@ -6250,13 +6284,7 @@ define('fusor-ember-cli/templates/hypervisor/discovered-host', ['exports', 'embe
     data.buffer.push(" </td>\n      <td> ");
     stack1 = helpers._triageMustache.call(depth0, "host.memory", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
     if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-    data.buffer.push(" ");
-    stack1 = helpers._triageMustache.call(depth0, "host.isSelectedAsHypervisor", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-    if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-    data.buffer.push(" ");
-    stack1 = helpers._triageMustache.call(depth0, "host.isSelectedAsEngine", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-    if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-    data.buffer.push("</td>\n    </tr>\n  ");
+    data.buffer.push(" </td>\n    </tr>\n  ");
     return buffer;
     }
   function program2(depth0,data) {
@@ -6278,19 +6306,28 @@ define('fusor-ember-cli/templates/hypervisor/discovered-host', ['exports', 'embe
     data.buffer.push("Cancel");
     }
 
-    data.buffer.push("\n\n\n<!-- <strong></strong> of <strong></strong>\navailable hosts selected \n -->\n<br />\n<table class=\"table table-bordered table-striped small\">\n  <thead>\n    <tr>\n      <th> </th>\n      <th> Name </th>\n      <th> MAC </th>\n      <th> CPU's </th>\n      <th> Memory </th>\n    </tr>\n  </thead>\n\n  <tbody>\n  ");
+    data.buffer.push("\n\n\n\n<strong>");
+    stack1 = helpers._triageMustache.call(depth0, "model.length", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+    if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+    data.buffer.push("</strong> of <strong>");
+    stack1 = helpers._triageMustache.call(depth0, "availableHosts.length", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+    if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+    data.buffer.push("</strong>\navailable hosts selected ");
+    stack1 = helpers._triageMustache.call(depth0, "idsChecked", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+    if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+    data.buffer.push("\n<br />\n<br />\n<table class=\"table table-bordered table-striped small\">\n  <thead>\n    <tr>\n      <th> </th>\n      <th> Name </th>\n      <th> MAC </th>\n      <th> CPU's </th>\n      <th> Memory </th>\n    </tr>\n  </thead>\n\n  <tbody>\n  ");
     stack1 = helpers.each.call(depth0, "host", "in", "availableHosts", {hash:{
       'itemController': ("discovered-host")
     },hashTypes:{'itemController': "STRING"},hashContexts:{'itemController': depth0},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
     if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-    data.buffer.push("\n  </tbody>\n</table>\n<!-- <button >saveHyperVisors</button>\n -->\n    <div class='pull-right'>\n      <br />\n      ");
+    data.buffer.push("\n  </tbody>\n</table>\n\n<div class='pull-right'>\n  <br />\n  ");
     stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{
       'class': ("btn btn-default")
     },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "deployments", options) : helperMissing.call(depth0, "link-to", "deployments", options));
     if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-    data.buffer.push("\n      <button ");
+    data.buffer.push("\n  <button ");
     data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveHyperVisors", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-    data.buffer.push(" class='btn btn-primary'>Next</button>\n      <!--Next-->\n    </div>\n");
+    data.buffer.push(" class='btn btn-primary'>Next</button>\n  <!--Next-->\n</div>\n");
     return buffer;
     
   });
@@ -7432,7 +7469,7 @@ define('fusor-ember-cli/templates/review/installation', ['exports', 'ember'], fu
     stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(13, program13, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "engine.discovered-host", options) : helperMissing.call(depth0, "link-to", "engine.discovered-host", options));
     if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
     data.buffer.push("<br />\n        Hypervisor: <br />\n        ");
-    stack1 = helpers.each.call(depth0, "host", "in", "hypervisorSelectedHosts", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(16, program16, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+    stack1 = helpers.each.call(depth0, "host", "in", "selectedHypervisorHosts", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(16, program16, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
     if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
     data.buffer.push("\n      ");
     return buffer;
@@ -9103,7 +9140,7 @@ define('fusor-ember-cli/tests/controllers/discovered-host.jshint', function () {
 
   module('JSHint - controllers');
   test('controllers/discovered-host.js should pass jshint', function() { 
-    ok(false, 'controllers/discovered-host.js should pass jshint.\ncontrollers/discovered-host.js: line 17, col 78, Missing semicolon.\ncontrollers/discovered-host.js: line 18, col 50, Missing semicolon.\ncontrollers/discovered-host.js: line 20, col 19, Missing semicolon.\n\n3 errors'); 
+    ok(false, 'controllers/discovered-host.js should pass jshint.\ncontrollers/discovered-host.js: line 27, col 78, Missing semicolon.\ncontrollers/discovered-host.js: line 28, col 50, Missing semicolon.\ncontrollers/discovered-host.js: line 30, col 19, Missing semicolon.\n\n3 errors'); 
   });
 
 });
@@ -9123,7 +9160,7 @@ define('fusor-ember-cli/tests/controllers/engine/discovered-host.jshint', functi
 
   module('JSHint - controllers/engine');
   test('controllers/engine/discovered-host.js should pass jshint', function() { 
-    ok(false, 'controllers/engine/discovered-host.js should pass jshint.\ncontrollers/engine/discovered-host.js: line 11, col 30, Expected \'!==\' and instead saw \'!=\'.\ncontrollers/engine/discovered-host.js: line 10, col 85, \'array\' is defined but never used.\ncontrollers/engine/discovered-host.js: line 10, col 78, \'index\' is defined but never used.\n\n3 errors'); 
+    ok(false, 'controllers/engine/discovered-host.js should pass jshint.\ncontrollers/engine/discovered-host.js: line 16, col 85, \'array\' is defined but never used.\ncontrollers/engine/discovered-host.js: line 16, col 78, \'index\' is defined but never used.\n\n2 errors'); 
   });
 
 });
@@ -9163,7 +9200,7 @@ define('fusor-ember-cli/tests/controllers/hypervisor/discovered-host.jshint', fu
 
   module('JSHint - controllers/hypervisor');
   test('controllers/hypervisor/discovered-host.js should pass jshint', function() { 
-    ok(false, 'controllers/hypervisor/discovered-host.js should pass jshint.\ncontrollers/hypervisor/discovered-host.js: line 12, col 30, Expected \'!==\' and instead saw \'!=\'.\ncontrollers/hypervisor/discovered-host.js: line 15, col 18, \'Em\' is not defined.\ncontrollers/hypervisor/discovered-host.js: line 21, col 21, \'Em\' is not defined.\ncontrollers/hypervisor/discovered-host.js: line 11, col 85, \'array\' is defined but never used.\ncontrollers/hypervisor/discovered-host.js: line 11, col 78, \'index\' is defined but never used.\ncontrollers/hypervisor/discovered-host.js: line 37, col 24, \'key\' is defined but never used.\n\n6 errors'); 
+    ok(false, 'controllers/hypervisor/discovered-host.js should pass jshint.\ncontrollers/hypervisor/discovered-host.js: line 12, col 30, Expected \'!==\' and instead saw \'!=\'.\ncontrollers/hypervisor/discovered-host.js: line 11, col 85, \'array\' is defined but never used.\ncontrollers/hypervisor/discovered-host.js: line 11, col 78, \'index\' is defined but never used.\ncontrollers/hypervisor/discovered-host.js: line 30, col 31, \'value\' is defined but never used.\ncontrollers/hypervisor/discovered-host.js: line 30, col 26, \'key\' is defined but never used.\ncontrollers/hypervisor/discovered-host.js: line 38, col 29, \'value\' is defined but never used.\ncontrollers/hypervisor/discovered-host.js: line 38, col 24, \'key\' is defined but never used.\ncontrollers/hypervisor/discovered-host.js: line 52, col 22, \'row\' is defined but never used.\ncontrollers/hypervisor/discovered-host.js: line 68, col 24, \'key\' is defined but never used.\n\n9 errors'); 
   });
 
 });
@@ -11522,26 +11559,6 @@ define('fusor-ember-cli/tests/mixins/start-controller-mixin.jshint', function ()
   });
 
 });
-define('fusor-ember-cli/tests/models/deployable.jshint', function () {
-
-  'use strict';
-
-  module('JSHint - models');
-  test('models/deployable.js should pass jshint', function() { 
-    ok(true, 'models/deployable.js should pass jshint.'); 
-  });
-
-});
-define('fusor-ember-cli/tests/models/deployment-host.jshint', function () {
-
-  'use strict';
-
-  module('JSHint - models');
-  test('models/deployment-host.js should pass jshint', function() { 
-    ok(true, 'models/deployment-host.js should pass jshint.'); 
-  });
-
-});
 define('fusor-ember-cli/tests/models/deployment.jshint', function () {
 
   'use strict';
@@ -11978,7 +11995,7 @@ define('fusor-ember-cli/tests/routes/hypervisor/discovered-host.jshint', functio
 
   module('JSHint - routes/hypervisor');
   test('routes/hypervisor/discovered-host.js should pass jshint', function() { 
-    ok(false, 'routes/hypervisor/discovered-host.js should pass jshint.\nroutes/hypervisor/discovered-host.js: line 14, col 44, Missing semicolon.\nroutes/hypervisor/discovered-host.js: line 14, col 9, \'model\' is defined but never used.\nroutes/hypervisor/discovered-host.js: line 20, col 11, \'self\' is defined but never used.\nroutes/hypervisor/discovered-host.js: line 21, col 11, \'dep\' is defined but never used.\n\n4 errors'); 
+    ok(false, 'routes/hypervisor/discovered-host.js should pass jshint.\nroutes/hypervisor/discovered-host.js: line 14, col 44, Missing semicolon.\nroutes/hypervisor/discovered-host.js: line 14, col 9, \'model\' is defined but never used.\nroutes/hypervisor/discovered-host.js: line 19, col 31, \'hosts\' is defined but never used.\n\n3 errors'); 
   });
 
 });

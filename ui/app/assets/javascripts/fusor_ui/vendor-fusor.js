@@ -86906,14 +86906,8 @@ define('ember-validations/mixin', ['exports', 'ember', 'ember-validations/errors
   var lookupValidator = function(validatorName) {
     var container = get(this, 'container');
     var service = container.lookup('service:validations');
+    var cache = get(service, 'cache');
     var validators = [];
-    var cache;
-
-    if (service) {
-      cache = get(service, 'cache');
-    } else {
-      cache = {};
-    }
 
     if (cache[validatorName]) {
       validators = validators.concat(cache[validatorName]);
@@ -87391,7 +87385,7 @@ define('ember-validations/validators/local/length', ['exports', 'ember', 'ember-
         }
       }
 
-      this.options.tokenizer = this.options.tokenizer || function(value) { return value.toString().split(''); };
+      this.options.tokenizer = this.options.tokenizer || function(value) { return value.split(''); };
       // if (typeof(this.options.tokenizer) === 'function') {
         // debugger;
         // // this.tokenizedLength = new Function('value', 'return '
