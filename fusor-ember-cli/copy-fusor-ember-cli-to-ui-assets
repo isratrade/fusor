@@ -1,11 +1,12 @@
  #!/bin/bash
 
-cp ./dist/assets/vendor.css              ~/fusor/ui/app/assets/stylesheets/fusor_ui/vendor-fusor.css;
 cp ./dist/assets/fusor-ember-cli.css     ~/fusor/ui/app/assets/stylesheets/fusor_ui/;
 cp ./dist/assets/fusor-ember-cli.css.map  ~/fusor/ui/app/assets/stylesheets/fusor_ui/;
 
-cp ./dist/assets/vendor.js               ~/fusor/ui/app/assets/javascripts/fusor_ui/vendor-fusor.js;
+cp ./dist/assets/vendor.js               ~/fusor/ui/app/assets/javascripts/fusor_ui/;
+cp ./dist/assets/vendor.map              ~/fusor/ui/app/assets/javascripts/fusor_ui/;
 cp ./dist/assets/fusor-ember-cli.js      ~/fusor/ui/app/assets/javascripts/fusor_ui/;
+cp ./dist/assets/fusor-ember-cli.map     ~/fusor/ui/app/assets/javascripts/fusor_ui/;
 
 cp ./dist/assets/r/rhci-rhev-640-210.png            ~/fusor/ui/app/assets/images/r/;
 cp ./dist/assets/r/rhci-openstack-640-210.png       ~/fusor/ui/app/assets/images/r/;
