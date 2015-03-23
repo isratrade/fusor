@@ -4634,7 +4634,7 @@ define('fusor-ember-cli/templates/components/rhci-start', ['exports', 'ember'], 
     data.buffer.push("<div class='row'>\n  <div class='col-md-12'>\n    <h2>New Deployment: Select Cloud Infrastructure Products</h2>\n\n    Choose the products to deploy. This wizard guides you through creating a new ");
     stack1 = helpers._triageMustache.call(depth0, "nameRedHat", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
     if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-    data.buffer.push(" Cloud Infrastructure deployment.\n    <br />\n    <br />\n  </div>\n</div>\n\n<div class='row' style='height:370px;'>\n\n  <div class='col-md-4'>\n    ");
+    data.buffer.push(" Cloud Infrastructure deployment.\n    <br />\n    <br />\n  </div>\n</div>\n\n<i class=\"fa fa-3x fa-spin fa-refresh\"></i>\n\n\n<div class='row' style='height:370px;'>\n\n  <div class='col-md-4'>\n    ");
     data.buffer.push(escapeExpression((helper = helpers['rchi-item'] || (depth0 && depth0['rchi-item']),options={hash:{
       'srcImage': ("imgRhev"),
       'isChecked': ("isRhev"),
