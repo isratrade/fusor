@@ -1,13 +1,9 @@
-#ember-app {
-  padding-top: 50px;  /*change to 40px when deploying, change to 0px when in ember-cli mode */
-}
+@import "katello-path-selector";
+@import "downstream/wizard";
+@import "custom";
 
-.pager{
-    position:absolute;
-    left:-50px;
-}
+/* comment out styles/downstream/ directories out when deploying */
 
-/* comment downstream/ directory out when deploying (except wizard.scss) */
 /*
 @import "downstream/application";
 @import "downstream/mixin";
@@ -17,6 +13,3 @@
 @import "downstream/topbar";
 @import "downstream/typography";
 */
-@import "katello-path-selector";
-@import "downstream/wizard";
-@import "custom";

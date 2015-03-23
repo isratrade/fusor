@@ -1,34 +1,7 @@
-#ember-app {
-  padding-top: 50px;
-  /*change to 40px when deploying, change to 0px when in ember-cli mode */ }
-
 .pager {
   position: absolute;
   left: -50px; }
 
-/* comment downstream/ directory out when deploying (except wizard.scss) */
-/*
-@import "downstream/application";
-@import "downstream/mixin";
-@import "downstream/bootstrap_and_overrides";
-@import "downstream/charts";
-@import "downstream/colors";
-@import "downstream/topbar";
-@import "downstream/typography";
-*/
-/*@import "katello/activation_keys";
-@import "katello/content_search";
-@import "katello/contents";
-@import "katello/custom_info";
-@import "katello/dashboard";
-@import "katello/dashboard";
-@import "katello/distributors";
-@import "katello/fancyqueries";
-@import "katello/generic";
-@import "katello/header";
-@import "katello/ie";
-@import "katello/katello";
-*/
 /* katello */
 .path-selector {
   margin-top: 10px; }
