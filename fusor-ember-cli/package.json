@@ -44,6 +44,7 @@
     "torii": "^0.2.2",
     "ember-cli-divshot": "^0.1.7",
     "ember-radio-button": "^0.1.3",
-    "ember-validations": "~ 2.0.0-alpha.2"
+    "ember-validations": "~ 2.0.0-alpha.2",
+    "ember-cli-rails-addon": "0.0.11"
   }
 }
