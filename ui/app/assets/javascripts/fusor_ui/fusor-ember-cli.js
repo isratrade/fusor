@@ -2625,25 +2625,25 @@ define('fusor-ember-cli/mixins/start-controller-mixin', ['exports', 'ember'], fu
     // images
     imgRhev: (function () {
       if (this.get("isUpstream")) {
-        return "/r/assets/ovirt-640-210.png";
+        return "/assets/r/ovirt-640-210.png";
       } else {
-        return "/r/assets/rhci-rhev-640-210.png";
+        return "/assets/r/rhci-rhev-640-210.png";
       }
     }).property("isUpstream"),
 
     imgOpenStack: (function () {
       if (this.get("isUpstream")) {
-        return "/r/assets/rdo-640-210.png";
+        return "/assets/r/rdo-640-210.png";
       } else {
-        return "/r/assets/rhci-openstack-640-210.png";
+        return "/assets/r/rhci-openstack-640-210.png";
       }
     }).property("isUpstream"),
 
     imgCloudForms: (function () {
       if (this.get("isUpstream")) {
-        return "/r/assets/manageiq-640-210.png";
+        return "/assets/r/manageiq-640-210.png";
       } else {
-        return "/r/assets/rhci-cloudforms-640-210.png";
+        return "/assets/r/rhci-cloudforms-640-210.png";
       }
     }).property("isUpstream") });
 
