@@ -7,7 +7,9 @@
     left:-50px;
 }
 
-/*@import "downstream/application";
+/* comment downstream/ directory out when deploying (except wizard.scss) */
+/*
+@import "downstream/application";
 @import "downstream/mixin";
 @import "downstream/bootstrap_and_overrides";
 @import "downstream/charts";
