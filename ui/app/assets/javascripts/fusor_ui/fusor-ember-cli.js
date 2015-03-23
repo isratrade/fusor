@@ -6342,10 +6342,15 @@ define('fusor-ember-cli/templates/loading', ['exports', 'ember'], function (expo
   exports['default'] = Ember['default'].Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
   helpers = this.merge(helpers, Ember['default'].Handlebars.helpers); data = data || {};
-    
+    var buffer = '', helper, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
 
 
-    data.buffer.push("<h2>\nLoading ....\n</h2>");
+    data.buffer.push("<br />\n<br />\n<br />\n<h2>\n  ");
+    data.buffer.push(escapeExpression((helper = helpers['fa-icon'] || (depth0 && depth0['fa-icon']),options={hash:{
+      'spin': (true)
+    },hashTypes:{'spin': "BOOLEAN"},hashContexts:{'spin': depth0},contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "spinner", options) : helperMissing.call(depth0, "fa-icon", "spinner", options))));
+    data.buffer.push(" Loading ....\n</h2>");
+    return buffer;
     
   });
 
