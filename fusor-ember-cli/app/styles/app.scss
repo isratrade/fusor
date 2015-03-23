@@ -1,10 +1,11 @@
 @import "wizard";
 @import "custom";
 
-/* comment out styles/downstream/ directories out when deploying */
-
-/*
+/* TODO - this should be able to comment out when deploying. Currently, I need it */
 @import "katello-path-selector";
+
+/* comment out styles/downstream/ directories out when deploying */
+/*
 @import "downstream/application";
 @import "downstream/mixin";
 @import "downstream/bootstrap_and_overrides";
