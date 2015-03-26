@@ -29,7 +29,7 @@ Summary: Fusor Plugin
 Name: %{?scl_prefix}rubygem-%{gem_name}
 
 Version: 0.0.1
-Release: 7%{dist}
+Release: 8%{dist}
 Group: Development/Ruby
 License: Distributable
 URL: https://github.com/fusor/fusor
@@ -116,6 +116,12 @@ ln -s %{foreman_assets_plugin} %{buildroot}%{foreman_dir}/public/assets/fusor_ui
 %{gem_dir}/doc/%{gem_name}-%{version}
 
 %changelog
+* Thu Mar 26 2015 Joseph Magen <jmagen@redhat.com> 0.0.1-8
+- Spec file update to trigger asset precompilation, still need updates to
+  source code so it will precompile successfully. (jwmatthews@gmail.com)
+- fix images, fonts, and css so ember-cli code works correctly as plugin
+  (jmagen@redhat.com)
+
 * Thu Mar 19 2015 John Matthews <jwmatthews@gmail.com> 0.0.1-7
 - Updating ui directory to match latest code in fusor-ember-cli
   (jwmatthews@gmail.com)
