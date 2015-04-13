@@ -19,7 +19,9 @@
   </div>
   <div class='col-md-4'>
     <div class='pull-right'>
-       <button class='btn btn-default' {{action 'showModal' 'newOrganizationModal'}}>New Organization</button>
+      {{#em-modal-toggler modal-id="newOrganizationModal" class="btn btn-primary"}}
+        New Organization
+      {{/em-modal-toggler}}
     </div>
   </div>
 </div>
@@ -63,6 +65,26 @@
   </div>
 </div>
 
-{{#bs-modal name="newOrganizationModal" fade=true footerButtonsBinding="rhciModalButtons" title="New Organization"}}
-  {{partial 'new-organization'}}
-{{/bs-modal}}
+
+ {{#em-modal configName="bs" id="newOrganizationModal"}}
+    {{#em-modal-title}}
+        <!--optional toggler to close the opened modal-->
+        {{#em-modal-toggler class="close"}}×Close{{/em-modal-toggler}}
+        <h4 class="modal-title">New Organization</h4>
+    {{/em-modal-title}}
+    <!--the content of the modal...-->
+    {{#em-modal-body}}
+      {{partial 'new-organization'}}
+    {{/em-modal-body}}
+    <!--optional footer section of the modal, usually contains buttons-->
+    {{#em-modal-footer}}
+        {{#em-modal-toggler class="btn btn-default"}}Close{{/em-modal-toggler}}
+        <button {{action 'createOrganization'}}>Create</button>
+<!--         rhciModalButtons: [
+            Ember.Object.create({title: 'Cancel', clicked:"cancel", dismiss: 'modal'}),
+            Ember.Object.create({title: 'Create', clicked:"createOrganization", type: 'primary'})
+        ],
+ -->
+    {{/em-modal-footer}}
+{{/em-modal}}
+

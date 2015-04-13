@@ -2,8 +2,7 @@
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
-// importBootstrapJS only for isEmberCliMode so that menu bar works
-var app = new EmberApp({
+-modavar app = new EmberApp({
   storeConfigInMeta: false
 });
 
