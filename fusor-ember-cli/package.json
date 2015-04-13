@@ -33,7 +33,7 @@
     "ember-data": "1.0.0-beta.16.1",
     "ember-export-application-global": "^1.0.2",
     "glob": "^4.4.2",
-    "ember-cli-bootstrap-sass": "~0.2.11",
+    "ember-cli-bootstrap-sassy": "0.0.17",
     "ember-cli-sass": "~4.0.0-beta.5",
     "ember-cli-font-awesome": "0.0.9",
     "ember-cli-showdown": "~2.1.3",
