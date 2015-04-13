@@ -41,6 +41,7 @@
     "morgan": "~1.5.2",
     "ember-radio-button": "~1.0.1",
     "express": "~4.12.3",
-    "ember-idx-modal": "~0.1.4"
+    "ember-idx-modal": "~0.1.4",
+    "ember-idx-button": "~0.1.3"
   }
 }
