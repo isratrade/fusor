@@ -3,29 +3,8 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 
-  beforeModel: function(transition) {
-    if (this.controllerFor('application').get('deployAsPlugin')) {
-      return this.get('session').set('isAuthenticated', true);
-    };
-  },
-
-  setupController: function(controller, model) {
-    controller.set('model', model);
-
-    // Ensure headers are set in ApplicationAdapter. TODO - Why can't adapter access session?
-    if (this.controllerFor('application').get('isEmberCliMode')) {
-      var adapter = this.store.adapterFor('ApplicationAdapter');
-      if (this.get('session.authType') == 'oAuth') {
-        adapter.set('headers', { Authorization: 'Bearer ' + this.get('session.access_token') });
-      } else if (this.get('session.authType') == 'Basic') {
-        adapter.set('headers', { Authorization: 'Basic ' + this.get('session.basicAuthToken') });
-      }
-    }
-  },
-
   actions: {
     invalidateSession: function () {
-      this.get('session').invalidate();
       return this.transitionTo('login');
     },
 
@@ -35,20 +14,6 @@ export default Ember.Route.extend({
     willImplement: function() {
       alert('Check back soon. This will be implemented soon.');
     },
-
-    // OLD MODAL CODE MANUALLY NOT USING BS EMBER
-    // showModal: function(controller_name) {
-    //   this.render(controller_name, {
-    //     into: 'application',
-    //     outlet: 'modal'
-    //   });
-    // },
-    // removeModal: function() {
-    //   this.disconnectOutlet({
-    //     outlet: 'modal',
-    //     parentView: 'application'
-    //   });
-    // },
 
     //Submit the modal
     submit: function() {
