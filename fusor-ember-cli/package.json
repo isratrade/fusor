@@ -32,6 +32,7 @@
     "ember-cli-uglify": "1.0.1",
     "ember-data": "1.0.0-beta.16.1",
     "ember-export-application-global": "^1.0.2",
+    "glob": "^4.4.2",
     "ember-cli-bootstrap-sass": "0.2.11",
     "ember-cli-sass": "3.2.1",
     "ember-cli-font-awesome": "0.0.4",
