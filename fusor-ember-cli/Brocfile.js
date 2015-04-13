@@ -2,7 +2,7 @@
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
--modavar app = new EmberApp({
+var app = new EmberApp({
   storeConfigInMeta: false
 });
 

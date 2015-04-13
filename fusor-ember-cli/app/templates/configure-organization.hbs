@@ -19,6 +19,10 @@
   </div>
   <div class='col-md-4'>
     <div class='pull-right'>
+      {{#em-modal-toggler modal-id="modalf" class="btn btn-primary"}}
+        Create Org
+      {{/em-modal-toggler}}
+
       {{#em-modal-toggler modal-id="newOrganizationModal" class="btn btn-primary"}}
         New Organization
       {{/em-modal-toggler}}
@@ -79,8 +83,7 @@
     <!--optional footer section of the modal, usually contains buttons-->
     {{#em-modal-footer}}
         {{#em-modal-toggler class="btn btn-default"}}Close{{/em-modal-toggler}}
-        <button {{action 'createOrganization'}}>Create</button>
-<!--         rhciModalButtons: [
+<!--  --><!--         rhciModalButtons: [
             Ember.Object.create({title: 'Cancel', clicked:"cancel", dismiss: 'modal'}),
             Ember.Object.create({title: 'Create', clicked:"createOrganization", type: 'primary'})
         ],
@@ -88,3 +91,22 @@
     {{/em-modal-footer}}
 {{/em-modal}}
 
+
+{{#em-modal-form configName="bs" id="modalf" on-submit="createOrganization" in-async=async}}
+    {{#em-modal-title}}
+        {{#em-modal-toggler class="close"}}<span aria-hidden="true">×</span><span class="sr-only">Close</span>{{/em-modal-toggler}}
+        <h4 class="modal-title">Add Tag</h4>
+    {{/em-modal-title}}
+    {{#em-modal-body}}
+        {{#if async}}
+            Submitting, please wait...
+        {{else}}
+            {{text-f label="Organization Name" value=defaultOrgName labelSize='col-md-4' inputSize='col-md-8' }}
+            {{!text-f label="Label" value=orgLabelName labelSize='col-md-4' inputSize='col-md-8'}}
+            {{textarea-f label="Description (Optional)" value=fields_org.description labelSize='col-md-4' inputSize='col-md-8'}}
+        {{/if}}
+    {{/em-modal-body}}
+    {{#em-modal-footer}}
+        <button type="submit" class="btn btn-primary" {{bind-attr disabled=async}}>Submit</button>
+    {{/em-modal-footer}}
+{{/em-modal-form}}
