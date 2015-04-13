@@ -1,6 +1,11 @@
 @import "mixin";
 @import "colors";
 
+$dropdown-bg: #333333;
+$dropdown-fallback-border: white;
+$dropdown-border: white;
+$dropdown-link-color: #0088cc;
+
 .navbar {
   border-radius: 0;
   margin-bottom: 0;
