@@ -11,6 +11,7 @@ export default Ember.Route.extend({
       var self = this;
       return this.store.find('deployment', item.get('id')).then(function(deployment) {
         deployment.deleteRecord();
+        self.notify.success('Deployment was successfully deleted.');
         return deployment.save();
       });
     },
