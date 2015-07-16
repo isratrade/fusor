@@ -5,7 +5,9 @@ import DisableTabMixin from "../mixins/disable-tab-mixin";
 export default Ember.ObjectController.extend(DeploymentControllerMixin, DisableTabMixin, {
 
   needs: ['configure-environment', 'deployments', 'rhev', 'cloudforms',
-          'subscriptions/credentials', 'subscriptions/select-subscriptions'],
+          'subscriptions/credentials', 'subscriptions/select-subscriptions', 'review/progress/overview'],
+
+  deploymentResult: Ember.computed.alias("controllers.review/progress/overview.result"),
 
   routeNameSatellite: 'satellite',
 
@@ -61,6 +63,10 @@ export default Ember.ObjectController.extend(DeploymentControllerMixin, DisableT
   isStarted: function() {
     return !!(this.get('model.foreman_task_uuid'));
   }.property('model.foreman_task_uuid'),
+
+  canDelete: function() {
+    return (!(this.get('isStarted') || (this.get('deploymentResult') === 'error')));
+  }.property('isStarted'),
 
   numSubscriptionsRequired: function() {
     var num = 0;
