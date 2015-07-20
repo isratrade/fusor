@@ -2,6 +2,12 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
+  // classNameBindings: ['hasValidationError:hasError'],
+
+  // hasValidationError: function () {
+  //   return this.get('hasError');
+  // }.property('hasError'),
+
   labelClassSize: function () {
     return this.getWithDefault('labelSize', 'col-md-2');
   }.property(),
@@ -16,5 +22,6 @@ export default Ember.Component.extend({
 
   unitsClassSize: function () {
     return this.getWithDefault('unitsSize', 'col-md-2');
-  }.property()
+  }.property(),
+
 });
