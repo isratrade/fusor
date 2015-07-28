@@ -5,7 +5,7 @@ export default DS.RESTSerializer.extend({
     primaryKey: 'uuid',
 
     // add root node 'management_applications' that customer protal JSON response doesn't return
-    extractArray: function(store, type, payload) {
+    normalizeArrayResponse: function(store, type, payload) {
       payload = { management_applications: payload };
       return this._super(store, type, payload);
     },

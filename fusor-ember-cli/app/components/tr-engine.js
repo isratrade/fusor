@@ -20,7 +20,7 @@ export default Ember.Component.extend(SaveHostnameMixin, {
     engineHostChanged: function(host) {
       var self = this.get('targetObject');
       var controller = self.get('controllers.deployment');
-      return self.store.find('discovered-host', host.get('id')).then(function (result) {
+      return self.store.findRecord('discovered-host', host.get('id')).then(function (result) {
         return controller.set('model.discovered_host', result);
       });
     },

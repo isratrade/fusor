@@ -9,7 +9,7 @@ export default Ember.Route.extend({
     controller.set('model', model);
     controller.set('isLoadingHosts', true);
     var self = this;
-    this.store.find('discovered-host').then(function(results) {
+    this.store.findAll('discovered-host').then(function(results) {
       controller.set('allDiscoveredHosts', results);
       self.modelFor('deployment').get('discovered_hosts').then(function(results2) {
         controller.set('selectedHypervisors', results2);

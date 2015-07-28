@@ -54,7 +54,7 @@ export default Ember.Controller.extend({
     engineHostChanged: function(host) {
       var engine_hostname = host.get('name');
       var controller = this.get('controllers.deployment');
-      return this.store.find('discovered-host', host.get('id')).then(function (result) {
+      return this.store.findRecord('discovered-host', host.get('id')).then(function (result) {
         return controller.set('discovered_host', result);
         //TODO save hostname on discovered host on save deploy
       });
