@@ -6,4 +6,5 @@ export default DS.ActiveModelAdapter.extend({
     headers: {
         "X-CSRF-Token": token
     }
+
 });
