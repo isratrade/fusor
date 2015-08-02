@@ -24,6 +24,13 @@ module Fusor
 #    has_one :discovered_host, serializer: ::DiscoveredHostSerializer
     # has many hypervisors
 #    has_many :discovered_hosts, serializer: ::DiscoveredHostSerializer
+    def discovered_host_id
+      object.discovered_host_id
+    end
+
+    def discovered_host_ids
+      object.discovered_host_ids
+    end
 
     has_many :subscriptions, serializer: Fusor::SubscriptionSerializer
 
