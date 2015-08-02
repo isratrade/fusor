@@ -48,14 +48,49 @@ export default DS.Model.extend({
   created_at: DS.attr('date'),
   updated_at: DS.attr('date'),
 
-  // has one Engine
+  // has one Engine - discovered_host is an alias for rhev_engine_host_id
   discovered_host: DS.belongsTo('discovered-host', {async: true}),
+  rhev_engine_host_id: DS.attr('number'),
 
   // has many Hypervisors
   discovered_hosts: DS.hasMany('discovered-host', {async: true}),
 
   // has many Subscriptions
   subscriptions: DS.hasMany('subscription', {inverse: 'deployment', async: true}),
+
+  // Ember Data doesn't have DS.attr('array') so I did this
+  rhev_hypervisor_host_ids: function() {
+    var discovered_hosts = this.get('discovered_hosts');
+    if (Ember.isPresent(discovered_hosts)) {
+      return discovered_hosts.getEach('id');
+    } else {
+      return [];
+    }
+  }.property('discovered_hosts'),
+
+  isStarted: function() {
+    return !!(this.get('foreman_task_uuid'));
+  }.property('foreman_task_uuid'),
+
+  rhevDiscoveredHypervisors: function() {
+    var rhev_hypervisor_host_ids = this.get('rhev_hypervisor_host_ids');
+    return this.store.find('discovered-host', {id: rhev_hypervisor_host_ids}).then(function(results) {
+        return results;
+    });
+  }.property('rhev_hypervisor_host_ids'),
+
+  rhevManagedHypervisors: function() {
+    var rhev_hypervisor_host_ids = this.get('rhev_hypervisor_host_ids');
+    return this.store.find('host', {id: rhev_hypervisor_host_ids}).then(function(results) {
+        alert(results.get('length'));
+        return results;
+    });
+  }.property('rhev_hypervisor_host_ids'),
+
+  // rhevManagedEngine: function() {
+
+  // }.property('rhev_hypervisor_host_ids'),
+
 
 });
 
