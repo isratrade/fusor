@@ -11,7 +11,20 @@ export default Ember.Controller.extend({
 
   stepNumberReview: Ember.computed.alias("controllers.deployment.stepNumberReview"),
 
-  isFinished: Ember.computed.alias("controllers.review/progress/overview.isFinished"),
+  valueProgress: function() {
+    if (this.get('model.state') === 'planning') {
+        return 0.1;
+    } else if (this.get('model.state')) {
+        return (this.get('model.progress') * 100);
+    } else {
+        return 0;
+    }
+  }.property('model.progress'),
+
+  // this is checking only the Deploy task, not the children
+  isFinished: function() {
+    return (this.get('valueProgress') === 100);
+  }.property('valueProgress'),
 
   disableTabInstallation: function() {
     return (this.get('disableNext') && (!(this.get('isUpstream'))));

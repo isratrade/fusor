@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  needs: ['deployment', 'review/progress/overview'],
+  needs: ['deployment', 'review'],
 
   isRhevOpen: true,
   isOpenStackOpen: false,
@@ -12,12 +12,7 @@ export default Ember.Controller.extend({
 
   showErrorMessage: false,
   errorMsg: null, // this should be overwritten by API response
-  installationInProgress: true,
 
-  prog: 1,
-
-  incrementBy: 20,
-
-  isFinished: Ember.computed.alias("controllers.review/progress/overview.isFinished"),
+  isFinished: Ember.computed.alias("controllers.review.isFinished"),
 
 });
