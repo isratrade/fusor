@@ -21,9 +21,9 @@ module Fusor
     has_one :organization, serializer: ::OrganizationSerializer
     has_one :lifecycle_environment, serializer: ::LifecycleEnvironmentSerializer
     # has one engine
-    has_one :discovered_host, serializer: ::DiscoveredHostSerializer
+#    has_one :discovered_host, serializer: ::DiscoveredHostSerializer
     # has many hypervisors
-    has_many :discovered_hosts, serializer: ::DiscoveredHostSerializer
+#    has_many :discovered_hosts, serializer: ::DiscoveredHostSerializer
 
     has_many :subscriptions, serializer: Fusor::SubscriptionSerializer
 
