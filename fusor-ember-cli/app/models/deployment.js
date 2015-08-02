@@ -48,6 +48,9 @@ export default DS.Model.extend({
   created_at: DS.attr('date'),
   updated_at: DS.attr('date'),
 
+  // db attribute, discovered_host_id is alias for this attribute
+  rhev_engine_host_id: DS.attr('number'),
+
   // has one Engine
   discovered_host: DS.belongsTo('discovered-host', {async: true}),
 
