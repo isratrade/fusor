@@ -87,11 +87,6 @@ export default DS.Model.extend({
     });
   }.property('rhev_hypervisor_host_ids'),
 
-  // rhevManagedEngine: function() {
-
-  // }.property('rhev_hypervisor_host_ids'),
-
-
 });
 
 
