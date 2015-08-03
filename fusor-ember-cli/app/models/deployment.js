@@ -70,23 +70,7 @@ export default DS.Model.extend({
 
   isStarted: function() {
     return !!(this.get('foreman_task_uuid'));
-  }.property('foreman_task_uuid'),
-
-  rhevDiscoveredHypervisors: function() {
-    var rhev_hypervisor_host_ids = this.get('rhev_hypervisor_host_ids');
-    return this.store.find('discovered-host', {id: rhev_hypervisor_host_ids}).then(function(results) {
-        alert('rhevDiscoveredHypervisors length is ' + results.get('length'));
-        return results;
-    });
-  }.property('rhev_hypervisor_host_ids'),
-
-  rhevManagedHypervisors: function() {
-    var rhev_hypervisor_host_ids = this.get('rhev_hypervisor_host_ids');
-    return this.store.find('host', {id: rhev_hypervisor_host_ids}).then(function(results) {
-        alert('rhevManagedHypervisors length is ' + results.get('length'));
-        return results;
-    });
-  }.property('rhev_hypervisor_host_ids'),
+  }.property('foreman_task_uuid')
 
 });
 
