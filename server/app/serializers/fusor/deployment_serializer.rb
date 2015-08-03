@@ -16,6 +16,7 @@ module Fusor
                :rhev_root_password, :cfme_root_password,
                :host_naming_scheme, :custom_preprend_name, :enable_access_insights,
                :cfme_address,
+               :rhev_engine_host_id,
                :created_at, :updated_at
 
     has_one :organization, serializer: ::OrganizationSerializer
