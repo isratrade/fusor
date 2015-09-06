@@ -1,5 +1,8 @@
 export default function() {
 
+  this.get('/fusor/api/v21/deployments', function(db) {
+    return db.deployments;
+  });
   // These comments are here to help you get started. Feel free to delete them.
 
   /*
