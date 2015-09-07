@@ -2,10 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-  minHeightStyle: function() {
-      return new Ember.Handlebars.SafeString('min-height: ' + this.get('minHeight') + 'px;');
-  }.property('minHeight'),
-
   resizeWizard: function() {
     var self = this;
     this.resizeHandler = function() {

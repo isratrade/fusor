@@ -15,7 +15,7 @@ module('Acceptance | deployments page', {
 });
 
 test('user should see all elements on deployments page', function(assert) {
-  server.createList('deployment', 3);
+  //server.createList('deployment', 3);
   visit('/deployments');
 
   andThen(function() {
