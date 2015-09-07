@@ -4,6 +4,8 @@ export default Ember.Component.extend({
 
   tagName: 'tr',
 
+  classNames: ['deployment-row'],
+
   isStarted: function() {
     return !!(this.get('deployment.foreman_task_uuid'));
   }.property('deployment.foreman_task_uuid'),

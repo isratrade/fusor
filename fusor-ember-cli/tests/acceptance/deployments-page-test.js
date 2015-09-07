@@ -37,12 +37,32 @@ test('user should see all elements on deployments page', function(assert) {
   });
 });
 
-// test('user clicks on New Deployment button', function(assert) {
+test('user clicks on New Deployment button', function(assert) {
+  visit('/deployments');
+  click('.new-deployment-button a');
+
+  andThen(function() {
+    assert.equal(currentURL(), '/deployments/new/start');
+  });
+});
+
+test('display rows of deployments', function(assert) {
+  visit('/deployments');
+
+  andThen(function() {
+    var deployments = find('tr.deployment-row');
+    assert.equal(deployments.length, 3);
+
+    var deployment_name = find('tr.deployment-row:first-child > td:first-child > a');
+    assert.equal($.trim(deployment_name.text()), 'aaa');
+  });
+});
+
+// test('user filters list of deployments', function(assert) {
 //   visit('/deployments');
-//   click('.new-deployment-button a');
+//   fillIn('input.filter-input', 'aaa');
 
 //   andThen(function() {
 //     assert.equal(currentURL(), '/deployments/new/start');
 //   });
 // });
-
