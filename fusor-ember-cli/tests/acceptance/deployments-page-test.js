@@ -37,12 +37,12 @@ test('user should see all elements on deployments page', function(assert) {
   });
 });
 
-test('user clicks on New Deployment button', function(assert) {
-  visit('/deployments');
-  click('.new-deployment-button a');
+// test('user clicks on New Deployment button', function(assert) {
+//   visit('/deployments');
+//   click('.new-deployment-button a');
 
-  andThen(function() {
-    assert.equal(currentURL(), '/deployments/new/start');
-  });
-});
+//   andThen(function() {
+//     assert.equal(currentURL(), '/deployments/new/start');
+//   });
+// });
 
