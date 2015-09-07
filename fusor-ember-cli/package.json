@@ -25,7 +25,6 @@
     "ember-cli-babel": "^5.0.0",
     "ember-cli-content-security-policy": "0.4.0",
     "ember-cli-dependency-checker": "0.0.8",
-    "ember-cli-es5-shim": "^0.1.1",
     "ember-cli-font-awesome": "0.0.9",
     "ember-cli-htmlbars": "0.7.4",
     "ember-cli-ic-ajax": "0.1.1",
@@ -47,7 +46,6 @@
     "ember-radio-button": "~1.0.1",
     "express": "^4.13.0",
     "glob": "^4.5.3",
-    "morgan": "^1.6.0",
-    "phantomjs": "~1.9.18"
+    "morgan": "^1.6.0"
   }
 }
