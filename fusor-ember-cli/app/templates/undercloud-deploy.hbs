@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class='col-md-10'>
-                <button class="btn btn-primary pull-left" {{action "deployUndercloud"}} {{bindAttr disabled="deployDisabled"}}>
+                <button class="btn btn-primary pull-left" {{action "deployUndercloud"}} disabled="{{deployDisabled}}">
                     Deploy Undercloud
                 </button>
         </div>
