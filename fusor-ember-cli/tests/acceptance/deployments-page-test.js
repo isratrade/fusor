@@ -88,22 +88,23 @@ test('user filters list of deployments', function(assert) {
 
 test('edit deployment page', function(assert) {
     visit('/deployments/1/satellite');
+    // click('tr.deployment-row:first-child > td:first-child > a');
 
     andThen(function() {
           assert.equal(currentURL(), '/deployments/1/satellite');
-          assert.equal($.trim(find('h1').text()), 'New RHCI Deployment:  aaa');
-      // assert.equal($.trim(find('.new-deployment-button').text()), 'New Deployment');
-      // assert.equal(find('.new-deployment-button a').attr('href'), '#/deployments/new/start');
-      // assert.equal($.trim(find('.form-group button').text()), 'Search');
-      // assert.equal($.trim(find('.filter-deployments input').attr('placeholder')), 'Filter ...');
-      // assert.ok(find('table.deployments-table').length);
-      // assert.equal($.trim(find('table.deployments-table > thead > tr > th:nth-child(1)').text()), 'Name');
-      // assert.equal($.trim(find('table.deployments-table > thead > tr > th:nth-child(2)').text()), 'Environment');
-      // assert.equal($.trim(find('table.deployments-table > thead > tr > th:nth-child(3)').text()), 'Organization');
-      // assert.equal($.trim(find('table.deployments-table > thead > tr > th:nth-child(4)').text()), 'Status');
-      // var displayingString = $.trim(find('.displaying-entries').text());
-      // assert.ok(new RegExp('Displaying').test(displayingString), 'Should show text Displaying ## of ## entries');
-      // // assert.ok(new RegExp('^displaying\s+\d+\s+of\s+\d+\s+entries$').test(displayingString), 'Should show text Displaying ## of ## entries');
-      // // assert.ok(new RegExp('^displaying\s\d').test('displaying'));
+    //       assert.equal($.trim(find('h1').text()), 'New RHCI Deployment:  aaa');
+    //   // assert.equal($.trim(find('.new-deployment-button').text()), 'New Deployment');
+    //   // assert.equal(find('.new-deployment-button a').attr('href'), '#/deployments/new/start');
+    //   // assert.equal($.trim(find('.form-group button').text()), 'Search');
+    //   // assert.equal($.trim(find('.filter-deployments input').attr('placeholder')), 'Filter ...');
+    //   // assert.ok(find('table.deployments-table').length);
+    //   // assert.equal($.trim(find('table.deployments-table > thead > tr > th:nth-child(1)').text()), 'Name');
+    //   // assert.equal($.trim(find('table.deployments-table > thead > tr > th:nth-child(2)').text()), 'Environment');
+    //   // assert.equal($.trim(find('table.deployments-table > thead > tr > th:nth-child(3)').text()), 'Organization');
+    //   // assert.equal($.trim(find('table.deployments-table > thead > tr > th:nth-child(4)').text()), 'Status');
+    //   // var displayingString = $.trim(find('.displaying-entries').text());
+    //   // assert.ok(new RegExp('Displaying').test(displayingString), 'Should show text Displaying ## of ## entries');
+    //   // // assert.ok(new RegExp('^displaying\s+\d+\s+of\s+\d+\s+entries$').test(displayingString), 'Should show text Displaying ## of ## entries');
+    //   // // assert.ok(new RegExp('^displaying\s\d').test('displaying'));
     });
 });
