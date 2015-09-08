@@ -1,8 +1,35 @@
 export default function() {
 
   this.get('/fusor/api/v21/deployments', function(db) {
-    return db.deployments;
+    return {
+      deployments: db.deployments
+    };
   });
+
+  this.get('/fusor/api/v21/deployments/:id', function(db, request) {
+    var id = request.params.id;
+    return {
+      deployment: db.deployments.find(id)
+    };
+  });
+
+  this.get('/katello/api/v2/organizations', function(db) {
+    return {
+      results: db.organizations
+    };
+  });
+
+  this.get('/katello/api/v2/organizations/:id', function(db, request) {
+    var id = request.params.id;
+    return {
+      organization: db.organizations.find(id)
+    };
+  });
+
+
+
+
+
   // These comments are here to help you get started. Feel free to delete them.
 
   /*
