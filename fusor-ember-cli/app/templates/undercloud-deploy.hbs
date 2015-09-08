@@ -4,8 +4,8 @@
         <div class='col-md-12'>
           {{select-simple-f id="example" label="Deployment Mode" value=model.deploymentMode      labelSize='deploy-undercloud-param-label' inputSize='deploy-undercloud-param-input' isRequired=true helpText=deploymentModeHelp content=deploymentModes}}
           {{text-f label="Image Path"               value=model.imagePath           labelSize='deploy-undercloud-param-label' inputSize='deploy-undercloud-param-input' isRequired=true helpText=imagePathHelp}}
-          {{text-f label="Undercloud IP"            valueBinding=model.undercloudIP labelSize='deploy-undercloud-param-label' inputSize='deploy-undercloud-param-input' isRequired=true helpText=undercloudIPHelp}}
-          {{text-f label="SSH User"                 valueBinding=model.sshUser      labelSize='deploy-undercloud-param-label' inputSize='deploy-undercloud-param-input' isRequired=true helpText=sshUserHelp}}
+          {{text-f label="Undercloud IP"            value=model.undercloudIP labelSize='deploy-undercloud-param-label' inputSize='deploy-undercloud-param-input' isRequired=true helpText=undercloudIPHelp}}
+          {{text-f label="SSH User"                 value=model.sshUser      labelSize='deploy-undercloud-param-label' inputSize='deploy-undercloud-param-input' isRequired=true helpText=sshUserHelp}}
           {{text-f label="SSH Password"             value=model.sshPassword         labelSize='deploy-undercloud-param-label' inputSize='deploy-undercloud-param-input' isRequired=true helpText=sshPasswordHelp type='password'}}
           {{text-f label="Local Interface"          value=model.localInterface      labelSize='deploy-undercloud-param-label' inputSize='deploy-undercloud-param-input' isRequired=true helpText=localInterfaceHelp}}
         </div>
