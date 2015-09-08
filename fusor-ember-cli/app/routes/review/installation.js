@@ -2,11 +2,13 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function() {
+    var deployment = this.modelFor('deployment');
+
     return Ember.RSVP.hash({
-        deployment: this.modelFor('deployment'),
-        openstackPlan: this.store.find('deployment-plan', 'overcloud'),
-        openstackNodes: this.store.find('node'),
-        openstackProfiles: this.store.find('flavor')
+        deployment: deployment,
+        openstackPlan: (deployment.get('isOpenStack') ? this.store.find('deployment-plan', 'overcloud') : []),
+        openstackNodes: (deployment.get('isOpenStack') ? this.store.find('node') : []),
+        openstackProfiles: (deployment.get('isOpenStack') ? this.store.find('flavor') : [])
     });
   },
 
