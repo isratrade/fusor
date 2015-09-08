@@ -37,7 +37,7 @@
         <th>UUID</th>
       </thead>
       <tbody>
-        {{#each managementApp in model}}
+        {{#each model as |managementApp|}}
           {{tr-management-app managementApp=managementApp
                               consumerUUID=sessionPortal.consumerUUID
                               action="selectManagementApp"

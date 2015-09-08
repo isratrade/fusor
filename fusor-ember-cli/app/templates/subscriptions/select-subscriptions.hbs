@@ -60,7 +60,7 @@
               </thead>
 
             <tbody>
-            {{#each subscription in subscriptionPools}}
+            {{#each subscriptionPools as |subscription|}}
               {{tr-subscription subscription=subscription numSubscriptionsRequired=numSubscriptionsRequired model=model}}
             {{else}}
               <tr>
@@ -100,7 +100,7 @@
                     </thead>
 
                     <tbody>
-                    {{#each sub in model}}
+                    {{#each model as |sub|}}
                       {{tr-subscription-saved subscription=sub}}
                     {{/each}}
                     </tbody>
@@ -122,7 +122,7 @@
               </thead>
 
               <tbody>
-              {{#each sub in model}}
+              {{#each model as |sub|}}
                 {{tr-subscription-saved subscription=sub}}
               {{else}}
                 <tr>

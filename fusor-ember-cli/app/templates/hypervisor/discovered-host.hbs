@@ -61,7 +61,7 @@
         </thead>
 
         <tbody>
-        {{#each host in filteredHosts}}
+        {{#each filteredHosts as |host|}}
            {{tr-hypervisor host=host
                            model=model
                            parentController=controller

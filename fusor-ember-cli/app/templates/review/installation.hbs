@@ -39,7 +39,7 @@
                           value=engineNamePlusDomain}}
 
             {{#review-link label='Hypervisor Host Name' routeName='hypervisor.discovered-host' isRequired=true value=selectedHypervisorHosts useYieldInstead=true}}
-                {{#each host in selectedHypervisorHosts}}
+                {{#each selectedHypervisorHosts as |host|}}
                    {{hypervisor-name host=host hypervisorDomain=hypervisorDomain}}
                 {{/each}}
             {{/review-link}}
@@ -93,8 +93,8 @@
       {{#accordion-item name=controllers.deployment.nameOpenStack isOpen=isOpenStackOpen}}
         {{#link-to 'assign-nodes'}}Assigned Nodes{{/link-to}}:
           <div class="row">
-            {{#each profile in model.openstackProfiles}}
-              {{#each profile in model.openstackProfiles}}
+            {{#each model.openstackProfiles as |profile|}}
+              {{#each model.openstackProfiles as |profile|}}
                 <div class="col-md-8">
                   {{node-profile profile=profile nodes=model.openstackNodes plan=model.openstackPlan doAssign=true readOnly=true}}
                 </div>
@@ -123,7 +123,7 @@
                         value=controllers.subscriptions/select-subscriptions.enableAnalytics }}
 
 
-          {{#each sub in subscriptions}}
+          {{#each subscriptions as |sub|}}
               {{review-link label='Subscription Name'
                             routeName='subscriptions.select-subscriptions'
                             value=sub.product_name }}

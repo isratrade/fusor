@@ -3,7 +3,7 @@
 
 <h1>{{totalQuantity}} Subscriptions Attached</h1>
 
-{{#each entitlement in model}}
+{{#each model as |entitlement|}}
     <p>
         {{entitlement.contractNumber}} - {{entitlement.quantity}} - {{entitlement.endDate}} - {{entitlement.consumed}} - {{entitlement.poolQuantity}}
     </p>
@@ -25,7 +25,7 @@
 
         <h1>{{totalQuantity}} Subscriptions Attached</h1>
 
-        {{#each entitlement in model}}
+        {{#each model as |entitlement|}}
             <p>
                 {{entitlement.contractNumber}} - {{entitlement.quantity}} - {{entitlement.endDate}}
             </p>

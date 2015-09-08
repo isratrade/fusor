@@ -33,7 +33,7 @@
     </thead>
 
   <tbody>
-  {{#each deployment in filteredDeployments}}
+  {{#each filteredDeployments as |deployment|}}
       {{tr-deployment deployment=deployment}}
   {{/each}}
   </tbody>

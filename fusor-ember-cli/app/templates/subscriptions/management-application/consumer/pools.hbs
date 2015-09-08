@@ -42,7 +42,7 @@
         </thead>
 
       <tbody>
-      {{#each subscription in model}}
+      {{#each model as |subscription|}}
         {{tr-subscription subscription=subscription numSubscriptionsRequired=numSubscriptionsRequired}}
       {{else}}
         <tr>
