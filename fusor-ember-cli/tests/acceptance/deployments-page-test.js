@@ -15,6 +15,11 @@ module('Acceptance | deployments page', {
 });
 
 test('user should see all elements on deployments page', function(assert) {
+
+  var org = server.create('organization');
+  var env = server.create('lifecycleenvironment');
+  server.createList('deployment', 10, {organization_id: org.id, lifecycle_environment_id: env.id});
+
   server.createList('deployment', 3);
   visit('/deployments');
 
@@ -37,7 +42,9 @@ test('user should see all elements on deployments page', function(assert) {
 });
 
 test('user clicks on New Deployment button', function(assert) {
-  server.createList('deployment', 3);
+  var org = server.create('organization');
+  var env = server.create('lifecycleenvironment');
+  server.createList('deployment', 3, {organization_id: org.id, lifecycle_environment_id: env.id});
   visit('/deployments');
   click('.new-deployment-button a');
 
@@ -47,7 +54,9 @@ test('user clicks on New Deployment button', function(assert) {
 });
 
 test('display rows of deployments', function(assert) {
-  server.createList('deployment', 3);
+  var org = server.create('organization');
+  var env = server.create('lifecycleenvironment');
+  server.createList('deployment', 3, {organization_id: org.id, lifecycle_environment_id: env.id});
   visit('/deployments');
 
   andThen(function() {
@@ -60,7 +69,9 @@ test('display rows of deployments', function(assert) {
 });
 
 test('user filters list of deployments', function(assert) {
-  server.createList('deployment', 11);
+  var org = server.create('organization');
+  var env = server.create('lifecycleenvironment');
+  server.createList('deployment', 11, {organization_id: org.id, lifecycle_environment_id: env.id});
   visit('/deployments');
   fillIn('input.filter-input', '1');
 
@@ -91,15 +102,14 @@ test('user filters list of deployments', function(assert) {
 // });
 
 test('click deployment link (first-child) and verify edit deployment page ', function(assert) {
-  var organization = server.create('organization');
-  var lifecycle_environment = server.create('lifecycle_environment');
-  server.createList('post', 10, {user_id: user.id});
-  server.createList('deployment', 1);
+  var org = server.create('organization');
+  var env = server.create('lifecycleenvironment');
+  server.createList('deployment', 1, {organization_id: org.id, lifecycle_environment_id: env.id});
   visit('/deployments');
   click('tr.deployment-row:first-child > td:first-child > a');
 
   andThen(function() {
     assert.equal(currentURL(), '/deployments/1/satellite');
-    assert.equal($.trim(find('h1').text()), 'New RHCI Deployment: Deployment number 0');
+    assert.equal($.trim(find('h1').text()), 'New RHCI Deployment:  Deployment number 0');
   });
 });

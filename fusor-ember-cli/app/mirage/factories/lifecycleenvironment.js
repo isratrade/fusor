@@ -6,5 +6,7 @@
 import Mirage, {faker} from 'ember-cli-mirage';
 
 export default Mirage.Factory.extend({
-  name(i) { return `LifecycleEnviron ${i}`; }
+  name(i) { return `lifecycleenvironment ${i}`; },
+  title: 'title222'
+
 });

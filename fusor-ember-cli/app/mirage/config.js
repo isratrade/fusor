@@ -21,8 +21,34 @@ export default function() {
 
   this.get('/katello/api/v2/organizations/:id', function(db, request) {
     var id = request.params.id;
+    return db.organizations.find(id);
+  });
+
+  this.get('/api/v21/organizations', function(db) {
+    return {
+      organizations: db.organizations
+    };
+  });
+
+  this.get('/api/v21/organizations/:id', function(db, request) {
+    var id = request.params.id;
     return {
       organization: db.organizations.find(id)
+    };
+  });
+
+  this.get('/api/v21/lifecycle_environments', function(db, request) {
+    var organization_id = request.params.organization_id;
+    return {
+      lifecycle_environments: db.lifecycleenvironments
+    };
+  });
+
+  this.get('/api/v21/lifecycle_environments/:id', function(db, request) {
+    var organization_id = request.params.organization_id;
+    var id = request.params.id;
+    return {
+      lifecycle_environment: db.lifecycleenvironments.find(id)
     };
   });
 

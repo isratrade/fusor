@@ -19,15 +19,19 @@ export default Ember.Route.extend(DeploymentRouteMixin, {
     // check if org has upstream UUID using Katello V2 API
     var orgID = model.get('organization.id');
     var url = '/katello/api/v2/organizations/' + orgID;
-    Ember.$.getJSON(url).then(function(results) {
+    Ember.$.getJSON(url).then(function(result) {
+      console.log('result is .....');
+      console.log(result.name);
+      console.log(result.owner_details.upstreamConsumer);
+      console.log('end is .....');
       Ember.run(function () {
-        if (Ember.isPresent(results.owner_details.upstreamConsumer)) {
-          controller.set('organizationUpstreamConsumerUUID', results.owner_details.upstreamConsumer.uuid);
-          controller.set('organizationUpstreamConsumerName', results.owner_details.upstreamConsumer.name);
+        if (Ember.isPresent(result.owner_details) && Ember.isPresent(result.owner_details.upstreamConsumer)) {
+          controller.set('organizationUpstreamConsumerUUID', result.owner_details.upstreamConsumer.uuid);
+          controller.set('organizationUpstreamConsumerName', result.owner_details.upstreamConsumer.name);
           // if no UUID for deployment, assign it from org UUID
           if (Ember.isBlank(controller.get('model.upstream_consumer_uuid'))) {
-            controller.set('model.upstream_consumer_uuid', results.owner_details.upstreamConsumer.uuid);
-            controller.set('model.upstream_consumer_name', results.owner_details.upstreamConsumer.name);
+            controller.set('model.upstream_consumer_uuid', result.owner_details.upstreamConsumer.uuid);
+            controller.set('model.upstream_consumer_name', result.owner_details.upstreamConsumer.name);
           }
         } else {
           controller.set('organizationUpstreamConsumerUUID', null);
