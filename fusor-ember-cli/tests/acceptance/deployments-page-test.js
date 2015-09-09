@@ -104,7 +104,7 @@ test('user filters list of deployments', function(assert) {
 test('click deployment link (first-child) and verify edit deployment page ', function(assert) {
   var org = server.create('organization');
   var env = server.create('lifecycleenvironment');
-  server.createList('deployment', 1, {organization_id: org.id, lifecycle_environment_id: env.id});
+  server.createList('deployment', 3, {organization_id: org.id, lifecycle_environment_id: env.id});
   visit('/deployments');
   click('tr.deployment-row:first-child > td:first-child > a');
 

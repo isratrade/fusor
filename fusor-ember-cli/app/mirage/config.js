@@ -38,14 +38,12 @@ export default function() {
   });
 
   this.get('/api/v21/lifecycle_environments', function(db, request) {
-    var organization_id = request.params.organization_id;
     return {
       lifecycle_environments: db.lifecycleenvironments
     };
   });
 
   this.get('/api/v21/lifecycle_environments/:id', function(db, request) {
-    var organization_id = request.params.organization_id;
     var id = request.params.id;
     return {
       lifecycle_environment: db.lifecycleenvironments.find(id)
