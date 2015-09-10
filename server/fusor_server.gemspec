@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.files     += Dir["config/fusor.yaml"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "active_model_serializers", '~> 0.9'
+  s.add_dependency "active_model_serializers", '0.10.0.rc2'
   s.add_dependency "mechanize"
 
 end
