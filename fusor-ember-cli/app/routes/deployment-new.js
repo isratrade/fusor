@@ -22,11 +22,11 @@ export default Ember.Route.extend(DeploymentRouteMixin, {
 
   // rollback if new deployment not saved
   // TODO modal confirm/cancel
-  deactivate: function() {
-    var deployment = this.modelFor('deployment-new');
-    if (deployment.get('isNew')) {
-      return deployment.rollback();
-    }
-  }
+  // deactivate: function() {
+  //   var deployment = this.modelFor('deployment-new');
+  //   if (deployment.get('isNew')) {
+  //     return deployment.rollback();
+  //   }
+  // }
 
 });
