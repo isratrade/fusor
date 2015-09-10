@@ -1,7 +1,7 @@
 import Ember from 'ember';
-
+// is this used
 export default Ember.Controller.extend({
-  needs: ['rhev', 'deployment'],
+  needs: ['rhev'],
 
   hostNamingScheme: Ember.computed.alias("controllers.deployment.model.host_naming_scheme"),
   customPreprendName: Ember.computed.alias("controllers.deployment.model.custom_preprend_name"),

@@ -141,7 +141,7 @@
 {{#cancel-back-next backRouteName='subscriptions.management-application'
                    disableBack=false
                    parentController=controller
-                   disableCancel=controllers.deployment.isStarted}}
+                   disableCancel=isStarted}}
   <button {{action 'saveSubscriptions' 'review'}} class='btn btn-primary'>Next</button>
 {{/cancel-back-next}}
 

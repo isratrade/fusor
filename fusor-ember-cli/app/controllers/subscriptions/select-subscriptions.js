@@ -1,13 +1,14 @@
 import Ember from 'ember';
+import NeedsDeploymentMixin from "../../mixins/needs-deployment-mixin";
 
-export default Ember.ArrayController.extend({
-  needs: ['application', 'deployment'],
+export default Ember.ArrayController.extend(NeedsDeploymentMixin, {
+
+  needs: ['application'],
 
   isUpstream: Ember.computed.alias("controllers.application.isUpstream"),
   stepNumberSubscriptions: Ember.computed.alias("controllers.deployment.stepNumberSubscriptions"),
   enableAccessInsights: Ember.computed.alias("controllers.deployment.model.enable_access_insights"),
   numSubscriptionsRequired: Ember.computed.alias("controllers.deployment.numSubscriptionsRequired"),
-  isStarted: Ember.computed.alias("controllers.deployment.isStarted"),
 
   hasSubscriptionPools: function() {
       return (this.get('subscriptionPools.length') > 0);

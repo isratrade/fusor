@@ -148,8 +148,8 @@
   {{#cancel-back-next backRouteName=backRouteNameonReviewInstallation
                       disableBack=false
                       parentController=controller
-                      disableCancel=controllers.deployment.isStarted}}
-      {{#if controllers.deployment.isStarted}}
+                      disableCancel=isStarted}}
+      {{#if isStarted}}
           {{#link-to 'review.progress.overview' role="button" class='btn btn-primary'}}
             Next <i class="fa fa-angle-right"></i>
           {{/link-to}}

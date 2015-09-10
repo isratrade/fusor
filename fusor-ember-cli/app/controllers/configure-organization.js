@@ -1,9 +1,8 @@
 import Ember from 'ember';
 import ConfigureOrganizationMixin from "../mixins/configure-organization-mixin";
+import NeedsDeploymentMixin from "../mixins/needs-deployment-mixin";
 
-export default Ember.Controller.extend(ConfigureOrganizationMixin, {
-
-  needs: ['deployment', 'application'],
+export default Ember.Controller.extend(ConfigureOrganizationMixin, NeedsDeploymentMixin, {
 
   organization: Ember.computed.alias("controllers.deployment.organization"),
 
@@ -11,7 +10,6 @@ export default Ember.Controller.extend(ConfigureOrganizationMixin, {
   satelliteTabRouteName: Ember.computed.alias("controllers.deployment.satelliteTabRouteName"),
   lifecycleEnvironmentTabRouteName: Ember.computed.alias("controllers.deployment.lifecycleEnvironmentTabRouteName"),
   deploymentName: Ember.computed.alias("controllers.deployment.name"),
-  isStarted: Ember.computed.alias("controllers.deployment.isStarted"),
 
   actions: {
     selectOrganization: function(organization) {

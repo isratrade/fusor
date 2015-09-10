@@ -18,7 +18,7 @@
   <div class='col-md-9'>
     <div class='pull-right'>
       {{#em-modal-toggler modal-id="registerNewSatellite" class="btn btn-primary"
-                          disabled=controllers.deployment.isStarted}}
+                          disabled=isStarted}}
         Register a New Satellite
       {{/em-modal-toggler}}
     </div>
@@ -41,7 +41,7 @@
           {{tr-management-app managementApp=managementApp
                               consumerUUID=sessionPortal.consumerUUID
                               action="selectManagementApp"
-                              disabled=controllers.deployment.isStarted}}
+                              disabled=isStarted}}
         {{/each}}
       </tbody>
     </table>
@@ -55,7 +55,7 @@
                    nextRouteName='subscriptions.select-subscriptions'
                    disableNext=disableNextOnManagementApp
                    parentController=controller
-                   disableCancel=controllers.deployment.isStarted}}
+                   disableCancel=isStarted}}
 
 {{/if}}
 

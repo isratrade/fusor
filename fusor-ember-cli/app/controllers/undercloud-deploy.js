@@ -1,9 +1,8 @@
 import Ember from 'ember';
 import DeploymentControllerMixin from "../mixins/deployment-controller-mixin";
+import NeedsDeploymentMixin from "../mixins/needs-deployment-mixin";
 
-export default Ember.Controller.extend(DeploymentControllerMixin, {
-
-  needs: ['deployment'],
+export default Ember.Controller.extend(DeploymentControllerMixin, NeedsDeploymentMixin, {
 
   deploymentModes: ['POC', 'Scale'],
 

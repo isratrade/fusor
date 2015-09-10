@@ -1,9 +1,10 @@
 import Ember from 'ember';
 import DeploymentControllerMixin from "../mixins/deployment-controller-mixin";
+import NeedsDeploymentMixin from "../mixins/needs-deployment-mixin";
 
-export default Ember.Controller.extend(DeploymentControllerMixin, {
+export default Ember.Controller.extend(DeploymentControllerMixin, NeedsDeploymentMixin, {
 
-  needs: ['deployment', 'register-nodes'],
+  needs: ['register-nodes'],
 
   getParamValue: function(paramName, params) {
     var paramValue = null;

@@ -1,13 +1,11 @@
 import Ember from 'ember';
 import ConfigureEnvironmentMixin from "../mixins/configure-environment-mixin";
+import NeedsDeploymentMixin from "../mixins/needs-deployment-mixin";
 
-export default Ember.Controller.extend(ConfigureEnvironmentMixin, {
-
-  needs: ['deployment', 'application'],
+export default Ember.Controller.extend(ConfigureEnvironmentMixin, NeedsDeploymentMixin, {
 
   satelliteTabRouteName: Ember.computed.alias("controllers.deployment.model.satelliteTabRouteName"),
   organizationTabRouteName: Ember.computed.alias("controllers.deployment.model.organizationTabRouteName"),
-  isStarted: Ember.computed.alias("controllers.deployment.isStarted"),
 
   selectedOrganization: Ember.computed.alias("controllers.deployment.model.organization"),
 

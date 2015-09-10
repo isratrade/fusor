@@ -1,12 +1,12 @@
 import Ember from 'ember';
+import NeedsDeploymentMixin from "../../mixins/needs-deployment-mixin";
 
-export default Ember.ArrayController.extend({
-  needs: ['deployment', 'hypervisor', 'rhev'],
+export default Ember.ArrayController.extend(NeedsDeploymentMixin, {
+
+  needs: ['hypervisor', 'rhev'],
 
   selectedRhevEngine: Ember.computed.alias("controllers.deployment.model.discovered_host"),
   rhevIsSelfHosted: Ember.computed.alias("controllers.deployment.model.rhev_is_self_hosted"),
-  isStarted: Ember.computed.alias("controllers.deployment.isStarted"),
-  isNotStarted: Ember.computed.alias("controllers.deployment.isNotStarted"),
 
   isCustomScheme: Ember.computed.alias("controllers.hypervisor.isCustomScheme"),
   isHypervisorN: Ember.computed.alias("controllers.hypervisor.isHypervisorN"),
