@@ -8,6 +8,7 @@ export default function() {
 
   this.get('/fusor/api/v21/deployments/:id', function(db, request) {
     var id = request.params.id;
+    console.log('got hereeeeeeeee');
     return {
       deployment: db.deployments.find(id)
     };
