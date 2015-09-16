@@ -38,6 +38,10 @@ export default Ember.Mixin.create({
     if (this.get('isUpstream')) { return "RDO"; } else { return "RHELOSP"; }
   }.property('isUpstream'),
 
+  nameOpenShift: function() {
+    return "OpenShfit";
+  }.property(),
+
   nameCloudForms: function() {
     if (this.get('isUpstream')) { return "ManageIQ"; } else { return "CloudForms"; }
   }.property('isUpstream'),
@@ -53,6 +57,10 @@ export default Ember.Mixin.create({
 
   imgCloudForms: function() {
     if (this.get('isUpstream')) { return "/assets/r/manageiq-640-210.png"; } else { return "/assets/r/rhci-cloudforms-640-210.png"; }
-  }.property('isUpstream')
+  }.property('isUpstream'),
+
+  imgOpenShfit: function() {
+    return "/assets/r/rhci-openshift-640-400.png";
+  }.property()
 
 });

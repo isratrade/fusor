@@ -60,6 +60,11 @@ export default Router.map(function() {
       this.resource('where-install');
       this.route('cfme-configuration', { path: 'configuration' });
     });
+    this.resource('openshift', function() {
+      this.route('openshift-masters', { path: 'masters' });
+      this.route('openshift-nodes', { path: 'nodes' });
+      this.route('openshift-configuration', { path: 'configuration' });
+    });
     this.resource('subscriptions', function() {
       this.route('credentials');
       this.route('management-application', function() {

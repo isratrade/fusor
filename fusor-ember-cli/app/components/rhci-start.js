@@ -9,6 +9,9 @@ export default Ember.Component.extend({
       this.set('isCloudForms', false);
       return this.set('isDisabledCfme', true);
     }
-  }.observes('isRhev', 'isOpenStack')
+  }.observes('isRhev', 'isOpenStack'),
+
+  isOpenShift: true,
+  isDisabledOpenShift: false
 
 });
