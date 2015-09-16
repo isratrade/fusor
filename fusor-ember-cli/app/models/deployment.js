@@ -10,6 +10,7 @@ export default DS.Model.extend({
   deploy_rhev: DS.attr('boolean'),
   deploy_cfme: DS.attr('boolean'),
   deploy_openstack: DS.attr('boolean'),
+  deploy_openshift: DS.attr('boolean'),
 
   rhev_is_self_hosted: DS.attr('boolean'),
 

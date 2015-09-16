@@ -7,9 +7,10 @@ export default Ember.Controller.extend({
   upstreamConsumerUuid: Ember.computed.alias("controllers.deployment.model.upstream_consumer_uuid"),
   upstreamConsumerName: Ember.computed.alias("controllers.deployment.model.upstream_consumer_name"),
 
-  isRhev: Ember.computed.alias("controllers.deployment.deploy_rhev"),
-  isOpenStack: Ember.computed.alias("controllers.deployment.deploy_openstack"),
-  isCloudForms: Ember.computed.alias("controllers.deployment.deploy_cfme"),
+  isRhev: Ember.computed.alias("controllers.deployment.model.deploy_rhev"),
+  isOpenStack: Ember.computed.alias("controllers.deployment.model.deploy_openstack"),
+  isCloudForms: Ember.computed.alias("controllers.deployment.model.deploy_cfme"),
+  isOpenShift: Ember.computed.alias("controllers.deployment.model.deploy_openshift"),
 
   //overwritten by setupController
   organizationUpstreamConsumerUUID: null,

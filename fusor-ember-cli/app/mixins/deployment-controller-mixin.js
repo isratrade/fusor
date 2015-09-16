@@ -9,6 +9,7 @@ export default Ember.Mixin.create({
   isRhev: Ember.computed.alias("model.deploy_rhev"),
   isOpenStack: Ember.computed.alias("model.deploy_openstack"),
   isCloudForms: Ember.computed.alias("model.deploy_cfme"),
+  isOpenShift: Ember.computed.alias("model.deploy_openshift"),
 
   // default is downstream
   isUpstream: false,

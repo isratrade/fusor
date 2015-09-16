@@ -11,18 +11,21 @@
 
 <div class='row' style='height:370px;'>
 
-  <div class='col-md-4'>
+  <div class='col-md-3'>
     {{rhci-item srcImage=imgRhev isChecked=isRhev name=nameRhev cssId='is_rhev'}}
   </div>
 
-  <div class='col-md-4'>
+  <div class='col-md-3'>
     {{rhci-item srcImage=imgOpenStack isChecked=isOpenStack name=nameOpenStack cssId='is_openstack'}}
   </div>
 
-  <div class='col-md-4'>
+  <div class='col-md-3'>
     {{rhci-item srcImage=imgCloudForms isChecked=isCloudForms name=nameCloudForms cssId='is_cloudforms' isDisabled=isDisabledCfme}}
   </div>
 
+  <div class='col-md-3'>
+    {{rhci-item srcImage=imgOpenShift isChecked=isOpenShift name=nameOpenShift cssId='is_openshift' isDisabled=isDisabledOpenShift}}
+  </div>
 </div>
 
 {{#unless isUpstream}}
