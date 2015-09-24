@@ -2,9 +2,9 @@
 <form class="form-horizontal" role="form">
     <div class="row">
         <div class='col-md-12'>
-          {{text-f label="Undercloud IP"            valueBinding=model.undercloudIP labelSize='deploy-undercloud-param-label' inputSize='deploy-undercloud-param-input' isRequired=true helpText=undercloudIPHelp}}
-          {{text-f label="SSH User"                 valueBinding=model.sshUser      labelSize='deploy-undercloud-param-label' inputSize='deploy-undercloud-param-input' isRequired=true helpText=sshUserHelp}}
-          {{text-f label="SSH Password"             value=model.sshPassword         labelSize='deploy-undercloud-param-label' inputSize='deploy-undercloud-param-input' isRequired=true helpText=sshPasswordHelp}}
+          {{text-f label="Undercloud IP" value=undercloudIP labelSize='deploy-undercloud-param-label' inputSize='deploy-undercloud-param-input' isRequired=true helpText=undercloudIPHelp}}
+          {{text-f label="SSH User" value=sshUser labelSize='deploy-undercloud-param-label' inputSize='deploy-undercloud-param-input' isRequired=true helpText=sshUserHelp}}
+          {{text-f label="SSH Password" value=sshPassword         labelSize='deploy-undercloud-param-label' inputSize='deploy-undercloud-param-input' isRequired=true helpText=sshPasswordHelp}}
         </div>
         <div class='col-md-10'>
                 <button class="btn btn-primary pull-left" {{action "deployUndercloud"}} {{bindAttr disabled="deployDisabled"}}>

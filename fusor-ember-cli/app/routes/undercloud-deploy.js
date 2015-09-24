@@ -1,13 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  model: function () {
-      return {
-        undercloudIP: '',
-        sshUser: 'root',
-        sshPassword: 'changeme',
-      };
-  },
+
+  // If no model hook, then model is taken from parent route,
+  // so model is "deployment"
 
   setupController: function(controller, model) {
     controller.set('model', model);
