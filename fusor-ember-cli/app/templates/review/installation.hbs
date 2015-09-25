@@ -90,7 +90,12 @@
     {{/if}}
 
     {{#if isOpenStack}}
-      {{#accordion-item name="Red Hat OpenStack Platform" isOpen=isOpenStackOpen}}
+      {{#accordion-item name=controllers.deployment.nameOpenStack isOpen=isOpenStackOpen}}
+            {{#review-link label='Assigned Nodes' routeName='assign-nodes' isRequired=true value=model.openstackProfiles useYieldInstead=true}}
+                {{#each profile in model.openstackProfiles}}
+                    {{node-profile profile=profile nodes=model.openstackNodes plan=model.openstackPlan doAssign=true readOnly=true}}
+                {{/each}}
+            {{/review-link}}
       {{/accordion-item}}
     {{/if}}
 

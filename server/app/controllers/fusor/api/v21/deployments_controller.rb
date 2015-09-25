@@ -36,11 +36,8 @@ module Fusor
     end
 
     def update
-      # update_attribute does not call validation, which is desired, while
-      # update_attributes does. Horay consistency!
-      for name, value in params[:deployment]
-        @deployment.update_attribute(name, value)
-      end
+      @deployment.attributes = params[:deployment]
+      @deployment.save(:validate => false)
       render :json => @deployment, :serializer => Fusor::DeploymentSerializer
     end
 
@@ -58,11 +55,16 @@ module Fusor
       end
     end
 
+    def resource_name
+      'deployment'
+    end
+
     private
 
     def find_deployment
-      not_found and return false if params[:id].blank?
-      @deployment = Deployment.find(params[:id])
+      id = params[:deployment_id] || params[:id]
+      not_found and return false if id.blank?
+      @deployment = Deployment.find(id)
     end
 
     def ignore_it

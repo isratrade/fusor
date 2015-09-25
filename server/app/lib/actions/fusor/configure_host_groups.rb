@@ -47,6 +47,8 @@ module Actions
 
       private
 
+      # TODO: break up this method
+      # rubocop:disable Metrics/MethodLength
       def find_or_ensure_hostgroup(deployment, product_type, organization_id, lifecycle_environment_id,
                                    hostgroup_settings)
 
@@ -74,7 +76,7 @@ module Actions
           puppet_environment = content_view_puppet_environment.puppet_environment
 
           if puppet_class_settings = hostgroup_settings[:puppet_classes]
-            puppet_classes = Puppetclass.where(:name => puppet_class_settings.map{ |c| c[:name] }).
+            puppet_classes = Puppetclass.where(:name => puppet_class_settings.map { |c| c[:name] }).
                 joins(:environment_classes).
                 where("environment_classes.environment_id in (?)", puppet_environment.id).uniq
             puppet_class_ids = puppet_classes.map(&:id)
@@ -87,16 +89,22 @@ module Actions
             # this host group is a child of the deployment group
             hostgroup_params[:name] = name_setting
             hostgroup_params[:puppetclass_ids] = puppet_class_ids
+            if hostgroup_settings[:os]
+              operating_system = ::Redhat.where(:name => hostgroup_settings[:os], :major => hostgroup_settings[:major], :minor => hostgroup_settings[:minor]).first
+              hostgroup_params[:operatingsystem_id] = operating_system.try(:id)
+              hostgroup_params[:medium_id] = operating_system.try(:media).try(:first).try(:id)
+              hostgroup_params[:ptable_id] = operating_system.try(:ptables).try(:first).try(:id)
+              hostgroup_params[:architecture_id] = operating_system.try(:architectures).try(:first).try(:id)
+              hostgroup_params[:root_pass] = root_password(deployment, product_type)
+            end
           else
             # this host group is the deployment group
-            operating_system = find_operating_system(lifecycle_environment, content_view)
-
             # add access insights class, will get inherited by all machine nodes
             if deployment.enable_access_insights
               # Puppetclass names are unique, there is only one access insights
               # puppet class regardless of how many environments or orgs there are
               insights_class = Puppetclass.find("access_insights_client")
-              hostgroup_params[:puppetclass_ids] = [ insights_class.id ]
+              hostgroup_params[:puppetclass_ids] = [insights_class.id]
             end
 
             default_capsule_id = ::Katello::CapsuleContent.default_capsule.try(:capsule).try(:id)
@@ -108,11 +116,6 @@ module Actions
             hostgroup_params[:content_source_id] = default_capsule_id
             hostgroup_params[:puppet_ca_proxy_id] = default_capsule_id
             hostgroup_params[:puppet_proxy_id] = default_capsule_id
-            hostgroup_params[:operatingsystem_id] = operating_system.try(:id)
-            hostgroup_params[:medium_id] = operating_system.try(:media).try(:first).try(:id)
-            hostgroup_params[:ptable_id] = operating_system.try(:ptables).try(:first).try(:id)
-            hostgroup_params[:architecture_id] = operating_system.try(:architectures).try(:first).try(:id)
-            hostgroup_params[:root_pass] = root_password(deployment, product_type)
           end
         else
           fail _("Unable to locate content view '%s'.") % content_view_name(deployment)
@@ -150,7 +153,7 @@ module Actions
             if parameter_settings = puppet_class_setting[:parameters]
               parameter_settings.each do |parameter_setting|
                 unless parameter_setting[:override].blank?
-                  puppet_class = Puppetclass.where(:name =>puppet_class_setting[:name]).
+                  puppet_class = Puppetclass.where(:name => puppet_class_setting[:name]).
                       joins(:environment_classes).
                       where("environment_classes.environment_id in (?)", puppet_environment.id).first
 
@@ -222,7 +225,7 @@ module Actions
 
         # Check if the host group has some overrides specified for this deployment.
         # If it does, set them for the host group.
-        if overrides = deployment_overrides.find{ |hg| hg[:hostgroup_name] == hostgroup.name }
+        if overrides = deployment_overrides.find { |hg| hg[:hostgroup_name] == hostgroup.name }
           overrides[:puppet_classes].each do |pclass|
             puppet_class = Puppetclass.where(:name => pclass[:name]).
                 joins(:environment_classes).
@@ -270,22 +273,6 @@ module Actions
 
       def find_content_view(organization_id, view_name)
         ::Katello::ContentView.where(:organization_id => organization_id, :name => view_name).first
-      end
-
-      def find_operating_system(lifecycle_environment, content_view)
-        content_view_version = content_view.version(lifecycle_environment)
-
-        # Find the first repo that has a distribution.
-        # Note: at this time, the assumption is that there will only be 1 repo containing distro.
-        repo = content_view_version.repositories.find{ |repo| repo.bootable_distribution }
-        distribution = repo.bootable_distribution
-
-        # Locate the operating system using the information from the distribution
-        os_name = ::Redhat.construct_name(distribution.family)
-        major, minor = distribution.version.split('.')
-        minor ||= '' # treat minor versions as empty string to not confuse with nil
-
-        ::Redhat.where(:name => os_name, :major => major, :minor => minor).first
       end
 
       def content_view_name(deployment)

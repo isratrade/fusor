@@ -33,7 +33,11 @@ module Actions
             api_host = deployment.rhev_engine_host.facts['ipaddress']
 
             # TODO: Revisit how the data center is stored in the deployment object
+<<<<<<< HEAD
             #       name of "rhev_database_name" is non-intuitive, 
+=======
+            #       name of "rhev_database_name" is non-intuitive,
+>>>>>>> openstack-soft-coded22
             #       it'd be better to store "Default" in it opposed to allowing it to be empt
             # Warning, the rhev_database_name may be empty, if so then assume value of "Default"
             data_center = deployment.rhev_database_name.to_s[/.+/m] || "Default"

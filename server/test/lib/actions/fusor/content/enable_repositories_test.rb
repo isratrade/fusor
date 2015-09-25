@@ -25,6 +25,7 @@ module Actions::Fusor::Content
       def initialize(value)
         @value = value
       end
+
       def find_repository
         return @value
       end
@@ -41,13 +42,13 @@ module Actions::Fusor::Content
     test "plan should enable repo if it is not enabled" do
       EnableRepositories.any_instance.stubs(:repo_mapper).returns(Mapper.new(false))
       plan_action @action, @deployment.organization, SETTINGS[:fusor][:content][:cloudforms]
-      assert_action_planed @action, EnableRepository 
+      assert_action_planed @action, EnableRepository
     end
 
     test "plan should not enable repo if already enabled" do
       EnableRepositories.any_instance.stubs(:repo_mapper).returns(Mapper.new(true))
       plan_action @action, @deployment.organization, SETTINGS[:fusor][:content][:cloudforms]
-      refute_action_planed @action, EnableRepository 
+      refute_action_planed @action, EnableRepository
     end
 
     test "there is no run method for EnableRepositories Actions" do

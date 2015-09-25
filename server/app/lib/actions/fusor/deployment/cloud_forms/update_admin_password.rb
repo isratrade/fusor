@@ -43,8 +43,13 @@ module Actions
               @io.close unless @io.closed?
 
             rescue Exception => e
+<<<<<<< HEAD
               fail _("Failed to update admin password on appliance. Error message: #{e.message}")
               @io.close unless @io.closed?
+=======
+              @io.close if @io && !@io.closed?
+              fail _("Failed to update admin password on appliance. Error message: #{e.message}")
+>>>>>>> openstack-soft-coded22
             end
             Rails.logger.info "================ Leaving UpdateAdminPassword run method ===================="
           end

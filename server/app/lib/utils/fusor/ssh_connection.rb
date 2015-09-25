@@ -19,14 +19,14 @@ module Utils
         stringio.puts text unless stringio.nil?
       end
 
-      def port_open?(port, stringio=nil, local_ip="127.0.0.1", remote_ip="192.0.2.1", seconds=1)
+      def port_open?(port, stringio = nil, local_ip = "127.0.0.1", remote_ip = "192.0.2.1", seconds = 1)
         t = Thread.new {
           begin
             Net::SSH.start(@host, @user, :password => @password, :timeout => seconds,
                            :auth_methods => ["password"],
                            :number_of_password_prompts => 0) do |session|
             puts "Forwarding #{port} #{remote_ip} #{port}"
-            session.forward.local( port, remote_ip, port )
+            session.forward.local(port, remote_ip, port)
             session.loop { true }
           end
           rescue => e
@@ -109,9 +109,9 @@ module Utils
         rescue Exception => e
           puts e.message
           puts e.backtrace.inspect
+          stringio_write(stringio, e.message)
           call_failure
           call_complete
-          stringio_write(stringio, e.message)
           e.message if stringio.nil?
         end
       end

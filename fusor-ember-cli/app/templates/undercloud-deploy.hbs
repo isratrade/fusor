@@ -1,0 +1,41 @@
+<br />
+<form class="form-horizontal" role="form">
+    <div class="row">
+        <div class='col-md-12'>
+          {{text-f label="Undercloud IP" value=undercloudIP labelSize='deploy-undercloud-param-label' inputSize='deploy-undercloud-param-input' isRequired=true helpText=undercloudIPHelp}}
+          {{text-f label="SSH User" value=sshUser labelSize='deploy-undercloud-param-label' inputSize='deploy-undercloud-param-input' isRequired=true helpText=sshUserHelp}}
+          {{text-f label="SSH Password" value=sshPassword         labelSize='deploy-undercloud-param-label' inputSize='deploy-undercloud-param-input' isRequired=true helpText=sshPasswordHelp}}
+        </div>
+        <div class='col-md-10'>
+                <button class="btn btn-primary pull-left" {{action "deployUndercloud"}} {{bindAttr disabled="deployDisabled"}}>
+                    Detect Undercloud
+                </button>
+        </div>
+        {{#if deployed}}
+            <div class='col-md-12' style="padding-top: 10px;">
+                <div class="alert alert-success" style="margin-bottom: 0px;">
+                    <span class="pficon pficon-ok"></span>
+                    Undercloud has been successfully detected.
+                </div>
+            </div>
+        {{else}}
+            {{#if deploymentError}}
+                <div class='col-md-12' style="padding-top: 10px;">
+                    <div class="alert alert-danger" style="margin-bottom: 0px;">
+                        <span class="pficon pficon-error-circle-o"></span>
+                        Undercloud detection failed: {{deploymentError}}
+                    </div>
+                </div>
+            {{/if}}
+        {{/if}}
+    </div>
+</form>
+<br />
+{{cancel-back-next backRouteName=backRouteNameUndercloud
+                   disableBack=false
+                   nextRouteName='register-nodes'
+                   disableNext=disableDeployUndercloudNext
+                   parentController=controller}}
+{{loading-spinner show=showLoadingSpinner text=loadingSpinnerText}}
+
+{{base-popover selector='popover'}}

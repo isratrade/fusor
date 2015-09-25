@@ -23,6 +23,10 @@ export default Ember.Controller.extend(ProgressBarMixin, {
 
   deployTaskIsFinished: function() {
     return ((this.get('progressDeployment') === '1') && (this.get('resultDeployment') === 'success'));
+<<<<<<< HEAD
   }.property('progressDeployment', 'resultDeployment')
+=======
+  }.property('progressDeployment', 'resultDeployment'),
+>>>>>>> openstack-soft-coded22
 
 });
