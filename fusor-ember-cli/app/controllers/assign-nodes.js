@@ -253,10 +253,7 @@ export default Ember.Controller.extend({
         data: JSON.stringify({ 'parameters': params }),
         success: function() {
           console.log('SUCCESS');
-          me.store.find('deployment-plan', deploymentId).then(function (result) {
-            me.set('model.plan', result);
-            me.set('showLoadingSpinner', false);
-          });
+          me.send('refreshModel');
         },
         error: function(error) {
           console.log('ERROR');
@@ -284,10 +281,7 @@ export default Ember.Controller.extend({
         data: JSON.stringify(data),
         success: function() {
           console.log('SUCCESS');
-          me.store.find('deployment-plan', deploymentId).then(function (result) {
-            me.set('model.plan', result);
-            me.set('showLoadingSpinner', false);
-          });
+          me.send('refreshModel');
         },
         error: function(error) {
           console.log('ERROR');
