@@ -66,6 +66,7 @@ export default Ember.Controller.extend({
     deployUndercloud: function () {
       var self = this;
       var model = this.get('model');
+      model.set('openstack_undercloud_password', 'acbdasd123123123'); //DEV ONLY - BE DOES THIS
       console.log('detectUndercloud');
       console.log("host " + this.get('undercloudIP'));
       console.log("user " + this.get('sshUser'));
