@@ -252,7 +252,7 @@ export default Ember.Controller.extend({
       console.log('action: saveRole, PUT /fusor/api/openstack/deployments/' + this.get('deploymentId') + '/deployment_plans/overcloud/update_parameters');
       //ic-ajax request
       request({
-        url: '/fusor/api/openstack/deployments/' + this.get('deploymentId') + '/deployment_plans/overcloud/update_parameters',
+        url: '/fusor/api/openstack/deployments/' + self.get('deploymentId') + '/deployment_plans/overcloud/update_parameters',
         type: 'PUT',
         headers: {
           "Accept": "application/json",
