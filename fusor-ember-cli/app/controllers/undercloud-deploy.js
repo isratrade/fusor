@@ -3,10 +3,11 @@ import request from 'ic-ajax';
 
 export default Ember.Controller.extend({
 
-  needs: ['deployment'],
+  needs: ['deployment', 'application'],
 
   deploymentId: Ember.computed.alias("model.id"),
   undercloudPassword: Ember.computed.alias("model.openstack_undercloud_password"),
+  isEmberCliMode: Ember.computed.alias("controllers.application.isEmberCliMode"),
 
   // these 3 attributes are not persisted by UI.
   // backend controller will persist these
@@ -120,6 +121,9 @@ export default Ember.Controller.extend({
               } else {
                 console.log('detection success');
                 self.set('deploymentError', null);
+                if (self.get('isEmberCliMode')) {
+                  model.set('openstack_undercloud_password', '123456790'); //DEV ONLY - BACKEND DOES THIS
+                }
                 resolve(true);
               }
             } else {
