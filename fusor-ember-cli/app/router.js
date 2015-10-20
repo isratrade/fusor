@@ -26,6 +26,7 @@ export default Router.map(function() {
     this.route('satellite', function() {
       this.route('configure-environment');
       this.route("configure-organization");
+      this.route('content-provider');
     });
   });
 
@@ -36,6 +37,7 @@ export default Router.map(function() {
     this.resource('satellite', function() {
       this.resource('configure-organization');
       this.resource('configure-environment');
+      this.route('content-provider');
     });
 
     this.resource('rhev', function() {
@@ -86,4 +88,9 @@ export default Router.map(function() {
     });
   });
 
+  this.route('deployment-new', function() {
+    this.route('satellite', function() {
+      this.route('content-provider');
+    });
+  });
 });
