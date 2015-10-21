@@ -39,6 +39,10 @@ module Fusor
       app.routes_reloader.paths << "#{Fusor::Engine.root}/config/routes/api/customer_portal.rb"
     end
 
+    initializer "fusor.json-api" do |app|
+        ActiveModel::Serializer.config.adapter = ActiveModel::Serializer::Adapter::JsonApi
+    end
+
     initializer 'fusor.register_plugin', :after => :finisher_hook do |app|
       Foreman::Plugin.register :fusor do
         requires_foreman '>= 1.7'
