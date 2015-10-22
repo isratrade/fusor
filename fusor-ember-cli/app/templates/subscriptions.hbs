@@ -1,19 +1,19 @@
 {{#wizard-step outlet=outlet}}
 
+isDisconnected = {{isDisconnected}}
+
       {{#link-to 'subscriptions.credentials' tagName='li' disabled=disableTabCredentials}}
         <a>{{stepNumberSubscriptions}}A. Red Hat Login</a>
       {{/link-to}}
-      {{#link-to 'subscriptions.management-application' tagName='li' disabled=disableTabManagementApplication}}
-        <a>{{stepNumberSubscriptions}}B. Subscription Management Application</a>
-      {{/link-to}}
+
+      {{#unless isDisconnected}}
+          {{#link-to 'subscriptions.management-application' tagName='li' disabled=disableTabManagementApplication}}
+            <a>{{stepNumberSubscriptions}}B. Subscription Management Application</a>
+          {{/link-to}}
+      {{/unless}}
+
       {{#link-to 'subscriptions.select-subscriptions' tagName='li' disabled=disableTabSelectSubsciptions}}
-        <a>{{stepNumberSubscriptions}}C. Subscriptions</a>
+        <a>{{stepNumberSubscriptions}}C. Add Subscriptions</a>
       {{/link-to}}
-      {{!#link-to 'subscriptions.management-application.consumer.entitlements' uuid tagName='li' disabled=disableTabSelectSubsciptions}}
-        <!-- <a>4C. Entitlements</a> -->
-      {{!/link-to}}
-      {{!#link-to 'subscriptions.management-application.consumer.pools' uuid tagName='li' disabled=disableTabSelectSubsciptions}}
-        <!-- <a>4C. Pools</a> -->
-      {{!/link-to}}
 
 {{/wizard-step}}
