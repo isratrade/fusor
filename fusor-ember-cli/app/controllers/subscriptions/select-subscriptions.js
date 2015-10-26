@@ -8,6 +8,7 @@ export default Ember.ArrayController.extend({
   enableAccessInsights: Ember.computed.alias("controllers.deployment.model.enable_access_insights"),
   numSubscriptionsRequired: Ember.computed.alias("controllers.deployment.numSubscriptionsRequired"),
   isStarted: Ember.computed.alias("controllers.deployment.isStarted"),
+  isDisconnected: Ember.computed.alias('controllers.deployment.model.is_disconnected'),
 
   hasSubscriptionPools: function() {
       return (this.get('subscriptionPools.length') > 0);

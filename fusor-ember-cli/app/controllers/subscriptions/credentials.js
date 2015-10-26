@@ -7,9 +7,9 @@ export default Ember.Controller.extend({
   upstreamConsumerUuid: Ember.computed.alias("controllers.deployment.model.upstream_consumer_uuid"),
   upstreamConsumerName: Ember.computed.alias("controllers.deployment.model.upstream_consumer_name"),
 
-  isRhev: Ember.computed.alias("controllers.deployment.deploy_rhev"),
-  isOpenStack: Ember.computed.alias("controllers.deployment.deploy_openstack"),
-  isCloudForms: Ember.computed.alias("controllers.deployment.deploy_cfme"),
+  isRhev: Ember.computed.alias("controllers.deployment.model.deploy_rhev"),
+  isOpenStack: Ember.computed.alias("controllers.deployment.model.deploy_openstack"),
+  isCloudForms: Ember.computed.alias("controllers.deployment.model.deploy_cfme"),
 
   //overwritten by setupController
   organizationUpstreamConsumerUUID: null,
@@ -53,7 +53,27 @@ export default Ember.Controller.extend({
     } else {
       return 'loginPortal';
     }
-  }.property('model.isAuthenticated')
+  }.property('model.isAuthenticated'),
+
+  isDisconnected: Ember.computed.alias('controllers.deployment.model.is_disconnected'),
+
+  contentProviderType: function() {
+    return (this.get('isDisconnected') ? "disconnected" : "redhat_cdn");
+  }.property('isDisconnected'),
+
+  contentProviderTitle: function() {
+    return (this.get('isDisconnected') ? "Disconnected" : "Red Hat CDN");
+  }.property('isDisconnected'),
+
+  isDisconnectedSelected: function() {
+    return (this.get('contentProviderType') === 'disconnected');
+  }.property('contentProviderType'),
+
+  actions: {
+    providerTypeChanged: function() {
+      return this.set('isDisconnected', this.get('isDisconnectedSelected'));
+    }
+  }
 
 
 });
