@@ -55,7 +55,6 @@ export default DS.Model.extend({
 
   cdn_url: DS.attr('string'),
   manifest_file: DS.attr('string'),
-  attachment: DS.attr('file'),
 
   created_at: DS.attr('date'),
   updated_at: DS.attr('date'),

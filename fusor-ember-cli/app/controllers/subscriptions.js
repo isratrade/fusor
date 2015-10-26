@@ -11,6 +11,8 @@ export default Ember.Controller.extend({
      return (!this.get('isStarted') && !this.get('model.isAuthenticated'));
   }.property('model.isAuthenticated', 'isStarted'),
 
+  disableTabReviewSubsciptions: Ember.computed.empty("controllers.deployment.model.manifest_file"),
+
   upstreamConsumerUuid: Ember.computed.alias("controllers.deployment.model.upstream_consumer_uuid"),
 
   disableTabSelectSubsciptions: function() {

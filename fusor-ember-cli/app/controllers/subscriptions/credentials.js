@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import request from 'ic-ajax';
 
 export default Ember.Controller.extend({
 
@@ -7,6 +8,7 @@ export default Ember.Controller.extend({
   upstreamConsumerUuid: Ember.computed.alias("controllers.deployment.model.upstream_consumer_uuid"),
   upstreamConsumerName: Ember.computed.alias("controllers.deployment.model.upstream_consumer_name"),
   cdnUrl: Ember.computed.alias("controllers.deployment.model.cdn_url"),
+  manifestFile: Ember.computed.alias("controllers.deployment.model.manifest_file"),
 
   isRhev: Ember.computed.alias("controllers.deployment.model.deploy_rhev"),
   isOpenStack: Ember.computed.alias("controllers.deployment.model.deploy_openstack"),
@@ -57,6 +59,8 @@ export default Ember.Controller.extend({
   }.property('model.isAuthenticated'),
 
   isDisconnected: Ember.computed.alias('controllers.deployment.model.is_disconnected'),
+  hasManifestFile: Ember.computed.notEmpty('manifestFile'),
+  noManifestFile: Ember.computed.empty('manifestFile'),
 
   contentProviderType: function() {
     return (this.get('isDisconnected') ? "disconnected" : "redhat_cdn");
@@ -78,12 +82,35 @@ export default Ember.Controller.extend({
     uploadManifest: function() {
       var file = document.getElementById('file-field').files[0];
       // this.get('controllers.deployment.model').set('attachment', file);
-      this.get('controllers.deployment.model').set('manifest_file', file.name);
+      var self = this;
+      var params = {};
+      var token = Ember.$('meta[name="csrf-token"]').attr('content');
+      console.log('action: uploadManifest, PUT /fusor/api/v21/subscriptions/upload');
+      //ic-ajax request
+      request({
+        url: '/fusor/api/v21/subscriptions/upload',
+        type: 'PUT',
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "X-CSRF-Token": token,
+        },
+        data: JSON.stringify({ 'parameters': params })
+      }).then( function() {
+            self.get('controllers.deployment.model').set('manifest_file', file.name);
+            self.get('controllers.deployment.model').save().then(function () {
+              return console.log('Manifest successfully uploaded');
+            });
+        }, function(error) {
+              return console.log('ERROR on uploadManifest');
+        }
+      );
 
-      this.get('controllers.deployment.model').save().then(function () {
-        return alert('Manifest successfully uploaded');
-      });
     },
+
+    uploadDifferentManifest: function() {
+      return this.set("manifestFile", null);
+    }
   }
 
 
