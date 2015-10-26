@@ -53,6 +53,8 @@ export default DS.Model.extend({
   openstack_undercloud_user: DS.attr('string'),
   openstack_undercloud_user_password: DS.attr('string'),
 
+  cdn_url: DS.attr('string'),
+  manifest_file: DS.attr('string'),
   attachment: DS.attr('file'),
 
   created_at: DS.attr('date'),

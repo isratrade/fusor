@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
 
   upstreamConsumerUuid: Ember.computed.alias("controllers.deployment.model.upstream_consumer_uuid"),
   upstreamConsumerName: Ember.computed.alias("controllers.deployment.model.upstream_consumer_name"),
+  cdnUrl: Ember.computed.alias("controllers.deployment.model.cdn_url"),
 
   isRhev: Ember.computed.alias("controllers.deployment.model.deploy_rhev"),
   isOpenStack: Ember.computed.alias("controllers.deployment.model.deploy_openstack"),
@@ -72,7 +73,17 @@ export default Ember.Controller.extend({
   actions: {
     providerTypeChanged: function() {
       return this.set('isDisconnected', this.get('isDisconnectedSelected'));
-    }
+    },
+
+    uploadManifest: function() {
+      var file = document.getElementById('file-field').files[0];
+      // this.get('controllers.deployment.model').set('attachment', file);
+      this.get('controllers.deployment.model').set('manifest_file', file.name);
+
+      this.get('controllers.deployment.model').save().then(function () {
+        return alert('Manifest successfully uploaded');
+      });
+    },
   }
 
 

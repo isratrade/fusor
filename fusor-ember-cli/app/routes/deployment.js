@@ -134,10 +134,6 @@ export default Ember.Route.extend(DeploymentRouteMixin, {
       });
     },
 
-    uploadManifest: function() {
-      return alert('Manifest upload is not yet implement');
-    },
-
     saveAndCancelDeployment: function() {
       return this.send('saveDeployment', 'deployments');
     },
