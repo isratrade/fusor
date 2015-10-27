@@ -14,6 +14,19 @@ module Fusor
   class Api::V21::SubscriptionsController < Api::V2::BaseController
     skip_before_filter :check_content_type, :only => [:upload]
 
+    before_filter :check_content_type, :only => :upload
+
+    def check_content_type
+      # overwrite this method in V2::BaseController that
+      # renders error if request.content_type != "application/json"
+      # the upload method uses "multipart/form-data"
+    end
+
+    def upload
+      # placeholder only. TODO perform actually upload file
+      render :json => {params: params, request: @request}
+    end
+
     def index
       @subscriptions = Subscription.all
       render :json => @subscriptions, :each_serializer => Fusor::SubscriptionSerializer
