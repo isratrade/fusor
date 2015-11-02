@@ -16,7 +16,7 @@ require 'strong_parameters'
 module Fusor
   module Api
     module Openstack
-      class BaseController < ::Katello::Api::V2::ApiController
+      class BaseController <  ::Api::BaseController
         before_filter :find_deployment
 
         # TODO: REMOVE CORS FILTER ONCE EMBER PROXY IS UNNEEDED

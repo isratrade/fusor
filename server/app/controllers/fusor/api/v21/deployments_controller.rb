@@ -11,7 +11,7 @@
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
 module Fusor
-  class Api::V21::DeploymentsController < Api::V2::DeploymentsController
+  class Api::V21::DeploymentsController < Api::V21::BaseController
 
     before_filter :find_deployment, :only => [:destroy, :show, :update, :deploy]
 

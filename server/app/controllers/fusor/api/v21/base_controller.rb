@@ -14,15 +14,17 @@ require 'strong_parameters'
 
 module Fusor
   module Api
-    module V2
-      class BaseController < ::Katello::Api::V2::ApiController
-
-        include Api::V2::Rendering
+    module V21
+      class BaseController < ::Api::BaseController
 
         resource_description do
           resource_id 'fusor'
-          api_version 'v2'
+          api_version 'v21'
           api_base_url '/fusor/api'
+        end
+
+        def api_version
+          '21'
         end
 
       end
