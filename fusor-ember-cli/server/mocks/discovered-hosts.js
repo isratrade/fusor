@@ -4,7 +4,7 @@ module.exports = function(app) {
 
   var discoveredHosts = [
         {
-            "id": 2,
+            "id": 179,
             "name": "mac5254007d02be",
             "type": "Host::Discovered",
             "ip": "192.168.152.12",
@@ -25,7 +25,7 @@ module.exports = function(app) {
             "is_discovered": true
         },
         {
-            "id": 3,
+            "id": 182,
             "name": "mac525400ab9e78",
             "type": "Host::Discovered",
             "ip": "192.168.152.14",
@@ -46,7 +46,7 @@ module.exports = function(app) {
             "is_discovered": true
         },
         {
-            "id": 5,
+            "id": 183,
             "name": "mac525400c5fc31",
             "type": "Host::Discovered",
             "ip": "192.168.152.18",
@@ -67,7 +67,7 @@ module.exports = function(app) {
             "is_discovered": true
         },
         {
-            "id": 4,
+            "id": 194,
             "name": "mac525400ebc504",
             "type": "Host::Discovered",
             "ip": "192.168.152.16",
