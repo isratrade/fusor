@@ -61,6 +61,10 @@ export default Ember.Mixin.create({
     if (this.get('isUpstream')) { return "ManageIQ"; } else { return "CloudForms"; }
   }.property('isUpstream'),
 
+  nameOpenShift: function() {
+    return "OpenShift";
+  }.property(),
+
   fullnameRhev: function() {
     if (this.get('isUpstream')) { return "oVirt Project"; } else { return "Red Hat Enterprise Virtualization"; }
   }.property('isUpstream'),
@@ -72,6 +76,10 @@ export default Ember.Mixin.create({
   fullnameCloudForms: function() {
     if (this.get('isUpstream')) { return "ManageIQ"; } else { return "Red Hat Cloud Forms Management Engine"; }
   }.property('isUpstream'),
+
+  fullnameOpenShift: function() {
+    return "Red Hat Cloud OpenShift";
+  }.property(),
 
   // logo
   logoPath: function() {
