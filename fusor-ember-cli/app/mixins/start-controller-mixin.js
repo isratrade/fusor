@@ -59,7 +59,7 @@ export default Ember.Mixin.create({
     if (this.get('isUpstream')) { return "/assets/r/manageiq-640-210.png"; } else { return "/assets/r/rhci-cloudforms-640-210.png"; }
   }.property('isUpstream'),
 
-  imgOpenShfit: function() {
+  imgOpenShift: function() {
     return "/assets/r/rhci-openshift-640-400.png";
   }.property()
 
