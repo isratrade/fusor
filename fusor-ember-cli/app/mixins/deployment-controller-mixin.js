@@ -88,51 +88,71 @@ export default Ember.Mixin.create({
 
   currentStepNumber: null, //set by setupController,
 
-  // steps
-  stepNumberRhev: 2,
+  numberProducts: function() {
+    var rhev = this.get('isRhev') ? 1 : 0
+    var osp = this.get('isOpenStack') ? 1 : 0
+    var cfme = this.get('isCloudForms') ? 1 : 0
+    var osh = this.get('isOpenShift') ? 1 : 0
+    return rhev + osp + cfme + osh;
+  }.property('isRhev', 'isOpenStack', 'isCloudForms', 'isOpenShift'),
 
-  stepNumberOpenstack: function() {
+  // steps
+  stepNumberRhev: function() {
     if (this.get('isRhev')) {
-      return 3;
-    } else {
       return 2;
     }
   }.property('isRhev'),
 
-  stepNumberCloudForms: function() {
-    if (this.get('isRhev') && this.get('isOpenStack')) {
-      return 4;
-    } else if (this.get('isRhev') || this.get('isOpenStack'))  {
-      return 3;
-    } else {
-      return 2;
+  stepNumberOpenstack: function() {
+    if (this.get('isOpenStack')) {
+      if (this.get('stepNumberRhev')) {
+        return this.get('stepNumberRhev') + 1;
+      } else {
+        return 2;
+      }
     }
-  }.property('isRhev', 'isOpenStack'),
+  }.property('stepNumberRhev', 'isOpenStack'),
+
+  stepNumberOpenShift: function() {
+    if (this.get('isOpenShift')) {
+      if (this.get('stepNumberOpenstack')) {
+        return this.get('stepNumberOpenstack') + 1;
+      } else if (this.get('stepNumberRhev')) {
+        return this.get('stepNumberRhev') + 1;
+      } else {
+        return 2;
+      }
+    }
+  }.property('stepNumberOpenstack', 'isOpenShift'),
+
+  stepNumberCloudForms: function() {
+    if (this.get('isCloudForms')) {
+      if (this.get('stepNumberOpenShift')) {
+        return this.get('stepNumberOpenShift') + 1;
+      } else if (this.get('stepNumberOpenstack')) {
+        return this.get('stepNumberOpenstack') + 1;
+      } else if (this.get('stepNumberRhev')) {
+        return this.get('stepNumberRhev') + 1;
+      } else {
+        return 2;
+      }
+    }
+  }.property('stepNumberOpenShift', 'isCloudForms'),
 
   stepNumberSubscriptions: function() {
-    if (this.get('isRhev') && this.get('isOpenStack') && this.get('isCloudForms')) {
-      return 5;
-    } else if ((this.get('isRhev') && this.get('isOpenStack')) || (this.get('isRhev') && this.get('isCloudForms')) ||  (this.get('isOpenStack') && this.get('isCloudForms')))  {
-      return 4;
-    } else if (this.get('isRhev') || this.get('isOpenStack') || this.get('isCloudForms')) {
-      return 3;
-    } else {
-      return 2;
+    if (this.get('isSubscriptions')) {
+      return (this.get('numberProducts') + 2);
     }
-  }.property('isRhev', 'isOpenStack', 'isCloudForms'),
+  }.property('numberProducts', 'isSubscriptions'),
 
   // calculate temporary without isSubscriptions
   stepNumberReviewTemp: function() {
-    if (this.get('isRhev') && this.get('isOpenStack') && this.get('isCloudForms')) {
-      return 6;
-    } else if ((this.get('isRhev') && this.get('isOpenStack')) || (this.get('isRhev') && this.get('isCloudForms')) ||  (this.get('isOpenStack') && this.get('isCloudForms')))  {
-      return 5;
-    } else if (this.get('isRhev') || this.get('isOpenStack') || this.get('isCloudForms')) {
-      return 4;
+    if (this.get('isSubscriptions')) {
+      return (this.get('numberProducts') + 3);
     } else {
-      return 3;
+      return (this.get('numberProducts') + 2);
     }
-  }.property('isRhev', 'isOpenStack', 'isCloudForms'),
+  }.property('numberProducts', 'isSubscriptions'),
 
   stepNumberReview: function() {
     if (this.get('isSubscriptions')) {
