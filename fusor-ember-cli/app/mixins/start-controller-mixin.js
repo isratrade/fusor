@@ -14,8 +14,8 @@ export default Ember.Mixin.create({
 
   // disable Next button if none selected
   disableNextOnStart: function () {
-    return (!(this.get('isRhev') || this.get('isOpenStack') || this.get('isCloudForms')));
-  }.property('isRhev', 'isOpenStack', 'isCloudForms'),
+    return (!(this.get('isRhev') || this.get('isOpenStack') || this.get('isCloudForms') || this.get('isOpenShift')));
+  }.property('isRhev', 'isOpenStack', 'isCloudForms', 'isOpenShift'),
 
   // names
   nameRHCI: function() {
