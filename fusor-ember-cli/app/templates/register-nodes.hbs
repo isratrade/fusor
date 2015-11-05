@@ -85,7 +85,7 @@
       </div>
   </div>
 
-  {{#each profile in model.profiles}}
+  {{#each model.profiles as |profile|}}
       <div class="row">
           <div class='col-md-7'>
             {{#if model.nodes}}
@@ -107,7 +107,7 @@
                    disableBack=false
                    nextRouteName='assign-nodes'
                    disableNext=disableRegisterNodesNext
-                   parentController=controller
+
                    disableCancel=controllers.deployment.isStarted}}
 
 {{partial 'new-node-registration'}}
