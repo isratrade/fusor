@@ -2,7 +2,7 @@ import { moduleForModel, test } from 'ember-qunit';
 
 moduleForModel('domain', 'Unit | Model | domain', {
   // Specify the other units that are required for this test.
-  needs: []
+  needs: ['model:hostgroup']
 });
 
 test('it exists', function(assert) {
