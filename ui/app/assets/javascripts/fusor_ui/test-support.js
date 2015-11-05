@@ -1,1 +1,1 @@
-/git/RHCI/fusor/fusor-ember-cli/dist/assets/test-support.js
+/home/jmagen/fusor/fusor-ember-cli/dist/assets/test-support.js
