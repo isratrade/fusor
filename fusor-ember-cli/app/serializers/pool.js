@@ -3,7 +3,7 @@ import DS from 'ember-data';
 export default DS.RESTSerializer.extend({
 
     // add root node 'entitlements' that customer protal JSON response doesn't return
-    extractArray(store, type, payload) {
+    normalizeArrayResponse(store, type, payload) {
       payload = { pools: payload };
       return this._super(store, type, payload);
     },
