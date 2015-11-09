@@ -1,25 +1,21 @@
-{{#em-modal configName="bs" id="cancelDeploymentModal" open-if=openModal}}
-    {{#em-modal-title}}
-        {{#em-modal-toggler class="close"}}
-            <span aria-hidden="true">×</span><span class="sr-only">Close</span>
-        {{/em-modal-toggler}}
-        <h4 class="modal-title">Cancel RHCI Deployment - {{parentController.name}} </h4>
-    {{/em-modal-title}}
+{{#pf-modal-base idModal='cancelDeploymentModal'}}
 
-    {{#em-modal-body}}
-        What would you like to do with this deployment?
-    {{/em-modal-body}}
+      {{pf-modal-header title="Cancel RHCI Deployment"}}
 
-    {{#em-modal-footer}}
-        <button type="submit" {{action 'cancelAndDeleteDeployment'}} class="btn btn-default">
-          Exit and Delete
-        </button>
-        <button type="submit" {{action 'saveAndCancelDeployment'}} class="btn btn-default">
-          Exit and Save
-        </button>
-        {{#em-modal-toggler class="btn btn-primary"}}
-          Continue Working
-        {{/em-modal-toggler}}
-    {{/em-modal-footer}}
-    {{isNew}}
-{{/em-modal}}
+      {{#pf-modal-body}}
+          What would you like to do with this deployment?
+      {{/pf-modal-body}}
+
+      {{#pf-modal-footer}}
+          <button {{action 'cancelAndDeleteDeployment'}} class="btn btn-default">
+              Exit and Delete
+          </button>
+          <button {{action 'saveAndCancelDeployment'}} class="btn btn-default">
+              Exit and Save
+          </button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">
+              Continue Working
+          </button>
+      {{/pf-modal-footer}}
+
+{{/pf-modal-base}}
