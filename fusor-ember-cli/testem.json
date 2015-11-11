@@ -13,7 +13,7 @@
     "/api": {
       "target": "http://localhost:4200"
     },
-    "/fusor": {
+    "/fusor/api": {
       "target": "http://localhost:4200"
     }
   }

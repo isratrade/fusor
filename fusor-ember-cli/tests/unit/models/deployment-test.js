@@ -19,30 +19,26 @@ test('it exists', function(assert) {
   assert.ok(!!model);
 });
 
-test('isStarted', function(assert){
+test('isStarted should be false on init', function(assert){
   var model = this.subject();
   assert.equal(model.get('isStarted'), false);
+  assert.equal(model.get('isNotStarted'), true);
+});
 
+test('isStarted should be true if foreman_task_uuid is set to a valid uuid', function(assert){
+  var model = this.subject();
   Ember.run(function() {
     model.set('foreman_task_uuid', 'db25a76f-e344-48ba-ac77-f29303586dbe');
   });
-
   assert.equal(model.get('isStarted'), true);
+  assert.equal(model.get('isNotStarted'), false);
+});
 
+test('isStarted should be false if foreman_task_uuid is null', function(assert){
+  var model = this.subject();
   Ember.run(function() {
     model.set('foreman_task_uuid', null);
   });
-
   assert.equal(model.get('isStarted'), false);
-});
-
-test('isNotStarted', function(assert){
-  var model = this.subject();
   assert.equal(model.get('isNotStarted'), true);
-
-  Ember.run(function() {
-    model.set('foreman_task_uuid', 'db25a76f-e344-48ba-ac77-f29303586dbe');
-  });
-
-  assert.equal(model.get('isNotStarted'), false);
 });
