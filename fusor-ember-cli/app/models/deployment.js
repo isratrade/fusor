@@ -93,20 +93,20 @@ export default DS.Model.extend({
   progress: null,
   state: null,
 
-  foremanTask: Ember.computed('foreman_task_uuid', function() {
-    if (this.get('isStarted')) {
-        return this.store.findRecord('foreman-task', this.get('foreman_task_uuid'));
-    }
-  }),
+  // foremanTask: Ember.computed('foreman_task_uuid', function() {
+  //   if (this.get('isStarted')) {
+  //       return this.store.findRecord('foreman-task', this.get('foreman_task_uuid'));
+  //   }
+  // }),
 
-  setProgress: Ember.observer('foremanTask', 'foreman_task_uuid', function() {
-    if (this.get('foremanTask')) {
-      this.get('foremanTask').then(function(result) {
-          this.set('progress', result.get('progress'));
-          this.set('state', result.get('state'));
-      }.bind(this));
-    }
-  }),
+  // setProgress: Ember.observer('foremanTask', 'foreman_task_uuid', function() {
+  //   if (this.get('foremanTask')) {
+  //     this.get('foremanTask').then(function(result) {
+  //         this.set('progress', result.get('progress'));
+  //         this.set('state', result.get('state'));
+  //     }.bind(this));
+  //   }
+  // }),
 
   progressPercent: Ember.computed('progress', function() {
     if (this.get('progress')) {

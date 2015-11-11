@@ -16,7 +16,9 @@ export default DS.Model.extend({
   humanized_output: DS.attr('string'),
   humanized_input: DS.attr('string'),
   repository: DS.attr('string'),
+
   taskUrl: Ember.computed('id', function() {
     return '/foreman_tasks/tasks/' + this.get('id');
   })
+
 });
