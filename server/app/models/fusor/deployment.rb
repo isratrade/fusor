@@ -17,6 +17,7 @@ module Fusor
     validates_with Fusor::Validators::DeploymentValidator, on: :update
     belongs_to :organization
     belongs_to :lifecycle_environment, :class_name => "Katello::KTEnvironment"
+    belongs_to :foreman_task, :class_name => "::ForemanTasks::Task", :foreign_key => :foreman_task_uuid
 
     validates :name, :presence => true, :uniqueness => {:scope => :organization_id}
     validates :organization_id, :presence => true
