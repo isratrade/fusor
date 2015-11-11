@@ -1,0 +1,1460 @@
+{
+  "stats": {
+    "suites": 385,
+    "tests": 387,
+    "passes": 387,
+    "pending": 0,
+    "failures": 0,
+    "start": "2015-11-11T12:31:50.747Z",
+    "end": "2015-11-11T12:31:55.314Z"
+  },
+  "coverage": {
+    "total": {
+      "statementsTotal": 2821,
+      "statementsCovered": 750,
+      "percentage": 26.59
+    },
+    "files": [
+      {
+        "name": "fusor-ember-cli/mixins/configure-environment-mixin",
+        "statementsTotal": 11,
+        "statementsCovered": 3,
+        "percentage": 27.27
+      },
+      {
+        "name": "fusor-ember-cli/mixins/needs-deployment-mixin",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/mixins/configure-organization-mixin",
+        "statementsTotal": 16,
+        "statementsCovered": 3,
+        "percentage": 18.75
+      },
+      {
+        "name": "fusor-ember-cli/mixins/deployment-controller-mixin",
+        "statementsTotal": 84,
+        "statementsCovered": 3,
+        "percentage": 3.57
+      },
+      {
+        "name": "fusor-ember-cli/mixins/deployment-new-controller-mixin",
+        "statementsTotal": 5,
+        "statementsCovered": 3,
+        "percentage": 60
+      },
+      {
+        "name": "fusor-ember-cli/mixins/deployment-new-satellite-route-mixin",
+        "statementsTotal": 5,
+        "statementsCovered": 3,
+        "percentage": 60
+      },
+      {
+        "name": "fusor-ember-cli/mixins/deployment-route-mixin",
+        "statementsTotal": 11,
+        "statementsCovered": 3,
+        "percentage": 27.27
+      },
+      {
+        "name": "fusor-ember-cli/mixins/disable-tab-mixin",
+        "statementsTotal": 15,
+        "statementsCovered": 3,
+        "percentage": 20
+      },
+      {
+        "name": "fusor-ember-cli/mixins/discovered-host-route-mixin",
+        "statementsTotal": 15,
+        "statementsCovered": 3,
+        "percentage": 20
+      },
+      {
+        "name": "fusor-ember-cli/mixins/progress-bar-mixin",
+        "statementsTotal": 10,
+        "statementsCovered": 3,
+        "percentage": 30
+      },
+      {
+        "name": "fusor-ember-cli/mixins/start-controller-mixin",
+        "statementsTotal": 31,
+        "statementsCovered": 3,
+        "percentage": 9.68
+      },
+      {
+        "name": "fusor-ember-cli/mixins/tr-engine-hypervisor-mixin",
+        "statementsTotal": 16,
+        "statementsCovered": 3,
+        "percentage": 18.75
+      },
+      {
+        "name": "fusor-ember-cli/router",
+        "statementsTotal": 43,
+        "statementsCovered": 4,
+        "percentage": 9.3
+      },
+      {
+        "name": "fusor-ember-cli/config/environment",
+        "statementsTotal": 2,
+        "statementsCovered": 1,
+        "percentage": 50
+      },
+      {
+        "name": "fusor-ember-cli/adapters/application",
+        "statementsTotal": 5,
+        "statementsCovered": 4,
+        "percentage": 80
+      },
+      {
+        "name": "fusor-ember-cli/models/foreman-task",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/models/introspection-task",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/models/subscription",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/models/discovered-host",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/models/lifecycle-environment",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/models/organization",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/models/deployment",
+        "statementsTotal": 16,
+        "statementsCovered": 10,
+        "percentage": 62.5
+      },
+      {
+        "name": "fusor-ember-cli/routes/application",
+        "statementsTotal": 11,
+        "statementsCovered": 3,
+        "percentage": 27.27
+      },
+      {
+        "name": "fusor-ember-cli/routes/assign-nodes",
+        "statementsTotal": 6,
+        "statementsCovered": 3,
+        "percentage": 50
+      },
+      {
+        "name": "fusor-ember-cli/routes/cloudforms/cfme-configuration",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/routes/cloudforms/index",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/routes/cloudforms",
+        "statementsTotal": 6,
+        "statementsCovered": 3,
+        "percentage": 50
+      },
+      {
+        "name": "fusor-ember-cli/routes/configure-environment",
+        "statementsTotal": 15,
+        "statementsCovered": 3,
+        "percentage": 20
+      },
+      {
+        "name": "fusor-ember-cli/routes/configure-organization",
+        "statementsTotal": 9,
+        "statementsCovered": 3,
+        "percentage": 33.33
+      },
+      {
+        "name": "fusor-ember-cli/routes/consumer",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/routes/deployment/index",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/routes/deployment/start",
+        "statementsTotal": 8,
+        "statementsCovered": 3,
+        "percentage": 37.5
+      },
+      {
+        "name": "fusor-ember-cli/routes/deployment-new/index",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/routes/deployment-new/satellite/configure-environment",
+        "statementsTotal": 18,
+        "statementsCovered": 3,
+        "percentage": 16.67
+      },
+      {
+        "name": "fusor-ember-cli/routes/deployment-new/satellite/configure-organization",
+        "statementsTotal": 14,
+        "statementsCovered": 3,
+        "percentage": 21.43
+      },
+      {
+        "name": "fusor-ember-cli/routes/deployment-new/satellite/index",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/routes/deployment-new/satellite",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/routes/deployment-new/start",
+        "statementsTotal": 9,
+        "statementsCovered": 3,
+        "percentage": 33.33
+      },
+      {
+        "name": "fusor-ember-cli/routes/deployment-new",
+        "statementsTotal": 17,
+        "statementsCovered": 3,
+        "percentage": 17.65
+      },
+      {
+        "name": "fusor-ember-cli/routes/deployment",
+        "statementsTotal": 75,
+        "statementsCovered": 3,
+        "percentage": 4
+      },
+      {
+        "name": "fusor-ember-cli/routes/deployments",
+        "statementsTotal": 9,
+        "statementsCovered": 3,
+        "percentage": 33.33
+      },
+      {
+        "name": "fusor-ember-cli/routes/engine/discovered-host",
+        "statementsTotal": 5,
+        "statementsCovered": 3,
+        "percentage": 60
+      },
+      {
+        "name": "fusor-ember-cli/routes/engine",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/routes/hypervisor/discovered-host",
+        "statementsTotal": 15,
+        "statementsCovered": 3,
+        "percentage": 20
+      },
+      {
+        "name": "fusor-ember-cli/routes/hypervisor",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/routes/index",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/routes/new-environment",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/routes/new-node-registration",
+        "statementsTotal": 5,
+        "statementsCovered": 3,
+        "percentage": 60
+      },
+      {
+        "name": "fusor-ember-cli/routes/new-organization",
+        "statementsTotal": 5,
+        "statementsCovered": 3,
+        "percentage": 60
+      },
+      {
+        "name": "fusor-ember-cli/routes/openstack/index",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/routes/openstack",
+        "statementsTotal": 6,
+        "statementsCovered": 3,
+        "percentage": 50
+      },
+      {
+        "name": "fusor-ember-cli/routes/register-nodes",
+        "statementsTotal": 34,
+        "statementsCovered": 3,
+        "percentage": 8.82
+      },
+      {
+        "name": "fusor-ember-cli/routes/review/index",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/routes/review/installation",
+        "statementsTotal": 19,
+        "statementsCovered": 3,
+        "percentage": 15.79
+      },
+      {
+        "name": "fusor-ember-cli/routes/review/progress/details",
+        "statementsTotal": 15,
+        "statementsCovered": 3,
+        "percentage": 20
+      },
+      {
+        "name": "fusor-ember-cli/routes/review/progress/overview",
+        "statementsTotal": 26,
+        "statementsCovered": 3,
+        "percentage": 11.54
+      },
+      {
+        "name": "fusor-ember-cli/routes/review/progress",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/routes/review/summary",
+        "statementsTotal": 6,
+        "statementsCovered": 3,
+        "percentage": 50
+      },
+      {
+        "name": "fusor-ember-cli/routes/review",
+        "statementsTotal": 6,
+        "statementsCovered": 3,
+        "percentage": 50
+      },
+      {
+        "name": "fusor-ember-cli/routes/rhci",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/routes/rhev/index",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/routes/rhev-options",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/routes/rhev-setup",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/routes/rhev",
+        "statementsTotal": 5,
+        "statementsCovered": 3,
+        "percentage": 60
+      },
+      {
+        "name": "fusor-ember-cli/routes/satellite/access-insights",
+        "statementsTotal": 5,
+        "statementsCovered": 3,
+        "percentage": 60
+      },
+      {
+        "name": "fusor-ember-cli/routes/satellite/index",
+        "statementsTotal": 5,
+        "statementsCovered": 3,
+        "percentage": 60
+      },
+      {
+        "name": "fusor-ember-cli/routes/satellite",
+        "statementsTotal": 8,
+        "statementsCovered": 3,
+        "percentage": 37.5
+      },
+      {
+        "name": "fusor-ember-cli/routes/storage",
+        "statementsTotal": 7,
+        "statementsCovered": 3,
+        "percentage": 42.86
+      },
+      {
+        "name": "fusor-ember-cli/routes/subscriptions/credentials",
+        "statementsTotal": 85,
+        "statementsCovered": 3,
+        "percentage": 3.53
+      },
+      {
+        "name": "fusor-ember-cli/routes/subscriptions/index",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/routes/subscriptions/management-application/consumer",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/routes/subscriptions/management-application",
+        "statementsTotal": 41,
+        "statementsCovered": 3,
+        "percentage": 7.32
+      },
+      {
+        "name": "fusor-ember-cli/routes/subscriptions/review-subscriptions",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/routes/subscriptions/select-subscriptions",
+        "statementsTotal": 46,
+        "statementsCovered": 3,
+        "percentage": 6.52
+      },
+      {
+        "name": "fusor-ember-cli/routes/subscriptions",
+        "statementsTotal": 12,
+        "statementsCovered": 3,
+        "percentage": 25
+      },
+      {
+        "name": "fusor-ember-cli/routes/where-install",
+        "statementsTotal": 11,
+        "statementsCovered": 3,
+        "percentage": 27.27
+      },
+      {
+        "name": "fusor-ember-cli/serializers/entitlement",
+        "statementsTotal": 20,
+        "statementsCovered": 3,
+        "percentage": 15
+      },
+      {
+        "name": "fusor-ember-cli/models/entitlement",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/serializers/foreman-task",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/serializers/management-application",
+        "statementsTotal": 12,
+        "statementsCovered": 3,
+        "percentage": 25
+      },
+      {
+        "name": "fusor-ember-cli/models/management-application",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/serializers/pool",
+        "statementsTotal": 12,
+        "statementsCovered": 3,
+        "percentage": 25
+      },
+      {
+        "name": "fusor-ember-cli/models/pool",
+        "statementsTotal": 5,
+        "statementsCovered": 3,
+        "percentage": 60
+      },
+      {
+        "name": "fusor-ember-cli/adapters/deployment-plan",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/adapters/deployment",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/adapters/entitlement",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/adapters/flavor",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/adapters/image",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/adapters/management-application",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/adapters/node",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/adapters/pool",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/adapters/session-portal",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/adapters/subscription",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/app",
+        "statementsTotal": 7,
+        "statementsCovered": 7,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/initializers/app-version",
+        "statementsTotal": 6,
+        "statementsCovered": 6,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/initializers/coordinator-setup",
+        "statementsTotal": 5,
+        "statementsCovered": 3,
+        "percentage": 60
+      },
+      {
+        "name": "fusor-ember-cli/models/coordinator",
+        "statementsTotal": 14,
+        "statementsCovered": 3,
+        "percentage": 21.43
+      },
+      {
+        "name": "fusor-ember-cli/models/obj-hash",
+        "statementsTotal": 19,
+        "statementsCovered": 3,
+        "percentage": 15.79
+      },
+      {
+        "name": "fusor-ember-cli/initializers/ember-devtools",
+        "statementsTotal": 11,
+        "statementsCovered": 3,
+        "percentage": 27.27
+      },
+      {
+        "name": "fusor-ember-cli/services/ember-devtools",
+        "statementsTotal": 78,
+        "statementsCovered": 5,
+        "percentage": 6.41
+      },
+      {
+        "name": "fusor-ember-cli/initializers/ember-idx-modal",
+        "statementsTotal": 9,
+        "statementsCovered": 3,
+        "percentage": 33.33
+      },
+      {
+        "name": "fusor-ember-cli/initializers/ember-moment",
+        "statementsTotal": 13,
+        "statementsCovered": 5,
+        "percentage": 38.46
+      },
+      {
+        "name": "fusor-ember-cli/initializers/export-application-global",
+        "statementsTotal": 17,
+        "statementsCovered": 5,
+        "percentage": 29.41
+      },
+      {
+        "name": "fusor-ember-cli/components/accordion-item",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/components/app-version",
+        "statementsTotal": 6,
+        "statementsCovered": 6,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/base-f",
+        "statementsTotal": 10,
+        "statementsCovered": 3,
+        "percentage": 30
+      },
+      {
+        "name": "fusor-ember-cli/components/base-popover",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/components/button-f",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/components/cancel-back-next",
+        "statementsTotal": 8,
+        "statementsCovered": 3,
+        "percentage": 37.5
+      },
+      {
+        "name": "fusor-ember-cli/components/debug-info",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/components/delete-deployment-button",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/components/deployment-role",
+        "statementsTotal": 33,
+        "statementsCovered": 3,
+        "percentage": 9.09
+      },
+      {
+        "name": "fusor-ember-cli/components/draggable-object-target",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/draggable-object",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/em-button",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/em-checkbox",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/em-form-control-help",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/em-form-group",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/em-form-label",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/em-form-submit",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/em-form",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/em-input",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/em-modal-body",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/em-modal-confirm-with-reason",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/em-modal-confirm",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/em-modal-emform",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/em-modal-footer",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/em-modal-form",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/em-modal-title",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/em-modal-toggler",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/em-modal",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/em-select",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/em-text",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/env-path-list-item",
+        "statementsTotal": 12,
+        "statementsCovered": 3,
+        "percentage": 25
+      },
+      {
+        "name": "fusor-ember-cli/components/error-message",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/components/file-upload-form",
+        "statementsTotal": 14,
+        "statementsCovered": 3,
+        "percentage": 21.43
+      },
+      {
+        "name": "fusor-ember-cli/components/hypervisor-name",
+        "statementsTotal": 6,
+        "statementsCovered": 3,
+        "percentage": 50
+      },
+      {
+        "name": "fusor-ember-cli/components/labeled-radio-button",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/markdown-to-html",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/node-profile",
+        "statementsTotal": 71,
+        "statementsCovered": 3,
+        "percentage": 4.23
+      },
+      {
+        "name": "fusor-ember-cli/components/object-bin",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/progress-bar",
+        "statementsTotal": 52,
+        "statementsCovered": 3,
+        "percentage": 5.77
+      },
+      {
+        "name": "fusor-ember-cli/components/radio-button-f",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/radio-button-input",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/radio-button",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/range-text-f",
+        "statementsTotal": 5,
+        "statementsCovered": 3,
+        "percentage": 60
+      },
+      {
+        "name": "fusor-ember-cli/components/review-link",
+        "statementsTotal": 13,
+        "statementsCovered": 3,
+        "percentage": 23.08
+      },
+      {
+        "name": "fusor-ember-cli/components/rhci-item",
+        "statementsTotal": 9,
+        "statementsCovered": 3,
+        "percentage": 33.33
+      },
+      {
+        "name": "fusor-ember-cli/components/rhci-start",
+        "statementsTotal": 7,
+        "statementsCovered": 3,
+        "percentage": 42.86
+      },
+      {
+        "name": "fusor-ember-cli/components/rhci-wizard",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/select-f",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/select-simple-f",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/step-number",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/text-f",
+        "statementsTotal": 30,
+        "statementsCovered": 3,
+        "percentage": 10
+      },
+      {
+        "name": "fusor-ember-cli/components/textarea-f",
+        "statementsTotal": 8,
+        "statementsCovered": 3,
+        "percentage": 37.5
+      },
+      {
+        "name": "fusor-ember-cli/components/tr-deployment",
+        "statementsTotal": 22,
+        "statementsCovered": 3,
+        "percentage": 13.64
+      },
+      {
+        "name": "fusor-ember-cli/components/tr-engine",
+        "statementsTotal": 7,
+        "statementsCovered": 3,
+        "percentage": 42.86
+      },
+      {
+        "name": "fusor-ember-cli/components/tr-hypervisor",
+        "statementsTotal": 18,
+        "statementsCovered": 3,
+        "percentage": 16.67
+      },
+      {
+        "name": "fusor-ember-cli/components/tr-management-app",
+        "statementsTotal": 7,
+        "statementsCovered": 3,
+        "percentage": 42.86
+      },
+      {
+        "name": "fusor-ember-cli/components/tr-organization",
+        "statementsTotal": 7,
+        "statementsCovered": 3,
+        "percentage": 42.86
+      },
+      {
+        "name": "fusor-ember-cli/components/tr-subscription-saved",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/components/tr-subscription",
+        "statementsTotal": 26,
+        "statementsCovered": 3,
+        "percentage": 11.54
+      },
+      {
+        "name": "fusor-ember-cli/components/tr-task",
+        "statementsTotal": 10,
+        "statementsCovered": 3,
+        "percentage": 30
+      },
+      {
+        "name": "fusor-ember-cli/components/wizard-item",
+        "statementsTotal": 7,
+        "statementsCovered": 3,
+        "percentage": 42.86
+      },
+      {
+        "name": "fusor-ember-cli/components/wizard-step",
+        "statementsTotal": 21,
+        "statementsCovered": 3,
+        "percentage": 14.29
+      },
+      {
+        "name": "fusor-ember-cli/controllers/application",
+        "statementsTotal": 5,
+        "statementsCovered": 3,
+        "percentage": 60
+      },
+      {
+        "name": "fusor-ember-cli/controllers/array",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/controllers/assign-nodes",
+        "statementsTotal": 181,
+        "statementsCovered": 3,
+        "percentage": 1.66
+      },
+      {
+        "name": "fusor-ember-cli/controllers/cloudforms/cfme-configuration",
+        "statementsTotal": 6,
+        "statementsCovered": 3,
+        "percentage": 50
+      },
+      {
+        "name": "fusor-ember-cli/controllers/cloudforms",
+        "statementsTotal": 7,
+        "statementsCovered": 3,
+        "percentage": 42.86
+      },
+      {
+        "name": "fusor-ember-cli/controllers/configure-environment",
+        "statementsTotal": 29,
+        "statementsCovered": 3,
+        "percentage": 10.34
+      },
+      {
+        "name": "fusor-ember-cli/controllers/configure-organization",
+        "statementsTotal": 6,
+        "statementsCovered": 3,
+        "percentage": 50
+      },
+      {
+        "name": "fusor-ember-cli/controllers/deployment/start",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/controllers/deployment-new/satellite/configure-environment",
+        "statementsTotal": 29,
+        "statementsCovered": 3,
+        "percentage": 10.34
+      },
+      {
+        "name": "fusor-ember-cli/controllers/deployment-new/satellite/configure-organization",
+        "statementsTotal": 6,
+        "statementsCovered": 3,
+        "percentage": 50
+      },
+      {
+        "name": "fusor-ember-cli/controllers/deployment-new/satellite/index",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/controllers/deployment-new/satellite",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/controllers/deployment-new/start",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/controllers/deployment-new",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/controllers/deployment-plan",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/controllers/deployment-role",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/controllers/deployment",
+        "statementsTotal": 25,
+        "statementsCovered": 3,
+        "percentage": 12
+      },
+      {
+        "name": "fusor-ember-cli/controllers/deployments",
+        "statementsTotal": 14,
+        "statementsCovered": 3,
+        "percentage": 21.43
+      },
+      {
+        "name": "fusor-ember-cli/controllers/engine/discovered-host",
+        "statementsTotal": 25,
+        "statementsCovered": 3,
+        "percentage": 12
+      },
+      {
+        "name": "fusor-ember-cli/controllers/engine",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/controllers/flavor",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/controllers/host",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/controllers/hypervisor/discovered-host",
+        "statementsTotal": 33,
+        "statementsCovered": 3,
+        "percentage": 9.09
+      },
+      {
+        "name": "fusor-ember-cli/controllers/hypervisor",
+        "statementsTotal": 7,
+        "statementsCovered": 3,
+        "percentage": 42.86
+      },
+      {
+        "name": "fusor-ember-cli/controllers/image",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/controllers/new-environment",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/controllers/new-organization",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/controllers/node",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/controllers/object",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/controllers/openstack",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/controllers/register-nodes",
+        "statementsTotal": 164,
+        "statementsCovered": 3,
+        "percentage": 1.83
+      },
+      {
+        "name": "fusor-ember-cli/controllers/review/installation",
+        "statementsTotal": 35,
+        "statementsCovered": 3,
+        "percentage": 8.57
+      },
+      {
+        "name": "fusor-ember-cli/controllers/review/progress/overview",
+        "statementsTotal": 5,
+        "statementsCovered": 3,
+        "percentage": 60
+      },
+      {
+        "name": "fusor-ember-cli/controllers/review/progress",
+        "statementsTotal": 6,
+        "statementsCovered": 3,
+        "percentage": 50
+      },
+      {
+        "name": "fusor-ember-cli/controllers/review/summary",
+        "statementsTotal": 10,
+        "statementsCovered": 3,
+        "percentage": 30
+      },
+      {
+        "name": "fusor-ember-cli/controllers/review",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
+      },
+      {
+        "name": "fusor-ember-cli/controllers/rhev-options",
+        "statementsTotal": 13,
+        "statementsCovered": 3,
+        "percentage": 23.08
+      },
+      {
+        "name": "fusor-ember-cli/controllers/rhev-setup",
+        "statementsTotal": 7,
+        "statementsCovered": 3,
+        "percentage": 42.86
+      },
+      {
+        "name": "fusor-ember-cli/controllers/rhev",
+        "statementsTotal": 12,
+        "statementsCovered": 3,
+        "percentage": 25
+      },
+      {
+        "name": "fusor-ember-cli/controllers/satellite/access-insights",
+        "statementsTotal": 6,
+        "statementsCovered": 3,
+        "percentage": 50
+      },
+      {
+        "name": "fusor-ember-cli/controllers/satellite/index",
+        "statementsTotal": 6,
+        "statementsCovered": 3,
+        "percentage": 50
+      },
+      {
+        "name": "fusor-ember-cli/controllers/satellite",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/controllers/storage",
+        "statementsTotal": 41,
+        "statementsCovered": 3,
+        "percentage": 7.32
+      },
+      {
+        "name": "fusor-ember-cli/controllers/subscriptions/credentials",
+        "statementsTotal": 36,
+        "statementsCovered": 3,
+        "percentage": 8.33
+      },
+      {
+        "name": "fusor-ember-cli/controllers/subscriptions/management-application/consumer/entitlements",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/controllers/subscriptions/management-application/consumer/pools",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/controllers/subscriptions/management-application/consumer",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/controllers/subscriptions/management-application",
+        "statementsTotal": 27,
+        "statementsCovered": 3,
+        "percentage": 11.11
+      },
+      {
+        "name": "fusor-ember-cli/controllers/subscriptions/select-subscriptions",
+        "statementsTotal": 14,
+        "statementsCovered": 3,
+        "percentage": 21.43
+      },
+      {
+        "name": "fusor-ember-cli/controllers/subscriptions",
+        "statementsTotal": 5,
+        "statementsCovered": 3,
+        "percentage": 60
+      },
+      {
+        "name": "fusor-ember-cli/controllers/undercloud-deploy",
+        "statementsTotal": 65,
+        "statementsCovered": 3,
+        "percentage": 4.62
+      },
+      {
+        "name": "fusor-ember-cli/controllers/where-install",
+        "statementsTotal": 25,
+        "statementsCovered": 3,
+        "percentage": 12
+      },
+      {
+        "name": "fusor-ember-cli/helpers/fa-icon",
+        "statementsTotal": 56,
+        "statementsCovered": 7,
+        "percentage": 12.5
+      },
+      {
+        "name": "fusor-ember-cli/helpers/host-type",
+        "statementsTotal": 8,
+        "statementsCovered": 5,
+        "percentage": 62.5
+      },
+      {
+        "name": "fusor-ember-cli/helpers/log",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/initialize",
+        "statementsTotal": 5,
+        "statementsCovered": 3,
+        "percentage": 60
+      },
+      {
+        "name": "fusor-ember-cli/models/consumer",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/models/deployment-plan-parameter",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/models/deployment-plan",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/models/deployment-role",
+        "statementsTotal": 19,
+        "statementsCovered": 3,
+        "percentage": 15.79
+      },
+      {
+        "name": "fusor-ember-cli/models/domain",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/models/environment",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/models/flavor",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/models/host",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/models/hostgroup",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/models/image",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/models/node",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/models/session-portal",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/models/subnet",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/routes/undercloud-deploy",
+        "statementsTotal": 7,
+        "statementsCovered": 3,
+        "percentage": 42.86
+      },
+      {
+        "name": "fusor-ember-cli/serializers/deployment-plan-parameter",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/serializers/deployment-plan",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/serializers/deployment-role",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/serializers/node",
+        "statementsTotal": 3,
+        "statementsCovered": 3,
+        "percentage": 100
+      },
+      {
+        "name": "fusor-ember-cli/services/validations",
+        "statementsTotal": 5,
+        "statementsCovered": 4,
+        "percentage": 80
+      }
+    ]
+  }
+}
