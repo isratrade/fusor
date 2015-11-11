@@ -93,7 +93,7 @@ export default DS.Model.extend({
   progress: null,
   state: null,
 
-  foremanTask: Ember.computed('foreman_task_uuid', 'isStarted', function() {
+  foremanTask: Ember.computed('foreman_task_uuid', function() {
     if (this.get('isStarted')) {
         return this.store.findRecord('foreman-task', this.get('foreman_task_uuid'));
     }
