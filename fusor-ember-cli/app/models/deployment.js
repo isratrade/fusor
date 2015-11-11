@@ -93,6 +93,8 @@ export default DS.Model.extend({
   progress: null,
   state: null,
 
+  // TODO-REFACTOR return foreman_task in API response and create belongsTo assocation
+  // foreman-task: DS.belongsTo('foreman-task')
   foremanTask: Ember.computed('foreman_task_uuid', 'isStarted', function() {
     if (this.get('isStarted')) {
         return this.store.findRecord('foreman-task', this.get('foreman_task_uuid'));
