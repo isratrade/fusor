@@ -35,3 +35,14 @@ test('isStarted', function(assert){
 
   assert.equal(model.get('isStarted'), false);
 });
+
+test('isNotStarted', function(assert){
+  var model = this.subject();
+  assert.equal(model.get('isNotStarted'), true);
+
+  Ember.run(function() {
+    model.set('foreman_task_uuid', 'db25a76f-e344-48ba-ac77-f29303586dbe');
+  });
+
+  assert.equal(model.get('isNotStarted'), false);
+});
