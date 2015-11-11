@@ -23,7 +23,7 @@ test('isStarted', function(assert){
   assert.equal(model.get('isStarted'), false);
 
   Ember.run(function() {
-    model.set('foreman_task_uuid', 'any-arbitrary-uuid');
+    model.set('foreman_task_uuid', 'db25a76f-e344-48ba-ac77-f29303586dbe');
   });
 
   assert.equal(model.get('isStarted'), true);
