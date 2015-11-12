@@ -27,5 +27,45 @@ module.exports = function(defaults) {
 
   // any app.import lines below are should ONLY appear in development ember-cli branches and not in 'master branch'
 
+  /* Boostrap JS */
+  app.import('bower_components/patternfly/components/bootstrap/js/alert.js');
+  app.import('bower_components/patternfly/components/bootstrap/js/button.js');
+  app.import('bower_components/patternfly/components/bootstrap/js/modal.js');
+  app.import('bower_components/patternfly/components/bootstrap/js/dropdown.js');
+  app.import('bower_components/patternfly/components/bootstrap/js/tab.js');
+  app.import('bower_components/patternfly/components/bootstrap-combobox/js/bootstrap-combobox.js');
+  app.import('bower_components/patternfly/components/bootstrap-select/js/bootstrap-select.js');
+
+  /* Boostrap CSS */
+  app.import('bower_components/patternfly/dist/css/patternfly.css');
+  app.import('bower_components/patternfly/dist/css/patternfly-additions.css');
+
+  /* Fonts & Icons */
+  app.import('bower_components/patternfly/dist/fonts/OpenSans-Bold-webfont.ttf', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/OpenSans-Bold-webfont.woff', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/OpenSans-BoldItalic-webfont.ttf', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/OpenSans-BoldItalic-webfont.woff', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/OpenSans-ExtraBold-webfont.ttf', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/OpenSans-ExtraBold-webfont.woff', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/OpenSans-ExtraBoldItalic-webfont.ttf', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/OpenSans-ExtraBoldItalic-webfont.woff', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/OpenSans-Italic-webfont.ttf', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/OpenSans-Italic-webfont.woff', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/OpenSans-Light-webfont.ttf', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/OpenSans-Light-webfont.woff', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/OpenSans-LightItalic-webfont.ttf', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/OpenSans-LightItalic-webfont.woff', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/OpenSans-Regular-webfont.ttf', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/OpenSans-Regular-webfont.woff', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/OpenSans-Semibold-webfont.ttf', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/OpenSans-Semibold-webfont.woff', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/OpenSans-SemiboldItalic-webfont.ttf', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/OpenSans-SemiboldItalic-webfont.woff', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/PatternFlyIcons-webfont.ttf', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/PatternFlyIcons-webfont.woff', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/components/font-awesome/fonts/fontawesome-webfont.ttf', {destDir: 'components/font-awesome/fonts'});
+  app.import('bower_components/patternfly/components/font-awesome/fonts/fontawesome-webfont.woff', {destDir: 'components/font-awesome/fonts'});
+  app.import('bower_components/patternfly/components/font-awesome/fonts/fontawesome-webfont.woff2', {destDir: 'components/font-awesome/fonts'});
+
   return app.toTree();
 };
