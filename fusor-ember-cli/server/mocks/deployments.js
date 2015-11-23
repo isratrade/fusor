@@ -6,10 +6,10 @@ module.exports = function(app) {
   "deployments": [
     {
       "id": 13,
-      "name": "osp",
+      "name": "osp deployment",
       "description": "",
       "deploy_rhev": false,
-      "deploy_cfme": true,
+      "deploy_cfme": false,
       "deploy_openstack": true,
       "rhev_engine_admin_password": null,
       "rhev_database_name": "Default",
@@ -67,10 +67,10 @@ module.exports = function(app) {
     },
     {
       "id": 18,
-      "name": "rhev333",
+      "name": "rhev and cfme deployment",
       "description": null,
       "deploy_rhev": true,
-      "deploy_cfme": false,
+      "deploy_cfme": true,
       "deploy_openstack": false,
       "rhev_engine_admin_password": "11111111",
       "rhev_database_name": "Default",
@@ -117,7 +117,7 @@ module.exports = function(app) {
       "created_at": "2015-11-17T14:52:03Z",
       "updated_at": "2015-11-17T14:53:03Z",
       "organization_id": 1,
-      "lifecycle_environment_id": null,
+      "lifecycle_environment_id": 1,
       "discovered_host_id": 2,
       "discovered_host_ids": [
         6
@@ -129,7 +129,7 @@ module.exports = function(app) {
     },
     {
       "id": 9,
-      "name": "aaaaa",
+      "name": "already started deployment",
       "description": null,
       "deploy_rhev": false,
       "deploy_cfme": false,
@@ -179,7 +179,7 @@ module.exports = function(app) {
       "created_at": "2015-11-10T10:35:15Z",
       "updated_at": "2015-11-19T13:04:38Z",
       "organization_id": 1,
-      "lifecycle_environment_id": null,
+      "lifecycle_environment_id": 1,
       "discovered_host_id": 4,
       "discovered_host_ids": [
         5
@@ -189,10 +189,10 @@ module.exports = function(app) {
     },
     {
       "id": 7,
-      "name": "rhev",
+      "name": "rhev only deployment",
       "description": null,
       "deploy_rhev": true,
-      "deploy_cfme": true,
+      "deploy_cfme": false,
       "deploy_openstack": false,
       "rhev_engine_admin_password": "11111111",
       "rhev_database_name": "asdfadfadf",
@@ -415,6 +415,15 @@ module.exports = function(app) {
       }
     });
   });
+
+  deploymentsRouter.put('/:id/deploy', function(req, res) {
+    res.send({
+      'deployment': {
+        id: req.params.id
+      }
+    });
+  });
+
 
   deploymentsRouter.delete('/:id', function(req, res) {
     res.status(204).end();
