@@ -388,13 +388,24 @@ module.exports = function(app) {
   });
 
   deploymentsRouter.post('/', function(req, res) {
-    res.status(201).end();
+    res.send({
+      'deployment': {
+        id: 22
+      }
+    });
   });
 
-  deploymentsRouter.get('/:id', function(req, res) {
-    res.send({
-        id: req.params.id
-    });
+  deploymentsRouter.get('/13', function(req, res) {
+    res.send(deployments['deployments'][0]);
+  });
+  deploymentsRouter.get('/18', function(req, res) {
+    res.send(deployments['deployments'][1]);
+  });
+  deploymentsRouter.get('/9', function(req, res) {
+    res.send(deployments['deployments'][2]);
+  });
+  deploymentsRouter.get('/7', function(req, res) {
+    res.send(deployments['deployments'][3]);
   });
 
   deploymentsRouter.put('/:id', function(req, res) {
