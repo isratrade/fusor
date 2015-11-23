@@ -17,9 +17,7 @@ export default Ember.Mixin.create(NeedsDeploymentMixin, {
     return this.get('libraryEnvironments').get('firstObject');
   }),
 
-  priorLibraryEnvironments: Ember.computed.filter('lifecycleEnvironments', function(item) {
-    return (item.get('prior_id') === 1);
-  }).property('lifecycleEnvironments.@each.[]', 'libraryEnv'),
+  priorLibraryEnvironments: Ember.computed.filterBy('lifecycleEnvironments', 'prior_id', 1),
 
   fields_env: {},
 
