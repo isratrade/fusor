@@ -2766,2746 +2766,2757 @@ module.exports = function(app) {
   });
 
   deploymentPlanRouter.put('/:id/deployment_plans/overcloud/:update_action', function(req, res) {
-    res.send({
+    res.send(
+{
     "deployment_plan": {
-        "created_at": "2015-10-12T19:40:16",
         "description": null,
+        "roles": [
+            {
+                "description": "OpenStack ceph storage node configured by Puppet",
+                "version": 1,
+                "uuid": "ab7c02d8-bd5d-4ce3-9bf8-39d729cb55c1",
+                "name": "Ceph-Storage"
+            },
+            {
+                "description": "OpenStack cinder storage configured by Puppet",
+                "version": 1,
+                "uuid": "f1b1885e-cd78-4e29-9db9-92fe71206976",
+                "name": "Cinder-Storage"
+            },
+            {
+                "description": "OpenStack controller node configured by Puppet.\n",
+                "version": 1,
+                "uuid": "e148432f-ff6b-401e-a3e4-10f265177146",
+                "name": "Controller"
+            },
+            {
+                "description": "OpenStack hypervisor node configured via Puppet.\n",
+                "version": 1,
+                "uuid": "a94c2108-d87d-4145-9358-008ed5a78225",
+                "name": "Compute"
+            },
+            {
+                "description": "OpenStack swift storage node configured by Puppet",
+                "version": 1,
+                "uuid": "8f4f0cc5-94bd-44d1-aecf-138852eb20fc",
+                "name": "Swift-Storage"
+            }
+        ],
+        "created_at": "2015-11-25T13:23:29",
+        "updated_at": null,
         "name": "overcloud",
         "parameters": [
             {
-                "constraints": [],
-                "default": "",
                 "description": "If set, the contents of an SSL certificate .key file for encrypting SSL endpoints.",
-                "hidden": true,
-                "label": null,
-                "name": "Controller-1::SSLKey",
-                "parameter_type": "string",
-                "value": ""
-            },
-            {
-                "constraints": [],
-                "default": false,
-                "description": "Rabbit client subscriber parameter to specify an SSL connection to the RabbitMQ host.\n",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::RabbitClientUseSSL",
-                "parameter_type": "string",
-                "value": false
-            },
-            {
-                "constraints": [],
                 "default": "",
-                "description": "Keystone certificate for verifying token validity.",
-                "hidden": null,
+                "value": "",
                 "label": null,
-                "name": "Controller-1::KeystoneSSLCertificate",
                 "parameter_type": "string",
-                "value": ""
+                "hidden": true,
+                "constraints": [],
+                "name": "Controller-1::SSLKey"
             },
             {
+                "description": "Rabbit client subscriber parameter to specify an SSL connection to the RabbitMQ host.\n",
+                "default": false,
+                "value": false,
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
                 "constraints": [],
-                "default": 3,
+                "name": "Compute-1::RabbitClientUseSSL"
+            },
+            {
+                "description": "Keystone certificate for verifying token validity.",
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::KeystoneSSLCertificate"
+            },
+            {
                 "description": "The number of neutron dhcp agents to schedule per network",
-                "hidden": null,
+                "default": 3,
+                "value": 3,
                 "label": null,
-                "name": "Controller-1::NeutronDhcpAgentsPerNetwork",
                 "parameter_type": "number",
-                "value": 3
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronDhcpAgentsPerNetwork"
             },
             {
-                "constraints": [],
-                "default": {},
                 "description": "Contains parameters to configure Cinder backends. Typically set via parameter_defaults in the resource registry.",
-                "hidden": null,
+                "default": {},
+                "value": {},
                 "label": null,
-                "name": "Controller-1::CinderBackendConfig",
                 "parameter_type": "json",
-                "value": {}
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::CinderBackendConfig"
             },
             {
-                "constraints": [],
-                "default": 5000,
                 "description": "The size of the loopback file used by the cinder LVM driver.",
-                "hidden": null,
+                "default": 5000,
+                "value": 5000,
                 "label": null,
-                "name": "Controller-1::CinderLVMLoopDeviceSize",
                 "parameter_type": "number",
-                "value": 5000
-            },
-            {
-                "constraints": [],
-                "default": "1:1000",
-                "description": "Comma-separated list of <tun_min>:<tun_max> tuples enumerating ranges\nof GRE tunnel IDs that are available for tenant network allocation\n",
                 "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::CinderLVMLoopDeviceSize"
+            },
+            {
+                "description": "Comma-separated list of <tun_min>:<tun_max> tuples enumerating ranges\nof GRE tunnel IDs that are available for tenant network allocation\n",
+                "default": "1:1000",
+                "value": "1:1000",
                 "label": null,
-                "name": "Controller-1::NeutronTunnelIdRanges",
                 "parameter_type": "comma_delimited_list",
-                "value": "1:1000"
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronTunnelIdRanges"
             },
             {
-                "constraints": [],
-                "default": "unset",
                 "description": "The password for the keystone admin account, used for monitoring, querying neutron etc.",
-                "hidden": true,
+                "default": "unset",
+                "value": "f2656cd234438ccf1acff6f4ceb614898f74ada7",
                 "label": null,
-                "name": "Compute-1::AdminPassword",
                 "parameter_type": "string",
-                "value": "eefc9d08730418d97ed35349880de68d3c2fa552"
+                "hidden": true,
+                "constraints": [],
+                "name": "Compute-1::AdminPassword"
             },
             {
-                "constraints": [],
-                "default": true,
                 "description": "Whether to enable or not the Iscsi backend for Cinder",
-                "hidden": null,
+                "default": true,
+                "value": true,
                 "label": null,
-                "name": "Cinder-Storage-1::CinderEnableIscsiBackend",
                 "parameter_type": "boolean",
-                "value": true
-            },
-            {
-                "constraints": [],
-                "default": [],
-                "description": null,
                 "hidden": null,
-                "label": null,
-                "name": "Controller-1::removal_policies",
-                "parameter_type": "json",
-                "value": []
+                "constraints": [],
+                "name": "Cinder-Storage-1::CinderEnableIscsiBackend"
             },
             {
+                "description": null,
+                "default": [],
+                "value": [],
+                "label": null,
+                "parameter_type": "json",
+                "hidden": null,
                 "constraints": [],
-                "default": "unset",
+                "name": "Controller-1::removal_policies"
+            },
+            {
                 "description": "The password for the nova service and db account, used by nova-api.",
-                "hidden": true,
-                "label": null,
-                "name": "Controller-1::NovaPassword",
-                "parameter_type": "string",
-                "value": "a5b263e90913ecfd93ded79c9062fbe04818a7dc"
-            },
-            {
-                "constraints": [],
                 "default": "unset",
-                "description": "Shared secret to prevent spoofing",
-                "hidden": null,
+                "value": "652e5ea19e6dc51b80e3059da246588584da6888",
                 "label": null,
-                "name": "Compute-1::NeutronMetadataProxySharedSecret",
                 "parameter_type": "string",
-                "value": "unset"
+                "hidden": true,
+                "constraints": [],
+                "name": "Controller-1::NovaPassword"
             },
             {
+                "description": "Shared secret to prevent spoofing",
+                "default": "unset",
+                "value": "unset",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NeutronMetadataProxySharedSecret"
+            },
+            {
+                "description": null,
+                "default": null,
+                "value": "1",
+                "label": null,
+                "parameter_type": "number",
+                "hidden": null,
                 "constraints": [
                     {
-                        "constraint_type": "range",
                         "definition": {
                             "min": "0"
                         },
-                        "description": null
+                        "description": null,
+                        "constraint_type": "range"
                     }
                 ],
-                "default": null,
-                "description": null,
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::count",
-                "parameter_type": "number",
-                "value": "1"
+                "name": "Controller-1::count"
             },
             {
-                "constraints": [],
-                "default": "9292",
                 "description": "Glance port.",
-                "hidden": null,
+                "default": "9292",
+                "value": "9292",
                 "label": null,
-                "name": "Compute-1::GlancePort",
                 "parameter_type": "string",
-                "value": "9292"
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::GlancePort"
             },
             {
-                "constraints": [],
-                "default": "",
                 "description": "VLAN tag for creating a public VLAN. The tag will be used to create an access port on the exterior bridge for each control plane node, and that port will be given the IP address returned by neutron from the public network. Set CONTROLEXTRA=overcloud-vlan-port.yaml when compiling overcloud.yaml to include the deployment of VLAN ports to the control plane.\n",
-                "hidden": null,
+                "default": "",
+                "value": "",
                 "label": null,
-                "name": "NeutronPublicInterfaceTag",
                 "parameter_type": "string",
-                "value": ""
+                "hidden": null,
+                "constraints": [],
+                "name": "NeutronPublicInterfaceTag"
             },
             {
-                "constraints": [],
-                "default": "%stackname%-controller-%index%",
                 "description": "Format for Controller node hostnames",
-                "hidden": null,
+                "default": "%stackname%-controller-%index%",
+                "value": "%stackname%-controller-%index%",
                 "label": null,
-                "name": "ControllerHostnameFormat",
                 "parameter_type": "string",
-                "value": "%stackname%-controller-%index%"
+                "hidden": null,
+                "constraints": [],
+                "name": "ControllerHostnameFormat"
             },
             {
-                "constraints": [],
-                "default": "ro_snmp_user",
                 "description": "The user name for SNMPd with readonly rights running on all Overcloud nodes",
-                "hidden": null,
+                "default": "ro_snmp_user",
+                "value": "ro_snmp_user",
                 "label": null,
-                "name": "Controller-1::SnmpdReadonlyUserName",
                 "parameter_type": "string",
-                "value": "ro_snmp_user"
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::SnmpdReadonlyUserName"
             },
             {
-                "constraints": [],
-                "default": "openvswitch",
                 "description": "The mechanism drivers for the Neutron tenant network. To specify multiple\nvalues, use a comma separated string, like so: 'openvswitch,l2_population'\n",
-                "hidden": null,
+                "default": "openvswitch",
+                "value": "openvswitch",
                 "label": null,
-                "name": "Compute-1::NeutronMechanismDrivers",
                 "parameter_type": "string",
-                "value": "openvswitch"
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NeutronMechanismDrivers"
             },
             {
-                "constraints": [],
-                "default": "",
                 "description": null,
-                "hidden": null,
+                "default": "",
+                "value": "",
                 "label": null,
-                "name": "Ceph-Storage-1::NtpServer",
                 "parameter_type": "string",
-                "value": ""
-            },
-            {
-                "constraints": [],
-                "default": "false",
-                "description": "Set to true to enable package installation via Puppet",
                 "hidden": null,
-                "label": null,
-                "name": "Ceph-Storage-1::EnablePackageInstall",
-                "parameter_type": "boolean",
-                "value": "false"
+                "constraints": [],
+                "name": "Ceph-Storage-1::NtpServer"
             },
             {
+                "description": "Set to true to enable package installation via Puppet",
+                "default": "false",
+                "value": "false",
+                "label": null,
+                "parameter_type": "boolean",
+                "hidden": null,
+                "constraints": [],
+                "name": "Ceph-Storage-1::EnablePackageInstall"
+            },
+            {
+                "description": null,
+                "default": null,
+                "value": "0",
+                "label": null,
+                "parameter_type": "number",
+                "hidden": null,
                 "constraints": [
                     {
-                        "constraint_type": "range",
                         "definition": {
                             "min": "0"
                         },
-                        "description": null
+                        "description": null,
+                        "constraint_type": "range"
                     }
                 ],
-                "default": null,
-                "description": null,
-                "hidden": null,
-                "label": null,
-                "name": "Ceph-Storage-1::count",
-                "parameter_type": "number",
-                "value": "0"
+                "name": "Ceph-Storage-1::count"
             },
             {
-                "constraints": [],
-                "default": "default",
                 "description": "Name of an existing EC2 KeyPair to enable SSH access to the instances",
-                "hidden": null,
+                "default": "default",
+                "value": "default",
                 "label": null,
-                "name": "Cinder-Storage-1::KeyName",
                 "parameter_type": "string",
-                "value": "default"
+                "hidden": null,
+                "constraints": [],
+                "name": "Cinder-Storage-1::KeyName"
             },
             {
-                "constraints": [],
-                "default": "REBUILD_PRESERVE_EPHEMERAL",
                 "description": "What policy to use when reconstructing instances. REBUILD for rebuilds, REBUILD_PRESERVE_EPHEMERAL to preserve /mnt.",
-                "hidden": null,
+                "default": "REBUILD_PRESERVE_EPHEMERAL",
+                "value": "REBUILD_PRESERVE_EPHEMERAL",
                 "label": null,
-                "name": "Controller-1::ImageUpdatePolicy",
                 "parameter_type": "string",
-                "value": "REBUILD_PRESERVE_EPHEMERAL"
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::ImageUpdatePolicy"
             },
             {
-                "constraints": [],
-                "default": true,
                 "description": "Whether to deploy a LoadBalancer on the Controller",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::EnableLoadBalancer",
-                "parameter_type": "boolean",
-                "value": true
-            },
-            {
-                "constraints": [],
-                "default": "1:1000",
-                "description": "Comma-separated list of <tun_min>:<tun_max> tuples enumerating ranges\nof GRE tunnel IDs that are available for tenant network allocation\n",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::NeutronTunnelIdRanges",
-                "parameter_type": "comma_delimited_list",
-                "value": "1:1000"
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "Setting to a previously unused value during stack-update will trigger package update on all nodes\n",
-                "hidden": null,
-                "label": null,
-                "name": "Swift-Storage-1::UpdateIdentifier",
-                "parameter_type": "string",
-                "value": ""
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": null,
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::NovaComputeLibvirtType",
-                "parameter_type": "string",
-                "value": "qemu"
-            },
-            {
-                "constraints": [],
-                "default": "unset",
-                "description": "The password for the keystone admin account, used for monitoring, querying neutron etc.",
-                "hidden": true,
-                "label": null,
-                "name": "Controller-1::AdminPassword",
-                "parameter_type": "string",
-                "value": "eefc9d08730418d97ed35349880de68d3c2fa552"
-            },
-            {
-                "constraints": [],
-                "default": 1,
-                "description": "The minimum time (in hours) before a partition in a ring can be moved following a rebalance.",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::SwiftMinPartHours",
-                "parameter_type": "number",
-                "value": 1
-            },
-            {
-                "constraints": [],
-                "default": {},
-                "description": "Controller specific hiera configuration data to inject into the cluster.\n",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::ControllerExtraConfig",
-                "parameter_type": "json",
-                "value": {}
-            },
-            {
-                "constraints": [],
-                "default": 5672,
-                "description": "Set rabbit subscriber port, change this if using SSL",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::RabbitClientPort",
-                "parameter_type": "number",
-                "value": 5672
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "The Ceph client key. Can be created with ceph-authtool --gen-print-key. Currently only used for external Ceph deployments to create the openstack user keyring.",
-                "hidden": null,
-                "label": null,
-                "name": "CephClientKey",
-                "parameter_type": "string",
-                "value": ""
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": null,
-                "hidden": null,
-                "label": null,
-                "name": "Swift-Storage-1::NtpServer",
-                "parameter_type": "string",
-                "value": ""
-            },
-            {
-                "constraints": [],
-                "default": "default",
-                "description": "Name of an existing EC2 KeyPair to enable SSH access to the instances",
-                "hidden": null,
-                "label": null,
-                "name": "Swift-Storage-1::KeyName",
-                "parameter_type": "string",
-                "value": "default"
-            },
-            {
-                "constraints": [],
-                "default": {
-                    "BlockStorageHostnameResolveNetwork": "internal_api",
-                    "CeilometerApiNetwork": "internal_api",
-                    "CephClusterNetwork": "storage_mgmt",
-                    "CephPublicNetwork": "storage",
-                    "CephStorageHostnameResolveNetwork": "storage",
-                    "CinderApiNetwork": "internal_api",
-                    "CinderIscsiNetwork": "storage",
-                    "ComputeHostnameResolveNetwork": "internal_api",
-                    "ControllerHostnameResolveNetwork": "internal_api",
-                    "GlanceApiNetwork": "storage",
-                    "GlanceRegistryNetwork": "internal_api",
-                    "HeatApiNetwork": "internal_api",
-                    "HorizonNetwork": "internal_api",
-                    "KeystoneAdminApiNetwork": "ctlplane",
-                    "KeystonePublicApiNetwork": "internal_api",
-                    "MemcachedNetwork": "internal_api",
-                    "MongoDbNetwork": "internal_api",
-                    "MysqlNetwork": "internal_api",
-                    "NeutronApiNetwork": "internal_api",
-                    "NeutronTenantNetwork": "tenant",
-                    "NovaApiNetwork": "internal_api",
-                    "NovaMetadataNetwork": "internal_api",
-                    "NovaVncProxyNetwork": "internal_api",
-                    "ObjectStorageHostnameResolveNetwork": "internal_api",
-                    "RabbitMqNetwork": "internal_api",
-                    "RedisNetwork": "internal_api",
-                    "SwiftMgmtNetwork": "storage_mgmt",
-                    "SwiftProxyNetwork": "storage"
-                },
-                "description": "Mapping of service_name -> network name. Typically set via parameter_defaults in the resource registry.",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::ServiceNetMap",
-                "parameter_type": "json",
-                "value": {
-                    "BlockStorageHostnameResolveNetwork": "internal_api",
-                    "CeilometerApiNetwork": "internal_api",
-                    "CephClusterNetwork": "storage_mgmt",
-                    "CephPublicNetwork": "storage",
-                    "CephStorageHostnameResolveNetwork": "storage",
-                    "CinderApiNetwork": "internal_api",
-                    "CinderIscsiNetwork": "storage",
-                    "ComputeHostnameResolveNetwork": "internal_api",
-                    "ControllerHostnameResolveNetwork": "internal_api",
-                    "GlanceApiNetwork": "storage",
-                    "GlanceRegistryNetwork": "internal_api",
-                    "HeatApiNetwork": "internal_api",
-                    "HorizonNetwork": "internal_api",
-                    "KeystoneAdminApiNetwork": "ctlplane",
-                    "KeystonePublicApiNetwork": "internal_api",
-                    "MemcachedNetwork": "internal_api",
-                    "MongoDbNetwork": "internal_api",
-                    "MysqlNetwork": "internal_api",
-                    "NeutronApiNetwork": "internal_api",
-                    "NeutronTenantNetwork": "tenant",
-                    "NovaApiNetwork": "internal_api",
-                    "NovaMetadataNetwork": "internal_api",
-                    "NovaVncProxyNetwork": "internal_api",
-                    "ObjectStorageHostnameResolveNetwork": "internal_api",
-                    "RabbitMqNetwork": "internal_api",
-                    "RedisNetwork": "internal_api",
-                    "SwiftMgmtNetwork": "storage_mgmt",
-                    "SwiftProxyNetwork": "storage"
-                }
-            },
-            {
-                "constraints": [],
-                "default": "True",
-                "description": "Allow automatic l3-agent failover",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::NeutronAllowL3AgentFailover",
-                "parameter_type": "string",
-                "value": "True"
-            },
-            {
-                "constraints": [],
-                "default": "libvirt.LibvirtDriver",
-                "description": null,
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::NovaComputeDriver",
-                "parameter_type": "string",
-                "value": "libvirt.LibvirtDriver"
-            },
-            {
-                "constraints": [
-                    {
-                        "constraint_type": "custom_constraint",
-                        "definition": "nova.flavor",
-                        "description": null
-                    }
-                ],
-                "default": null,
-                "description": "Flavor for block storage nodes to request when deploying.",
-                "hidden": null,
-                "label": null,
-                "name": "Cinder-Storage-1::Flavor",
-                "parameter_type": "string",
-                "value": "Flavor-4-x86_64-6144-40"
-            },
-            {
-                "constraints": [],
-                "default": "1:1000",
-                "description": "Comma-separated list of <vni_min>:<vni_max> tuples enumerating ranges\nof VXLAN VNI IDs that are available for tenant network allocation\n",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::NeutronVniRanges",
-                "parameter_type": "comma_delimited_list",
-                "value": "1:1000"
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "Keystone key for signing tokens.",
-                "hidden": true,
-                "label": null,
-                "name": "Controller-1::KeystoneSigningKey",
-                "parameter_type": "string",
-                "value": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQD2uO//W6bu5vKp\n3jLcZsWwjVQ9mafzyFjMtXuxRWdhlKhxuDgVPKkFE1jo3963puNngErC6m+cMUfz\n++k2Ojv5ejCAbygbxklDK2fH4lT7+9YgA/odgS12sWvC2ntcLkAlRVl2nDtF9TCw\ny4xTv2vz/wZDC/q+AGazkmq19cV51HOUvU88JPjI1Q0jRy1B+GksSOD/eq099HYz\nslu9GVKncHf7FSru9gCCAVWf8jffRzdHZTIeGxEEHlXTlwQiLRlToLjMKqWi/sF2\n5qItZ18HEfGuLCCJ4Ie0P5AJ9usAFTZnDSafns7HkwO9b0oVC7olkTaC1z5XikUb\n5EFgyd3DAgMBAAECggEAEnv8jxcgxJlM6OkaymRwvy93dj4C1ULXVE7se3WFr0vh\n6tMwcHbg+t5eNORA3WWFeAWmlD/YKM2QZHklGcj3IVPEOnsZeCs85elklxcf4tkV\nS8TAgmFhNJlKR4jy4Q8eAyzU7Qv7bNxXz4cQdl3LCra6k19cY8vH5gA8OnG1X9Ej\nRym9wrcRLsoSQKl5NBX2NYin2x1elckyXvw/3/zSnx8151urg0rF4tPgyldvhXrf\nRCnR2XnsT9COq0XC+Ag9C/E5IofommK5rEbGnObViOfNiew/QcW9FPO1t/KAzT7m\nnhXo5bgXSJorrKrlNNm+vXX3qhLy4XQLRiGOM0JAYQKBgQD8aGCxgs4NV4vyOM1c\nmt2sECRP8c0eDUVxV5UcKrxSU829NBvP4REE18puIdXNj7gD+0wj7mclfb3PQ3+Y\nGFX03tdk0oq9hXaghDUA4RNgOvFanGIH1YiUMF6q1UEOgiLxtIww5I0XbJApQCGA\nt31su7i4dIJCWQ+YWYJk5vxMawKBgQD6O9iNpDuAC3IizYBJiGLiDN+RK2/ygYJ8\nCfa5qu+v7pmaoVou/81a4/8IHq+Op9yI9X3JS8PirM9Yy0xh1H3t6O/atrqK4Fsu\nqQ0I3K0hHjpSyEkLWyKEUeN3oPA3pKYMi3oGv0sEK+gKNGJwo5SUkl9eP9Th52LB\n6xx/8I0KCQKBgQCVwMvVpbjg25dRX/gfwFZStsUElX7QHKmdxIvYSVawNb50Sg1S\nOcNiLzGQRAzYyDMyUY9sJg8WhFLwPKjgMVgWT3xV+kCMjznBpI7Z9bAMQQxfaTcU\nVNGSslwIWTwfAoD/DNK8U22Ofz/M6Zq3Bqaos3u2HJIIEVUaW8jsWstH/wKBgBA5\nOxQL1tO5aj/5ZNzfm9GeFgyabVqirOwP1VA6VenpJUpSNb+gVBcVex5ypt0v4ut6\nRxp68AtNOvA91gjttvBqzso2WKfSXfcLfM3bSNpB1HQzihDTasx7Zq0F4S0qXp2n\nmVTAqENv+U5YER3ObT6ossgwiUPQNaXu8V0WIn7JAoGBAIvKQwX/s5nrid3n2puQ\nk22UZgXob5Tm9O9VKO/R5fjyspqn8TcqQxGf2sWlD6G5xqiBgp3rD2Lyzs/Fh8zM\nqVTSdfH32QWzwQEIDgGXF3ZMv1tn6tJb0ck98Ul2z+2nHnW6poFoDSxJuzXymEg0\naxFpaPPz3fK7Mz28AP+0kMEg\n-----END PRIVATE KEY-----"
-            },
-            {
-                "constraints": [],
-                "default": "guest",
-                "description": null,
-                "hidden": null,
-                "label": null,
-                "name": "Cinder-Storage-1::RabbitUserName",
-                "parameter_type": "string",
-                "value": "guest"
-            },
-            {
-                "constraints": [
-                    {
-                        "constraint_type": "range",
-                        "definition": {
-                            "min": "0"
-                        },
-                        "description": null
-                    }
-                ],
-                "default": null,
-                "description": null,
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::count",
-                "parameter_type": "number",
-                "value": "1"
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "If set, the contents of an SSL certificate authority file.",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::SSLCACertificate",
-                "parameter_type": "string",
-                "value": ""
-            },
-            {
-                "constraints": [],
-                "default": "false",
-                "description": "Set to true to enable package installation via Puppet",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::EnablePackageInstall",
-                "parameter_type": "boolean",
-                "value": "false"
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "Mount options for NFS mounts used by Cinder NFS backend. Effective when CinderEnableNfsBackend is true.\n",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::CinderNfsMountOptions",
-                "parameter_type": "string",
-                "value": ""
-            },
-            {
-                "constraints": [],
-                "default": "unset",
-                "description": "The password for the Heat service and db account, used by the Heat services.",
-                "hidden": true,
-                "label": null,
-                "name": "Controller-1::HeatPassword",
-                "parameter_type": "string",
-                "value": "e03ae34153f1d5c7ed61c8a1cf5cdea091b97609"
-            },
-            {
-                "constraints": [
-                    {
-                        "constraint_type": "range",
-                        "definition": {
-                            "min": "0"
-                        },
-                        "description": null
-                    }
-                ],
-                "default": null,
-                "description": null,
-                "hidden": null,
-                "label": null,
-                "name": "Swift-Storage-1::count",
-                "parameter_type": "number",
-                "value": "0"
-            },
-            {
-                "constraints": [],
                 "default": true,
-                "description": "Whether to enable Swift Storage on the Controller",
-                "hidden": null,
+                "value": true,
                 "label": null,
-                "name": "Controller-1::EnableSwiftStorage",
                 "parameter_type": "boolean",
-                "value": true
-            },
-            {
-                "constraints": [],
-                "default": 3,
-                "description": "How many replicas to use in the swift rings.",
                 "hidden": null,
-                "label": null,
-                "name": "Swift-Storage-1::Replicas",
-                "parameter_type": "number",
-                "value": 3
+                "constraints": [],
+                "name": "Controller-1::EnableLoadBalancer"
             },
             {
-                "constraints": [],
-                "default": "vxlan",
-                "description": "The tenant network type for Neutron, either gre or vxlan.",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::NeutronNetworkType",
-                "parameter_type": "string",
-                "value": "gre"
-            },
-            {
-                "constraints": [],
-                "default": "unset",
-                "description": "The password for the neutron service and db account, used by neutron agents.",
-                "hidden": true,
-                "label": null,
-                "name": "Controller-1::NeutronPassword",
-                "parameter_type": "string",
-                "value": "e35d984c3e035a889d9a8b361f8e87176e220761"
-            },
-            {
-                "constraints": [],
-                "default": [],
-                "description": null,
-                "hidden": null,
-                "label": null,
-                "name": "Swift-Storage-1::removal_policies",
-                "parameter_type": "json",
-                "value": []
-            },
-            {
-                "constraints": [],
-                "default": "unset",
-                "description": "The user password for SNMPd with readonly rights running on all Overcloud nodes",
-                "hidden": true,
-                "label": null,
-                "name": "Cinder-Storage-1::SnmpdReadonlyUserPassword",
-                "parameter_type": "string",
-                "value": "dd9dcedb826db03b001eddfc335349a2415924c7"
-            },
-            {
-                "constraints": [],
-                "default": "vxlan,vlan,flat,gre",
-                "description": "Comma-seperated list of network type driver entrypoints to be loaded.\n",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::NeutronTypeDrivers",
-                "parameter_type": "comma_delimited_list",
-                "value": "vxlan,vlan,flat,gre"
-            },
-            {
-                "constraints": [],
-                "default": "unset",
-                "description": "The password for the swift service account, used by the swift proxy services.",
-                "hidden": true,
-                "label": null,
-                "name": "Controller-1::SwiftPassword",
-                "parameter_type": "string",
-                "value": "5e401d7fe2924226a60710c90ce4b98b458d34a0"
-            },
-            {
-                "constraints": [],
-                "default": "ml2",
-                "description": "The core plugin for Neutron. The value should be the entrypoint to be loaded\nfrom neutron.core_plugins namespace.\n",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::NeutronCorePlugin",
-                "parameter_type": "string",
-                "value": "ml2"
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "The filepath of the file to use for logging messages from Glance.",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::GlanceLogFile",
-                "parameter_type": "string",
-                "value": ""
-            },
-            {
-                "constraints": [],
-                "default": "1:1000",
-                "description": "Comma-separated list of <vni_min>:<vni_max> tuples enumerating ranges\nof VXLAN VNI IDs that are available for tenant network allocation\n",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::NeutronVniRanges",
-                "parameter_type": "comma_delimited_list",
-                "value": "1:1000"
-            },
-            {
-                "constraints": [],
-                "default": "ro_snmp_user",
-                "description": "The user name for SNMPd with readonly rights running on all Overcloud nodes",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::SnmpdReadonlyUserName",
-                "parameter_type": "string",
-                "value": "ro_snmp_user"
-            },
-            {
-                "constraints": [],
-                "default": "1:1000",
                 "description": "Comma-separated list of <tun_min>:<tun_max> tuples enumerating ranges\nof GRE tunnel IDs that are available for tenant network allocation\n",
-                "hidden": null,
+                "default": "1:1000",
+                "value": "1:1000",
                 "label": null,
-                "name": "NeutronTunnelIdRanges",
                 "parameter_type": "comma_delimited_list",
-                "value": "1:1000"
-            },
-            {
-                "constraints": [],
-                "default": {},
-                "description": "Additional configuration to inject into the cluster. The JSON should have\nthe following structure:\n  {\"FILEKEY\":\n    {\"config\":\n      [{\"section\": \"SECTIONNAME\",\n        \"values\":\n          [{\"option\": \"OPTIONNAME\",\n            \"value\": \"VALUENAME\"\n           }\n          ]\n       }\n      ]\n    }\n  }\nFor instance:\n  {\"nova\":\n    {\"config\":\n      [{\"section\": \"default\",\n        \"values\":\n          [{\"option\": \"force_config_drive\",\n            \"value\": \"always\"\n           }\n          ]\n       },\n       {\"section\": \"cells\",\n        \"values\":\n          [{\"option\": \"driver\",\n            \"value\": \"nova.cells.rpc_driver.CellsRPCDriver\"\n           }\n          ]\n       }\n      ]\n    }\n  }\n",
                 "hidden": null,
-                "label": null,
-                "name": "Compute-1::ExtraConfig",
-                "parameter_type": "json",
-                "value": {}
+                "constraints": [],
+                "name": "Compute-1::NeutronTunnelIdRanges"
             },
             {
-                "constraints": [],
-                "default": false,
-                "description": "Whether to make Glance file backend a mount managed by Pacemaker. Effective when GlanceBackend is 'file'.\n",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::GlanceFilePcmkManage",
-                "parameter_type": "boolean",
-                "value": false
-            },
-            {
-                "constraints": [],
-                "default": "unset",
-                "description": "A random string to be used as a salt when hashing to determine mappings in the ring.",
-                "hidden": true,
-                "label": null,
-                "name": "Controller-1::SwiftHashSuffix",
-                "parameter_type": "string",
-                "value": "63ef2ba2dbd3482131d3cdd010b27178560d729a"
-            },
-            {
-                "constraints": [],
+                "description": "Setting to a previously unused value during stack-update will trigger package update on all nodes\n",
                 "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Swift-Storage-1::UpdateIdentifier"
+            },
+            {
                 "description": null,
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::NtpServer",
-                "parameter_type": "string",
-                "value": ""
-            },
-            {
-                "constraints": [],
-                "default": 1,
-                "description": "The minimum time (in hours) before a partition in a ring can be moved following a rebalance.",
-                "hidden": null,
-                "label": null,
-                "name": "Swift-Storage-1::MinPartHours",
-                "parameter_type": "number",
-                "value": 1
-            },
-            {
-                "constraints": [],
-                "default": "unset",
-                "description": "The password for the ceilometer service  and db account.",
-                "hidden": true,
-                "label": null,
-                "name": "Controller-1::CeilometerPassword",
-                "parameter_type": "string",
-                "value": "c27e160e8ca981f4046f3ca0cf8dd03be694ed68"
-            },
-            {
-                "constraints": [],
                 "default": "",
-                "description": "The Ceph admin client key. Can be created with ceph-authtool --gen-print-key.",
-                "hidden": null,
+                "value": "kvm",
                 "label": null,
-                "name": "CephAdminKey",
                 "parameter_type": "string",
-                "value": ""
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NovaComputeLibvirtType"
             },
             {
-                "constraints": [],
-                "default": 5000,
-                "description": "The size of the loopback file used by the cinder LVM driver.",
-                "hidden": null,
+                "description": "The password for the keystone admin account, used for monitoring, querying neutron etc.",
+                "default": "unset",
+                "value": "f2656cd234438ccf1acff6f4ceb614898f74ada7",
                 "label": null,
-                "name": "Cinder-Storage-1::CinderLVMLoopDeviceSize",
+                "parameter_type": "string",
+                "hidden": true,
+                "constraints": [],
+                "name": "Controller-1::AdminPassword"
+            },
+            {
+                "description": "The minimum time (in hours) before a partition in a ring can be moved following a rebalance.",
+                "default": 1,
+                "value": 1,
+                "label": null,
                 "parameter_type": "number",
-                "value": 5000
-            },
-            {
-                "constraints": [],
-                "default": "false",
-                "description": "Set to true to enable package installation via Puppet",
                 "hidden": null,
-                "label": null,
-                "name": "Controller-1::EnablePackageInstall",
-                "parameter_type": "boolean",
-                "value": "false"
+                "constraints": [],
+                "name": "Controller-1::SwiftMinPartHours"
             },
             {
+                "description": "Controller specific hiera configuration data to inject into the cluster.\n",
+                "default": {},
+                "value": {},
+                "label": null,
+                "parameter_type": "json",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::ControllerExtraConfig"
+            },
+            {
+                "description": "Set rabbit subscriber port, change this if using SSL",
+                "default": 5672,
+                "value": 5672,
+                "label": null,
+                "parameter_type": "number",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::RabbitClientPort"
+            },
+            {
+                "description": "The Ceph client key. Can be created with ceph-authtool --gen-print-key. Currently only used for external Ceph deployments to create the openstack user keyring.",
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "CephClientKey"
+            },
+            {
+                "description": null,
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Swift-Storage-1::NtpServer"
+            },
+            {
+                "description": "Name of an existing EC2 KeyPair to enable SSH access to the instances",
+                "default": "default",
+                "value": "default",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Swift-Storage-1::KeyName"
+            },
+            {
+                "description": "Mapping of service_name -> network name. Typically set via parameter_defaults in the resource registry.",
+                "default": {
+                    "NeutronApiNetwork": "internal_api",
+                    "SwiftProxyNetwork": "storage",
+                    "GlanceRegistryNetwork": "internal_api",
+                    "HeatApiNetwork": "internal_api",
+                    "NeutronTenantNetwork": "tenant",
+                    "NovaApiNetwork": "internal_api",
+                    "CeilometerApiNetwork": "internal_api",
+                    "CephStorageHostnameResolveNetwork": "storage",
+                    "SwiftMgmtNetwork": "storage_mgmt",
+                    "MemcachedNetwork": "internal_api",
+                    "RabbitMqNetwork": "internal_api",
+                    "ObjectStorageHostnameResolveNetwork": "internal_api",
+                    "KeystoneAdminApiNetwork": "ctlplane",
+                    "GlanceApiNetwork": "storage",
+                    "BlockStorageHostnameResolveNetwork": "internal_api",
+                    "NovaVncProxyNetwork": "internal_api",
+                    "CinderApiNetwork": "internal_api",
+                    "CephClusterNetwork": "storage_mgmt",
+                    "KeystonePublicApiNetwork": "internal_api",
+                    "MysqlNetwork": "internal_api",
+                    "RedisNetwork": "internal_api",
+                    "NovaMetadataNetwork": "internal_api",
+                    "ComputeHostnameResolveNetwork": "internal_api",
+                    "CinderIscsiNetwork": "storage",
+                    "MongoDbNetwork": "internal_api",
+                    "HorizonNetwork": "internal_api",
+                    "ControllerHostnameResolveNetwork": "internal_api",
+                    "CephPublicNetwork": "storage"
+                },
+                "value": {
+                    "NeutronApiNetwork": "internal_api",
+                    "SwiftProxyNetwork": "storage",
+                    "GlanceRegistryNetwork": "internal_api",
+                    "HeatApiNetwork": "internal_api",
+                    "NeutronTenantNetwork": "tenant",
+                    "NovaApiNetwork": "internal_api",
+                    "CeilometerApiNetwork": "internal_api",
+                    "CephStorageHostnameResolveNetwork": "storage",
+                    "SwiftMgmtNetwork": "storage_mgmt",
+                    "MemcachedNetwork": "internal_api",
+                    "RabbitMqNetwork": "internal_api",
+                    "ObjectStorageHostnameResolveNetwork": "internal_api",
+                    "KeystoneAdminApiNetwork": "ctlplane",
+                    "GlanceApiNetwork": "storage",
+                    "BlockStorageHostnameResolveNetwork": "internal_api",
+                    "NovaVncProxyNetwork": "internal_api",
+                    "CinderApiNetwork": "internal_api",
+                    "CephClusterNetwork": "storage_mgmt",
+                    "KeystonePublicApiNetwork": "internal_api",
+                    "MysqlNetwork": "internal_api",
+                    "RedisNetwork": "internal_api",
+                    "NovaMetadataNetwork": "internal_api",
+                    "ComputeHostnameResolveNetwork": "internal_api",
+                    "CinderIscsiNetwork": "storage",
+                    "MongoDbNetwork": "internal_api",
+                    "HorizonNetwork": "internal_api",
+                    "ControllerHostnameResolveNetwork": "internal_api",
+                    "CephPublicNetwork": "storage"
+                },
+                "label": null,
+                "parameter_type": "json",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::ServiceNetMap"
+            },
+            {
+                "description": "Allow automatic l3-agent failover",
+                "default": "True",
+                "value": "True",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronAllowL3AgentFailover"
+            },
+            {
+                "description": null,
+                "default": "libvirt.LibvirtDriver",
+                "value": "libvirt.LibvirtDriver",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NovaComputeDriver"
+            },
+            {
+                "description": "Flavor for block storage nodes to request when deploying.",
+                "default": null,
+                "value": "Flavor-1-x86_64-6144-40",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
                 "constraints": [
                     {
-                        "constraint_type": "range",
+                        "definition": "nova.flavor",
+                        "description": null,
+                        "constraint_type": "custom_constraint"
+                    }
+                ],
+                "name": "Cinder-Storage-1::Flavor"
+            },
+            {
+                "description": "Comma-separated list of <vni_min>:<vni_max> tuples enumerating ranges\nof VXLAN VNI IDs that are available for tenant network allocation\n",
+                "default": "1:1000",
+                "value": "1:1000",
+                "label": null,
+                "parameter_type": "comma_delimited_list",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronVniRanges"
+            },
+            {
+                "description": "Keystone key for signing tokens.",
+                "default": "",
+                "value": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDeiXTZ74B5JTxQ\n1NnIsmAjnW4fp6G7GGWywkV5KTCSQMaw3/V5GmnCaC4cHSLPbu5FhXIQ0N1wYqIF\nJ0ELWNQOjcHR9OoiJ8FNa6FDMWBvn5M6V1C70nn26pIkc4CG87ViXMcXs+TVq7TX\nLEZVID2ktkvWYtOBVOUG7JqNccG3HXhU42a+6B+quXFMsu3u2Vyi+JBsPp6M9HQx\nNB7/ZHyvOQEgiQZZKW8ssne8SKxfeae3FEaTmDshbFbtQysCHTEPmFvwcmHgwhxz\nP8VTAD9pfzASCrFP+wQ68HCSZK/4lzwroJyu0dnO+65O72FKbGZVpXrfW9LUKiTD\n0kqzO7RZAgMBAAECggEAeaaGvERS5ObYDA/vZeks6Qs8kg1fOhniLlBJDizYIntK\nopIrbKJlwiKVYkUDLIYlttd2PX8QLkmc7FhDFGLguXwAwjeybi1xXFND+qlZYGvJ\nXhExTxuGFNayQT7qudssArNZGrn6lFujJiVL5WkUiaAl4PJxULgJ4zkgW8Yd8W0j\nY+uK8IKMHVzIYsb3YrJXVlXR6ac9aCPglhrxuGVxpsb56fDJ1UOpcvwhZLu1aQl9\njHq77q9zo3NjG0WbRds+AnWf8cvRyaw/Ok8q4vAfqDNbxeo9CaTtYLfdY3XLCVSl\nXmOyRmQJwSh9YcfresXCoDQZQbEK4/EEj1TRwXYviQKBgQD8oJ6oOROXK9uhlmLH\n4U8Ak0J5ptYiaKdFNAXKuCftaRIliGofpibU6beDFhJ/I5IBLT3qNSKpI1ltvR/5\nzKL4sCf5fjVp2ch/3IvBbSuFzMVUhYtVFUG9mIMu5PCRguRNgM/BFtYAXYcPcD0R\nSFXa/4ttnOH8nDRc4N7/Ab99QwKBgQDhgf/W+Yzt6EIjWRTPXUJ! fxbPi5cFi L c9x\niy7CWsOypLZ6+n8543YV4HHe70LH1Pj3p/J0XkN6GvMCPGiZ5X/ousNUDx2LlqjU\nsT1CosTbgkP7sfR001c69gWhLUQ5rTkQvp2wsMqOwzqFyWhRRm854E7GuCX4p1GK\nqP1DY1dAMwKBgQDpEodOTNp2LlCD1GtuXcC1lydNdU86j7NDdauiTCUKNFY5qpG+\ngVxyMu7MUiDei8K4szTcUAmaYrKvPD20CciSCHPZC0fcUMFate96lW4CE9o7ELpr\n1SDB+2OMcExC87AOkTkbvCXUUHW7GKI+v632Tq4kgwk8NiFZT15thv9UYQKBgQCc\nDYImGftUh219WJ/1/+t2qzGYyrXQYzMyt8Zb6MOUVDeTUtXIEYgeC3vBcoEcGF1R\nxH8b2D+JuCyCV5trJE4nl1akTPF9L30V8rEZ89mWrcat3q/0SGwM+UNcDh8wapca\n503of+8sbB2Lh50Q4VUHEBpzmets7xyWf+sDPzOZ0QKBgA9qdIZ1Df2EDpVJYSti\nv0FVbaSsBjBVZIqII9gaMZjT3M001dTGT8By286gay336ckwxa6+PWjy466gBkL8\nhOMuggHSG6Ueo74SubNVlQdlfpOmPXmv5hYQ/b3eblkou0yK5JneXoiEetI4lrAF\naTcpOY+XBfRrGGvlm9EoDdta\n-----END PRIVATE KEY-----",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": true,
+                "constraints": [],
+                "name": "Controller-1::KeystoneSigningKey"
+            },
+            {
+                "description": null,
+                "default": "guest",
+                "value": "guest",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Cinder-Storage-1::RabbitUserName"
+            },
+            {
+                "description": null,
+                "default": null,
+                "value": "1",
+                "label": null,
+                "parameter_type": "number",
+                "hidden": null,
+                "constraints": [
+                    {
                         "definition": {
                             "min": "0"
                         },
-                        "description": null
+                        "description": null,
+                        "constraint_type": "range"
                     }
                 ],
-                "default": null,
-                "description": null,
-                "hidden": null,
-                "label": null,
-                "name": "Cinder-Storage-1::count",
-                "parameter_type": "number",
-                "value": "0"
+                "name": "Compute-1::count"
             },
             {
-                "constraints": [],
-                "default": "datacentre:br-ex",
-                "description": "The OVS logical->physical bridge mappings to use. See the Neutron documentation for details. Defaults to mapping br-ex - the external bridge on hosts - to a physical name 'datacentre' which can be used to create provider networks (and we use this for the default floating network) - if changing this either use different post-install network scripts or be sure to keep 'datacentre' as a mapping network name.\n",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::NeutronBridgeMappings",
-                "parameter_type": "string",
-                "value": "datacentre:br-ex"
-            },
-            {
-                "constraints": [],
-                "default": "br-ex",
-                "description": "Specifies the interface where the public-facing virtual ip will be assigned. This should be int_public when a VLAN is being used.\n",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::PublicVirtualInterface",
-                "parameter_type": "string",
-                "value": "br-ex"
-            },
-            {
-                "constraints": [
-                    {
-                        "constraint_type": "custom_constraint",
-                        "definition": "nova.flavor",
-                        "description": null
-                    }
-                ],
-                "default": null,
-                "description": "Flavor for the nova compute node",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::Flavor",
-                "parameter_type": "string",
-                "value": "Flavor-4-x86_64-6144-40"
-            },
-            {
-                "constraints": [],
-                "default": false,
-                "description": "Rabbit client subscriber parameter to specify an SSL connection to the RabbitMQ host.\n",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::RabbitClientUseSSL",
-                "parameter_type": "string",
-                "value": false
-            },
-            {
-                "constraints": [],
-                "default": 3,
-                "description": "How many replicas to use in the swift rings.",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::SwiftReplicas",
-                "parameter_type": "number",
-                "value": 3
-            },
-            {
-                "constraints": [],
-                "default": "%stackname%-compute-%index%",
-                "description": "Format for Compute node hostnames",
-                "hidden": null,
-                "label": null,
-                "name": "ComputeHostnameFormat",
-                "parameter_type": "string",
-                "value": "%stackname%-compute-%index%"
-            },
-            {
-                "constraints": [],
-                "default": "http",
-                "description": "Protocol to use when connecting to glance, set to https for SSL.",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::GlanceProtocol",
-                "parameter_type": "string",
-                "value": "http"
-            },
-            {
-                "constraints": [],
-                "default": "nic1",
-                "description": "A port to add to the NeutronPhysicalBridge.",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::NeutronPublicInterface",
-                "parameter_type": "string",
-                "value": "nic1"
-            },
-            {
-                "constraints": [],
-                "default": "vxlan",
-                "description": "The tunnel types for the Neutron tenant network. To specify multiple\nvalues, use a comma separated string, like so: 'gre,vxlan'\n",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::NeutronTunnelTypes",
-                "parameter_type": "string",
-                "value": "gre"
-            },
-            {
-                "constraints": [],
-                "default": "vxlan",
-                "description": "The tunnel types for the Neutron tenant network. To specify multiple\nvalues, use a comma separated string, like so: 'gre,vxlan'\n",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::NeutronTunnelTypes",
-                "parameter_type": "string",
-                "value": "gre"
-            },
-            {
-                "constraints": [],
-                "default": "unset",
-                "description": "The user password for SNMPd with readonly rights running on all Overcloud nodes",
-                "hidden": true,
-                "label": null,
-                "name": "Controller-1::SnmpdReadonlyUserPassword",
-                "parameter_type": "string",
-                "value": "dd9dcedb826db03b001eddfc335349a2415924c7"
-            },
-            {
-                "constraints": [],
-                "default": "noop",
-                "description": "Strategy to use for Glance notification queue",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::GlanceNotifierStrategy",
-                "parameter_type": "string",
-                "value": "noop"
-            },
-            {
-                "constraints": [],
+                "description": "If set, the contents of an SSL certificate authority file.",
                 "default": "",
-                "description": null,
-                "hidden": null,
+                "value": "",
                 "label": null,
-                "name": "Compute-1::NeutronPublicInterfaceRawDevice",
                 "parameter_type": "string",
-                "value": ""
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "Set to True to enable debugging on all services.",
                 "hidden": null,
-                "label": null,
-                "name": "Cinder-Storage-1::Debug",
-                "parameter_type": "string",
-                "value": ""
-            },
-            {
                 "constraints": [],
-                "default": "unset",
-                "description": "The password for the cinder service and db account, used by cinder-api.",
-                "hidden": true,
-                "label": null,
-                "name": "Controller-1::CinderPassword",
-                "parameter_type": "string",
-                "value": "ab4bf07dfcbfacf49bc5d443d4bd5b820b46c762"
+                "name": "Controller-1::SSLCACertificate"
             },
             {
-                "constraints": [],
-                "default": "guest",
-                "description": "The username for RabbitMQ",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::RabbitUserName",
-                "parameter_type": "string",
-                "value": "guest"
-            },
-            {
-                "constraints": [],
-                "default": false,
-                "description": "Whether to enable or not the NFS backend for Cinder",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::CinderEnableNfsBackend",
-                "parameter_type": "boolean",
-                "value": false
-            },
-            {
-                "constraints": [],
-                "default": "ro_snmp_user",
-                "description": "The user name for SNMPd with readonly rights running on all Overcloud nodes",
-                "hidden": null,
-                "label": null,
-                "name": "Cinder-Storage-1::SnmpdReadonlyUserName",
-                "parameter_type": "string",
-                "value": "ro_snmp_user"
-            },
-            {
-                "constraints": [],
-                "default": {
-                    "BlockStorageHostnameResolveNetwork": "internal_api",
-                    "CeilometerApiNetwork": "internal_api",
-                    "CephClusterNetwork": "storage_mgmt",
-                    "CephPublicNetwork": "storage",
-                    "CephStorageHostnameResolveNetwork": "storage",
-                    "CinderApiNetwork": "internal_api",
-                    "CinderIscsiNetwork": "storage",
-                    "ComputeHostnameResolveNetwork": "internal_api",
-                    "ControllerHostnameResolveNetwork": "internal_api",
-                    "GlanceApiNetwork": "storage",
-                    "GlanceRegistryNetwork": "internal_api",
-                    "HeatApiNetwork": "internal_api",
-                    "HorizonNetwork": "internal_api",
-                    "KeystoneAdminApiNetwork": "ctlplane",
-                    "KeystonePublicApiNetwork": "internal_api",
-                    "MemcachedNetwork": "internal_api",
-                    "MongoDbNetwork": "internal_api",
-                    "MysqlNetwork": "internal_api",
-                    "NeutronApiNetwork": "internal_api",
-                    "NeutronTenantNetwork": "tenant",
-                    "NovaApiNetwork": "internal_api",
-                    "NovaMetadataNetwork": "internal_api",
-                    "NovaVncProxyNetwork": "internal_api",
-                    "ObjectStorageHostnameResolveNetwork": "internal_api",
-                    "RabbitMqNetwork": "internal_api",
-                    "RedisNetwork": "internal_api",
-                    "SwiftMgmtNetwork": "storage_mgmt",
-                    "SwiftProxyNetwork": "storage"
-                },
-                "description": "Mapping of service_name -> network name. Typically set via parameter_defaults in the resource registry.",
-                "hidden": null,
-                "label": null,
-                "name": "Ceph-Storage-1::ServiceNetMap",
-                "parameter_type": "json",
-                "value": {
-                    "BlockStorageHostnameResolveNetwork": "internal_api",
-                    "CeilometerApiNetwork": "internal_api",
-                    "CephClusterNetwork": "storage_mgmt",
-                    "CephPublicNetwork": "storage",
-                    "CephStorageHostnameResolveNetwork": "storage",
-                    "CinderApiNetwork": "internal_api",
-                    "CinderIscsiNetwork": "storage",
-                    "ComputeHostnameResolveNetwork": "internal_api",
-                    "ControllerHostnameResolveNetwork": "internal_api",
-                    "GlanceApiNetwork": "storage",
-                    "GlanceRegistryNetwork": "internal_api",
-                    "HeatApiNetwork": "internal_api",
-                    "HorizonNetwork": "internal_api",
-                    "KeystoneAdminApiNetwork": "ctlplane",
-                    "KeystonePublicApiNetwork": "internal_api",
-                    "MemcachedNetwork": "internal_api",
-                    "MongoDbNetwork": "internal_api",
-                    "MysqlNetwork": "internal_api",
-                    "NeutronApiNetwork": "internal_api",
-                    "NeutronTenantNetwork": "tenant",
-                    "NovaApiNetwork": "internal_api",
-                    "NovaMetadataNetwork": "internal_api",
-                    "NovaVncProxyNetwork": "internal_api",
-                    "ObjectStorageHostnameResolveNetwork": "internal_api",
-                    "RabbitMqNetwork": "internal_api",
-                    "RedisNetwork": "internal_api",
-                    "SwiftMgmtNetwork": "storage_mgmt",
-                    "SwiftProxyNetwork": "storage"
-                }
-            },
-            {
-                "constraints": [],
-                "default": "%stackname%-blockstorage-%index%",
-                "description": "Format for BlockStorage node hostnames",
-                "hidden": null,
-                "label": null,
-                "name": "BlockStorageHostnameFormat",
-                "parameter_type": "string",
-                "value": "%stackname%-blockstorage-%index%"
-            },
-            {
-                "constraints": [],
-                "default": "unset",
-                "description": "Salt for the rabbit cookie, change this to force the randomly generated rabbit cookie to change.",
-                "hidden": null,
-                "label": null,
-                "name": "RabbitCookieSalt",
-                "parameter_type": "string",
-                "value": "unset"
-            },
-            {
-                "constraints": [],
-                "default": "guest",
-                "description": "The username for RabbitMQ",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::RabbitUserName",
-                "parameter_type": "string",
-                "value": "guest"
-            },
-            {
-                "constraints": [
-                    {
-                        "constraint_type": "custom_constraint",
-                        "definition": "glance.image",
-                        "description": null
-                    }
-                ],
-                "default": "overcloud-ceph-storage",
-                "description": null,
-                "hidden": null,
-                "label": null,
-                "name": "Ceph-Storage-1::Image",
-                "parameter_type": "string",
-                "value": "overcloud-full"
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "The Ceph cluster FSID. Must be a UUID.",
-                "hidden": null,
-                "label": null,
-                "name": "CephClusterFSID",
-                "parameter_type": "string",
-                "value": ""
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "Keystone certificate for verifying token validity.",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::KeystoneSigningCertificate",
-                "parameter_type": "string",
-                "value": "-----BEGIN CERTIFICATE-----\nMIIDJDCCAgygAwIBAgIBAjANBgkqhkiG9w0BAQUFADBTMQswCQYDVQQGEwJYWDEO\nMAwGA1UECBMFVW5zZXQxDjAMBgNVBAcTBVVuc2V0MQ4wDAYDVQQKEwVVbnNldDEU\nMBIGA1UEAxMLS2V5c3RvbmUgQ0EwHhcNMTUxMDEyMTk0MTEzWhcNMjUxMDA5MTk0\nMTEzWjBYMQswCQYDVQQGEwJYWDEOMAwGA1UECBMFVW5zZXQxDjAMBgNVBAcTBVVu\nc2V0MQ4wDAYDVQQKEwVVbnNldDEZMBcGA1UEAxMQS2V5c3RvbmUgU2lnbmluZzCC\nASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAPa47/9bpu7m8qneMtxmxbCN\nVD2Zp/PIWMy1e7FFZ2GUqHG4OBU8qQUTWOjf3rem42eASsLqb5wxR/P76TY6O/l6\nMIBvKBvGSUMrZ8fiVPv71iAD+h2BLXaxa8Lae1wuQCVFWXacO0X1MLDLjFO/a/P/\nBkML+r4AZrOSarX1xXnUc5S9Tzwk+MjVDSNHLUH4aSxI4P96rT30djOyW70ZUqdw\nd/sVKu72AIIBVZ/yN99HN0dlMh4bEQQeVdOXBCItGVOguMwqpaL+wXbmoi1nXwcR\n8a4sIIngh7Q/kAn26wAVNmcNJp+ezseTA71vShULuiWRNoLXPleKRRvkQWDJ3cMC\nAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAV/EaCEkV2NRr9MeXCY2h99KbVAd4fMQv\nVXmxwET/CXbQgDYImwUMkW9wafek8LaLRhOnqcMX64hZuamk/V5thVLTFHH+vN3g\nMIc1OW0xXSdW3jNvCzBYjXGhu0lTsuTL2ztqLb7Z9RyjILfLMF6uqvuYcjTTe94c\nDOVLkDkykAQD4Ue5dyyAc89x4esparM1WZxZ1cY7dOHMoQvr0SHqVkG/tVMGhczV\nzKqchYeVmS+irp0ObF6HU5R7k7VqlzIg12yPwPNKEucWIstj/RsL9WX0x8vqwgAf\nBONxAe4TRSEfZkYejkc3X82ruzvIv3LVauBTdvV2dWx7QrykSG+fvg==\n-----END CERTIFICATE-----"
-            },
-            {
-                "constraints": [
-                    {
-                        "constraint_type": "custom_constraint",
-                        "definition": "nova.keypair",
-                        "description": null
-                    }
-                ],
-                "default": "default",
-                "description": "Name of an existing EC2 KeyPair to enable SSH access to the instances",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::KeyName",
-                "parameter_type": "string",
-                "value": "default"
-            },
-            {
-                "constraints": [],
-                "default": 5672,
-                "description": "Set rabbit subscriber port, change this if using SSL",
-                "hidden": null,
-                "label": null,
-                "name": "Cinder-Storage-1::RabbitClientPort",
-                "parameter_type": "number",
-                "value": 5672
-            },
-            {
-                "constraints": [],
-                "default": "unset",
-                "description": "The user password for SNMPd with readonly rights running on all Overcloud nodes",
-                "hidden": true,
-                "label": null,
-                "name": "Compute-1::SnmpdReadonlyUserPassword",
-                "parameter_type": "string",
-                "value": "dd9dcedb826db03b001eddfc335349a2415924c7"
-            },
-            {
-                "constraints": [],
-                "default": "http",
-                "description": "Protocol to use when connecting to glance, set to https for SSL.",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::GlanceProtocol",
-                "parameter_type": "string",
-                "value": "http"
-            },
-            {
-                "constraints": [],
-                "default": "datacentre",
-                "description": "The Neutron ML2 and OpenVSwitch vlan mapping range to support. See the Neutron documentation for permitted values. Defaults to permitting any VLAN on the 'datacentre' physical network (See NeutronBridgeMappings).\n",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::NeutronNetworkVLANRanges",
-                "parameter_type": "comma_delimited_list",
-                "value": "datacentre"
-            },
-            {
-                "constraints": [],
-                "default": "dvr_snat",
-                "description": "Agent mode for the neutron-l3-agent on the controller hosts",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::NeutronAgentMode",
-                "parameter_type": "string",
-                "value": "dvr_snat"
-            },
-            {
-                "constraints": [],
-                "default": "datacentre",
-                "description": "If set, flat networks to configure in neutron plugins.\n",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::NeutronFlatNetworks",
-                "parameter_type": "string",
-                "value": "datacentre"
-            },
-            {
-                "constraints": [],
-                "default": "false",
                 "description": "Set to true to enable package installation via Puppet",
-                "hidden": null,
+                "default": "false",
+                "value": "false",
                 "label": null,
-                "name": "Cinder-Storage-1::EnablePackageInstall",
                 "parameter_type": "boolean",
-                "value": "false"
-            },
-            {
-                "constraints": [],
-                "default": "REBUILD_PRESERVE_EPHEMERAL",
-                "description": "What policy to use when reconstructing instances. REBUILD for rebuilds, REBUILD_PRESERVE_EPHEMERAL to preserve /mnt.",
                 "hidden": null,
-                "label": null,
-                "name": "Compute-1::ImageUpdatePolicy",
-                "parameter_type": "string",
-                "value": "REBUILD_PRESERVE_EPHEMERAL"
+                "constraints": [],
+                "name": "Compute-1::EnablePackageInstall"
             },
             {
-                "constraints": [],
-                "default": "images",
-                "description": "The name of the Ceph RBD pool to use/create for Glance images",
+                "description": "Mount options for NFS mounts used by Cinder NFS backend. Effective when CinderEnableNfsBackend is true.\n",
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
                 "hidden": null,
-                "label": null,
-                "name": "GlanceRbdPoolName",
-                "parameter_type": "string",
-                "value": "images"
+                "constraints": [],
+                "name": "Controller-1::CinderNfsMountOptions"
             },
             {
-                "constraints": [],
+                "description": "The password for the Heat service and db account, used by the Heat services.",
                 "default": "unset",
-                "description": "Shared secret to prevent spoofing",
-                "hidden": null,
+                "value": "687ffb4e5f6144f149503f86a7e965a9a8ae793d",
                 "label": null,
-                "name": "Controller-1::NeutronMetadataProxySharedSecret",
                 "parameter_type": "string",
-                "value": "unset"
-            },
-            {
+                "hidden": true,
                 "constraints": [],
-                "default": {},
-                "description": "A network mapped list of IPs to assign to Controllers in the following form: {\n  \"internal_api\": [\"a.b.c.d\", \"e.f.g.h\"],\n  ...\n}\n",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::ControllerIPs",
-                "parameter_type": "json",
-                "value": {}
+                "name": "Controller-1::HeatPassword"
             },
             {
+                "description": null,
+                "default": null,
+                "value": "0",
+                "label": null,
+                "parameter_type": "number",
+                "hidden": null,
                 "constraints": [
                     {
-                        "constraint_type": "custom_constraint",
-                        "definition": "nova.flavor",
-                        "description": null
+                        "definition": {
+                            "min": "0"
+                        },
+                        "description": null,
+                        "constraint_type": "range"
                     }
                 ],
-                "default": null,
-                "description": "Flavor for the Ceph Storage node.",
-                "hidden": null,
-                "label": null,
-                "name": "Ceph-Storage-1::Flavor",
-                "parameter_type": "string",
-                "value": "Flavor-4-x86_64-6144-40"
+                "name": "Swift-Storage-1::count"
             },
             {
+                "description": "Whether to enable Swift Storage on the Controller",
+                "default": true,
+                "value": true,
+                "label": null,
+                "parameter_type": "boolean",
+                "hidden": null,
                 "constraints": [],
-                "default": {
-                    "BlockStorageHostnameResolveNetwork": "internal_api",
-                    "CeilometerApiNetwork": "internal_api",
-                    "CephClusterNetwork": "storage_mgmt",
-                    "CephPublicNetwork": "storage",
-                    "CephStorageHostnameResolveNetwork": "storage",
-                    "CinderApiNetwork": "internal_api",
-                    "CinderIscsiNetwork": "storage",
-                    "ComputeHostnameResolveNetwork": "internal_api",
-                    "ControllerHostnameResolveNetwork": "internal_api",
-                    "GlanceApiNetwork": "storage",
-                    "GlanceRegistryNetwork": "internal_api",
-                    "HeatApiNetwork": "internal_api",
-                    "HorizonNetwork": "internal_api",
-                    "KeystoneAdminApiNetwork": "ctlplane",
-                    "KeystonePublicApiNetwork": "internal_api",
-                    "MemcachedNetwork": "internal_api",
-                    "MongoDbNetwork": "internal_api",
-                    "MysqlNetwork": "internal_api",
-                    "NeutronApiNetwork": "internal_api",
-                    "NeutronTenantNetwork": "tenant",
-                    "NovaApiNetwork": "internal_api",
-                    "NovaMetadataNetwork": "internal_api",
-                    "NovaVncProxyNetwork": "internal_api",
-                    "ObjectStorageHostnameResolveNetwork": "internal_api",
-                    "RabbitMqNetwork": "internal_api",
-                    "RedisNetwork": "internal_api",
-                    "SwiftMgmtNetwork": "storage_mgmt",
-                    "SwiftProxyNetwork": "storage"
-                },
-                "description": "Mapping of service_name -> network name. Typically set via parameter_defaults in the resource registry.",
-                "hidden": null,
-                "label": null,
-                "name": "Swift-Storage-1::ServiceNetMap",
-                "parameter_type": "json",
-                "value": {
-                    "BlockStorageHostnameResolveNetwork": "internal_api",
-                    "CeilometerApiNetwork": "internal_api",
-                    "CephClusterNetwork": "storage_mgmt",
-                    "CephPublicNetwork": "storage",
-                    "CephStorageHostnameResolveNetwork": "storage",
-                    "CinderApiNetwork": "internal_api",
-                    "CinderIscsiNetwork": "storage",
-                    "ComputeHostnameResolveNetwork": "internal_api",
-                    "ControllerHostnameResolveNetwork": "internal_api",
-                    "GlanceApiNetwork": "storage",
-                    "GlanceRegistryNetwork": "internal_api",
-                    "HeatApiNetwork": "internal_api",
-                    "HorizonNetwork": "internal_api",
-                    "KeystoneAdminApiNetwork": "ctlplane",
-                    "KeystonePublicApiNetwork": "internal_api",
-                    "MemcachedNetwork": "internal_api",
-                    "MongoDbNetwork": "internal_api",
-                    "MysqlNetwork": "internal_api",
-                    "NeutronApiNetwork": "internal_api",
-                    "NeutronTenantNetwork": "tenant",
-                    "NovaApiNetwork": "internal_api",
-                    "NovaMetadataNetwork": "internal_api",
-                    "NovaVncProxyNetwork": "internal_api",
-                    "ObjectStorageHostnameResolveNetwork": "internal_api",
-                    "RabbitMqNetwork": "internal_api",
-                    "RedisNetwork": "internal_api",
-                    "SwiftMgmtNetwork": "storage_mgmt",
-                    "SwiftProxyNetwork": "storage"
-                }
+                "name": "Controller-1::EnableSwiftStorage"
             },
             {
+                "description": "How many replicas to use in the swift rings.",
+                "default": 3,
+                "value": 3,
+                "label": null,
+                "parameter_type": "number",
+                "hidden": null,
+                "constraints": [],
+                "name": "Swift-Storage-1::Replicas"
+            },
+            {
+                "description": "The tenant network type for Neutron, either gre or vxlan.",
+                "default": "vxlan",
+                "value": "gre",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NeutronNetworkType"
+            },
+            {
+                "description": "The password for the neutron service and db account, used by neutron agents.",
+                "default": "unset",
+                "value": "d04c1925d87b3955940759b8003a75613b0f40ec",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": true,
+                "constraints": [],
+                "name": "Controller-1::NeutronPassword"
+            },
+            {
+                "description": null,
+                "default": [],
+                "value": [],
+                "label": null,
+                "parameter_type": "json",
+                "hidden": null,
+                "constraints": [],
+                "name": "Swift-Storage-1::removal_policies"
+            },
+            {
+                "description": "The user password for SNMPd with readonly rights running on all Overcloud nodes",
+                "default": "unset",
+                "value": "add36584cd0a3d2e26a8227520d9aeb65bc60f4c",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": true,
+                "constraints": [],
+                "name": "Cinder-Storage-1::SnmpdReadonlyUserPassword"
+            },
+            {
+                "description": "Comma-seperated list of network type driver entrypoints to be loaded.\n",
+                "default": "vxlan,vlan,flat,gre",
+                "value": "vxlan,vlan,flat,gre",
+                "label": null,
+                "parameter_type": "comma_delimited_list",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NeutronTypeDrivers"
+            },
+            {
+                "description": "The password for the swift service account, used by the swift proxy services.",
+                "default": "unset",
+                "value": "3b2bb5ba09e221c766b54991c0d8629b895b59dd",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": true,
+                "constraints": [],
+                "name": "Controller-1::SwiftPassword"
+            },
+            {
+                "description": "The core plugin for Neutron. The value should be the entrypoint to be loaded\nfrom neutron.core_plugins namespace.\n",
+                "default": "ml2",
+                "value": "ml2",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronCorePlugin"
+            },
+            {
+                "description": "The filepath of the file to use for logging messages from Glance.",
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::GlanceLogFile"
+            },
+            {
+                "description": "Comma-separated list of <vni_min>:<vni_max> tuples enumerating ranges\nof VXLAN VNI IDs that are available for tenant network allocation\n",
+                "default": "1:1000",
+                "value": "1:1000",
+                "label": null,
+                "parameter_type": "comma_delimited_list",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NeutronVniRanges"
+            },
+            {
+                "description": "The user name for SNMPd with readonly rights running on all Overcloud nodes",
+                "default": "ro_snmp_user",
+                "value": "ro_snmp_user",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::SnmpdReadonlyUserName"
+            },
+            {
+                "description": "Comma-separated list of <tun_min>:<tun_max> tuples enumerating ranges\nof GRE tunnel IDs that are available for tenant network allocation\n",
+                "default": "1:1000",
+                "value": "1:1000",
+                "label": null,
+                "parameter_type": "comma_delimited_list",
+                "hidden": null,
+                "constraints": [],
+                "name": "NeutronTunnelIdRanges"
+            },
+            {
+                "description": "Additional configuration to inject into the cluster. The JSON should have\nthe following structure:\n  {\"FILEKEY\":\n    {\"config\":\n      [{\"section\": \"SECTIONNAME\",\n        \"values\":\n          [{\"option\": \"OPTIONNAME\",\n            \"value\": \"VALUENAME\"\n           }\n          ]\n       }\n      ]\n    }\n  }\nFor instance:\n  {\"nova\":\n    {\"config\":\n      [{\"section\": \"default\",\n        \"values\":\n          [{\"option\": \"force_config_drive\",\n            \"value\": \"always\"\n           }\n          ]\n       },\n       {\"section\": \"cells\",\n        \"values\":\n          [{\"option\": \"driver\",\n            \"value\": \"nova.cells.rpc_driver.CellsRPCDriver\"\n           }\n          ]\n       }\n      ]\n    }\n  }\n",
+                "default": {},
+                "value": {},
+                "label": null,
+                "parameter_type": "json",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::ExtraConfig"
+            },
+            {
+                "description": "Whether to make Glance file backend a mount managed by Pacemaker. Effective when GlanceBackend is 'file'.\n",
+                "default": false,
+                "value": false,
+                "label": null,
+                "parameter_type": "boolean",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::GlanceFilePcmkManage"
+            },
+            {
+                "description": "A random string to be used as a salt when hashing to determine mappings in the ring.",
+                "default": "unset",
+                "value": "4ff509250cf4c7ebb0275f250191bca631132fd2",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": true,
+                "constraints": [],
+                "name": "Controller-1::SwiftHashSuffix"
+            },
+            {
+                "description": null,
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NtpServer"
+            },
+            {
+                "description": "The minimum time (in hours) before a partition in a ring can be moved following a rebalance.",
+                "default": 1,
+                "value": 1,
+                "label": null,
+                "parameter_type": "number",
+                "hidden": null,
+                "constraints": [],
+                "name": "Swift-Storage-1::MinPartHours"
+            },
+            {
+                "description": "The password for the ceilometer service  and db account.",
+                "default": "unset",
+                "value": "570ffde56025e3a855e7868e7b93c5d3b13fc898",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": true,
+                "constraints": [],
+                "name": "Controller-1::CeilometerPassword"
+            },
+            {
+                "description": "The Ceph admin client key. Can be created with ceph-authtool --gen-print-key.",
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "CephAdminKey"
+            },
+            {
+                "description": "The size of the loopback file used by the cinder LVM driver.",
+                "default": 5000,
+                "value": 5000,
+                "label": null,
+                "parameter_type": "number",
+                "hidden": null,
+                "constraints": [],
+                "name": "Cinder-Storage-1::CinderLVMLoopDeviceSize"
+            },
+            {
+                "description": "Set to true to enable package installation via Puppet",
+                "default": "false",
+                "value": "false",
+                "label": null,
+                "parameter_type": "boolean",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::EnablePackageInstall"
+            },
+            {
+                "description": null,
+                "default": null,
+                "value": "0",
+                "label": null,
+                "parameter_type": "number",
+                "hidden": null,
                 "constraints": [
                     {
-                        "constraint_type": "allowed_values",
+                        "definition": {
+                            "min": "0"
+                        },
+                        "description": null,
+                        "constraint_type": "range"
+                    }
+                ],
+                "name": "Cinder-Storage-1::count"
+            },
+            {
+                "description": "The OVS logical->physical bridge mappings to use. See the Neutron documentation for details. Defaults to mapping br-ex - the external bridge on hosts - to a physical name 'datacentre' which can be used to create provider networks (and we use this for the default floating network) - if changing this either use different post-install network scripts or be sure to keep 'datacentre' as a mapping network name.\n",
+                "default": "datacentre:br-ex",
+                "value": "datacentre:br-ex",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronBridgeMappings"
+            },
+            {
+                "description": "Specifies the interface where the public-facing virtual ip will be assigned. This should be int_public when a VLAN is being used.\n",
+                "default": "br-ex",
+                "value": "br-ex",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::PublicVirtualInterface"
+            },
+            {
+                "description": "Flavor for the nova compute node",
+                "default": null,
+                "value": "Flavor-1-x86_64-6144-40",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [
+                    {
+                        "definition": "nova.flavor",
+                        "description": null,
+                        "constraint_type": "custom_constraint"
+                    }
+                ],
+                "name": "Compute-1::Flavor"
+            },
+            {
+                "description": "Rabbit client subscriber parameter to specify an SSL connection to the RabbitMQ host.\n",
+                "default": false,
+                "value": false,
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::RabbitClientUseSSL"
+            },
+            {
+                "description": "How many replicas to use in the swift rings.",
+                "default": 3,
+                "value": 3,
+                "label": null,
+                "parameter_type": "number",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::SwiftReplicas"
+            },
+            {
+                "description": "Format for Compute node hostnames",
+                "default": "%stackname%-compute-%index%",
+                "value": "%stackname%-compute-%index%",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "ComputeHostnameFormat"
+            },
+            {
+                "description": "Protocol to use when connecting to glance, set to https for SSL.",
+                "default": "http",
+                "value": "http",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::GlanceProtocol"
+            },
+            {
+                "description": "A port to add to the NeutronPhysicalBridge.",
+                "default": "nic1",
+                "value": "nic1",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NeutronPublicInterface"
+            },
+            {
+                "description": "The tunnel types for the Neutron tenant network. To specify multiple\nvalues, use a comma separated string, like so: 'gre,vxlan'\n",
+                "default": "vxlan",
+                "value": "gre",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronTunnelTypes"
+            },
+            {
+                "description": "The tunnel types for the Neutron tenant network. To specify multiple\nvalues, use a comma separated string, like so: 'gre,vxlan'\n",
+                "default": "vxlan",
+                "value": "gre",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NeutronTunnelTypes"
+            },
+            {
+                "description": "The user password for SNMPd with readonly rights running on all Overcloud nodes",
+                "default": "unset",
+                "value": "add36584cd0a3d2e26a8227520d9aeb65bc60f4c",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": true,
+                "constraints": [],
+                "name": "Controller-1::SnmpdReadonlyUserPassword"
+            },
+            {
+                "description": "Strategy to use for Glance notification queue",
+                "default": "noop",
+                "value": "noop",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::GlanceNotifierStrategy"
+            },
+            {
+                "description": null,
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NeutronPublicInterfaceRawDevice"
+            },
+            {
+                "description": "Set to True to enable debugging on all services.",
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Cinder-Storage-1::Debug"
+            },
+            {
+                "description": "The password for the cinder service and db account, used by cinder-api.",
+                "default": "unset",
+                "value": "7fe089bf0688137071e98b1570921a1c2a1e5276",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": true,
+                "constraints": [],
+                "name": "Controller-1::CinderPassword"
+            },
+            {
+                "description": "The username for RabbitMQ",
+                "default": "guest",
+                "value": "guest",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::RabbitUserName"
+            },
+            {
+                "description": "Whether to enable or not the NFS backend for Cinder",
+                "default": false,
+                "value": false,
+                "label": null,
+                "parameter_type": "boolean",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::CinderEnableNfsBackend"
+            },
+            {
+                "description": "The user name for SNMPd with readonly rights running on all Overcloud nodes",
+                "default": "ro_snmp_user",
+                "value": "ro_snmp_user",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Cinder-Storage-1::SnmpdReadonlyUserName"
+            },
+            {
+                "description": "Mapping of service_name -> network name. Typically set via parameter_defaults in the resource registry.",
+                "default": {
+                    "NeutronApiNetwork": "internal_api",
+                    "SwiftProxyNetwork": "storage",
+                    "GlanceRegistryNetwork": "internal_api",
+                    "HeatApiNetwork": "internal_api",
+                    "NeutronTenantNetwork": "tenant",
+                    "NovaApiNetwork": "internal_api",
+                    "CeilometerApiNetwork": "internal_api",
+                    "CephStorageHostnameResolveNetwork": "storage",
+                    "SwiftMgmtNetwork": "storage_mgmt",
+                    "MemcachedNetwork": "internal_api",
+                    "RabbitMqNetwork": "internal_api",
+                    "ObjectStorageHostnameResolveNetwork": "internal_api",
+                    "KeystoneAdminApiNetwork": "ctlplane",
+                    "GlanceApiNetwork": "storage",
+                    "BlockStorageHostnameResolveNetwork": "internal_api",
+                    "NovaVncProxyNetwork": "internal_api",
+                    "CinderApiNetwork": "internal_api",
+                    "CephClusterNetwork": "storage_mgmt",
+                    "KeystonePublicApiNetwork": "internal_api",
+                    "MysqlNetwork": "internal_api",
+                    "RedisNetwork": "internal_api",
+                    "NovaMetadataNetwork": "internal_api",
+                    "ComputeHostnameResolveNetwork": "internal_api",
+                    "CinderIscsiNetwork": "storage",
+                    "MongoDbNetwork": "internal_api",
+                    "HorizonNetwork": "internal_api",
+                    "ControllerHostnameResolveNetwork": "internal_api",
+                    "CephPublicNetwork": "storage"
+                },
+                "value": {
+                    "NeutronApiNetwork": "internal_api",
+                    "SwiftProxyNetwork": "storage",
+                    "GlanceRegistryNetwork": "internal_api",
+                    "HeatApiNetwork": "internal_api",
+                    "NeutronTenantNetwork": "tenant",
+                    "NovaApiNetwork": "internal_api",
+                    "CeilometerApiNetwork": "internal_api",
+                    "CephStorageHostnameResolveNetwork": "storage",
+                    "SwiftMgmtNetwork": "storage_mgmt",
+                    "MemcachedNetwork": "internal_api",
+                    "RabbitMqNetwork": "internal_api",
+                    "ObjectStorageHostnameResolveNetwork": "internal_api",
+                    "KeystoneAdminApiNetwork": "ctlplane",
+                    "GlanceApiNetwork": "storage",
+                    "BlockStorageHostnameResolveNetwork": "internal_api",
+                    "NovaVncProxyNetwork": "internal_api",
+                    "CinderApiNetwork": "internal_api",
+                    "CephClusterNetwork": "storage_mgmt",
+                    "KeystonePublicApiNetwork": "internal_api",
+                    "MysqlNetwork": "internal_api",
+                    "RedisNetwork": "internal_api",
+                    "NovaMetadataNetwork": "internal_api",
+                    "ComputeHostnameResolveNetwork": "internal_api",
+                    "CinderIscsiNetwork": "storage",
+                    "MongoDbNetwork": "internal_api",
+                    "HorizonNetwork": "internal_api",
+                    "ControllerHostnameResolveNetwork": "internal_api",
+                    "CephPublicNetwork": "storage"
+                },
+                "label": null,
+                "parameter_type": "json",
+                "hidden": null,
+                "constraints": [],
+                "name": "Ceph-Storage-1::ServiceNetMap"
+            },
+            {
+                "description": "Format for BlockStorage node hostnames",
+                "default": "%stackname%-blockstorage-%index%",
+                "value": "%stackname%-blockstorage-%index%",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "BlockStorageHostnameFormat"
+            },
+            {
+                "description": "Salt for the rabbit cookie, change this to force the randomly generated rabbit cookie to change.",
+                "default": "unset",
+                "value": "unset",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "RabbitCookieSalt"
+            },
+            {
+                "description": "The username for RabbitMQ",
+                "default": "guest",
+                "value": "guest",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::RabbitUserName"
+            },
+            {
+                "description": null,
+                "default": "overcloud-ceph-storage",
+                "value": "overcloud-full",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [
+                    {
+                        "definition": "glance.image",
+                        "description": null,
+                        "constraint_type": "custom_constraint"
+                    }
+                ],
+                "name": "Ceph-Storage-1::Image"
+            },
+            {
+                "description": "The Ceph cluster FSID. Must be a UUID.",
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "CephClusterFSID"
+            },
+            {
+                "description": "Keystone certificate for verifying token validity.",
+                "default": "",
+                "value": "-----BEGIN CERTIFICATE-----\nMIIDJDCCAgygAwIBAgIBAjANBgkqhkiG9w0BAQUFADBTMQswCQYDVQQGEwJYWDEO\nMAwGA1UECBMFVW5zZXQxDjAMBgNVBAcTBVVuc2V0MQ4wDAYDVQQKEwVVbnNldDEU\nMBIGA1UEAxMLS2V5c3RvbmUgQ0EwHhcNMTUxMTI1MTMyMzUxWhcNMjUxMTIyMTMy\nMzUxWjBYMQswCQYDVQQGEwJYWDEOMAwGA1UECBMFVW5zZXQxDjAMBgNVBAcTBVVu\nc2V0MQ4wDAYDVQQKEwVVbnNldDEZMBcGA1UEAxMQS2V5c3RvbmUgU2lnbmluZzCC\nASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAN6JdNnvgHklPFDU2ciyYCOd\nbh+nobsYZbLCRXkpMJJAxrDf9XkaacJoLhwdIs9u7kWFchDQ3XBiogUnQQtY1A6N\nwdH06iInwU1roUMxYG+fkzpXULvSefbqkiRzgIbztWJcxxez5NWrtNcsRlUgPaS2\nS9Zi04FU5Qbsmo1xwbcdeFTjZr7oH6q5cUyy7e7ZXKL4kGw+noz0dDE0Hv9kfK85\nASCJBlkpbyyyd7xIrF95p7cURpOYOyFsVu1DKwIdMQ+YW/ByYeDCHHM/xVMAP2l/\nMBIKsU/7BDrwcJJkr/iXPCugnK7R2c77rk7vYUpsZlWlet9b0tQqJMPSSrM7tFkC\nAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAhdGbG79SEC5unbCb6HdfzP0XRyXJKpR/\n4ziRMSewm0IoF8jPboOJDZpzhVF15HwGUS9BdP59ZKD6rmgZ4Krr4Rjd+jqjZ38A\nx6Ekb9smtVP8Ke/UNoGc2205vLmkTuj56nmhZSwbHZBSKBc3J0DgBKlSjX7GRQZj\nuEGYuPRbN0ITVNQK74OvUgVk+MY5LODTjWsOiaaX+8z! bHxyRFphd r iKp/5u5T/A/\n5cHzZdkrnW8aoHMNpln1tezPKf5n6+TZmgErUQARyc3zGIf/ccE+JSWJRmOr/JgO\nmINIEZ/BLqs07R18aBtAkzAFKXq4blq8/E9YAlBUEKIATQBCNvi0uA==\n-----END CERTIFICATE-----",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::KeystoneSigningCertificate"
+            },
+            {
+                "description": "Name of an existing EC2 KeyPair to enable SSH access to the instances",
+                "default": "default",
+                "value": "default",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [
+                    {
+                        "definition": "nova.keypair",
+                        "description": null,
+                        "constraint_type": "custom_constraint"
+                    }
+                ],
+                "name": "Compute-1::KeyName"
+            },
+            {
+                "description": "Set rabbit subscriber port, change this if using SSL",
+                "default": 5672,
+                "value": 5672,
+                "label": null,
+                "parameter_type": "number",
+                "hidden": null,
+                "constraints": [],
+                "name": "Cinder-Storage-1::RabbitClientPort"
+            },
+            {
+                "description": "The user password for SNMPd with readonly rights running on all Overcloud nodes",
+                "default": "unset",
+                "value": "add36584cd0a3d2e26a8227520d9aeb65bc60f4c",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": true,
+                "constraints": [],
+                "name": "Compute-1::SnmpdReadonlyUserPassword"
+            },
+            {
+                "description": "Protocol to use when connecting to glance, set to https for SSL.",
+                "default": "http",
+                "value": "http",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::GlanceProtocol"
+            },
+            {
+                "description": "The Neutron ML2 and OpenVSwitch vlan mapping range to support. See the Neutron documentation for permitted values. Defaults to permitting any VLAN on the 'datacentre' physical network (See NeutronBridgeMappings).\n",
+                "default": "datacentre",
+                "value": "datacentre",
+                "label": null,
+                "parameter_type": "comma_delimited_list",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NeutronNetworkVLANRanges"
+            },
+            {
+                "description": "Agent mode for the neutron-l3-agent on the controller hosts",
+                "default": "dvr_snat",
+                "value": "dvr_snat",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronAgentMode"
+            },
+            {
+                "description": "If set, flat networks to configure in neutron plugins.\n",
+                "default": "datacentre",
+                "value": "datacentre",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NeutronFlatNetworks"
+            },
+            {
+                "description": "Set to true to enable package installation via Puppet",
+                "default": "false",
+                "value": "false",
+                "label": null,
+                "parameter_type": "boolean",
+                "hidden": null,
+                "constraints": [],
+                "name": "Cinder-Storage-1::EnablePackageInstall"
+            },
+            {
+                "description": "What policy to use when reconstructing instances. REBUILD for rebuilds, REBUILD_PRESERVE_EPHEMERAL to preserve /mnt.",
+                "default": "REBUILD_PRESERVE_EPHEMERAL",
+                "value": "REBUILD_PRESERVE_EPHEMERAL",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::ImageUpdatePolicy"
+            },
+            {
+                "description": "The name of the Ceph RBD pool to use/create for Glance images",
+                "default": "images",
+                "value": "images",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "GlanceRbdPoolName"
+            },
+            {
+                "description": "Shared secret to prevent spoofing",
+                "default": "unset",
+                "value": "unset",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronMetadataProxySharedSecret"
+            },
+            {
+                "description": "A network mapped list of IPs to assign to Controllers in the following form: {\n  \"internal_api\": [\"a.b.c.d\", \"e.f.g.h\"],\n  ...\n}\n",
+                "default": {},
+                "value": {},
+                "label": null,
+                "parameter_type": "json",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::ControllerIPs"
+            },
+            {
+                "description": "Flavor for the Ceph Storage node.",
+                "default": null,
+                "value": "Flavor-1-x86_64-6144-40",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [
+                    {
+                        "definition": "nova.flavor",
+                        "description": null,
+                        "constraint_type": "custom_constraint"
+                    }
+                ],
+                "name": "Ceph-Storage-1::Flavor"
+            },
+            {
+                "description": "Mapping of service_name -> network name. Typically set via parameter_defaults in the resource registry.",
+                "default": {
+                    "NeutronApiNetwork": "internal_api",
+                    "SwiftProxyNetwork": "storage",
+                    "GlanceRegistryNetwork": "internal_api",
+                    "HeatApiNetwork": "internal_api",
+                    "NeutronTenantNetwork": "tenant",
+                    "NovaApiNetwork": "internal_api",
+                    "CeilometerApiNetwork": "internal_api",
+                    "CephStorageHostnameResolveNetwork": "storage",
+                    "SwiftMgmtNetwork": "storage_mgmt",
+                    "MemcachedNetwork": "internal_api",
+                    "RabbitMqNetwork": "internal_api",
+                    "ObjectStorageHostnameResolveNetwork": "internal_api",
+                    "KeystoneAdminApiNetwork": "ctlplane",
+                    "GlanceApiNetwork": "storage",
+                    "BlockStorageHostnameResolveNetwork": "internal_api",
+                    "NovaVncProxyNetwork": "internal_api",
+                    "CinderApiNetwork": "internal_api",
+                    "CephClusterNetwork": "storage_mgmt",
+                    "KeystonePublicApiNetwork": "internal_api",
+                    "MysqlNetwork": "internal_api",
+                    "RedisNetwork": "internal_api",
+                    "NovaMetadataNetwork": "internal_api",
+                    "ComputeHostnameResolveNetwork": "internal_api",
+                    "CinderIscsiNetwork": "storage",
+                    "MongoDbNetwork": "internal_api",
+                    "HorizonNetwork": "internal_api",
+                    "ControllerHostnameResolveNetwork": "internal_api",
+                    "CephPublicNetwork": "storage"
+                },
+                "value": {
+                    "NeutronApiNetwork": "internal_api",
+                    "SwiftProxyNetwork": "storage",
+                    "GlanceRegistryNetwork": "internal_api",
+                    "HeatApiNetwork": "internal_api",
+                    "NeutronTenantNetwork": "tenant",
+                    "NovaApiNetwork": "internal_api",
+                    "CeilometerApiNetwork": "internal_api",
+                    "CephStorageHostnameResolveNetwork": "storage",
+                    "SwiftMgmtNetwork": "storage_mgmt",
+                    "MemcachedNetwork": "internal_api",
+                    "RabbitMqNetwork": "internal_api",
+                    "ObjectStorageHostnameResolveNetwork": "internal_api",
+                    "KeystoneAdminApiNetwork": "ctlplane",
+                    "GlanceApiNetwork": "storage",
+                    "BlockStorageHostnameResolveNetwork": "internal_api",
+                    "NovaVncProxyNetwork": "internal_api",
+                    "CinderApiNetwork": "internal_api",
+                    "CephClusterNetwork": "storage_mgmt",
+                    "KeystonePublicApiNetwork": "internal_api",
+                    "MysqlNetwork": "internal_api",
+                    "RedisNetwork": "internal_api",
+                    "NovaMetadataNetwork": "internal_api",
+                    "ComputeHostnameResolveNetwork": "internal_api",
+                    "CinderIscsiNetwork": "storage",
+                    "MongoDbNetwork": "internal_api",
+                    "HorizonNetwork": "internal_api",
+                    "ControllerHostnameResolveNetwork": "internal_api",
+                    "CephPublicNetwork": "storage"
+                },
+                "label": null,
+                "parameter_type": "json",
+                "hidden": null,
+                "constraints": [],
+                "name": "Swift-Storage-1::ServiceNetMap"
+            },
+            {
+                "description": "The Keystone notification format",
+                "default": "basic",
+                "value": "basic",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [
+                    {
                         "definition": [
                             "basic",
                             "cadf"
                         ],
-                        "description": null
+                        "description": null,
+                        "constraint_type": "allowed_values"
                     }
                 ],
-                "default": "basic",
-                "description": "The Keystone notification format",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::KeystoneNotificationFormat",
-                "parameter_type": "string",
-                "value": "basic"
+                "name": "Controller-1::KeystoneNotificationFormat"
             },
             {
-                "constraints": [],
-                "default": "",
                 "description": null,
-                "hidden": null,
+                "default": "",
+                "value": "",
                 "label": null,
-                "name": "Cinder-Storage-1::NtpServer",
                 "parameter_type": "string",
-                "value": ""
+                "hidden": null,
+                "constraints": [],
+                "name": "Cinder-Storage-1::NtpServer"
             },
             {
-                "constraints": [],
-                "default": [],
                 "description": "Control the IP allocation for the PublicVirtualInterface port. E.g. [{'ip_address':'1.2.3.4'}]\n",
-                "hidden": null,
+                "default": [],
+                "value": [],
                 "label": null,
-                "name": "PublicVirtualFixedIPs",
                 "parameter_type": "json",
-                "value": []
+                "hidden": null,
+                "constraints": [],
+                "name": "PublicVirtualFixedIPs"
             },
             {
-                "constraints": [],
-                "default": {
-                    "BlockStorageHostnameResolveNetwork": "internal_api",
-                    "CeilometerApiNetwork": "internal_api",
-                    "CephClusterNetwork": "storage_mgmt",
-                    "CephPublicNetwork": "storage",
-                    "CephStorageHostnameResolveNetwork": "storage",
-                    "CinderApiNetwork": "internal_api",
-                    "CinderIscsiNetwork": "storage",
-                    "ComputeHostnameResolveNetwork": "internal_api",
-                    "ControllerHostnameResolveNetwork": "internal_api",
-                    "GlanceApiNetwork": "storage",
-                    "GlanceRegistryNetwork": "internal_api",
-                    "HeatApiNetwork": "internal_api",
-                    "HorizonNetwork": "internal_api",
-                    "KeystoneAdminApiNetwork": "ctlplane",
-                    "KeystonePublicApiNetwork": "internal_api",
-                    "MemcachedNetwork": "internal_api",
-                    "MongoDbNetwork": "internal_api",
-                    "MysqlNetwork": "internal_api",
-                    "NeutronApiNetwork": "internal_api",
-                    "NeutronTenantNetwork": "tenant",
-                    "NovaApiNetwork": "internal_api",
-                    "NovaMetadataNetwork": "internal_api",
-                    "NovaVncProxyNetwork": "internal_api",
-                    "ObjectStorageHostnameResolveNetwork": "internal_api",
-                    "RabbitMqNetwork": "internal_api",
-                    "RedisNetwork": "internal_api",
-                    "SwiftMgmtNetwork": "storage_mgmt",
-                    "SwiftProxyNetwork": "storage"
-                },
                 "description": "Mapping of service_name -> network name. Typically set via parameter_defaults in the resource registry.",
-                "hidden": null,
-                "label": null,
-                "name": "ServiceNetMap",
-                "parameter_type": "json",
-                "value": {
-                    "BlockStorageHostnameResolveNetwork": "internal_api",
-                    "CeilometerApiNetwork": "internal_api",
-                    "CephClusterNetwork": "storage_mgmt",
-                    "CephPublicNetwork": "storage",
-                    "CephStorageHostnameResolveNetwork": "storage",
-                    "CinderApiNetwork": "internal_api",
-                    "CinderIscsiNetwork": "storage",
-                    "ComputeHostnameResolveNetwork": "internal_api",
-                    "ControllerHostnameResolveNetwork": "internal_api",
-                    "GlanceApiNetwork": "storage",
+                "default": {
+                    "NeutronApiNetwork": "internal_api",
+                    "SwiftProxyNetwork": "storage",
                     "GlanceRegistryNetwork": "internal_api",
                     "HeatApiNetwork": "internal_api",
-                    "HorizonNetwork": "internal_api",
-                    "KeystoneAdminApiNetwork": "ctlplane",
-                    "KeystonePublicApiNetwork": "internal_api",
-                    "MemcachedNetwork": "internal_api",
-                    "MongoDbNetwork": "internal_api",
-                    "MysqlNetwork": "internal_api",
-                    "NeutronApiNetwork": "internal_api",
                     "NeutronTenantNetwork": "tenant",
                     "NovaApiNetwork": "internal_api",
-                    "NovaMetadataNetwork": "internal_api",
-                    "NovaVncProxyNetwork": "internal_api",
-                    "ObjectStorageHostnameResolveNetwork": "internal_api",
-                    "RabbitMqNetwork": "internal_api",
-                    "RedisNetwork": "internal_api",
+                    "CeilometerApiNetwork": "internal_api",
+                    "CephStorageHostnameResolveNetwork": "storage",
                     "SwiftMgmtNetwork": "storage_mgmt",
-                    "SwiftProxyNetwork": "storage"
-                }
+                    "MemcachedNetwork": "internal_api",
+                    "RabbitMqNetwork": "internal_api",
+                    "ObjectStorageHostnameResolveNetwork": "internal_api",
+                    "KeystoneAdminApiNetwork": "ctlplane",
+                    "GlanceApiNetwork": "storage",
+                    "BlockStorageHostnameResolveNetwork": "internal_api",
+                    "NovaVncProxyNetwork": "internal_api",
+                    "CinderApiNetwork": "internal_api",
+                    "CephClusterNetwork": "storage_mgmt",
+                    "KeystonePublicApiNetwork": "internal_api",
+                    "MysqlNetwork": "internal_api",
+                    "RedisNetwork": "internal_api",
+                    "NovaMetadataNetwork": "internal_api",
+                    "ComputeHostnameResolveNetwork": "internal_api",
+                    "CinderIscsiNetwork": "storage",
+                    "MongoDbNetwork": "internal_api",
+                    "HorizonNetwork": "internal_api",
+                    "ControllerHostnameResolveNetwork": "internal_api",
+                    "CephPublicNetwork": "storage"
+                },
+                "value": {
+                    "NeutronApiNetwork": "internal_api",
+                    "SwiftProxyNetwork": "storage",
+                    "GlanceRegistryNetwork": "internal_api",
+                    "HeatApiNetwork": "internal_api",
+                    "NeutronTenantNetwork": "tenant",
+                    "NovaApiNetwork": "internal_api",
+                    "CeilometerApiNetwork": "internal_api",
+                    "CephStorageHostnameResolveNetwork": "storage",
+                    "SwiftMgmtNetwork": "storage_mgmt",
+                    "MemcachedNetwork": "internal_api",
+                    "RabbitMqNetwork": "internal_api",
+                    "ObjectStorageHostnameResolveNetwork": "internal_api",
+                    "KeystoneAdminApiNetwork": "ctlplane",
+                    "GlanceApiNetwork": "storage",
+                    "BlockStorageHostnameResolveNetwork": "internal_api",
+                    "NovaVncProxyNetwork": "internal_api",
+                    "CinderApiNetwork": "internal_api",
+                    "CephClusterNetwork": "storage_mgmt",
+                    "KeystonePublicApiNetwork": "internal_api",
+                    "MysqlNetwork": "internal_api",
+                    "RedisNetwork": "internal_api",
+                    "NovaMetadataNetwork": "internal_api",
+                    "ComputeHostnameResolveNetwork": "internal_api",
+                    "CinderIscsiNetwork": "storage",
+                    "MongoDbNetwork": "internal_api",
+                    "HorizonNetwork": "internal_api",
+                    "ControllerHostnameResolveNetwork": "internal_api",
+                    "CephPublicNetwork": "storage"
+                },
+                "label": null,
+                "parameter_type": "json",
+                "hidden": null,
+                "constraints": [],
+                "name": "ServiceNetMap"
             },
             {
-                "constraints": [],
-                "default": "True",
                 "description": "Allow automatic l3-agent failover",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::NeutronAllowL3AgentFailover",
-                "parameter_type": "string",
-                "value": "True"
-            },
-            {
-                "constraints": [],
-                "default": "1:1000",
-                "description": "Comma-separated list of <vni_min>:<vni_max> tuples enumerating ranges\nof VXLAN VNI IDs that are available for tenant network allocation\n",
-                "hidden": null,
-                "label": null,
-                "name": "NeutronVniRanges",
-                "parameter_type": "comma_delimited_list",
-                "value": "1:1000"
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "Set to True to enable debugging on all services.",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::Debug",
-                "parameter_type": "string",
-                "value": ""
-            },
-            {
-                "constraints": [],
-                "default": "openstack",
-                "description": "The Ceph user to use with OpenStack clients.",
-                "hidden": null,
-                "label": null,
-                "name": "CephClientUserName",
-                "parameter_type": "string",
-                "value": "openstack"
-            },
-            {
-                "constraints": [],
-                "default": "REBUILD_PRESERVE_EPHEMERAL",
-                "description": "What policy to use when reconstructing instances. REBUILD for rebuilds, REBUILD_PRESERVE_EPHEMERAL to preserve /mnt.",
-                "hidden": null,
-                "label": null,
-                "name": "Ceph-Storage-1::ImageUpdatePolicy",
-                "parameter_type": "string",
-                "value": "REBUILD_PRESERVE_EPHEMERAL"
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "Setting to a previously unused value during stack-update will trigger package update on all nodes\n",
-                "hidden": null,
-                "label": null,
-                "name": "Ceph-Storage-1::UpdateIdentifier",
-                "parameter_type": "string",
-                "value": ""
-            },
-            {
-                "constraints": [],
                 "default": "True",
-                "description": null,
-                "hidden": null,
+                "value": "True",
                 "label": null,
-                "name": "Compute-1::NeutronEnableTunnelling",
                 "parameter_type": "string",
-                "value": "True"
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NeutronAllowL3AgentFailover"
             },
             {
-                "constraints": [],
-                "default": "volumes",
-                "description": "The name of the Ceph RBD pool to use/create for Cinder volumes",
-                "hidden": null,
+                "description": "Comma-separated list of <vni_min>:<vni_max> tuples enumerating ranges\nof VXLAN VNI IDs that are available for tenant network allocation\n",
+                "default": "1:1000",
+                "value": "1:1000",
                 "label": null,
-                "name": "CinderRbdPoolName",
-                "parameter_type": "string",
-                "value": "volumes"
+                "parameter_type": "comma_delimited_list",
+                "hidden": null,
+                "constraints": [],
+                "name": "NeutronVniRanges"
             },
             {
-                "constraints": [],
+                "description": "Set to True to enable debugging on all services.",
                 "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::Debug"
+            },
+            {
+                "description": "The Ceph user to use with OpenStack clients.",
+                "default": "openstack",
+                "value": "openstack",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "CephClientUserName"
+            },
+            {
+                "description": "What policy to use when reconstructing instances. REBUILD for rebuilds, REBUILD_PRESERVE_EPHEMERAL to preserve /mnt.",
+                "default": "REBUILD_PRESERVE_EPHEMERAL",
+                "value": "REBUILD_PRESERVE_EPHEMERAL",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Ceph-Storage-1::ImageUpdatePolicy"
+            },
+            {
                 "description": "Setting to a previously unused value during stack-update will trigger package update on all nodes\n",
-                "hidden": null,
+                "default": "",
+                "value": "",
                 "label": null,
-                "name": "Cinder-Storage-1::UpdateIdentifier",
                 "parameter_type": "string",
-                "value": ""
+                "hidden": null,
+                "constraints": [],
+                "name": "Ceph-Storage-1::UpdateIdentifier"
             },
             {
+                "description": null,
+                "default": "True",
+                "value": "True",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
                 "constraints": [],
-                "default": "nfs",
+                "name": "Compute-1::NeutronEnableTunnelling"
+            },
+            {
+                "description": "The name of the Ceph RBD pool to use/create for Cinder volumes",
+                "default": "volumes",
+                "value": "volumes",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "CinderRbdPoolName"
+            },
+            {
+                "description": "Setting to a previously unused value during stack-update will trigger package update on all nodes\n",
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Cinder-Storage-1::UpdateIdentifier"
+            },
+            {
                 "description": "Filesystem type for Pacemaker mount used as Glance storage. Effective when GlanceFilePcmkManage is true.\n",
-                "hidden": null,
+                "default": "nfs",
+                "value": "nfs",
                 "label": null,
-                "name": "Controller-1::GlanceFilePcmkFstype",
                 "parameter_type": "string",
-                "value": "nfs"
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::GlanceFilePcmkFstype"
             },
             {
-                "constraints": [],
+                "description": "Comma-separated list of Oslo notification drivers used by Keystone",
                 "default": [
                     "messaging"
                 ],
-                "description": "Comma-separated list of Oslo notification drivers used by Keystone",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::KeystoneNotificationDriver",
-                "parameter_type": "comma_delimited_list",
                 "value": [
                     "messaging"
-                ]
-            },
-            {
-                "constraints": [],
-                "default": "mongodb",
-                "description": "The ceilometer backend type.",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::CeilometerBackend",
-                "parameter_type": "string",
-                "value": "mongodb"
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "List of externally managed Ceph Mon Host IPs. Only used for external Ceph deployments.",
-                "hidden": null,
-                "label": null,
-                "name": "CephExternalMonHost",
-                "parameter_type": "string",
-                "value": ""
-            },
-            {
-                "constraints": [],
-                "default": {},
-                "description": "Additional configuration to inject into the cluster. The JSON should have\nthe following structure:\n  {\"FILEKEY\":\n    {\"config\":\n      [{\"section\": \"SECTIONNAME\",\n        \"values\":\n          [{\"option\": \"OPTIONNAME\",\n            \"value\": \"VALUENAME\"\n           }\n          ]\n       }\n      ]\n    }\n  }\nFor instance:\n  {\"nova\":\n    {\"config\":\n      [{\"section\": \"default\",\n        \"values\":\n          [{\"option\": \"force_config_drive\",\n            \"value\": \"always\"\n           }\n          ]\n       },\n       {\"section\": \"cells\",\n        \"values\":\n          [{\"option\": \"driver\",\n            \"value\": \"nova.cells.rpc_driver.CellsRPCDriver\"\n           }\n          ]\n       }\n      ]\n    }\n  }\n",
-                "hidden": null,
-                "label": null,
-                "name": "Cinder-Storage-1::ExtraConfig",
-                "parameter_type": "json",
-                "value": {}
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "Keystone key for signing tokens.",
-                "hidden": true,
-                "label": null,
-                "name": "Controller-1::KeystoneSSLCertificateKey",
-                "parameter_type": "string",
-                "value": ""
-            },
-            {
-                "constraints": [
-                    {
-                        "constraint_type": "custom_constraint",
-                        "definition": "nova.keypair",
-                        "description": null
-                    }
                 ],
-                "default": "default",
-                "description": "Name of an existing EC2 KeyPair to enable SSH access to the instances",
-                "hidden": null,
                 "label": null,
-                "name": "Ceph-Storage-1::KeyName",
-                "parameter_type": "string",
-                "value": "default"
-            },
-            {
-                "constraints": [],
-                "default": "dvr_snat",
-                "description": "Agent mode for the neutron-l3-agent on the controller hosts",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::NeutronAgentMode",
-                "parameter_type": "string",
-                "value": "dvr_snat"
-            },
-            {
-                "constraints": [],
-                "default": "unset",
-                "description": "The password for the ceilometer service account.",
-                "hidden": true,
-                "label": null,
-                "name": "Compute-1::CeilometerPassword",
-                "parameter_type": "string",
-                "value": "c27e160e8ca981f4046f3ca0cf8dd03be694ed68"
-            },
-            {
-                "constraints": [],
-                "default": "ml2",
-                "description": "The core plugin for Neutron. The value should be the entrypoint to be loaded\nfrom neutron.core_plugins namespace.\n",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::NeutronCorePlugin",
-                "parameter_type": "string",
-                "value": "ml2"
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "Mount options for Pacemaker mount used as Glance storage. Effective when GlanceFilePcmkManage is true.\n",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::GlanceFilePcmkOptions",
-                "parameter_type": "string",
-                "value": ""
-            },
-            {
-                "constraints": [],
-                "default": 10,
-                "description": "Partition Power to use when building Swift rings",
-                "hidden": null,
-                "label": null,
-                "name": "Swift-Storage-1::PartPower",
-                "parameter_type": "number",
-                "value": 10
-            },
-            {
-                "constraints": [],
-                "default": {
-                    "BlockStorageHostnameResolveNetwork": "internal_api",
-                    "CeilometerApiNetwork": "internal_api",
-                    "CephClusterNetwork": "storage_mgmt",
-                    "CephPublicNetwork": "storage",
-                    "CephStorageHostnameResolveNetwork": "storage",
-                    "CinderApiNetwork": "internal_api",
-                    "CinderIscsiNetwork": "storage",
-                    "ComputeHostnameResolveNetwork": "internal_api",
-                    "ControllerHostnameResolveNetwork": "internal_api",
-                    "GlanceApiNetwork": "storage",
-                    "GlanceRegistryNetwork": "internal_api",
-                    "HeatApiNetwork": "internal_api",
-                    "HorizonNetwork": "internal_api",
-                    "KeystoneAdminApiNetwork": "ctlplane",
-                    "KeystonePublicApiNetwork": "internal_api",
-                    "MemcachedNetwork": "internal_api",
-                    "MongoDbNetwork": "internal_api",
-                    "MysqlNetwork": "internal_api",
-                    "NeutronApiNetwork": "internal_api",
-                    "NeutronTenantNetwork": "tenant",
-                    "NovaApiNetwork": "internal_api",
-                    "NovaMetadataNetwork": "internal_api",
-                    "NovaVncProxyNetwork": "internal_api",
-                    "ObjectStorageHostnameResolveNetwork": "internal_api",
-                    "RabbitMqNetwork": "internal_api",
-                    "RedisNetwork": "internal_api",
-                    "SwiftMgmtNetwork": "storage_mgmt",
-                    "SwiftProxyNetwork": "storage"
-                },
-                "description": "Mapping of service_name -> network name. Typically set via parameter_defaults in the resource registry.",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::ServiceNetMap",
-                "parameter_type": "json",
-                "value": {
-                    "BlockStorageHostnameResolveNetwork": "internal_api",
-                    "CeilometerApiNetwork": "internal_api",
-                    "CephClusterNetwork": "storage_mgmt",
-                    "CephPublicNetwork": "storage",
-                    "CephStorageHostnameResolveNetwork": "storage",
-                    "CinderApiNetwork": "internal_api",
-                    "CinderIscsiNetwork": "storage",
-                    "ComputeHostnameResolveNetwork": "internal_api",
-                    "ControllerHostnameResolveNetwork": "internal_api",
-                    "GlanceApiNetwork": "storage",
-                    "GlanceRegistryNetwork": "internal_api",
-                    "HeatApiNetwork": "internal_api",
-                    "HorizonNetwork": "internal_api",
-                    "KeystoneAdminApiNetwork": "ctlplane",
-                    "KeystonePublicApiNetwork": "internal_api",
-                    "MemcachedNetwork": "internal_api",
-                    "MongoDbNetwork": "internal_api",
-                    "MysqlNetwork": "internal_api",
-                    "NeutronApiNetwork": "internal_api",
-                    "NeutronTenantNetwork": "tenant",
-                    "NovaApiNetwork": "internal_api",
-                    "NovaMetadataNetwork": "internal_api",
-                    "NovaVncProxyNetwork": "internal_api",
-                    "ObjectStorageHostnameResolveNetwork": "internal_api",
-                    "RabbitMqNetwork": "internal_api",
-                    "RedisNetwork": "internal_api",
-                    "SwiftMgmtNetwork": "storage_mgmt",
-                    "SwiftProxyNetwork": "storage"
-                }
-            },
-            {
-                "constraints": [],
-                "default": "datacentre",
-                "description": "If set, flat networks to configure in neutron plugins.",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::NeutronFlatNetworks",
-                "parameter_type": "string",
-                "value": "datacentre"
-            },
-            {
-                "constraints": [],
-                "default": true,
-                "description": "Whether to enable or not the Iscsi backend for Cinder",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::CinderEnableIscsiBackend",
-                "parameter_type": "boolean",
-                "value": true
-            },
-            {
-                "constraints": [],
-                "default": "unset",
-                "description": "Secret shared by the ceilometer services.",
-                "hidden": true,
-                "label": null,
-                "name": "Compute-1::CeilometerMeteringSecret",
-                "parameter_type": "string",
-                "value": "128f8fa20a4d6cffbf0900b91488441f333a87ab"
-            },
-            {
-                "constraints": [],
-                "default": [],
-                "description": "Should be used for arbitrary ips.",
-                "hidden": null,
-                "label": null,
-                "name": "ControlFixedIPs",
-                "parameter_type": "json",
-                "value": []
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "A custom IP address to put onto the NeutronPublicInterface.",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::NeutronPublicInterfaceIP",
-                "parameter_type": "string",
-                "value": ""
-            },
-            {
-                "constraints": [],
-                "default": "unset",
-                "description": "The keystone auth secret and db password.",
-                "hidden": true,
-                "label": null,
-                "name": "Controller-1::AdminToken",
-                "parameter_type": "string",
-                "value": "81c77fea0fdedc51207864b1310372f220e86090"
-            },
-            {
-                "constraints": [
-                    {
-                        "constraint_type": "custom_constraint",
-                        "definition": "nova.keypair",
-                        "description": null
-                    }
-                ],
-                "default": "default",
-                "description": "Name of an existing EC2 KeyPair to enable SSH access to the instances",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::KeyName",
-                "parameter_type": "string",
-                "value": "default"
-            },
-            {
-                "constraints": [],
-                "default": "guest",
-                "description": "The password for RabbitMQ",
-                "hidden": true,
-                "label": null,
-                "name": "Controller-1::RabbitPassword",
-                "parameter_type": "string",
-                "value": "guest"
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "A custom default route for the NeutronPublicInterface.",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::NeutronPublicInterfaceDefaultRoute",
-                "parameter_type": "string",
-                "value": ""
-            },
-            {
-                "constraints": [],
-                "default": "false",
-                "description": "Value of mount_check in Swift account/container/object -server.conf",
-                "hidden": null,
-                "label": null,
-                "name": "Swift-Storage-1::MountCheck",
-                "parameter_type": "boolean",
-                "value": "false"
-            },
-            {
-                "constraints": [],
-                "default": "router",
-                "description": "Comma-seperated list of service plugin entrypoints to be loaded from the\nneutron.service_plugins namespace.\n",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::NeutronServicePlugins",
                 "parameter_type": "comma_delimited_list",
-                "value": "router"
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": null,
                 "hidden": null,
-                "label": null,
-                "name": "Compute-1::NtpServer",
-                "parameter_type": "string",
-                "value": ""
+                "constraints": [],
+                "name": "Controller-1::KeystoneNotificationDriver"
             },
             {
-                "constraints": [],
-                "default": "",
-                "description": "If set, the contents of an SSL certificate .crt file for encrypting SSL endpoints.",
-                "hidden": true,
+                "description": "The ceilometer backend type.",
+                "default": "mongodb",
+                "value": "mongodb",
                 "label": null,
-                "name": "Controller-1::SSLCertificate",
                 "parameter_type": "string",
-                "value": ""
-            },
-            {
-                "constraints": [],
-                "default": [],
-                "description": null,
                 "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::CeilometerBackend"
+            },
+            {
+                "description": "List of externally managed Ceph Mon Host IPs. Only used for external Ceph deployments.",
+                "default": "",
+                "value": "",
                 "label": null,
-                "name": "Compute-1::removal_policies",
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "CephExternalMonHost"
+            },
+            {
+                "description": "Additional configuration to inject into the cluster. The JSON should have\nthe following structure:\n  {\"FILEKEY\":\n    {\"config\":\n      [{\"section\": \"SECTIONNAME\",\n        \"values\":\n          [{\"option\": \"OPTIONNAME\",\n            \"value\": \"VALUENAME\"\n           }\n          ]\n       }\n      ]\n    }\n  }\nFor instance:\n  {\"nova\":\n    {\"config\":\n      [{\"section\": \"default\",\n        \"values\":\n          [{\"option\": \"force_config_drive\",\n            \"value\": \"always\"\n           }\n          ]\n       },\n       {\"section\": \"cells\",\n        \"values\":\n          [{\"option\": \"driver\",\n            \"value\": \"nova.cells.rpc_driver.CellsRPCDriver\"\n           }\n          ]\n       }\n      ]\n    }\n  }\n",
+                "default": {},
+                "value": {},
+                "label": null,
                 "parameter_type": "json",
-                "value": []
+                "hidden": null,
+                "constraints": [],
+                "name": "Cinder-Storage-1::ExtraConfig"
             },
             {
+                "description": "Keystone key for signing tokens.",
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": true,
+                "constraints": [],
+                "name": "Controller-1::KeystoneSSLCertificateKey"
+            },
+            {
+                "description": "Name of an existing EC2 KeyPair to enable SSH access to the instances",
+                "default": "default",
+                "value": "default",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
                 "constraints": [
                     {
-                        "constraint_type": "allowed_values",
+                        "definition": "nova.keypair",
+                        "description": null,
+                        "constraint_type": "custom_constraint"
+                    }
+                ],
+                "name": "Ceph-Storage-1::KeyName"
+            },
+            {
+                "description": "Agent mode for the neutron-l3-agent on the controller hosts",
+                "default": "dvr_snat",
+                "value": "dvr_snat",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NeutronAgentMode"
+            },
+            {
+                "description": "The password for the ceilometer service account.",
+                "default": "unset",
+                "value": "570ffde56025e3a855e7868e7b93c5d3b13fc898",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": true,
+                "constraints": [],
+                "name": "Compute-1::CeilometerPassword"
+            },
+            {
+                "description": "The core plugin for Neutron. The value should be the entrypoint to be loaded\nfrom neutron.core_plugins namespace.\n",
+                "default": "ml2",
+                "value": "ml2",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NeutronCorePlugin"
+            },
+            {
+                "description": "Mount options for Pacemaker mount used as Glance storage. Effective when GlanceFilePcmkManage is true.\n",
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::GlanceFilePcmkOptions"
+            },
+            {
+                "description": "Partition Power to use when building Swift rings",
+                "default": 10,
+                "value": 10,
+                "label": null,
+                "parameter_type": "number",
+                "hidden": null,
+                "constraints": [],
+                "name": "Swift-Storage-1::PartPower"
+            },
+            {
+                "description": "Mapping of service_name -> network name. Typically set via parameter_defaults in the resource registry.",
+                "default": {
+                    "NeutronApiNetwork": "internal_api",
+                    "SwiftProxyNetwork": "storage",
+                    "GlanceRegistryNetwork": "internal_api",
+                    "HeatApiNetwork": "internal_api",
+                    "NeutronTenantNetwork": "tenant",
+                    "NovaApiNetwork": "internal_api",
+                    "CeilometerApiNetwork": "internal_api",
+                    "CephStorageHostnameResolveNetwork": "storage",
+                    "SwiftMgmtNetwork": "storage_mgmt",
+                    "MemcachedNetwork": "internal_api",
+                    "RabbitMqNetwork": "internal_api",
+                    "ObjectStorageHostnameResolveNetwork": "internal_api",
+                    "KeystoneAdminApiNetwork": "ctlplane",
+                    "GlanceApiNetwork": "storage",
+                    "BlockStorageHostnameResolveNetwork": "internal_api",
+                    "NovaVncProxyNetwork": "internal_api",
+                    "CinderApiNetwork": "internal_api",
+                    "CephClusterNetwork": "storage_mgmt",
+                    "KeystonePublicApiNetwork": "internal_api",
+                    "MysqlNetwork": "internal_api",
+                    "RedisNetwork": "internal_api",
+                    "NovaMetadataNetwork": "internal_api",
+                    "ComputeHostnameResolveNetwork": "internal_api",
+                    "CinderIscsiNetwork": "storage",
+                    "MongoDbNetwork": "internal_api",
+                    "HorizonNetwork": "internal_api",
+                    "ControllerHostnameResolveNetwork": "internal_api",
+                    "CephPublicNetwork": "storage"
+                },
+                "value": {
+                    "NeutronApiNetwork": "internal_api",
+                    "SwiftProxyNetwork": "storage",
+                    "GlanceRegistryNetwork": "internal_api",
+                    "HeatApiNetwork": "internal_api",
+                    "NeutronTenantNetwork": "tenant",
+                    "NovaApiNetwork": "internal_api",
+                    "CeilometerApiNetwork": "internal_api",
+                    "CephStorageHostnameResolveNetwork": "storage",
+                    "SwiftMgmtNetwork": "storage_mgmt",
+                    "MemcachedNetwork": "internal_api",
+                    "RabbitMqNetwork": "internal_api",
+                    "ObjectStorageHostnameResolveNetwork": "internal_api",
+                    "KeystoneAdminApiNetwork": "ctlplane",
+                    "GlanceApiNetwork": "storage",
+                    "BlockStorageHostnameResolveNetwork": "internal_api",
+                    "NovaVncProxyNetwork": "internal_api",
+                    "CinderApiNetwork": "internal_api",
+                    "CephClusterNetwork": "storage_mgmt",
+                    "KeystonePublicApiNetwork": "internal_api",
+                    "MysqlNetwork": "internal_api",
+                    "RedisNetwork": "internal_api",
+                    "NovaMetadataNetwork": "internal_api",
+                    "ComputeHostnameResolveNetwork": "internal_api",
+                    "CinderIscsiNetwork": "storage",
+                    "MongoDbNetwork": "internal_api",
+                    "HorizonNetwork": "internal_api",
+                    "ControllerHostnameResolveNetwork": "internal_api",
+                    "CephPublicNetwork": "storage"
+                },
+                "label": null,
+                "parameter_type": "json",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::ServiceNetMap"
+            },
+            {
+                "description": "If set, flat networks to configure in neutron plugins.",
+                "default": "datacentre",
+                "value": "datacentre",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronFlatNetworks"
+            },
+            {
+                "description": "Whether to enable or not the Iscsi backend for Cinder",
+                "default": true,
+                "value": true,
+                "label": null,
+                "parameter_type": "boolean",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::CinderEnableIscsiBackend"
+            },
+            {
+                "description": "Secret shared by the ceilometer services.",
+                "default": "unset",
+                "value": "b052b28e738880b9cd5058672dd85735da3444e8",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": true,
+                "constraints": [],
+                "name": "Compute-1::CeilometerMeteringSecret"
+            },
+            {
+                "description": "Should be used for arbitrary ips.",
+                "default": [],
+                "value": [],
+                "label": null,
+                "parameter_type": "json",
+                "hidden": null,
+                "constraints": [],
+                "name": "ControlFixedIPs"
+            },
+            {
+                "description": "A custom IP address to put onto the NeutronPublicInterface.",
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronPublicInterfaceIP"
+            },
+            {
+                "description": "The keystone auth secret and db password.",
+                "default": "unset",
+                "value": "0f72bb4817e31edd2d08edeb59254378f66d79aa",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": true,
+                "constraints": [],
+                "name": "Controller-1::AdminToken"
+            },
+            {
+                "description": "Name of an existing EC2 KeyPair to enable SSH access to the instances",
+                "default": "default",
+                "value": "default",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [
+                    {
+                        "definition": "nova.keypair",
+                        "description": null,
+                        "constraint_type": "custom_constraint"
+                    }
+                ],
+                "name": "Controller-1::KeyName"
+            },
+            {
+                "description": "The password for RabbitMQ",
+                "default": "guest",
+                "value": "guest",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": true,
+                "constraints": [],
+                "name": "Controller-1::RabbitPassword"
+            },
+            {
+                "description": "A custom default route for the NeutronPublicInterface.",
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronPublicInterfaceDefaultRoute"
+            },
+            {
+                "description": "Value of mount_check in Swift account/container/object -server.conf",
+                "default": "false",
+                "value": "false",
+                "label": null,
+                "parameter_type": "boolean",
+                "hidden": null,
+                "constraints": [],
+                "name": "Swift-Storage-1::MountCheck"
+            },
+            {
+                "description": "Comma-seperated list of service plugin entrypoints to be loaded from the\nneutron.service_plugins namespace.\n",
+                "default": "router",
+                "value": "router",
+                "label": null,
+                "parameter_type": "comma_delimited_list",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronServicePlugins"
+            },
+            {
+                "description": null,
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NtpServer"
+            },
+            {
+                "description": "If set, the contents of an SSL certificate .crt file for encrypting SSL endpoints.",
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": true,
+                "constraints": [],
+                "name": "Controller-1::SSLCertificate"
+            },
+            {
+                "description": null,
+                "default": [],
+                "value": [],
+                "label": null,
+                "parameter_type": "json",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::removal_policies"
+            },
+            {
+                "description": "The short name of the Glance backend to use. Should be one of swift, rbd, or file",
+                "default": "swift",
+                "value": "swift",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [
+                    {
                         "definition": [
                             "swift",
                             "file",
                             "rbd"
                         ],
-                        "description": null
+                        "description": null,
+                        "constraint_type": "allowed_values"
                     }
                 ],
-                "default": "swift",
-                "description": "The short name of the Glance backend to use. Should be one of swift, rbd, or file",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::GlanceBackend",
-                "parameter_type": "string",
-                "value": "swift"
+                "name": "Controller-1::GlanceBackend"
             },
             {
-                "constraints": [],
-                "default": "vxlan",
                 "description": "The tenant network type for Neutron, either gre or vxlan.",
-                "hidden": null,
+                "default": "vxlan",
+                "value": "gre",
                 "label": null,
-                "name": "Controller-1::NeutronNetworkType",
                 "parameter_type": "string",
-                "value": "gre"
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronNetworkType"
             },
             {
-                "constraints": [
-                    {
-                        "constraint_type": "custom_constraint",
-                        "definition": "glance.image",
-                        "description": null
-                    }
-                ],
+                "description": null,
                 "default": "overcloud-compute",
-                "description": null,
-                "hidden": null,
+                "value": "overcloud-full",
                 "label": null,
-                "name": "Compute-1::Image",
                 "parameter_type": "string",
-                "value": "overcloud-full"
-            },
-            {
-                "constraints": [],
-                "default": {
-                    "BlockStorageHostnameResolveNetwork": "internal_api",
-                    "CeilometerApiNetwork": "internal_api",
-                    "CephClusterNetwork": "storage_mgmt",
-                    "CephPublicNetwork": "storage",
-                    "CephStorageHostnameResolveNetwork": "storage",
-                    "CinderApiNetwork": "internal_api",
-                    "CinderIscsiNetwork": "storage",
-                    "ComputeHostnameResolveNetwork": "internal_api",
-                    "ControllerHostnameResolveNetwork": "internal_api",
-                    "GlanceApiNetwork": "storage",
-                    "GlanceRegistryNetwork": "internal_api",
-                    "HeatApiNetwork": "internal_api",
-                    "HorizonNetwork": "internal_api",
-                    "KeystoneAdminApiNetwork": "ctlplane",
-                    "KeystonePublicApiNetwork": "internal_api",
-                    "MemcachedNetwork": "internal_api",
-                    "MongoDbNetwork": "internal_api",
-                    "MysqlNetwork": "internal_api",
-                    "NeutronApiNetwork": "internal_api",
-                    "NeutronTenantNetwork": "tenant",
-                    "NovaApiNetwork": "internal_api",
-                    "NovaMetadataNetwork": "internal_api",
-                    "NovaVncProxyNetwork": "internal_api",
-                    "ObjectStorageHostnameResolveNetwork": "internal_api",
-                    "RabbitMqNetwork": "internal_api",
-                    "RedisNetwork": "internal_api",
-                    "SwiftMgmtNetwork": "storage_mgmt",
-                    "SwiftProxyNetwork": "storage"
-                },
-                "description": "Mapping of service_name -> network name. Typically set via parameter_defaults in the resource registry.",
                 "hidden": null,
-                "label": null,
-                "name": "Cinder-Storage-1::ServiceNetMap",
-                "parameter_type": "json",
-                "value": {
-                    "BlockStorageHostnameResolveNetwork": "internal_api",
-                    "CeilometerApiNetwork": "internal_api",
-                    "CephClusterNetwork": "storage_mgmt",
-                    "CephPublicNetwork": "storage",
-                    "CephStorageHostnameResolveNetwork": "storage",
-                    "CinderApiNetwork": "internal_api",
-                    "CinderIscsiNetwork": "storage",
-                    "ComputeHostnameResolveNetwork": "internal_api",
-                    "ControllerHostnameResolveNetwork": "internal_api",
-                    "GlanceApiNetwork": "storage",
-                    "GlanceRegistryNetwork": "internal_api",
-                    "HeatApiNetwork": "internal_api",
-                    "HorizonNetwork": "internal_api",
-                    "KeystoneAdminApiNetwork": "ctlplane",
-                    "KeystonePublicApiNetwork": "internal_api",
-                    "MemcachedNetwork": "internal_api",
-                    "MongoDbNetwork": "internal_api",
-                    "MysqlNetwork": "internal_api",
-                    "NeutronApiNetwork": "internal_api",
-                    "NeutronTenantNetwork": "tenant",
-                    "NovaApiNetwork": "internal_api",
-                    "NovaMetadataNetwork": "internal_api",
-                    "NovaVncProxyNetwork": "internal_api",
-                    "ObjectStorageHostnameResolveNetwork": "internal_api",
-                    "RabbitMqNetwork": "internal_api",
-                    "RedisNetwork": "internal_api",
-                    "SwiftMgmtNetwork": "storage_mgmt",
-                    "SwiftProxyNetwork": "storage"
-                }
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "Setting to a previously unused value during stack-update will trigger package update on all nodes\n",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::UpdateIdentifier",
-                "parameter_type": "string",
-                "value": ""
-            },
-            {
-                "constraints": [],
-                "default": "False",
-                "description": "Whether to configure Neutron Distributed Virtual Routers",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::NeutronDVR",
-                "parameter_type": "string",
-                "value": "False"
-            },
-            {
-                "constraints": [],
-                "default": "unset",
-                "description": "The user password for SNMPd with readonly rights running on all Overcloud nodes",
-                "hidden": true,
-                "label": null,
-                "name": "Swift-Storage-1::SnmpdReadonlyUserPassword",
-                "parameter_type": "string",
-                "value": "dd9dcedb826db03b001eddfc335349a2415924c7"
-            },
-            {
-                "constraints": [],
-                "default": "9292",
-                "description": "Glance port.",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::GlancePort",
-                "parameter_type": "string",
-                "value": "9292"
-            },
-            {
-                "constraints": [],
-                "default": "router",
-                "description": "Comma-seperated list of service plugin entrypoints to be loaded from the\nneutron.service_plugins namespace.\n",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::NeutronServicePlugins",
-                "parameter_type": "comma_delimited_list",
-                "value": "router"
-            },
-            {
                 "constraints": [
                     {
-                        "constraint_type": "custom_constraint",
-                        "definition": "nova.flavor",
-                        "description": null
-                    }
-                ],
-                "default": null,
-                "description": "Flavor for control nodes to request when deploying.",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::Flavor",
-                "parameter_type": "string",
-                "value": "Flavor-4-x86_64-6144-40"
-            },
-            {
-                "constraints": [],
-                "default": "openvswitch",
-                "description": "The mechanism drivers for the Neutron tenant network. To specify multiple\nvalues, use a comma separated string, like so: 'openvswitch,l2_population'\n",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::NeutronMechanismDrivers",
-                "parameter_type": "string",
-                "value": "openvswitch"
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "The DNS name of this cloud. E.g. ci-overcloud.tripleo.org",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::CloudName",
-                "parameter_type": "string",
-                "value": "overcloud"
-            },
-            {
-                "constraints": [],
-                "default": "%stackname%-cephstorage-%index%",
-                "description": "Format for CephStorage node hostnames",
-                "hidden": null,
-                "label": null,
-                "name": "CephStorageHostnameFormat",
-                "parameter_type": "string",
-                "value": "%stackname%-cephstorage-%index%"
-            },
-            {
-                "constraints": [],
-                "default": false,
-                "description": "If enabled services will be monitored by Pacemaker; it will manage VIPs as well, in place of Keepalived.",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::EnablePacemaker",
-                "parameter_type": "boolean",
-                "value": false
-            },
-            {
-                "constraints": [],
-                "default": "unset",
-                "description": "Password for heat_stack_domain_admin user.",
-                "hidden": true,
-                "label": null,
-                "name": "Controller-1::HeatStackDomainAdminPassword",
-                "parameter_type": "string",
-                "value": "unset"
-            },
-            {
-                "constraints": [],
-                "default": "br-ex",
-                "description": "Name of bridge used for external network traffic.",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::NeutronExternalNetworkBridge",
-                "parameter_type": "string",
-                "value": "br-ex"
-            },
-            {
-                "constraints": [],
-                "default": 0,
-                "description": "Specifies the size of the buffer pool in megabytes. Setting to zero should be interpreted as \"no value\" and will defer to the lower level default.\n",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::MysqlInnodbBufferPoolSize",
-                "parameter_type": "number",
-                "value": 0
-            },
-            {
-                "constraints": [],
-                "default": "tgtadm",
-                "description": "The iSCSI helper to use with cinder.",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::CinderISCSIHelper",
-                "parameter_type": "string",
-                "value": "lioadm"
-            },
-            {
-                "constraints": [],
-                "default": "overcloud-swift-storage",
-                "description": null,
-                "hidden": null,
-                "label": null,
-                "name": "Swift-Storage-1::Image",
-                "parameter_type": "string",
-                "value": "overcloud-full"
-            },
-            {
-                "constraints": [],
-                "default": 5672,
-                "description": "Set rabbit subscriber port, change this if using SSL",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::RabbitClientPort",
-                "parameter_type": "number",
-                "value": 5672
-            },
-            {
-                "constraints": [],
-                "default": "tgtadm",
-                "description": "The iSCSI helper to use with cinder.",
-                "hidden": null,
-                "label": null,
-                "name": "Cinder-Storage-1::CinderISCSIHelper",
-                "parameter_type": "string",
-                "value": "lioadm"
-            },
-            {
-                "constraints": [],
-                "default": "True",
-                "description": null,
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::NeutronEnableTunnelling",
-                "parameter_type": "string",
-                "value": "True"
-            },
-            {
-                "constraints": [],
-                "default": "br-ex",
-                "description": "Interface where virtual ip will be assigned.",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::ControlVirtualInterface",
-                "parameter_type": "string",
-                "value": "br-ex"
-            },
-            {
-                "constraints": [],
-                "default": "false",
-                "description": "Set to true to enable package installation via Puppet",
-                "hidden": null,
-                "label": null,
-                "name": "Swift-Storage-1::EnablePackageInstall",
-                "parameter_type": "boolean",
-                "value": "false"
-            },
-            {
-                "constraints": [],
-                "default": false,
-                "description": "Whether to enable or not the Rbd backend for Nova",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::NovaEnableRbdBackend",
-                "parameter_type": "boolean",
-                "value": false
-            },
-            {
-                "constraints": [],
-                "default": "False",
-                "description": "Whether to enable l3-agent HA",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::NeutronL3HA",
-                "parameter_type": "string",
-                "value": "False"
-            },
-            {
-                "constraints": [
-                    {
-                        "constraint_type": "custom_constraint",
                         "definition": "glance.image",
-                        "description": null
+                        "description": null,
+                        "constraint_type": "custom_constraint"
                     }
                 ],
-                "default": "overcloud-control",
-                "description": null,
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::Image",
-                "parameter_type": "string",
-                "value": "overcloud-full"
+                "name": "Compute-1::Image"
             },
             {
-                "constraints": [],
-                "default": "unset",
-                "description": "A random string to be used as a salt when hashing to determine mappings in the ring.",
-                "hidden": true,
+                "description": "Mapping of service_name -> network name. Typically set via parameter_defaults in the resource registry.",
+                "default": {
+                    "NeutronApiNetwork": "internal_api",
+                    "SwiftProxyNetwork": "storage",
+                    "GlanceRegistryNetwork": "internal_api",
+                    "HeatApiNetwork": "internal_api",
+                    "NeutronTenantNetwork": "tenant",
+                    "NovaApiNetwork": "internal_api",
+                    "CeilometerApiNetwork": "internal_api",
+                    "CephStorageHostnameResolveNetwork": "storage",
+                    "SwiftMgmtNetwork": "storage_mgmt",
+                    "MemcachedNetwork": "internal_api",
+                    "RabbitMqNetwork": "internal_api",
+                    "ObjectStorageHostnameResolveNetwork": "internal_api",
+                    "KeystoneAdminApiNetwork": "ctlplane",
+                    "GlanceApiNetwork": "storage",
+                    "BlockStorageHostnameResolveNetwork": "internal_api",
+                    "NovaVncProxyNetwork": "internal_api",
+                    "CinderApiNetwork": "internal_api",
+                    "CephClusterNetwork": "storage_mgmt",
+                    "KeystonePublicApiNetwork": "internal_api",
+                    "MysqlNetwork": "internal_api",
+                    "RedisNetwork": "internal_api",
+                    "NovaMetadataNetwork": "internal_api",
+                    "ComputeHostnameResolveNetwork": "internal_api",
+                    "CinderIscsiNetwork": "storage",
+                    "MongoDbNetwork": "internal_api",
+                    "HorizonNetwork": "internal_api",
+                    "ControllerHostnameResolveNetwork": "internal_api",
+                    "CephPublicNetwork": "storage"
+                },
+                "value": {
+                    "NeutronApiNetwork": "internal_api",
+                    "SwiftProxyNetwork": "storage",
+                    "GlanceRegistryNetwork": "internal_api",
+                    "HeatApiNetwork": "internal_api",
+                    "NeutronTenantNetwork": "tenant",
+                    "NovaApiNetwork": "internal_api",
+                    "CeilometerApiNetwork": "internal_api",
+                    "CephStorageHostnameResolveNetwork": "storage",
+                    "SwiftMgmtNetwork": "storage_mgmt",
+                    "MemcachedNetwork": "internal_api",
+                    "RabbitMqNetwork": "internal_api",
+                    "ObjectStorageHostnameResolveNetwork": "internal_api",
+                    "KeystoneAdminApiNetwork": "ctlplane",
+                    "GlanceApiNetwork": "storage",
+                    "BlockStorageHostnameResolveNetwork": "internal_api",
+                    "NovaVncProxyNetwork": "internal_api",
+                    "CinderApiNetwork": "internal_api",
+                    "CephClusterNetwork": "storage_mgmt",
+                    "KeystonePublicApiNetwork": "internal_api",
+                    "MysqlNetwork": "internal_api",
+                    "RedisNetwork": "internal_api",
+                    "NovaMetadataNetwork": "internal_api",
+                    "ComputeHostnameResolveNetwork": "internal_api",
+                    "CinderIscsiNetwork": "storage",
+                    "MongoDbNetwork": "internal_api",
+                    "HorizonNetwork": "internal_api",
+                    "ControllerHostnameResolveNetwork": "internal_api",
+                    "CephPublicNetwork": "storage"
+                },
                 "label": null,
-                "name": "Swift-Storage-1::HashSuffix",
-                "parameter_type": "string",
-                "value": "unset"
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "The Ceph monitors key. Can be created with ceph-authtool --gen-print-key.",
-                "hidden": null,
-                "label": null,
-                "name": "CephMonKey",
-                "parameter_type": "string",
-                "value": ""
-            },
-            {
-                "constraints": [],
-                "default": "False",
-                "description": null,
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::NeutronDVR",
-                "parameter_type": "string",
-                "value": "False"
-            },
-            {
-                "constraints": [],
-                "default": "False",
-                "description": "Whether to enable l3-agent HA",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::NeutronL3HA",
-                "parameter_type": "string",
-                "value": "False"
-            },
-            {
-                "constraints": [],
-                "default": "overcloud-cinder-volume",
-                "description": null,
-                "hidden": null,
-                "label": null,
-                "name": "Cinder-Storage-1::Image",
-                "parameter_type": "string",
-                "value": "overcloud-full"
-            },
-            {
-                "constraints": [],
-                "default": "datacentre",
-                "description": "The Neutron ML2 and OpenVSwitch vlan mapping range to support. See the Neutron documentation for permitted values. Defaults to permitting any VLAN on the 'datacentre' physical network (See NeutronBridgeMappings).\n",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::NeutronNetworkVLANRanges",
-                "parameter_type": "comma_delimited_list",
-                "value": "datacentre"
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "Keystone self-signed certificate authority certificate.",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::KeystoneCACertificate",
-                "parameter_type": "string",
-                "value": "-----BEGIN CERTIFICATE-----\nMIIDNzCCAh+gAwIBAgIBATANBgkqhkiG9w0BAQUFADBTMQswCQYDVQQGEwJYWDEO\nMAwGA1UECBMFVW5zZXQxDjAMBgNVBAcTBVVuc2V0MQ4wDAYDVQQKEwVVbnNldDEU\nMBIGA1UEAxMLS2V5c3RvbmUgQ0EwHhcNMTUxMDEyMTk0MTEzWhcNMjUxMDA5MTk0\nMTEzWjBTMQswCQYDVQQGEwJYWDEOMAwGA1UECBMFVW5zZXQxDjAMBgNVBAcTBVVu\nc2V0MQ4wDAYDVQQKEwVVbnNldDEUMBIGA1UEAxMLS2V5c3RvbmUgQ0EwggEiMA0G\nCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDffc6+zTdbZ2+wKyocHpUG+ja9q7+Z\nuOOlTChM3MNhtgsjkw0f/REgNO4nruo2x+10iJu+57V/tRa03e0r3ZrklZOCg/BO\nz7ci9TN/FaNdzICSukr15gsnf1MaOJ+TbCi4tl2fT1cM358GXq13DoJp3vXWylJl\nPTbe/9FiGMN553Teb0QwmU/sHOKmXCy/WgzWzWbEb0pP8Jdxq+rtUc/FQAjvAxGd\nfpmY7IwiYbNa6B7XWAZ4rTTIudNDIrqpmdkpDLkQdQ6bAb0mz6su24kYK9M+ySCZ\nlnhd1lbtUB22hVmP0/zdlOu2qpnTpgJwJuOf8oc69iLdO/0/02Uhd6BFAgMBAAGj\nFjAUMBIGA1UdEwEB/wQIMAYBAf8CAQAwDQYJKoZIhvcNAQEFBQADggEBABaSXzDO\n0tgmEQJHYecXWoonKamH3F45eTP5bkKyDkg9UyFIjrdp8Hqb0odFz0wo/CIOscSV\nAfTKTX4nIwMiPwnz4Xz6PYEEXXOdfYtDKH6uAyiNiVxy6tGADncVjCoqA5RsB+2O\nL3RBgXcWAcqx+q65NGSuPxaQBfxniX28trLaPxhLyOe2WGmLj8cXm3krP2TuDBXs\nOtvpBwzt2Smcf7gAfeOW95ExvRsm3RCkWbKcxanB45zhigKsctZk9kxpSYTbFYC8\n2P/KbFTmAqxGA5jFC8YQR+tMw9k52mFRToS3uEtolVJjr7dRaf3+uoVN/fhFxB6S\nVcB6gpue73oImSg=\n-----END CERTIFICATE-----"
-            },
-            {
-                "constraints": [],
-                "default": [],
-                "description": null,
-                "hidden": null,
-                "label": null,
-                "name": "Ceph-Storage-1::removal_policies",
                 "parameter_type": "json",
-                "value": []
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "Neutron ID for ctlplane network.",
                 "hidden": null,
-                "label": null,
-                "name": "NeutronControlPlaneID",
-                "parameter_type": "string",
-                "value": "9a5cfe42-a58e-4957-b443-7c560fb711c3"
+                "constraints": [],
+                "name": "Cinder-Storage-1::ServiceNetMap"
             },
             {
-                "constraints": [],
+                "description": "Setting to a previously unused value during stack-update will trigger package update on all nodes\n",
                 "default": "",
-                "description": "If set, the public interface is a vlan with this device as the raw device.",
-                "hidden": null,
+                "value": "",
                 "label": null,
-                "name": "Controller-1::NeutronPublicInterfaceRawDevice",
                 "parameter_type": "string",
-                "value": ""
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::UpdateIdentifier"
             },
             {
-                "constraints": [],
-                "default": "",
-                "description": "An exported storage device that should be mounted by Pacemaker as Glance storage. Effective when GlanceFilePcmkManage is true.\n",
-                "hidden": null,
+                "description": "Whether to configure Neutron Distributed Virtual Routers",
+                "default": "False",
+                "value": "False",
                 "label": null,
-                "name": "Controller-1::GlanceFilePcmkDevice",
                 "parameter_type": "string",
-                "value": ""
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronDVR"
             },
             {
-                "constraints": [],
+                "description": "The user password for SNMPd with readonly rights running on all Overcloud nodes",
                 "default": "unset",
-                "description": "Secret shared by the ceilometer services.",
+                "value": "add36584cd0a3d2e26a8227520d9aeb65bc60f4c",
+                "label": null,
+                "parameter_type": "string",
                 "hidden": true,
-                "label": null,
-                "name": "Controller-1::CeilometerMeteringSecret",
-                "parameter_type": "string",
-                "value": "128f8fa20a4d6cffbf0900b91488441f333a87ab"
+                "constraints": [],
+                "name": "Swift-Storage-1::SnmpdReadonlyUserPassword"
             },
             {
-                "constraints": [],
-                "default": "guest",
-                "description": null,
-                "hidden": null,
-                "label": null,
-                "name": "Cinder-Storage-1::RabbitPassword",
-                "parameter_type": "string",
-                "value": "guest"
-            },
-            {
-                "constraints": [],
-                "default": false,
-                "description": "Rabbit client subscriber parameter to specify an SSL connection to the RabbitMQ host.\n",
-                "hidden": null,
-                "label": null,
-                "name": "Cinder-Storage-1::RabbitClientUseSSL",
-                "parameter_type": "string",
-                "value": false
-            },
-            {
-                "constraints": [],
-                "default": "unset",
-                "description": "The password for the cinder service and db account, used by cinder-api.",
-                "hidden": true,
-                "label": null,
-                "name": "Cinder-Storage-1::CinderPassword",
-                "parameter_type": "string",
-                "value": "unset"
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "VLAN tag for creating a public VLAN. The tag will be used to create an access port on the exterior bridge for each control plane node, and that port will be given the IP address returned by neutron from the public network. Set CONTROLEXTRA=overcloud-vlan-port.yaml when compiling overcloud.yaml to include the deployment of VLAN ports to the control plane.\n",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::NeutronPublicInterfaceTag",
-                "parameter_type": "string",
-                "value": ""
-            },
-            {
-                "constraints": [],
-                "default": "ro_snmp_user",
-                "description": "The user name for SNMPd with readonly rights running on all Overcloud nodes",
-                "hidden": null,
-                "label": null,
-                "name": "Swift-Storage-1::SnmpdReadonlyUserName",
-                "parameter_type": "string",
-                "value": "ro_snmp_user"
-            },
-            {
-                "constraints": [],
-                "default": "nic1",
-                "description": "What interface to bridge onto br-ex for network nodes.",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::NeutronPublicInterface",
-                "parameter_type": "string",
-                "value": "nic1"
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "NFS servers used by Cinder NFS backend. Effective when CinderEnableNfsBackend is true.\n",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::CinderNfsServers",
-                "parameter_type": "comma_delimited_list",
-                "value": ""
-            },
-            {
-                "constraints": [],
-                "default": "9292",
                 "description": "Glance port.",
-                "hidden": null,
+                "default": "9292",
+                "value": "9292",
                 "label": null,
-                "name": "Cinder-Storage-1::GlancePort",
                 "parameter_type": "string",
-                "value": "9292"
-            },
-            {
-                "constraints": [],
-                "default": "unset",
-                "description": "The password for the glance service and db account, used by the glance services.",
-                "hidden": true,
-                "label": null,
-                "name": "Controller-1::GlancePassword",
-                "parameter_type": "string",
-                "value": "e1bacd9f4b05d97e723b61dae897e175dce0767e"
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "Set to True to enable debugging on all services.",
                 "hidden": null,
-                "label": null,
-                "name": "Compute-1::Debug",
-                "parameter_type": "string",
-                "value": ""
+                "constraints": [],
+                "name": "Controller-1::GlancePort"
             },
             {
-                "constraints": [],
-                "default": "dhcp-option-force=26,1400",
-                "description": "Dnsmasq options for neutron-dhcp-agent. The default value here forces MTU to be set to 1400 to account for the gre tunnel overhead.",
-                "hidden": null,
+                "description": "Comma-seperated list of service plugin entrypoints to be loaded from the\nneutron.service_plugins namespace.\n",
+                "default": "router",
+                "value": "router",
                 "label": null,
-                "name": "Controller-1::NeutronDnsmasqOptions",
-                "parameter_type": "string",
-                "value": "dhcp-option-force=26,1400"
-            },
-            {
-                "constraints": [],
-                "default": false,
-                "description": "Whether to enable or not the NFS backend for Cinder",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::CinderEnableNfsBackend",
-                "parameter_type": "boolean",
-                "value": false
-            },
-            {
-                "constraints": [],
-                "default": "vxlan,vlan,flat,gre",
-                "description": "Comma-seperated list of network type driver entrypoints to be loaded.\n",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::NeutronTypeDrivers",
                 "parameter_type": "comma_delimited_list",
-                "value": "vxlan,vlan,flat,gre"
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NeutronServicePlugins"
             },
             {
+                "description": "Flavor for control nodes to request when deploying.",
+                "default": null,
+                "value": "Flavor-1-x86_64-6144-40",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
                 "constraints": [
                     {
-                        "constraint_type": "allowed_values",
+                        "definition": "nova.flavor",
+                        "description": null,
+                        "constraint_type": "custom_constraint"
+                    }
+                ],
+                "name": "Controller-1::Flavor"
+            },
+            {
+                "description": "The mechanism drivers for the Neutron tenant network. To specify multiple\nvalues, use a comma separated string, like so: 'openvswitch,l2_population'\n",
+                "default": "openvswitch",
+                "value": "openvswitch",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronMechanismDrivers"
+            },
+            {
+                "description": "The DNS name of this cloud. E.g. ci-overcloud.tripleo.org",
+                "default": "",
+                "value": "overcloud",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::CloudName"
+            },
+            {
+                "description": "Format for CephStorage node hostnames",
+                "default": "%stackname%-cephstorage-%index%",
+                "value": "%stackname%-cephstorage-%index%",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "CephStorageHostnameFormat"
+            },
+            {
+                "description": "If enabled services will be monitored by Pacemaker; it will manage VIPs as well, in place of Keepalived.",
+                "default": false,
+                "value": false,
+                "label": null,
+                "parameter_type": "boolean",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::EnablePacemaker"
+            },
+            {
+                "description": "Password for heat_stack_domain_admin user.",
+                "default": "unset",
+                "value": "unset",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": true,
+                "constraints": [],
+                "name": "Controller-1::HeatStackDomainAdminPassword"
+            },
+            {
+                "description": "Name of bridge used for external network traffic.",
+                "default": "br-ex",
+                "value": "br-ex",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronExternalNetworkBridge"
+            },
+            {
+                "description": "Specifies the size of the buffer pool in megabytes. Setting to zero should be interpreted as \"no value\" and will defer to the lower level default.\n",
+                "default": 0,
+                "value": 0,
+                "label": null,
+                "parameter_type": "number",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::MysqlInnodbBufferPoolSize"
+            },
+            {
+                "description": "The iSCSI helper to use with cinder.",
+                "default": "tgtadm",
+                "value": "lioadm",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::CinderISCSIHelper"
+            },
+            {
+                "description": null,
+                "default": "overcloud-swift-storage",
+                "value": "overcloud-full",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Swift-Storage-1::Image"
+            },
+            {
+                "description": "Set rabbit subscriber port, change this if using SSL",
+                "default": 5672,
+                "value": 5672,
+                "label": null,
+                "parameter_type": "number",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::RabbitClientPort"
+            },
+            {
+                "description": "The iSCSI helper to use with cinder.",
+                "default": "tgtadm",
+                "value": "lioadm",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Cinder-Storage-1::CinderISCSIHelper"
+            },
+            {
+                "description": null,
+                "default": "True",
+                "value": "True",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronEnableTunnelling"
+            },
+            {
+                "description": "Interface where virtual ip will be assigned.",
+                "default": "br-ex",
+                "value": "br-ex",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::ControlVirtualInterface"
+            },
+            {
+                "description": "Set to true to enable package installation via Puppet",
+                "default": "false",
+                "value": "false",
+                "label": null,
+                "parameter_type": "boolean",
+                "hidden": null,
+                "constraints": [],
+                "name": "Swift-Storage-1::EnablePackageInstall"
+            },
+            {
+                "description": "Whether to enable or not the Rbd backend for Nova",
+                "default": false,
+                "value": false,
+                "label": null,
+                "parameter_type": "boolean",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NovaEnableRbdBackend"
+            },
+            {
+                "description": "Whether to enable l3-agent HA",
+                "default": "False",
+                "value": "False",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronL3HA"
+            },
+            {
+                "description": null,
+                "default": "overcloud-control",
+                "value": "overcloud-full",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [
+                    {
+                        "definition": "glance.image",
+                        "description": null,
+                        "constraint_type": "custom_constraint"
+                    }
+                ],
+                "name": "Controller-1::Image"
+            },
+            {
+                "description": "A random string to be used as a salt when hashing to determine mappings in the ring.",
+                "default": "unset",
+                "value": "unset",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": true,
+                "constraints": [],
+                "name": "Swift-Storage-1::HashSuffix"
+            },
+            {
+                "description": "The Ceph monitors key. Can be created with ceph-authtool --gen-print-key.",
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "CephMonKey"
+            },
+            {
+                "description": null,
+                "default": "False",
+                "value": "False",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NeutronDVR"
+            },
+            {
+                "description": "Whether to enable l3-agent HA",
+                "default": "False",
+                "value": "False",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NeutronL3HA"
+            },
+            {
+                "description": null,
+                "default": "overcloud-cinder-volume",
+                "value": "overcloud-full",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Cinder-Storage-1::Image"
+            },
+            {
+                "description": "The Neutron ML2 and OpenVSwitch vlan mapping range to support. See the Neutron documentation for permitted values. Defaults to permitting any VLAN on the 'datacentre' physical network (See NeutronBridgeMappings).\n",
+                "default": "datacentre",
+                "value": "datacentre",
+                "label": null,
+                "parameter_type": "comma_delimited_list",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronNetworkVLANRanges"
+            },
+            {
+                "description": "Keystone self-signed certificate authority certificate.",
+                "default": "",
+                "value": "-----BEGIN CERTIFICATE-----\nMIIDNzCCAh+gAwIBAgIBATANBgkqhkiG9w0BAQUFADBTMQswCQYDVQQGEwJYWDEO\nMAwGA1UECBMFVW5zZXQxDjAMBgNVBAcTBVVuc2V0MQ4wDAYDVQQKEwVVbnNldDEU\nMBIGA1UEAxMLS2V5c3RvbmUgQ0EwHhcNMTUxMTI1MTMyMzUxWhcNMjUxMTIyMTMy\nMzUxWjBTMQswCQYDVQQGEwJYWDEOMAwGA1UECBMFVW5zZXQxDjAMBgNVBAcTBVVu\nc2V0MQ4wDAYDVQQKEwVVbnNldDEUMBIGA1UEAxMLS2V5c3RvbmUgQ0EwggEiMA0G\nCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDOd8+yMAc5EigHq6QSNgMrDGe4fD7V\nPO0KgntL3V6D0/+GQD1lj2R7b7HCBE98pmdptI3jOrbkFrAE3JO8DY6oM59cPl5n\nuW+Y5hdEKOI/H47HGyWbGW6QgousfZ/afx4/pueSHdmQqLx5QZZXi3h3lK6Esce9\nV79UHAHcfpsijKOMAuLvuawdW3kO71ZB4Y22BoVcKPm05PUEKRk4aVwuLIIBPQeU\nSV7RvtQDfSZIxamK65nNokterDIj8M9ROdNOSuLrQ7mY2/2iLj3YPLf4kdJXayNt\n0A9E4Q+QWCNVc5z5VGRVW0LYQFCzA6JbHppsiUDyFM54JHpE+zMkqostAgMBAAGj\nFjAUMBIGA1UdEwEB/wQIMAYBAf8CAQAwDQYJKoZIhvcNAQEFBQADggEBAAZ4oCRO\nK57A+4sHSmqIKpBQh+jFrUexkAGIzDrrpkFjOZ6VR9jQzFkxtua9zeXXmPG6KTYW\n/U5fZ5jusEezAGgzVTaffB2mbk33uCe+BTTaQZsaASv9e7xP3gSOs0zgu/BGikXp\nPYNsL5G8pLf8gPzqM76hPTRXkpPo3+mA8g4TY5hlEw5! p1wJW+IsC U E+2e8zqO6xf\nUuyKrj0Yeye7Uz5Kre2RJvRYx2vHr7vwDPnOrhUQkMLVUDKsBsA9OI8aH5Y4xYoG\n6XJZtAESJSfo5vjYqlQO/G8o5/w4z51DUOGy7/PmFRet6G2MsPo8HjyUF0y0XiZD\n5/5m6bLt9LtN2Cs=\n-----END CERTIFICATE-----",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::KeystoneCACertificate"
+            },
+            {
+                "description": null,
+                "default": [],
+                "value": [],
+                "label": null,
+                "parameter_type": "json",
+                "hidden": null,
+                "constraints": [],
+                "name": "Ceph-Storage-1::removal_policies"
+            },
+            {
+                "description": "Neutron ID for ctlplane network.",
+                "default": "",
+                "value": "657efb26-34c6-4820-a49a-98621374aa7a",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "NeutronControlPlaneID"
+            },
+            {
+                "description": "If set, the public interface is a vlan with this device as the raw device.",
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronPublicInterfaceRawDevice"
+            },
+            {
+                "description": "An exported storage device that should be mounted by Pacemaker as Glance storage. Effective when GlanceFilePcmkManage is true.\n",
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::GlanceFilePcmkDevice"
+            },
+            {
+                "description": "Secret shared by the ceilometer services.",
+                "default": "unset",
+                "value": "b052b28e738880b9cd5058672dd85735da3444e8",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": true,
+                "constraints": [],
+                "name": "Controller-1::CeilometerMeteringSecret"
+            },
+            {
+                "description": null,
+                "default": "guest",
+                "value": "guest",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Cinder-Storage-1::RabbitPassword"
+            },
+            {
+                "description": "Rabbit client subscriber parameter to specify an SSL connection to the RabbitMQ host.\n",
+                "default": false,
+                "value": false,
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Cinder-Storage-1::RabbitClientUseSSL"
+            },
+            {
+                "description": "The password for the cinder service and db account, used by cinder-api.",
+                "default": "unset",
+                "value": "unset",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": true,
+                "constraints": [],
+                "name": "Cinder-Storage-1::CinderPassword"
+            },
+            {
+                "description": "VLAN tag for creating a public VLAN. The tag will be used to create an access port on the exterior bridge for each control plane node, and that port will be given the IP address returned by neutron from the public network. Set CONTROLEXTRA=overcloud-vlan-port.yaml when compiling overcloud.yaml to include the deployment of VLAN ports to the control plane.\n",
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronPublicInterfaceTag"
+            },
+            {
+                "description": "The user name for SNMPd with readonly rights running on all Overcloud nodes",
+                "default": "ro_snmp_user",
+                "value": "ro_snmp_user",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Swift-Storage-1::SnmpdReadonlyUserName"
+            },
+            {
+                "description": "What interface to bridge onto br-ex for network nodes.",
+                "default": "nic1",
+                "value": "eth1",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronPublicInterface"
+            },
+            {
+                "description": "NFS servers used by Cinder NFS backend. Effective when CinderEnableNfsBackend is true.\n",
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "comma_delimited_list",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::CinderNfsServers"
+            },
+            {
+                "description": "Glance port.",
+                "default": "9292",
+                "value": "9292",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Cinder-Storage-1::GlancePort"
+            },
+            {
+                "description": "The password for the glance service and db account, used by the glance services.",
+                "default": "unset",
+                "value": "a7733712a9c7d6ea5fce8dda3534b977c871e71d",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": true,
+                "constraints": [],
+                "name": "Controller-1::GlancePassword"
+            },
+            {
+                "description": "Set to True to enable debugging on all services.",
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::Debug"
+            },
+            {
+                "description": "Dnsmasq options for neutron-dhcp-agent. The default value here forces MTU to be set to 1400 to account for the gre tunnel overhead.",
+                "default": "dhcp-option-force=26,1400",
+                "value": "dhcp-option-force=26,1400",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronDnsmasqOptions"
+            },
+            {
+                "description": "Whether to enable or not the NFS backend for Cinder",
+                "default": false,
+                "value": false,
+                "label": null,
+                "parameter_type": "boolean",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::CinderEnableNfsBackend"
+            },
+            {
+                "description": "Comma-seperated list of network type driver entrypoints to be loaded.\n",
+                "default": "vxlan,vlan,flat,gre",
+                "value": "vxlan,vlan,flat,gre",
+                "label": null,
+                "parameter_type": "comma_delimited_list",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::NeutronTypeDrivers"
+            },
+            {
+                "description": "Indicates whether the Compute agent is present and expects nova-compute to be configured accordingly",
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [
+                    {
                         "definition": [
                             "",
                             "Present"
                         ],
-                        "description": null
+                        "description": null,
+                        "constraint_type": "allowed_values"
                     }
                 ],
-                "default": "",
-                "description": "Indicates whether the Compute agent is present and expects nova-compute to be configured accordingly",
-                "hidden": null,
-                "label": null,
-                "name": "Compute-1::CeilometerComputeAgent",
-                "parameter_type": "string",
-                "value": ""
+                "name": "Compute-1::CeilometerComputeAgent"
             },
             {
-                "constraints": [],
-                "default": "datacentre:br-ex",
                 "description": "The OVS logical->physical bridge mappings to use. See the Neutron documentation for details. Defaults to mapping br-ex - the external bridge on hosts - to a physical name 'datacentre' which can be used to create provider networks (and we use this for the default floating network) - if changing this either use different post-install network scripts or be sure to keep 'datacentre' as a mapping network name.\n",
-                "hidden": null,
+                "default": "datacentre:br-ex",
+                "value": "datacentre:br-ex",
                 "label": null,
-                "name": "Compute-1::NeutronBridgeMappings",
                 "parameter_type": "string",
-                "value": "datacentre:br-ex"
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NeutronBridgeMappings"
             },
             {
-                "constraints": [],
-                "default": "http",
                 "description": "Protocol to use when connecting to glance, set to https for SSL.",
-                "hidden": null,
+                "default": "http",
+                "value": "http",
                 "label": null,
-                "name": "Cinder-Storage-1::GlanceProtocol",
                 "parameter_type": "string",
-                "value": "http"
+                "hidden": null,
+                "constraints": [],
+                "name": "Cinder-Storage-1::GlanceProtocol"
             },
             {
-                "constraints": [],
-                "default": {},
                 "description": "NovaCompute specific configuration to inject into the cluster. Same\nstructure as ExtraConfig.\n",
-                "hidden": null,
+                "default": {},
+                "value": {},
                 "label": null,
-                "name": "Compute-1::NovaComputeExtraConfig",
                 "parameter_type": "json",
-                "value": {}
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NovaComputeExtraConfig"
             },
             {
-                "constraints": [],
-                "default": "%stackname%-objectstorage-%index%",
                 "description": "Format for SwiftStorage node hostnames",
-                "hidden": null,
+                "default": "%stackname%-objectstorage-%index%",
+                "value": "%stackname%-objectstorage-%index%",
                 "label": null,
-                "name": "ObjectStorageHostnameFormat",
                 "parameter_type": "string",
-                "value": "%stackname%-objectstorage-%index%"
+                "hidden": null,
+                "constraints": [],
+                "name": "ObjectStorageHostnameFormat"
             },
             {
-                "constraints": [],
-                "default": "unset",
                 "description": "The password for the neutron service account, used by neutron agents.",
+                "default": "unset",
+                "value": "d04c1925d87b3955940759b8003a75613b0f40ec",
+                "label": null,
+                "parameter_type": "string",
                 "hidden": true,
-                "label": null,
-                "name": "Compute-1::NeutronPassword",
-                "parameter_type": "string",
-                "value": "e35d984c3e035a889d9a8b361f8e87176e220761"
+                "constraints": [],
+                "name": "Compute-1::NeutronPassword"
             },
             {
-                "constraints": [],
-                "default": "false",
                 "description": "Value of mount_check in Swift account/container/object -server.conf",
-                "hidden": null,
+                "default": "false",
+                "value": "false",
                 "label": null,
-                "name": "Controller-1::SwiftMountCheck",
                 "parameter_type": "boolean",
-                "value": "false"
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::SwiftMountCheck"
             },
             {
-                "constraints": [],
-                "default": 1024,
                 "description": "Configures MySQL max_connections config setting",
-                "hidden": null,
+                "default": 4096,
+                "value": 4096,
                 "label": null,
-                "name": "Controller-1::MysqlMaxConnections",
                 "parameter_type": "number",
-                "value": 1024
-            },
-            {
-                "constraints": [],
-                "default": "",
-                "description": "Setting to a previously unused value during stack-update will trigger package update on all nodes\n",
                 "hidden": null,
-                "label": null,
-                "name": "Controller-1::UpdateIdentifier",
-                "parameter_type": "string",
-                "value": ""
+                "constraints": [],
+                "name": "Controller-1::MysqlMaxConnections"
             },
             {
+                "description": "Setting to a previously unused value during stack-update will trigger package update on all nodes\n",
+                "default": "",
+                "value": "",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::UpdateIdentifier"
+            },
+            {
+                "description": "Configures RabbitMQ FD limit",
+                "default": 4096,
+                "value": 4096,
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::RabbitFDLimit"
+            },
+            {
+                "description": "Flavor for Swift storage nodes to request when deploying.",
+                "default": null,
+                "value": "Flavor-1-x86_64-6144-40",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
                 "constraints": [
                     {
-                        "constraint_type": "custom_constraint",
                         "definition": "nova.flavor",
-                        "description": null
+                        "description": null,
+                        "constraint_type": "custom_constraint"
                     }
                 ],
-                "default": null,
-                "description": "Flavor for Swift storage nodes to request when deploying.",
-                "hidden": null,
-                "label": null,
-                "name": "Swift-Storage-1::Flavor",
-                "parameter_type": "string",
-                "value": "Flavor-4-x86_64-6144-40"
+                "name": "Swift-Storage-1::Flavor"
             },
             {
-                "constraints": [],
-                "default": [],
                 "description": null,
-                "hidden": null,
+                "default": [],
+                "value": [],
                 "label": null,
-                "name": "Cinder-Storage-1::removal_policies",
                 "parameter_type": "json",
-                "value": []
+                "hidden": null,
+                "constraints": [],
+                "name": "Cinder-Storage-1::removal_policies"
             },
             {
-                "constraints": [],
-                "default": 10,
                 "description": "Partition Power to use when building Swift rings",
-                "hidden": null,
+                "default": 10,
+                "value": 10,
                 "label": null,
-                "name": "Controller-1::SwiftPartPower",
                 "parameter_type": "number",
-                "value": 10
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::SwiftPartPower"
             },
             {
-                "constraints": [],
-                "default": {},
                 "description": "Additional hieradata to inject into the cluster, note that\nControllerExtraConfig takes precedence over ExtraConfig.\n",
-                "hidden": null,
+                "default": {},
+                "value": {},
                 "label": null,
-                "name": "Controller-1::ExtraConfig",
                 "parameter_type": "json",
-                "value": {}
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::ExtraConfig"
             },
             {
-                "constraints": [],
-                "default": false,
                 "description": "Whether to enable or not the Rbd backend for Cinder",
-                "hidden": null,
-                "label": null,
-                "name": "Controller-1::CinderEnableRbdBackend",
-                "parameter_type": "boolean",
-                "value": false
-            },
-            {
-                "constraints": [],
                 "default": false,
+                "value": false,
+                "label": null,
+                "parameter_type": "boolean",
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::CinderEnableRbdBackend"
+            },
+            {
                 "description": "Whether to deploy Ceph Storage (OSD) on the Controller",
-                "hidden": null,
+                "default": false,
+                "value": false,
                 "label": null,
-                "name": "Controller-1::EnableCephStorage",
                 "parameter_type": "boolean",
-                "value": false
+                "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::EnableCephStorage"
             },
             {
-                "constraints": [],
-                "default": "br-ex",
                 "description": "An OVS bridge to create for accessing external networks.",
-                "hidden": null,
+                "default": "br-ex",
+                "value": "br-ex",
                 "label": null,
-                "name": "Compute-1::NeutronPhysicalBridge",
                 "parameter_type": "string",
-                "value": "br-ex"
+                "hidden": null,
+                "constraints": [],
+                "name": "Compute-1::NeutronPhysicalBridge"
             },
             {
-                "constraints": [],
-                "default": "unset",
                 "description": "The password for the nova service account, used by nova-api.",
-                "hidden": true,
+                "default": "unset",
+                "value": "652e5ea19e6dc51b80e3059da246588584da6888",
                 "label": null,
-                "name": "Compute-1::NovaPassword",
                 "parameter_type": "string",
-                "value": "a5b263e90913ecfd93ded79c9062fbe04818a7dc"
+                "hidden": true,
+                "constraints": [],
+                "name": "Compute-1::NovaPassword"
             },
             {
-                "constraints": [],
-                "default": true,
                 "description": "Whether to use Galera instead of regular MariaDB.",
-                "hidden": null,
+                "default": true,
+                "value": true,
                 "label": null,
-                "name": "Controller-1::EnableGalera",
                 "parameter_type": "boolean",
-                "value": true
-            },
-            {
-                "constraints": [],
-                "default": "guest",
-                "description": "The password for RabbitMQ",
-                "hidden": true,
-                "label": null,
-                "name": "Compute-1::RabbitPassword",
-                "parameter_type": "string",
-                "value": "guest"
-            },
-            {
-                "constraints": [],
-                "default": "vms",
-                "description": "The name of the Ceph RBD pool to use/create for Nova ephemeral disks",
                 "hidden": null,
+                "constraints": [],
+                "name": "Controller-1::EnableGalera"
+            },
+            {
+                "description": "The password for RabbitMQ",
+                "default": "guest",
+                "value": "guest",
                 "label": null,
-                "name": "NovaRbdPoolName",
                 "parameter_type": "string",
-                "value": "vms"
+                "hidden": true,
+                "constraints": [],
+                "name": "Compute-1::RabbitPassword"
+            },
+            {
+                "description": "The name of the Ceph RBD pool to use/create for Nova ephemeral disks",
+                "default": "vms",
+                "value": "vms",
+                "label": null,
+                "parameter_type": "string",
+                "hidden": null,
+                "constraints": [],
+                "name": "NovaRbdPoolName"
             }
         ],
-        "roles": [
-            {
-                "description": "OpenStack ceph storage node configured by Puppet",
-                "name": "Ceph-Storage",
-                "uuid": "8d0c85d8-7df0-4e28-9966-bc396eca8179",
-                "version": 1
-            },
-            {
-                "description": "OpenStack cinder storage configured by Puppet",
-                "name": "Cinder-Storage",
-                "uuid": "e720503c-23a8-44e7-a3ad-73d7f9299bd8",
-                "version": 1
-            },
-            {
-                "description": "OpenStack controller node configured by Puppet.\n",
-                "name": "Controller",
-                "uuid": "5fa76e40-e184-4612-96bb-1d34ddb28554",
-                "version": 1
-            },
-            {
-                "description": "OpenStack hypervisor node configured via Puppet.\n",
-                "name": "Compute",
-                "uuid": "be166fa3-8415-4394-9cb5-0acfcaa44449",
-                "version": 1
-            },
-            {
-                "description": "OpenStack swift storage node configured by Puppet",
-                "name": "Swift-Storage",
-                "uuid": "f79092de-d042-416d-a9f3-64cc9537c870",
-                "version": 1
-            }
-        ],
-        "updated_at": null,
-        "uuid": "5393d0c1-001b-4b4b-99ed-dee163a8200f"
+        "uuid": "88f0dc4a-1348-49c8-a62c-42ce79a8305b"
     }
-
-    });
+}
+        );
   });
 
   app.use('/fusor/api/openstack/deployments', deploymentPlanRouter);
