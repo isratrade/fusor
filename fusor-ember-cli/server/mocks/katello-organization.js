@@ -307,5 +307,5 @@ module.exports = function(app) {
 });
   });
 
-  app.use('/katello/api/v2/organizations', katelloOrganizationsRouter);
+  app.use('/katello/api/v2aaa/organizations', katelloOrganizationsRouter);
 };

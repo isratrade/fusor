@@ -396,5 +396,5 @@ module.exports = function(app) {
     res.status(204).end();
   });
 
-  app.use('/customer_portal/consumers', entitlementRouter);
+  app.use('/customer_portalaaa/consumers', entitlementRouter);
 };
