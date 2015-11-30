@@ -41,3 +41,11 @@ test('isStarted should be false if foreman_task_uuid is null', function(assert){
   assert.equal(model.get('isStarted'), false);
   assert.equal(model.get('isNotStarted'), true);
 });
+
+test('discovered_hosts hasMany relationship exists', function(assert){
+  var model = this.store().modelFor('deployment');
+  var relationship = Ember.get(model, 'relationshipsByName').get('discovered_hosts');
+
+  assert.equal(relationship.key, 'discovered_hosts');
+  assert.equal(relationship.kind, 'hasMany');
+});
