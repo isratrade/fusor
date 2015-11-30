@@ -259,5 +259,5 @@ module.exports = function(app) {
     });
   });
 
-  app.use('/customer_portal/owners', managementApplicationsRouter);
+  app.use('/customer_portalaaa/owners', managementApplicationsRouter);
 };

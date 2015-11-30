@@ -28,5 +28,5 @@ module.exports = function(app) {
       ]);
   });
 
-  app.use('/customer_portal', portalRouter);
+  app.use('/customer_portalaaa', portalRouter);
 };

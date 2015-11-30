@@ -44,5 +44,5 @@ module.exports = function(app) {
     res.status(204).end();
   });
 
-  app.use('/api/v21/lifecycle_environments', lifecycleEnvironmentsRouter);
+  app.use('/api/v21aaa/lifecycle_environments', lifecycleEnvironmentsRouter);
 };

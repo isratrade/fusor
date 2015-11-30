@@ -23,5 +23,5 @@ module.exports = function(app) {
     res.send(organizations[0]);
   });
 
-  app.use('/api/v21/organizations', organizationsRouter);
+  app.use('/api/v21aaa/organizations', organizationsRouter);
 };
