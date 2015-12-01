@@ -19,14 +19,17 @@ Fusor normally runs inside Satellite 6 as a plugin, but this demo only shows the
 * Delete deployment is not working in demo
 
 **Satellite**
+
 * Add new environment path is not working in demo
 
 
 **RHEV**
+
 * No differences
 
 
 **RHELOSP**
+
 * Subscription and Review tabs may be (incorrectly) disabled because the undercloud password is not persisted
 * Detect Undercloud - enter any values for Undercloud IP, SSH User, SSH Password
 * Tabs (Register Nodes, Assign Nodes, Configure Overcloud) may be (incorrectly) disabled in demo because the undercloud password is not persisted
@@ -35,13 +38,16 @@ Fusor normally runs inside Satellite 6 as a plugin, but this demo only shows the
 * Erors in demo only (Cannot read property '_internalModel' of undefined)
 
 **CFME**
+
 * No differences
 
 **Subscriptions**
+
 * Adding New Subscription Management Application not working in demo
 * Upload manifest does not show success message and enable "Next" in demo
 
 
 **Review**
+
 * Deploy button does not generate foreman task ID
 * Progress bar of deployment does not show any progress
