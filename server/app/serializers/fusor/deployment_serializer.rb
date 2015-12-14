@@ -12,7 +12,7 @@ module Fusor
                :rhev_gluster_node_name, :rhev_gluster_node_address,
                :rhev_gluster_ssh_port, :rhev_gluster_root_password,
                :rhev_is_self_hosted, :cfme_install_loc,
-               :foreman_task_uuid, :upstream_consumer_uuid, :upstream_consumer_name,
+               :upstream_consumer_uuid, :upstream_consumer_name,
                :rhev_root_password, :cfme_root_password, :cfme_admin_password,
                :host_naming_scheme, :custom_preprend_name, :enable_access_insights,
                :cfme_address,
@@ -42,6 +42,8 @@ module Fusor
 
     has_many :subscriptions, serializer: Fusor::SubscriptionSerializer
     has_many :introspection_tasks, serializer: Fusor::IntrospectionTaskSerializer
+
+    has_one :foreman_task, key: :foreman_task_uuid, serializer: ::ForemanTaskSerializer
 
   end
 end

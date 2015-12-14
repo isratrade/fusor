@@ -38,6 +38,8 @@ module Fusor
     has_many :subscriptions, :class_name => "Fusor::Subscription", :foreign_key => :deployment_id
     has_many :introspection_tasks, :class_name => 'Fusor::IntrospectionTask'
 
+    belongs_to :foreman_task, :class_name => "::ForemanTasks::Task", :foreign_key => :foreman_task_uuid
+
     after_initialize :setup_warnings
 
     scoped_search :on => [:id, :name], :complete_value => true
