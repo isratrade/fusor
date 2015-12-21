@@ -29,7 +29,6 @@ export default DS.Model.extend({
   cfme_root_password: DS.attr('string'),
   cfme_admin_password: DS.attr('string'),
 
-  foreman_task_uuid: DS.attr('string'),
   upstream_consumer_uuid: DS.attr('string'),
   upstream_consumer_name: DS.attr('string'),
 
@@ -80,6 +79,9 @@ export default DS.Model.extend({
 
   // has one foreman_task
   foreman_task: DS.belongsTo('foreman-task',  {async: true}),
+  // foreman_task_uuid is commented out below and defined in app/serializers/deployment.js
+  // based on key of DS.belongsTo
+  // foreman_task_uuid: DS.attr('string'),
 
   // Ember Data doesn't have DS.attr('array') so I did this
   rhev_hypervisor_host_ids: Ember.computed('discovered_hosts', function() {
