@@ -4,7 +4,7 @@ export default Ember.Component.extend({
 
   actions: {
     deleteHyper(hyp) {
-        return this.sendAction('action', hyp);
+      return this.sendAction('action', hyp);
     }
 
   }

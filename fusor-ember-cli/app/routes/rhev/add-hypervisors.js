@@ -8,6 +8,7 @@ export default Ember.Route.extend({
 
   setupController(controller, model) {
     controller.set('model', model);
+    //array - collection
     controller.set('hypervisors', this.modelFor('deployment').get('discovered_hosts'));
   },
 
@@ -29,7 +30,7 @@ export default Ember.Route.extend({
 
       var hyperNames = this.get('controller.hypervisors').getEach('name');
 
-      alert(hyperNames);
+      alert(hyperIds + ' ' + hyperNames );
 
       // request({
       //       url: '/fusor/api/v21/deployments/' + deployment.get('id'),

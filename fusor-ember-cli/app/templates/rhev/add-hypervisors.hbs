@@ -4,12 +4,12 @@
 
     <h1> Add Hypervisors </h1>
 
-    {{model}} -
-    {{hypervisors.length}}
-    <br />
-
     {{#each hypervisors as |hypervisor|}}
-        {{hyp-input hypervisor=hypervisor deploymentId=model.id action='deleteHypervisor'}}
+        {{hyp-input hypervisor=hypervisor
+                    deploymentId=model.id
+                    action='deleteHypervisor'
+                    action2="routeActionThis"
+                    action3="routeActionThis"}}
     {{/each}}
     <button {{action 'addAnotherHypervisor'}}>Add Another</button>
 
@@ -17,7 +17,6 @@
     <br />
     <button {{action 'saveAllHypervisors'}}>Save all</button>
 
-    {{outlet}}
 
   </div>
 </div>
