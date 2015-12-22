@@ -40,6 +40,7 @@ export default Router.map(function() {
       });
       this.route('rhev-options', {path: 'configuration', resetNamespace: true});
       this.route('storage', {resetNamespace: true});
+      this.route('add_hypervisors');
     });
 
     this.route('openstack', {resetNamespace: true}, function() {
