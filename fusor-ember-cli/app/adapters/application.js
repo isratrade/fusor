@@ -11,6 +11,7 @@ export default DS.ActiveModelAdapter.extend({
     shouldReloadRecord(store, ticketSnapshot) {
       return true;
     },
+    // this is good
     handleResponse(status /*, headers, payload */) {
         if(status === 401) {
             App.EventBus.trigger('displayErrorModal', {
