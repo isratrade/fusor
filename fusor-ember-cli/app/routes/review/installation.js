@@ -52,11 +52,7 @@ export default Ember.Route.extend({
             }
         }).then(function(response) {
             controller.set('showSpinner', false);
-
-            controller.set('showErrorMessage', response.errors.length > 0);
             controller.set('errorMsg', response.errors.join("\n"));
-
-            controller.set('showWarningMessage', response.warnings.length > 0);
             controller.set('warningMsg', response.warnings.join("\n"));
         }, function(response){
             controller.set('showSpinner', false);
