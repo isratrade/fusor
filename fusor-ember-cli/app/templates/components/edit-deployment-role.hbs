@@ -1,0 +1,18 @@
+{{#pf-modal-base idModal='editDeploymentRoleModal'
+                 openModal=openModal
+                 title=title}}
+
+      {{#pf-modal-body}}
+          paste here
+      {{/pf-modal-body}}
+
+      {{#pf-modal-footer}}
+          <button {{action 'cancelEditRole'}} class="btn btn-default">
+              Cancel
+          </button>
+          <button {{action 'saveRole'}} class="btn btn-primary">
+              Save
+          </button>
+      {{/pf-modal-footer}}
+
+{{/pf-modal-base}}

@@ -63,7 +63,9 @@
                    disableCancel=isStarted
                    deploymentName=deploymentName}}
 
-{{partial 'edit-deployment-role'}}
+{{edit-deployment-role openModal=openModalEditRole
+                       role=roleInModal???
+                       action='action'}}
 
 {{osp-global-config-modal openModal=openModalGlobalConfig
                           edittedPlanParameters=edittedPlanParameters
