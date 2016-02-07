@@ -1,0 +1,40 @@
+<div class='row'>
+  <div class='col-md-6 env-summary-title'>
+    Node Details
+    <div class='pull-right'>
+      <button {{action "editOseNodeDetails"}} class='btn btn-default btn-sm'>
+        {{customEditLabel}}
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-6 node-details-body'>
+
+    <div class='row'>
+      <div class='col-md-6 node-details-col'>
+        {{node-details-block numNodes=numMasterNodes
+                             valueVcpu=masterVcpu
+                             valueRam=masterRam
+                             valueDisk=masterDisk
+                             typeNode='master'
+                             isEditMode=isEditMode}}
+      </div>
+
+      <div class='col-md-6'>
+        {{node-details-block numNodes=numWorkerNodes
+                             valueVcpu=nodeVcpu
+                             valueRam=nodeRam
+                             valueDisk=nodeDisk
+                             typeNode='worker'
+                             isEditMode=isEditMode
+                             storageSize=storageSize}}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
