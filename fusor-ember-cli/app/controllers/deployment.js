@@ -64,6 +64,13 @@ export default Ember.Controller.extend(DeploymentControllerMixin, DisableTabMixi
     }
   ),
 
+  // isDisabledOpenShift: function() {
+  //   return (this.get('satelliteInvalid') ||
+  //           (this.get('isRhev') && !(this.get('validRhev'))) ||
+  //           (this.get('isOpenStack') && !(this.get('validOpenStack')))
+  //           );
+  // }.property("satelliteInvalid", 'isRhev', 'isOpenStack', 'validRhev', 'validOpenStack'),
+
 
   hasSubscriptionUUID: Ember.computed(
     'organizationUpstreamConsumerUUID',

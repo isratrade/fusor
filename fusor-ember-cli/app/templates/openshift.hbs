@@ -1,0 +1,11 @@
+{{#wizard-step outlet=outlet}}
+
+      {{#link-to 'openshift.openshift-nodes' tagName='li' disabled=disableTabRhevEngine}}
+        <a>{{stepNumberOpenShift}}A. Master/Nodes</a>
+      {{/link-to}}
+
+      {{#link-to 'openshift.openshift-configuration' tagName='li' disabled=disableTabRhevHypervisors}}
+        <a>{{stepNumberOpenShift}}B. Configuration</a>
+      {{/link-to}}
+
+{{/wizard-step}}
