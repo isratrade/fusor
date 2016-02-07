@@ -11,12 +11,14 @@ $error-color: #cc0000;
 }
 
 .rhci-footer-selected{
-  background-color: #eee; /*#5cb85c*/
+  background-color: #0099d3;
+  color: #ffffff;
   vertical-align: middle;
 }
 
 .rhci-footer-unselected{
   background-color:#eee;
+  color: #0099d3;
 }
 
 .rhci-footer-box {
@@ -32,20 +34,20 @@ $error-color: #cc0000;
 }
 
 i.fa-check {
-  color: #0099d3;
+  color: #ffffff;
 }
 
 .rhci-install-footer {
-  color: #0099d3;
   font-size: 130%;
 }
 
 .rhci-item {
   background-color:#eee;
+  margin:2px;
 }
 
 .rhci-item-selected {
-  border-bottom: solid 6px #0099d3;
+  /*border-: solid 6px #0099d3;*/
 }
 
 .subscriptions_needed {
@@ -518,4 +520,47 @@ table.fusor-table {
   color: #6d6e70;
   font-style: italic;
   font-weight: lighter;
+}
+
+.right-start-col {
+  margin-left: -38px;
+}
+
+.rhci-item-desc {
+  padding: 10px;
+}
+
+.rhci-product-image {
+  height: 210px;
+}
+
+.button-selection {
+  border: solid 1px #0099d3;
+  background-color: #eee;
+  color: #0099d3;
+  text-align: center;
+  display: inline-block;
+  min-width: 30px;
+  padding: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.button-selection-selected {
+  background-color: #0099d3;
+  color: #fff;
+}
+
+.progress-bar-gray {
+  background-color: #555 !important;
+}
+
+.progress-bar-black {
+  background-color: #000 !important;
+  color: #fff;
+}
+
+.input-ose {
+  width: 20px;
+  text-align: center;
 }

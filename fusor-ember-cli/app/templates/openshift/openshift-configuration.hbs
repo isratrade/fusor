@@ -1,0 +1,14 @@
+<p>
+  Set the user account that will be created and used to configure all nodes.
+</p>
+
+<form class="form form-horizontal">
+  {{text-f label="Username" value=model.openshift_username isRequired=true cssId='openshift_username' disabled=isStarted validator=openshiftUsernameValidator}}
+</form>
+
+{{cancel-back-next backRouteName='openshift.openshift-nodes'
+                   disableBack=false
+                   nextRouteName=nextRouteNameAfterOpenshift
+                   disableNext=isInvalidOpenshiftConfiguration
+                   disableCancel=isStarted
+                   deploymentName=deploymentName}}
