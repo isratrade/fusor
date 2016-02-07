@@ -33,6 +33,20 @@ export default Ember.Controller.extend(DeploymentControllerMixin, DisableTabMixi
            );
   }),
 
+  isDisabledOpenShift: Ember.computed(
+    "satelliteInvalid",
+    'isRhev',
+    'isOpenStack',
+    'validRhev',
+    'validOpenStack',
+    function() {
+      return (this.get('satelliteInvalid') ||
+              (this.get('isRhev') && !(this.get('validRhev'))) ||
+              (this.get('isOpenStack') && !(this.get('validOpenStack')))
+              );
+    }
+  ),
+
   isDisabledCloudForms: Ember.computed(
     "satelliteInvalid",
     'isRhev',
@@ -63,7 +77,6 @@ export default Ember.Controller.extend(DeploymentControllerMixin, DisableTabMixi
              );
     }
   ),
-
 
   hasSubscriptionUUID: Ember.computed(
     'organizationUpstreamConsumerUUID',

@@ -1,0 +1,57 @@
+<div class='row'>
+  <div class='col-md-9'>
+
+    <p>
+      Select where to provision the OpenShift Enterprise nodes.
+    </p>
+
+    <div class='ident-radio'>
+      {{#radio-button value="RHEV" groupValue=openshiftInstallLoc changed="openshiftLocationChanged" id="install_on_rhev" disabled=disableRHEVradio}}
+        <span class="{{if disableRHEV 'disabled'}}">
+          Red Hat Enterprise Virtualization
+        </span>
+      {{/radio-button}}
+    </div>
+
+    <div class='ident-radio'>
+      {{#radio-button value="OpenStack" groupValue=openshiftInstallLoc changed="openshiftLocationChanged" id="install_on_openstack" disabled=disableOpenstackradio}}
+        <span class="inline-block {{if disableOpenStack 'disabled'}}">
+          Red Hat Enterprise Linux OpenStack Platform
+        </span>
+      {{/radio-button}}
+    </div>
+
+    <br />
+    <p>
+      Select how many virtual machines should be created as nodes for the OpenShift environment.
+    </p>
+
+    <br />
+    <p>
+      Total Nodes
+    </p>
+    <p>
+      Non-HA
+    </p>
+
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <button>4</button>
+
+    <br />
+    <br />
+    <p>
+      Environment Details
+    </p>
+    <h1> TO DO</h1>
+
+  </div>
+</div>
+
+{{cancel-back-next backRouteName=backRouteName
+                   disableBack=false
+                   nextRouteName='openshift.openshift-configuration'
+                   disableNext=isInvalidOpenshiftNodes
+                   disableCancel=isStarted
+                   deploymentName=deploymentName}}
