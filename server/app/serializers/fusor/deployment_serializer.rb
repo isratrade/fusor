@@ -46,7 +46,11 @@ module Fusor
                :openshift_available_disk,
                :openshift_number_master_nodes,
                :openshift_number_worker_nodes,
-
+               :openshift_storage_type,
+               :openshift_storage_name,
+               :openshift_storage_desc,
+               :openshift_export_path,
+               :openshift_username,
                :created_at, :updated_at
 
 

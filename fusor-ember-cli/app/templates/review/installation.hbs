@@ -177,6 +177,25 @@
                       routeName='openshift.openshift-configuration'
                       isRequired=true
                       value=storageSize}}
+                      value='TODO'}}
+
+        {{review-link label='Storage Type'
+                      routeName='openshift.openshift-configuration'
+                      isRequired=true
+                      value=model.openshift_storage_type}}
+
+        {{review-link label='Storage Name'
+                      routeName='openshift.openshift-configuration'
+                      isRequired=true
+                      value=model.openshift_storage_name}}
+
+        {{review-link label='Storage Description'
+                      routeName='openshift.openshift-configuration'
+                      value=model.openshift_storage_desc}}
+
+        {{review-link label='Export Path'
+                      routeName='openshift.openshift-configuration'
+                      value=model.openshift_export_path}}
 
         {{review-link label='Username'
                       routeName='openshift.openshift-configuration'
