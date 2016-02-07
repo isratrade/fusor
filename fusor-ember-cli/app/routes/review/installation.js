@@ -31,38 +31,38 @@ export default Ember.Route.extend({
         controller.set('hasSubscriptionPools', Ember.isPresent(this.controllerFor('subscriptions/select-subscriptions').get('subscriptionPools')));
     }
 
-    if (!model.get('isStarted')) {
-        var self = this;
-        var deployment = self.modelFor('deployment');
-        var token = Ember.$('meta[name="csrf-token"]').attr('content');
+    // if (!model.get('isStarted')) {
+    //     var self = this;
+    //     var deployment = self.modelFor('deployment');
+    //     var token = Ember.$('meta[name="csrf-token"]').attr('content');
 
-        var validationErrors = controller.get('validationErrors');
+    //     var validationErrors = controller.get('validationErrors');
 
-        controller.set('validationErrors', []);
-        controller.set('validationWarnings', []);
+    //     controller.set('validationErrors', []);
+    //     controller.set('validationWarnings', []);
 
-        controller.set('showSpinner', true);
-        controller.set('spinnerTextMessage', "Validating deployment...");
+    //     controller.set('showSpinner', true);
+    //     controller.set('spinnerTextMessage', "Validating deployment...");
 
-        request({
-            url: `/fusor/api/v21/deployments/${model.get('id')}/validate`,
-            type: "GET",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "X-CSRF-Token": token
-            }
-        }).then(function (response) {
-          controller.set('showSpinner', false);
-          controller.set('validationErrors', response.validation.errors);
-          controller.set('validationWarnings', response.validation.warnings);
-        }, function(error){
-          console.log('error', error);
-          controller.set('showSpinner', false);
-          controller.set('errorMsg', error.jqXHR.responseText);
-          controller.set('showErrorMessage', true);
-        });
-    }
+    //     request({
+    //         url: `/fusor/api/v21/deployments/${model.get('id')}/validate`,
+    //         type: "GET",
+    //         headers: {
+    //             "Accept": "application/json",
+    //             "Content-Type": "application/json",
+    //             "X-CSRF-Token": token
+    //         }
+    //     }).then(function (response) {
+    //       controller.set('showSpinner', false);
+    //       controller.set('validationErrors', response.validation.errors);
+    //       controller.set('validationWarnings', response.validation.warnings);
+    //     }, function(error){
+    //       console.log('error', error);
+    //       controller.set('showSpinner', false);
+    //       controller.set('errorMsg', error.jqXHR.responseText);
+    //       controller.set('showErrorMessage', true);
+    //     });
+    // }
   }
 
 });
