@@ -1,0 +1,113 @@
+<div class='row'>
+  <div class='col-md-9'>
+
+    <p>
+      Select where to provision the OpenShift Enterprise nodes.
+    </p>
+
+    <div class='ident-radio'>
+      {{#radio-button value="RHEV" groupValue=openshiftInstallLoc changed="openshiftLocationChanged" id="install_on_rhev" disabled=disableRHEVradio}}
+        <span class="{{if disableRHEV 'disabled'}}">
+          Red Hat Enterprise Virtualization
+        </span>
+      {{/radio-button}}
+    </div>
+
+    <div class='ident-radio'>
+      {{#radio-button value="OpenStack" groupValue=openshiftInstallLoc changed="openshiftLocationChanged" id="install_on_openstack" disabled=disableOpenstackradio}}
+        <span class="inline-block {{if disableOpenStack 'disabled'}}">
+          Red Hat Enterprise Linux OpenStack Platform
+        </span>
+      {{/radio-button}}
+    </div>
+
+    <br />
+    <p>
+      Select how many virtual machines should be created as nodes for the OpenShift environment.
+    </p>
+
+    {{button-selection label=1
+                       value=1
+                       groupValue=model.openshift_number_nodes
+                       changed="numNodesChanged"}}
+    {{button-selection label=2
+                       value=2
+                       groupValue=model.openshift_number_nodes
+                       changed="numNodesChanged"}}
+    {{button-selection label=3
+                       value=3
+                       groupValue=model.openshift_number_nodes
+                       changed="numNodesChanged"}}
+    {{button-selection label=4
+                       value=4
+                       groupValue=model.openshift_number_nodes
+                       changed="numNodesChanged"}}
+    {{button-selection label=5
+                       value=5
+                       groupValue=model.openshift_number_nodes
+                       changed="numNodesChanged"}}
+    <div style='color: #999; font-style: italic;'>
+      Not Highly Available
+    </div>
+
+    <br />
+    <p>
+    Select how much additional storage is needed for Docker containers on each worker node.
+    </p>
+    {{button-selection label='15 GB'
+                       value=15
+                       groupValue=model.openshift_storage_size
+                       changed="storageSizeChanged"}}
+    {{button-selection label='20 GB'
+                       value=20
+                       groupValue=model.openshift_storage_size
+                       changed="storageSizeChanged"}}
+    {{button-selection label='25 GB'
+                       value=25
+                       groupValue=model.openshift_storage_size
+                       changed="storageSizeChanged"}}
+    {{button-selection label='30 GB'
+                       value=30
+                       groupValue=model.openshift_storage_size
+                       changed="storageSizeChanged"}}
+
+    <br />
+    <br />
+    {{#if showEnvironmentSummary}}
+        {{ose-env-summary numNodes=model.openshift_number_nodes
+                          storageSize=model.openshift_storage_size
+                          masterVcpu=model.openshift_master_vcpu
+                          masterRam=model.openshift_master_ram
+                          masterDisk=model.openshift_master_disk
+                          nodeVcpu=model.openshift_node_vcpu
+                          nodeRam=model.openshift_node_ram
+                          nodeDisk=model.openshift_node_disk
+                          vcpuAvailable=model.openshift_available_vcpu
+                          ramAvailable=model.openshift_available_ram
+                          diskAvailable=model.openshift_available_disk
+        }}
+
+        <div class='row'>
+          <div class='col-md-6'>
+        {{node-details numNodes=model.openshift_number_nodes
+                       storageSize=model.openshift_storage_size
+                       masterVcpu=model.openshift_master_vcpu
+                       masterRam=model.openshift_master_ram
+                       masterDisk=model.openshift_master_disk
+                       nodeVcpu=model.openshift_node_vcpu
+                       nodeRam=model.openshift_node_ram
+                       nodeDisk=model.openshift_node_disk
+                       }}
+            </div>
+          </div>
+    {{/if}}
+
+  </div>
+</div>
+
+{{cancel-back-next backRouteName=backRouteName
+                   disableBack=false
+                   nextRouteName='openshift.openshift-configuration'
+                   disableNext=isInvalidOpenshiftNodes
+                   disableCancel=isStarted
+                   deploymentName=deploymentName}}

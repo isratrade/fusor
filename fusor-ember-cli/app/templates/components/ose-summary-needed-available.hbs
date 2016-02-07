@@ -1,0 +1,16 @@
+
+<div class='row'>
+  <div class='col-md-1'>
+  <span>
+    <strong>{{label}}</strong>
+  </span>
+
+  </div>
+  <div class='col-md-11'>
+      <div class={{progressBarClass}} role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow={{percentProgressInt}} style="width: {{styleWidth}};">
+        <div style='text-align: left'>{{needed}} {{suffix}} </div>
+      </div>
+      <div style='float: right;'>{{available}} {{suffix}} </div>
+  </div>
+</div>
+{{isNeededAvailable}}
