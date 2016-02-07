@@ -1,0 +1,86 @@
+<div class='row' style='background-color: #eee;'>
+  <div class='col-md-6'>
+    Node Details  <a {{action "editOseNodeDetails"}}> {{customEditLabel}} </a>
+  </div>
+  <div class='col-md-6'>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-6'>
+    <h1>{{numMasterNodes}}</h1>
+  </div>
+  <div class='col-md-6'>
+    <h1>{{numWorkerNodes}}</h1>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-6'>
+    Each master node has:
+  </div>
+  <div class='col-md-6'>
+    Each worker node has:
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-6'>
+    <strong>vCPU</strong>&nbsp;
+    {{#if isEditMode}}
+      {{input value=masterVcpu class='input-ose'}}
+    {{else}}
+      {{masterVcpu}}
+    {{/if}}
+  </div>
+  <div class='col-md-6'>
+    <strong>vCPU</strong>&nbsp;
+    {{#if isEditMode}}
+      {{input value=nodeVcpu class='input-ose'}}
+    {{else}}
+      {{nodeVcpu}}
+    {{/if}}
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-6'>
+    <strong>RAM</strong>&nbsp;
+    {{#if isEditMode}}
+      {{input value=masterRam class='input-ose'}} GB
+    {{else}}
+      {{masterRam}} GB
+    {{/if}}
+  </div>
+  <div class='col-md-6'>
+    <strong>RAM</strong>&nbsp;
+    {{#if isEditMode}}
+      {{input value=nodeRam class='input-ose'}} GB
+    {{else}}
+      {{nodeRam}} GB
+    {{/if}}
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-6'>
+    <strong>Disk</strong>&nbsp;
+    {{#if isEditMode}}
+      {{input value=masterDisk class='input-ose'}} GB
+    {{else}}
+      {{masterDisk}} GB
+    {{/if}}
+  </div>
+  <div class='col-md-6'>
+    <strong>Disk</strong>&nbsp;
+    {{#if isEditMode}}
+      {{input value=nodeDisk class='input-ose'}} GB
+    {{else}}
+      {{nodeDisk}} GB
+    {{/if}}
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-6'>
+    &nbsp;
+  </div>
+  <div class='col-md-6'>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{storageSize}} GB for Docker
+  </div>
+</div>

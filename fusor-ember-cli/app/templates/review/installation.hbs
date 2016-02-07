@@ -160,6 +160,49 @@
       {{/accordion-item}}
     {{/if}}
 
+    {{#if isOpenShift}}
+      {{#accordion-item name="Openshift Enterprise" isOpen=isOpenshiftOpen}}
+
+        {{review-link label='Nodes Location'
+                      routeName='openshift.openshift-nodes'
+                      isRequired=true
+                      value=model.openshift_install_loc}}
+
+        {{review-link label='Nodes'
+                      routeName='openshift.openshift-nodes'
+                      isRequired=true
+                      value=model.numNodes}}
+
+        {{review-link label='Additional Storage'
+                      routeName='openshift.openshift-configuration'
+                      isRequired=true
+                      value=storageSize}}
+
+        {{review-link label='Storage Type'
+                      routeName='openshift.openshift-configuration'
+                      isRequired=true
+                      value=model.openshift_storage_type}}
+
+        {{review-link label='Storage Name'
+                      routeName='openshift.openshift-configuration'
+                      isRequired=true
+                      value=model.openshift_storage_name}}
+
+        {{review-link label='Storage Description'
+                      routeName='openshift.openshift-configuration'
+                      value=model.openshift_storage_desc}}
+
+        {{review-link label='Export Path'
+                      routeName='openshift.openshift-configuration'
+                      value=model.openshift_export_path}}
+
+        {{review-link label='Username'
+                      routeName='openshift.openshift-configuration'
+                      value=model.openshift_username}}
+
+      {{/accordion-item}}
+    {{/if}}
+
     {{#if isCloudForms}}
       {{#accordion-item name="Cloud Forms Management Engine" isOpen=isCloudFormsOpen}}
           {{review-link label='Installation Location' routeName='where-install' isRequired=true
