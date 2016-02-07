@@ -3,7 +3,7 @@ module Fusor
 
     embed :ids, include: true
     attributes :id, :name, :label, :description,
-               :deploy_rhev, :deploy_cfme, :deploy_openstack,
+               :deploy_rhev, :deploy_cfme, :deploy_openstack, :deploy_openshift,
                :rhev_engine_admin_password,
                :rhev_database_name, :rhev_cluster_name, :rhev_storage_name,
                :rhev_storage_type, :rhev_storage_address, :rhev_cpu_type, :rhev_share_path,
@@ -31,7 +31,12 @@ module Fusor
                :cfme_hostname,
                :is_disconnected,
                :cdn_url, :manifest_file,
+               :openshift_install_loc,
+               :openshift_number_nodes,
+               :openshift_storage_size,
+               :openshift_username,
                :created_at, :updated_at
+
 
     has_one :organization, serializer: ::OrganizationSerializer
     has_one :lifecycle_environment, serializer: ::LifecycleEnvironmentSerializer

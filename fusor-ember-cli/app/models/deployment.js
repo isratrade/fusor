@@ -11,6 +11,7 @@ export default DS.Model.extend({
   deploy_rhev: DS.attr('boolean'),
   deploy_cfme: DS.attr('boolean'),
   deploy_openstack: DS.attr('boolean'),
+  deploy_openshift: DS.attr('boolean'),
 
   is_disconnected: DS.attr('boolean'),
   rhev_is_self_hosted: DS.attr('boolean'),
@@ -64,6 +65,11 @@ export default DS.Model.extend({
 
   cdn_url: DS.attr('string'),
   manifest_file: DS.attr('string'),
+
+  openshift_install_loc: DS.attr('string'),
+  openshift_number_nodes: DS.attr('number'),
+  openshift_storage_size: DS.attr('number'),
+  openshift_username: DS.attr('string'),
 
   created_at: DS.attr('date'),
   updated_at: DS.attr('date'),

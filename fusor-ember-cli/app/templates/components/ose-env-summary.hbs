@@ -1,0 +1,34 @@
+<div class='row' style='background-color: #eee;'>
+  <div class='col-md-3'>
+    Environment Summary
+  </div>
+  <div class='col-md-3' style='text-align: right;'>
+    Node Count: {{numNodes}}
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-3'>
+    Resources needed:
+  </div>
+  <div class='col-md-3' style='text-align: right;'>
+    Resources available
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-6'>
+  {{ose-summary-needed-available label='vCPU' needed=vcpuNeeded available=vcpuAvailable storageSize=storageSize}}
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-6'>
+  {{ose-summary-needed-available label='RAM' needed=ramNeeded available=ramAvailable suffix='GB' storageSize=storageSize}}
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-6'>
+  {{ose-summary-needed-available label='Disk' needed=diskNeeded available=diskAvailable suffix='GB' storageSize=storageSize}}
+  </div>
+</div>
+
+<BR />
+<BR />
