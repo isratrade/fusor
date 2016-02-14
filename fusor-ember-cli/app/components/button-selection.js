@@ -11,7 +11,7 @@ export default Ember.Component.extend({
   }),
 
   click() {
-    return this.sendAction('action', this.get('value'));
+    return this.sendAction('changed', this.get('value'));
   }
 
 });

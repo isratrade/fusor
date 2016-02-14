@@ -26,30 +26,26 @@
       Select how many virtual machines should be created as nodes for the OpenShift environment.
     </p>
 
-    <br />
-    <p>
-      Total Nodes
-    </p>
-    <p>
-      Non-HA
-    </p>
     {{button-selection label=1
                        value=1
                        groupValue=model.openshift_number_nodes
-                       action="numNodesChanged"}}
+                       changed="numNodesChanged"}}
     {{button-selection label=2
                        value=2
                        groupValue=model.openshift_number_nodes
-                       action="numNodesChanged"}}
+                       changed="numNodesChanged"}}
     {{button-selection label=3
                        value=3
                        groupValue=model.openshift_number_nodes
-                       action="numNodesChanged"}}
+                       changed="numNodesChanged"}}
     {{button-selection label=4
                        value=4
                        groupValue=model.openshift_number_nodes
-                       action="numNodesChanged"}}
-    <br />
+                       changed="numNodesChanged"}}
+    <div style='color: #999; font-style: italic;'>
+      Not Highly Available
+    </div>
+
     <br />
     <p>
     Select how much additional storage is needed for Docker containers on each worker node.
@@ -57,19 +53,19 @@
     {{button-selection label='15 GB'
                        value='15 GB'
                        groupValue=model.openshift_storage_size
-                       storageSizeChanged="storageSizeChanged"}}
+                       changed="storageSizeChanged"}}
     {{button-selection label='20 GB'
                        value='20 GB'
                        groupValue=model.openshift_storage_size
-                       storageSizeChanged="storageSizeChanged"}}
+                       changed="storageSizeChanged"}}
     {{button-selection label='25 GB'
                        value='25 GB'
                        groupValue=model.openshift_storage_size
-                       storageSizeChanged="storageSizeChanged"}}
+                       changed="storageSizeChanged"}}
     {{button-selection label='30 GB'
                        value='30 GB'
                        groupValue=model.openshift_storage_size
-                       storageSizeChanged="storageSizeChanged"}}
+                       changed="storageSizeChanged"}}
 
   </div>
 </div>
@@ -80,6 +76,3 @@
                    disableNext=isInvalidOpenshiftNodes
                    disableCancel=isStarted
                    deploymentName=deploymentName}}
-nodes - {{model.openshift_number_nodes}}
-<br />
-model.openshift_storage_size
