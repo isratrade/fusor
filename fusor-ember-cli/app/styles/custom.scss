@@ -529,3 +529,19 @@ table.fusor-table {
 .rhci-product-image {
   height: 210px;
 }
+
+.button-selection {
+  border: solid 1px #0099d3;
+  background-color: #eee;
+  color: #0099d3;
+  text-align: center;
+  display: inline-block;
+  min-width: 30px;
+  padding: 5px;
+  margin-right: 5px;
+}
+
+.button-selection-selected {
+  background-color: #0099d3;
+  color: #fff;
+}

@@ -66,10 +66,8 @@ export default DS.Model.extend({
   manifest_file: DS.attr('string'),
 
   openshift_install_loc: DS.attr('string'),
-  openshift_storage_type: DS.attr('string'),
-  openshift_storage_name: DS.attr('string'),
-  openshift_storage_desc: DS.attr('string'),
-  openshift_export_path: DS.attr('string'),
+  openshift_number_nodes: DS.attr('number'),
+  openshift_storage_size: DS.attr('string'),
   openshift_username: DS.attr('string'),
 
   created_at: DS.attr('date'),

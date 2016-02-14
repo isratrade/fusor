@@ -42,7 +42,14 @@ export default Ember.Controller.extend(NeedsDeploymentMixin, {
   }),
 
   actions: {
-    openshiftLocationChanged() {
+    openshiftLocationChanged() {},
+
+    numNodesChanged(numNodes) {
+      return this.set('model.openshift_number_nodes', numNodes);
+    },
+
+    storageSizeChanged(storageSize) {
+      return this.set('model.openshift_storage_size', storageSize);
     }
   }
 
