@@ -32,12 +32,11 @@ module Fusor
                :is_disconnected,
                :cdn_url, :manifest_file,
                :openshift_install_loc,
-               :openshift_storage_type,
-               :openshift_storage_name,
-               :openshift_storage_desc,
-               :openshift_export_path,
+               :openshift_number_nodes,
+               :openshift_storage_size,
                :openshift_username,
                :created_at, :updated_at
+
 
     has_one :organization, serializer: ::OrganizationSerializer
     has_one :lifecycle_environment, serializer: ::LifecycleEnvironmentSerializer

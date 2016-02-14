@@ -3,10 +3,8 @@ class AddDeployOpenshift < ActiveRecord::Migration
 
     add_column :fusor_deployments, :deploy_openshift, :boolean, :default => false
     add_column :fusor_deployments, :openshift_install_loc, :string
-    add_column :fusor_deployments, :openshift_storage_type, :string
-    add_column :fusor_deployments, :openshift_storage_name, :string
-    add_column :fusor_deployments, :openshift_storage_desc, :string
-    add_column :fusor_deployments, :openshift_export_path, :string
+    add_column :fusor_deployments, :openshift_number_nodes, :integer
+    add_column :fusor_deployments, :openshift_storage_size, :string
     add_column :fusor_deployments, :openshift_username, :string
 
   end
