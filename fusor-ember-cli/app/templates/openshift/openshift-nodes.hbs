@@ -69,7 +69,14 @@
 
     <br />
     <br />
-    {{ose-env-summary}}
+    {{ose-env-summary numNodes=model.openshift_number_nodes
+                      vcpuNeeded=3
+                      ramNeeded=16
+                      diskNeeded=75
+                      vcpuAvailable=8
+                      ramAvailable=16
+                      diskAvailable=250
+    }}
 
   </div>
 </div>

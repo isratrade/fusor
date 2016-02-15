@@ -3,7 +3,7 @@
     Environment Summary
   </div>
   <div class='col-md-3' style='text-align: right;'>
-    Node Count
+    Node Count: {{numNodes}}
   </div>
 </div>
 <div class='row'>
@@ -12,5 +12,20 @@
   </div>
   <div class='col-md-3' style='text-align: right;'>
     Resources available
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-6'>
+  {{ose-summary-needed-available label='vCPU' needed=vcpuNeeded available=vcpuAvailable}}
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-6'>
+  {{ose-summary-needed-available label='RAM' needed=ramNeeded available=ramAvailable suffix='GB'}}
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-6'>
+  {{ose-summary-needed-available label='Disk' needed=diskNeeded available=diskAvailable suffix='GB'}}
   </div>
 </div>
