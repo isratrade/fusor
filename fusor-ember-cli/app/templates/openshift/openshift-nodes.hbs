@@ -51,31 +51,32 @@
     Select how much additional storage is needed for Docker containers on each worker node.
     </p>
     {{button-selection label='15 GB'
-                       value='15 GB'
+                       value=15
                        groupValue=model.openshift_storage_size
                        changed="storageSizeChanged"}}
     {{button-selection label='20 GB'
-                       value='20 GB'
+                       value=20
                        groupValue=model.openshift_storage_size
                        changed="storageSizeChanged"}}
     {{button-selection label='25 GB'
-                       value='25 GB'
+                       value=25
                        groupValue=model.openshift_storage_size
                        changed="storageSizeChanged"}}
     {{button-selection label='30 GB'
-                       value='30 GB'
+                       value=30
                        groupValue=model.openshift_storage_size
                        changed="storageSizeChanged"}}
 
     <br />
     <br />
     {{ose-env-summary numNodes=model.openshift_number_nodes
-                      vcpuNeeded=3
-                      ramNeeded=16
-                      diskNeeded=75
-                      vcpuAvailable=8
-                      ramAvailable=16
-                      diskAvailable=250
+                      storageSize=model.openshift_storage_size
+                      masterVcpu=2
+                      masterRam=8
+                      masterDisk=30
+                      nodeVcpu=1
+                      nodeRam=8
+                      nodeDisk=15
     }}
 
   </div>

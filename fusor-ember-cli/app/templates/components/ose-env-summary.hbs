@@ -16,16 +16,31 @@
 </div>
 <div class='row'>
   <div class='col-md-6'>
-  {{ose-summary-needed-available label='vCPU' needed=vcpuNeeded available=vcpuAvailable}}
+  {{ose-summary-needed-available label='vCPU' needed=vcpuNeeded available=vcpuAvailable storageSize=storageSize}}
   </div>
 </div>
 <div class='row'>
   <div class='col-md-6'>
-  {{ose-summary-needed-available label='RAM' needed=ramNeeded available=ramAvailable suffix='GB'}}
+  {{ose-summary-needed-available label='RAM' needed=ramNeeded available=ramAvailable suffix='GB' storageSize=storageSize}}
   </div>
 </div>
 <div class='row'>
   <div class='col-md-6'>
-  {{ose-summary-needed-available label='Disk' needed=diskNeeded available=diskAvailable suffix='GB'}}
+  {{ose-summary-needed-available label='Disk' needed=diskNeeded available=diskAvailable suffix='GB' storageSize=storageSize}}
+  </div>
+</div>
+
+<BR />
+<BR />
+<div class='row'>
+  <div class='col-md-6'>
+  {{node-details numNodes=numNodes
+                 storageSize=storageSize
+                 masterVcpu=masterVcpu
+                 masterRam=masterRam
+                 masterDisk=masterDisk
+                 nodeVcpu=nodeVcpu
+                 nodeRam=nodeRam
+                 nodeDisk=nodeDisk}}
   </div>
 </div>
