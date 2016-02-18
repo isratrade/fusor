@@ -23,8 +23,8 @@ export default Ember.Mixin.create({
   diskAvailable: Ember.computed.alias("model.openshift_available_disk"),
 
   vcpuNeeded: Ember.computed('numMasterNodes', 'numWorkerNodes', 'masterVcpu', 'nodeVcpu', function() {
-    return ( (this.get('numMasterNodes') * this.get('masterVcpu')) +
-             (this.get('numWorkerNodes') * this.get('nodeVcpu')) );
+    return ( parseInt(this.get('numMasterNodes')) * parseInt(this.get('masterVcpu')) +
+             parseInt(this.get('numWorkerNodes')) * parseInt(this.get('nodeVcpu')) );
   }),
 
   ramNeeded: Ember.computed('numMasterNodes', 'numWorkerNodes', 'masterRam', 'nodeRam', function() {
@@ -36,6 +36,6 @@ export default Ember.Mixin.create({
     return ( (this.get('numMasterNodes') * this.get('masterDisk')) +
              (this.get('numWorkerNodes') * this.get('nodeDisk')) +
              (this.get('numWorkerNodes') * this.get('storageSize')) );
-  }),
+  })
 
 });

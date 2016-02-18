@@ -6,7 +6,7 @@ export default Ember.Component.extend({
   classNames: ['row'],
 
   percentProgress: Ember.computed('needed', 'available', function() {
-    return this.get('needed') / this.get('available') * 100;
+    return parseInt(this.get('needed')) / parseInt(this.get('available')) * 100;
   }),
 
   percentProgressInt: Ember.computed('percentProgress', function() {
