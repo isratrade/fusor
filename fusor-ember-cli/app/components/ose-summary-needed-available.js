@@ -10,7 +10,8 @@ export default Ember.Component.extend({
   }),
 
   percentProgressInt: Ember.computed('percentProgress', function() {
-    return parseInt(this.get('percentProgress').toFixed(0));
+    var percentProgress = this.get('percentProgress') > 100 ? 100 : this.get('percentProgress')
+    return parseInt(percentProgress);
   }),
 
   styleWidth: Ember.computed('percentProgressInt', function () {
