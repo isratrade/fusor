@@ -564,3 +564,36 @@ table.fusor-table {
   width: 20px;
   text-align: center;
 }
+
+.env-summary-title {
+  background-color: #eee;
+  margin-left: 0px;
+  padding: 10px 10px;
+  border: solid 0px #000;
+}
+
+.env-summary-body {
+  margin-left: 0px;
+  padding: 10px 10px;
+  border: solid 0px #000;
+}
+
+.ose-help-msg {
+  padding-left: 30px;
+  font-style: italic;
+}
+
+.env-summary-needed-available {
+  padding: 10px;
+}
+
+.amt-needed {
+  position: absolute;
+  top: 10px;
+  left: 5px;
+}
+.amt-available {
+  position: absolute;
+  top: 10px;
+  right: 0px;
+}
