@@ -590,7 +590,7 @@ table.fusor-table {
 .amt-needed {
   position: absolute;
   top: 10px;
-  left: 50px;
+  left: 7px;
   height: 20px;
 }
 .amt-available {
@@ -603,8 +603,7 @@ table.fusor-table {
 .needed-available-bar {
   position: absolute;
   top: 10px;
-  left: 50px;
-  right: -50px;
+  left: 0px;
   height: 20px;
 }
 
@@ -613,5 +612,4 @@ table.fusor-table {
   top: 10px;
   left: 10px;
   height: 20px;
-/*//  width: 40px; display: inline; float: left;
-*/}
+}
