@@ -1,12 +1,12 @@
-<div class='col-sm-5 col-md-6 col-lg-6 env-summary-needed-available'>
-  <div style='width: 40px; display: inline; float: left;'>
+<div class='col-sm-5 col-md-6 col-lg-6'>
+  <div class='label-needed-available'>
     <strong>{{label}}</strong>
   </div>
-    <div style='22-needed'>
-      {{needed}} {{suffix}}
-    </div>
-  <div class="{{progressBarClass}}" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow={{percentProgressInt}} style="width: {{styleWidth}};">
-    {{percentProgress}}%
+  <div class='amt-needed'>
+    {{needed}} {{suffix}}
+  </div>
+  <div class="needed-available-bar {{progressBarClass}}" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow={{percentProgressInt}} style="width: {{styleWidth}};">
+    &nbsp;{{!percentProgress}}
   </div>
   <div class='amt-available'>
     {{available}} {{suffix}}

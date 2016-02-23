@@ -584,18 +584,34 @@ table.fusor-table {
 }
 
 .env-summary-needed-available {
-  padding: 10px;
+  padding-bottom: 8px;
 }
 
 .amt-needed {
   position: absolute;
   top: 10px;
   left: 50px;
-  right: -50px;
   height: 20px;
 }
 .amt-available {
   position: absolute;
   top: 10px;
-  right: 0px;
+  right: 10px;
+  height: 20px;
 }
+
+.needed-available-bar {
+  position: absolute;
+  top: 10px;
+  left: 50px;
+  right: -50px;
+  height: 20px;
+}
+
+.label-needed-available {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  height: 20px;
+/*//  width: 40px; display: inline; float: left;
+*/}
