@@ -36,8 +36,34 @@ export default Ember.Component.extend({
     }
   }),
 
+  fontColorClass: Ember.computed('percentProgress', function() {
+    if (this.get('percentProgress') > 99) {
+      return 'white';
+    } else {
+      return 'black';
+    }
+  }),
+
+  isMaxAmount: Ember.computed('percentProgress', function() {
+    return (this.get('percentProgress') === 100);
+  }),
+
   isOverCapacity: Ember.computed('percentProgress', function() {
-    return (this.get('percentProgressInt') > 100);
+    return (this.get('percentProgress') > 100);
+  }),
+
+  helpTextClass: Ember.computed('isOverCapacity', function() {
+    if (this.get('isOverCapacity')) {
+      return 'errorForValidation';
+    }
+  }),
+
+  helpText: Ember.computed('isOverCapacity', 'isMaxAmount', function() {
+    if (this.get('isOverCapacity')) {
+      return "Too much " + this.get('label') + " assigned";
+    } else if (this.get('isMaxAmount')) {
+      return "Maximum amount of " + this.get('label') + " assigned"
+    }
   })
 
 });

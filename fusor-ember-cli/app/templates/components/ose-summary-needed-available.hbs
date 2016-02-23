@@ -6,20 +6,20 @@
 
 <div class='col-sm-4 col-md-5 col-lg-5'>
     <div class='light-gray-background'>
-    &nbsp;333
+      &nbsp;
     </div>
     <div class="needed-available-bar {{progressBarClass}}" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow={{percentProgressInt}} style="width: {{styleWidth}};">
       &nbsp;{{!percentProgress}}
     </div>
-    <div class='amt-needed'>
+    <div class="amt-needed {{fontColorClass}}">
       {{needed}} {{suffix}}
     </div>
-    <div class='amt-available'>
+    <div class='amt-available {{fontColorClass}}'>
       {{available}} {{suffix}}
     </div>
-  </div>
 </div>
 
-<div class='hidden-sm hidden-xs col-md-6 col-lg-6 ose-help-msg'>
-  Maximum amount of RAM assigned
+<div class="hidden-sm hidden-xs col-md-6 col-lg-6 ose-help-msg {{helpTextClass}}">
+  {{helpText}}
+  &nbsp;
 </div>
