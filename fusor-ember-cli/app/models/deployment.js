@@ -67,7 +67,7 @@ export default DS.Model.extend({
   manifest_file: DS.attr('string'),
 
   openshift_install_loc: DS.attr('string'),
-<<<<<<< HEAD
+
   openshift_number_master_nodes: DS.attr('number'),
   openshift_number_worker_nodes: DS.attr('number'),
 
@@ -87,13 +87,10 @@ export default DS.Model.extend({
   openshift_available_vcpu: DS.attr('number'),
   openshift_available_ram: DS.attr('number'),
   openshift_available_disk: DS.attr('number'),
-=======
   openshift_storage_type: DS.attr('string'),
   openshift_storage_name: DS.attr('string'),
   openshift_storage_desc: DS.attr('string'),
   openshift_export_path: DS.attr('string'),
-  openshift_username: DS.attr('string'),
->>>>>>> ecea23f... openshift UI
 
   created_at: DS.attr('date'),
   updated_at: DS.attr('date'),
