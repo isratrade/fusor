@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import request from 'ic-ajax';
 
 export default Ember.Route.extend({
 
@@ -29,25 +30,30 @@ export default Ember.Route.extend({
     }
 
     // TODO pull from SAT6 default settings
-    if (!(model.get('openshift_master_vcpu') > 0)) {
-      model.set('openshift_master_vcpu', 2);
-    }
-    if (!(model.get('openshift_master_ram') > 0)) {
-      model.set('openshift_master_ram', 8);
-    }
-    if (!(model.get('openshift_master_disk') > 0)) {
-      model.set('openshift_master_disk', 30);
-    }
+    // http://localhost:9010/api/v2/settings?search=openshift
+    request('api/v2/settings?search=openshift').then(function(settings) {
+      var results = settings['results']
+      console.log(results);
+      if (!(model.get('openshift_master_vcpu') > 0)) {
+        model.set('openshift_master_vcpu', results.findBy('name', 'openshift_master_vcpu').value);
+      }
+      if (!(model.get('openshift_master_ram') > 0)) {
+        model.set('openshift_master_ram', results.findBy('name', 'openshift_master_ram').value);
+      }
+      if (!(model.get('openshift_master_disk') > 0)) {
+        model.set('openshift_master_disk', results.findBy('name', 'openshift_master_disk').value);
+      }
+      if (!(model.get('openshift_node_vcpu') > 0)) {
+        model.set('openshift_node_vcpu', results.findBy('name', 'openshift_node_vcpu').value);
+      }
+      if (!(model.get('openshift_node_ram') > 0)) {
+        model.set('openshift_node_ram', results.findBy('name', 'openshift_node_ram').value);
+      }
+      if (!(model.get('openshift_node_disk') > 0)) {
+        model.set('openshift_node_disk', results.findBy('name', 'openshift_node_disk').value);
+      }
+    });
 
-    if (!(model.get('openshift_node_vcpu') > 0)) {
-      model.set('openshift_node_vcpu', 1);
-    }
-    if (!(model.get('openshift_node_ram') > 0)) {
-      model.set('openshift_node_ram', 8);
-    }
-    if (!(model.get('openshift_node_disk') > 0)) {
-      model.set('openshift_node_disk', 15);
-    }
   },
 
   deactivate() {
@@ -55,3 +61,5 @@ export default Ember.Route.extend({
   }
 
 });
+
+
