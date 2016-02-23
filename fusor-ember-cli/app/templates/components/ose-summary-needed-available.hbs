@@ -2,10 +2,11 @@
   <div style='width: 40px; display: inline; float: left;'>
     <strong>{{label}}</strong>
   </div>
-  <div class={{progressBarClass}} role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow={{percentProgressInt}} style="width: {{styleWidth}};">
-    <div style='text-align: left'>
+    <div style='22-needed'>
       {{needed}} {{suffix}}
     </div>
+  <div class="{{progressBarClass}}" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow={{percentProgressInt}} style="width: {{styleWidth}};">
+    {{percentProgress}}%
   </div>
   <div class='amt-available'>
     {{available}} {{suffix}}

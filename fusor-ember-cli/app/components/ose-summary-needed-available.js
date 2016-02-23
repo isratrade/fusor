@@ -6,20 +6,25 @@ export default Ember.Component.extend({
   classNames: ['row'],
 
   percentProgress: Ember.computed('needed', 'available', function() {
-    return parseInt(this.get('needed')) / parseInt(this.get('available')) * 100;
+    return parseInt(parseInt(this.get('needed')) / parseInt(this.get('available')) * 100);
   }),
 
-  percentProgressInt: Ember.computed('percentProgress', function() {
+  // percentProgressInt: Ember.computed('percentProgress', function() {
+  //   var percentProgress = this.get('percentProgress') > 100 ? 100 : this.get('percentProgress')
+  //   return parseInt(percentProgress);
+  // }),
+
+  percentProgressMax: Ember.computed('percentProgress', function () {
     var percentProgress = this.get('percentProgress') > 100 ? 100 : this.get('percentProgress')
     return parseInt(percentProgress);
   }),
 
-  styleWidth: Ember.computed('percentProgressInt', function () {
-    return new Ember.Handlebars.SafeString(this.get('percentProgressInt') + '%');
+  styleWidth: Ember.computed('percentProgressMax', function () {
+    return new Ember.Handlebars.SafeString(this.get('percentProgressMax') + '%');
   }),
 
-  progressBarClass: Ember.computed('percentProgressInt', function() {
-    var percent = this.get('percentProgressInt');
+  progressBarClass: Ember.computed('percentProgress', function() {
+    var percent = this.get('percentProgress');
     if (percent < 100) {
       return 'progress-bar progress-bar-gray';
     } else if (percent === 100) {
@@ -31,7 +36,7 @@ export default Ember.Component.extend({
     }
   }),
 
-  isOverCapacity: Ember.computed('percentProgressInt', function() {
+  isOverCapacity: Ember.computed('percentProgress', function() {
     return (this.get('percentProgressInt') > 100);
   })
 
