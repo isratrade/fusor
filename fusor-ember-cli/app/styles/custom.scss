@@ -589,27 +589,36 @@ table.fusor-table {
 
 .amt-needed {
   position: absolute;
-  top: 10px;
+  top: 0px;
   left: 7px;
   height: 20px;
 }
 .amt-available {
   position: absolute;
-  top: 10px;
+  top: 0px;
   right: 10px;
   height: 20px;
 }
 
 .needed-available-bar {
   position: absolute;
-  top: 10px;
+  top: 0px;
   left: 0px;
   height: 20px;
 }
 
 .label-needed-available {
   position: absolute;
-  top: 10px;
+  top: 0px;
   left: 10px;
   height: 20px;
+}
+
+.light-gray-background {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 20px;
+  width: 100%;
+  background-color: #eee;
 }
