@@ -3,6 +3,10 @@ import Ember from 'ember';
 export default Ember.Mixin.create({
 
   openshiftInstallLoc: Ember.computed.alias("model.openshift_install_loc"),
+  cfmeInstallLoc: Ember.computed.alias("model.cfme_install_loc"),
+  isRhev: Ember.computed.alias("model.deploy_rhev"),
+  isOpenStack: Ember.computed.alias("model.deploy_openstack"),
+  isCloudForms: Ember.computed.alias("model.deploy_cfme"),
 
   numNodes: Ember.computed.alias("model.numNodes"),
   numMasterNodes: Ember.computed.alias("model.openshift_number_master_nodes"),
@@ -20,7 +24,32 @@ export default Ember.Mixin.create({
 
   masterDisk: Ember.computed.alias("model.openshift_master_disk"),
   nodeDisk: Ember.computed.alias("model.openshift_node_disk"),
-  diskAvailable: Ember.computed.alias("model.openshift_available_disk"),
+  cfmeDisk: Ember.computed.alias("model.cfmeDisk"),
+
+  ignoreCfme: Ember.computed("isCloudForms", "isRhev", "isOpenStack",
+                             "openshiftInstallLoc", "cfmeInstallLoc", function() {
+    // ignore if CFME is not selected OR if both RHEV and OSP are selected
+    // but locations of CFME and OSE are different
+    return (!this.get('isCloudForms') ||
+            (this.get('isRhev') && this.get('isOpenStack') &&
+             ((this.get('openshiftInstallLoc') === 'RHEV' && this.get('cfmeInstallLoc') === 'OpenStack') ||
+              (this.get('openshiftInstallLoc') === 'OpenStack' && this.get('cfmeInstallLoc') === 'RHEV'))));
+  }),
+  substractCfme: Ember.computed.not('ignoreCfme'),
+
+  diskAvailableMinusCfme: Ember.computed("model.openshift_available_disk", "cfmeDisk", function() {
+    return this.get("model.openshift_available_disk") - this.get("cfmeDisk");
+  }),
+
+  diskAvailable: Ember.computed("model.openshift_available_disk",
+                                "ignoreCfme",
+                                "diskAvailableMinusCfme", function() {
+    if (this.get('ignoreCfme')) {
+      return this.get('model.openshift_available_disk');
+    } else {
+      return this.get('diskAvailableMinusCfme');
+    }
+  }),
 
   vcpuNeeded: Ember.computed('numMasterNodes', 'numWorkerNodes', 'masterVcpu', 'nodeVcpu', function() {
     if ((this.get('numMasterNodes') > 0) && (this.get('masterVcpu') > 0) &&

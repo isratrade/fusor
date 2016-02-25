@@ -35,7 +35,11 @@ export default Mirage.Factory.extend({
   upstream_consumer_name: "tsanders-rhci",
   openshift_storage_type: "NFS",
   openshift_storage_name: "openshift-storage",
-  openshift_export_path: "/share/openshift/path"
+  openshift_export_path: "/share/openshift/path",
+  cloudforms_vcpu: 4,
+  cloudforms_ram: 6,
+  cloudforms_vm_disk_size: 40,
+  cloudforms_db_disk_size: 40
 
 });
 

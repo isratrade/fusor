@@ -97,6 +97,11 @@ export default DS.Model.extend({
   cloudforms_vm_disk_size: DS.attr('number'),
   cloudforms_db_disk_size: DS.attr('number'),
 
+  cfmeDisk: Ember.computed('cloudforms_vm_disk_size',
+                           'cloudforms_db_disk_size', function() {
+      return this.get('cloudforms_vm_disk_size') + this.get('cloudforms_db_disk_size');
+  }),
+
   created_at: DS.attr('date'),
   updated_at: DS.attr('date'),
 

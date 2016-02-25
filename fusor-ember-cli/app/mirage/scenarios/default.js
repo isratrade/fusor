@@ -59,4 +59,14 @@ export default function(server) {
                                       discovered_host_ids: [hypervisor1.id, hypervisor2.id]
                                      });
 
+  server.create('deployment', {name: 'rhev_openshift_cfme_deployment',
+                                      deploy_rhev: true,
+                                      deploy_openshift: true,
+                                      deploy_cfme: true,
+                                      organization_id: org.id,
+                                      lifecycle_environment_id: env.id,
+                                      discovered_host_id: engine.id,
+                                      discovered_host_ids: [hypervisor1.id, hypervisor2.id]
+                                     });
+
 }

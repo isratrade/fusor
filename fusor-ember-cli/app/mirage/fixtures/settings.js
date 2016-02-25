@@ -64,5 +64,49 @@ export default [
             "default": 1,
             "created_at": "2016-02-18T14:36:44Z",
             "updated_at": "2016-02-18T15:16:49Z"
+        },
+        {
+            "id": 111,
+            "name": "cloudforms_db_disk_size",
+            "value": 40,
+            "description": "Size of Storage (GB) for DB for CloudForms",
+            "category": "Setting::Openshift",
+            "settings_type": "integer",
+            "default": 40,
+            "created_at": "2016-02-25T15:32:31Z",
+            "updated_at": "2016-02-25T15:32:31Z"
+        },
+        {
+            "id": 112,
+            "name": "cloudforms_ram",
+            "value": 6,
+            "description": "Amount of RAM (GB) for CloudForms",
+            "category": "Setting::Openshift",
+            "settings_type": "integer",
+            "default": 6,
+            "created_at": "2016-02-25T15:32:31Z",
+            "updated_at": "2016-02-25T15:32:31Z"
+        },
+        {
+            "id": 113,
+            "name": "cloudforms_vcpu",
+            "value": 4,
+            "description": "Number of vCPU's for CloudForms",
+            "category": "Setting::Openshift",
+            "settings_type": "integer",
+            "default": 4,
+            "created_at": "2016-02-25T15:32:31Z",
+            "updated_at": "2016-02-25T15:32:31Z"
+        },
+        {
+            "id": 110,
+            "name": "cloudforms_vm_disk_size",
+            "value": 40,
+            "description": "Size of Storage (GB) for VM for CloudForms",
+            "category": "Setting::Openshift",
+            "settings_type": "integer",
+            "default": 40,
+            "created_at": "2016-02-25T15:32:31Z",
+            "updated_at": "2016-02-25T15:32:31Z"
         }
     ];
