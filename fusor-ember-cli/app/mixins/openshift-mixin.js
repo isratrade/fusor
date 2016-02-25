@@ -51,6 +51,139 @@ export default Ember.Mixin.create({
     } else {
       return 0;
     }
-  })
+  }),
+
+  vcpu1Needed: Ember.computed('masterVcpu', function() {
+      return parseInt(this.get('masterVcpu'));
+  }),
+  vcpu2Needed: Ember.computed('vcpu1Needed', 'nodeVcpu', function() {
+      return this.get('vcpu1Needed') + parseInt(this.get('nodeVcpu'));
+  }),
+  vcpu3Needed: Ember.computed('vcpu2Needed', 'nodeVcpu', function() {
+      return this.get('vcpu2Needed') + parseInt(this.get('nodeVcpu'));
+  }),
+  vcpu4Needed: Ember.computed('vcpu3Needed', 'nodeVcpu', function() {
+      return this.get('vcpu3Needed') + parseInt(this.get('nodeVcpu'));
+  }),
+  vcpu5Needed: Ember.computed('vcpu4Needed', 'nodeVcpu', function() {
+      return this.get('vcpu4Needed') + parseInt(this.get('nodeVcpu'));
+  }),
+
+  ram1Needed: Ember.computed('masterRam', function() {
+      return parseInt(this.get('masterRam'));
+  }),
+  ram2Needed: Ember.computed('ram1Needed', 'nodeRam', function() {
+      return this.get('ram1Needed') + parseInt(this.get('nodeRam'));
+  }),
+  ram3Needed: Ember.computed('ram2Needed', 'nodeRam', function() {
+      return this.get('ram2Needed') + parseInt(this.get('nodeRam'));
+  }),
+  ram4Needed: Ember.computed('ram3Needed', 'nodeRam', function() {
+      return this.get('ram3Needed') + parseInt(this.get('nodeRam'));
+  }),
+  ram5Needed: Ember.computed('ram4Needed', 'nodeRam', function() {
+      return this.get('ram4Needed') + parseInt(this.get('nodeRam'));
+  }),
+
+  disk1Needed: Ember.computed('masterDisk', function() {
+      return parseInt(this.get('masterDisk'));
+  }),
+  disk2Needed: Ember.computed('disk1Needed', 'nodeDisk', function() {
+      return this.get('disk1Needed') + parseInt(this.get('nodeDisk'));
+  }),
+  disk3Needed: Ember.computed('disk2Needed', 'nodeDisk', function() {
+      return this.get('disk2Needed') + parseInt(this.get('nodeDisk'));
+  }),
+  disk4Needed: Ember.computed('disk3Needed', 'nodeDisk', function() {
+      return this.get('disk3Needed') + parseInt(this.get('nodeDisk'));
+  }),
+  disk5Needed: Ember.computed('disk4Needed', 'nodeDisk', function() {
+      return this.get('disk4Needed') + parseInt(this.get('nodeDisk'));
+  }),
+
+  isVcpu1OverCapacity: Ember.computed('vcpu1Needed', 'vcpuAvailable', function() {
+      return (this.get('vcpu1Needed') > this.get('vcpuAvailable'));
+  }),
+  isVcpu2OverCapacity: Ember.computed('vcpu2Needed', 'vcpuAvailable', function() {
+      return (this.get('vcpu2Needed') > this.get('vcpuAvailable'));
+  }),
+  isVcpu3OverCapacity: Ember.computed('vcpu3Needed', 'vcpuAvailable', function() {
+      return (this.get('vcpu3Needed') > this.get('vcpuAvailable'));
+  }),
+  isVcpu4OverCapacity: Ember.computed('vcpu4Needed', 'vcpuAvailable', function() {
+      return (this.get('vcpu4Needed') > this.get('vcpuAvailable'));
+  }),
+  isVcpu5OverCapacity: Ember.computed('vcpu5Needed', 'vcpuAvailable', function() {
+      return (this.get('vcpu5Needed') > this.get('vcpuAvailable'));
+  }),
+
+  isRam1OverCapacity: Ember.computed('ram1Needed', 'ramAvailable', function() {
+      return (this.get('ram1Needed') > this.get('ramAvailable'));
+  }),
+  isRam2OverCapacity: Ember.computed('ram2Needed', 'ramAvailable', function() {
+      return (this.get('ram2Needed') > this.get('ramAvailable'));
+  }),
+  isRam3OverCapacity: Ember.computed('ram3Needed', 'ramAvailable', function() {
+      return (this.get('ram3Needed') > this.get('ramAvailable'));
+  }),
+  isRam4OverCapacity: Ember.computed('ram4Needed', 'ramAvailable', function() {
+      return (this.get('ram4Needed') > this.get('ramAvailable'));
+  }),
+  isRam5OverCapacity: Ember.computed('ram5Needed', 'ramAvailable', function() {
+      return (this.get('ram5Needed') > this.get('ramAvailable'));
+  }),
+
+  isDisk1OverCapacity: Ember.computed('disk1Needed', 'diskAvailable', function() {
+      return (this.get('disk1Needed') > this.get('diskAvailable'));
+  }),
+  isDisk2OverCapacity: Ember.computed('disk2Needed', 'diskAvailable', function() {
+      return (this.get('disk2Needed') > this.get('diskAvailable'));
+  }),
+  isDisk3OverCapacity: Ember.computed('disk3Needed', 'diskAvailable', function() {
+      return (this.get('disk3Needed') > this.get('diskAvailable'));
+  }),
+  isDisk4OverCapacity: Ember.computed('disk4Needed', 'diskAvailable', function() {
+      return (this.get('disk4Needed') > this.get('diskAvailable'));
+  }),
+  isDisk5OverCapacity: Ember.computed('disk5Needed', 'diskAvailable', function() {
+      return (this.get('disk5Needed') > this.get('diskAvailable'));
+  }),
+
+  isOver1Capacity: Ember.computed('isVcpu1OverCapacity',
+                                 'isRam1OverCapacity',
+                                 'isDisk1OverCapacity', function() {
+      return (this.get('isVcpu1OverCapacity') ||
+              this.get('isRam1OverCapacity') ||
+              this.get('isDisk1OverCapacity'));
+  }),
+  isOver2Capacity: Ember.computed('isVcpu2OverCapacity',
+                                 'isRam2OverCapacity',
+                                 'isDisk2OverCapacity', function() {
+      return (this.get('isVcpu2OverCapacity') ||
+              this.get('isRam2OverCapacity') ||
+              this.get('isDisk2OverCapacity'));
+  }),
+  isOver3Capacity: Ember.computed('isVcpu3OverCapacity',
+                                 'isRam3OverCapacity',
+                                 'isDisk3OverCapacity', function() {
+      return (this.get('isVcpu3OverCapacity') ||
+              this.get('isRam3OverCapacity') ||
+              this.get('isDisk3OverCapacity'));
+  }),
+  isOver4Capacity: Ember.computed('isVcpu4OverCapacity',
+                                 'isRam4OverCapacity',
+                                 'isDisk4OverCapacity', function() {
+      return (this.get('isVcpu4OverCapacity') ||
+              this.get('isRam4OverCapacity') ||
+              this.get('isDisk4OverCapacity'));
+  }),
+  isOver5Capacity: Ember.computed('isVcpu5OverCapacity',
+                                 'isRam5OverCapacity',
+                                 'isDisk5OverCapacity', function() {
+      return (this.get('isVcpu5OverCapacity') ||
+              this.get('isRam5OverCapacity') ||
+              this.get('isDisk5OverCapacity'));
+  }),
+
 
 });

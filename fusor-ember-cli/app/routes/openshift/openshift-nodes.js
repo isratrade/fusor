@@ -14,6 +14,17 @@ export default Ember.Route.extend({
       model.set('openshift_install_loc', 'OpenStack');
     }
 
+    // set default values for nodes and docker storage size
+    if (!(model.get('openshift_number_master_nodes') > 0)) {
+      model.set('openshift_number_master_nodes', 1);
+    }
+    if (!(model.get('openshift_number_worker_nodes') > 0)) {
+      model.set('openshift_number_worker_nodes', 1);
+    }
+    if (!(model.get('openshift_storage_size') > 0)) {
+      model.set('openshift_storage_size', 20);
+    }
+
     // TODO pull from API resources available
     var result = { vcpuAvailabe: 8,
                    ramAvailable: 32,

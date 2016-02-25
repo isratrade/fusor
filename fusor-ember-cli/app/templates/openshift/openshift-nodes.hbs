@@ -29,27 +29,33 @@
     {{button-selection label=1
                        value=1
                        groupValue=model.numNodes
-                       changed="numNodesChanged"}}
+                       changed="numNodesChanged"
+                       disabled=isOver1Capacity}}
     {{button-selection label=2
                        value=2
                        groupValue=model.numNodes
-                       changed="numNodesChanged"}}
+                       changed="numNodesChanged"
+                       disabled=isOver2Capacity}}
     {{button-selection label=3
                        value=3
                        groupValue=model.numNodes
-                       changed="numNodesChanged"}}
+                       changed="numNodesChanged"
+                       disabled=isOver3Capacity}}
     {{button-selection label=4
                        value=4
                        groupValue=model.numNodes
-                       changed="numNodesChanged"}}
+                       changed="numNodesChanged"
+                       disabled=isOver4Capacity}}
     {{button-selection label=5
                        value=5
                        groupValue=model.numNodes
-                       changed="numNodesChanged"}}
-    <div style='color: #999; font-style: italic;'>
+                       changed="numNodesChanged"
+                       disabled=isOver5Capacity}}
+    <!--<div style='color: #999; font-style: italic;'>
       Not Highly Available
-    </div>
+    </div>-->
 
+    <br />
     <br />
     <p>
     Select how much additional storage is needed for Docker containers on each worker node.

@@ -4,14 +4,20 @@ export default Ember.Component.extend({
 
   classNames: ['button-selection'],
 
-  classNameBindings: ['buttonSelectionSelected'],
+  classNameBindings: ['buttonSelectionSelected', 'buttonDisabled'],
 
   buttonSelectionSelected: Ember.computed('value', 'groupValue', function() {
     return (this.get('value') === this.get('groupValue'));
   }),
 
+  buttonDisabled: Ember.computed('disabled', function() {
+    return this.get('disabled');
+  }),
+
   click() {
-    return this.sendAction('changed', this.get('value'));
+    if (!this.get('disabled')) {
+      return this.sendAction('changed', this.get('value'));
+    }
   }
 
 });

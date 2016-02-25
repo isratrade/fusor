@@ -546,6 +546,13 @@ table.fusor-table {
   cursor: pointer;
 }
 
+.button-disabled {
+  border: solid 1px #6dd7ff;
+  color: #6dd7ff;
+  background-color: #f7f7f7;
+  cursor: not-allowed;
+}
+
 .button-selection-selected {
   background-color: #0099d3;
   color: #fff;
