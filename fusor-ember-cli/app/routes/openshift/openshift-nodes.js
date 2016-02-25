@@ -14,17 +14,6 @@ export default Ember.Route.extend({
       model.set('openshift_install_loc', 'OpenStack');
     }
 
-    // set default values for nodes and docker storage size
-    if (!(model.get('openshift_number_master_nodes') > 0)) {
-      model.set('openshift_number_master_nodes', 1);
-    }
-    if (!(model.get('openshift_number_worker_nodes') > 0)) {
-      model.set('openshift_number_worker_nodes', 1);
-    }
-    if (!(model.get('openshift_storage_size') > 0)) {
-      model.set('openshift_storage_size', 20);
-    }
-
     // TODO pull from API resources available
     var result = { vcpuAvailabe: 8,
                    ramAvailable: 32,
@@ -39,30 +28,6 @@ export default Ember.Route.extend({
     if (!(model.get('openshift_available_disk') > 0)) {
       model.set('openshift_available_disk', result['diskAvailable']);
     }
-
-    // GET from API v2 settings for Foreman/Sat6
-    request('api/v2/settings?search=openshift').then(function(settings) {
-      var results = settings['results'];
-      console.log(results);
-      if (!(model.get('openshift_master_vcpu') > 0)) {
-        model.set('openshift_master_vcpu', results.findBy('name', 'openshift_master_vcpu').value);
-      }
-      if (!(model.get('openshift_master_ram') > 0)) {
-        model.set('openshift_master_ram', results.findBy('name', 'openshift_master_ram').value);
-      }
-      if (!(model.get('openshift_master_disk') > 0)) {
-        model.set('openshift_master_disk', results.findBy('name', 'openshift_master_disk').value);
-      }
-      if (!(model.get('openshift_node_vcpu') > 0)) {
-        model.set('openshift_node_vcpu', results.findBy('name', 'openshift_node_vcpu').value);
-      }
-      if (!(model.get('openshift_node_ram') > 0)) {
-        model.set('openshift_node_ram', results.findBy('name', 'openshift_node_ram').value);
-      }
-      if (!(model.get('openshift_node_disk') > 0)) {
-        model.set('openshift_node_disk', results.findBy('name', 'openshift_node_disk').value);
-      }
-    });
 
   },
 

@@ -36,6 +36,7 @@ module Fusor
     # list includes the plugin STI setting class
     initializer 'fusor.load_default_settings', :before => :load_config_initializers do |app|
       require_dependency File.expand_path("#{Fusor::Engine.root}/app/models/setting/openshift.rb", __FILE__) if (Setting.table_exists? rescue(false))
+      #require_dependency File.expand_path("#{Fusor::Engine.root}/app/models/setting/cloudforms.rb", __FILE__) if (Setting.table_exists? rescue(false))
     end
 
     initializer "fusor.paths" do |app|

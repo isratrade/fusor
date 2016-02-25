@@ -51,6 +51,10 @@ module Fusor
                :openshift_storage_desc,
                :openshift_export_path,
                :openshift_username,
+               :cloudforms_vcpu,
+               :cloudforms_ram,
+               :cloudforms_vm_disk_size,
+               :cloudforms_db_disk_size,
                :created_at, :updated_at
 
 

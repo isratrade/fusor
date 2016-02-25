@@ -92,6 +92,11 @@ export default DS.Model.extend({
   openshift_storage_desc: DS.attr('string'),
   openshift_export_path: DS.attr('string'),
 
+  cloudforms_vcpu: DS.attr('number'),
+  cloudforms_ram: DS.attr('number'),
+  cloudforms_vm_disk_size: DS.attr('number'),
+  cloudforms_db_disk_size: DS.attr('number'),
+
   created_at: DS.attr('date'),
   updated_at: DS.attr('date'),
 
