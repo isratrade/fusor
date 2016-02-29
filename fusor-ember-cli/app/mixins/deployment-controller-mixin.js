@@ -111,8 +111,8 @@ export default Ember.Mixin.create({
     }
   }),
 
-  stepNumberOpenShift: Ember.computed('stepNumberOpenstack', 'isOpenShift', function() {
-    if (this.get('isOpenShift')) {
+  stepNumberCloudForms: Ember.computed('stepNumberOpenstack', 'isCloudForms', function() {
+    if (this.get('isCloudForms')) {
       if (this.get('stepNumberOpenstack')) {
         return this.get('stepNumberOpenstack') + 1;
       } else if (this.get('stepNumberRhev')) {
@@ -123,10 +123,10 @@ export default Ember.Mixin.create({
     }
   }),
 
-  stepNumberCloudForms: Ember.computed('stepNumberOpenShift', 'isCloudForms', function() {
-    if (this.get('isCloudForms')) {
-      if (this.get('stepNumberOpenShift')) {
-        return this.get('stepNumberOpenShift') + 1;
+  stepNumberOpenShift: Ember.computed('stepNumberCloudForms', 'isOpenShift', function() {
+    if (this.get('isOpenShift')) {
+      if (this.get('stepNumberCloudForms')) {
+        return this.get('stepNumberCloudForms') + 1;
       } else if (this.get('stepNumberOpenstack')) {
         return this.get('stepNumberOpenstack') + 1;
       } else if (this.get('stepNumberRhev')) {
@@ -171,27 +171,27 @@ export default Ember.Mixin.create({
   step3RouteName: Ember.computed(
     'step2RouteName',
     'isOpenStack',
-    'isOpenShift',
     'isCloudForms',
+    'isOpenShift',
     'isSubscriptions',
     function() {
       if (this.get('step2RouteName') === 'rhev') {
         if (this.get('isOpenStack')) {
           return 'openstack';
-        } else if (this.get('isOpenShift')) {
-          return 'openshift';
         } else if (this.get('isCloudForms')) {
           return 'cloudforms';
+        } else if (this.get('isOpenShift')) {
+          return 'openshift';
         } else if (this.get('isSubscriptions')) {
           return 'subscriptions';
         } else {
           return 'review';
         }
       } else if (this.get('step2RouteName') === 'openstack') {
-        if (this.get('isOpenShift')) {
-          return 'openshift';
-        } else if (this.get('isCloudForms')) {
+        if (this.get('isCloudForms')) {
           return 'cloudforms';
+        } else if (this.get('isOpenShift')) {
+          return 'openshift';
         } else if (this.get('isSubscriptions')) {
           return 'subscriptions';
         } else {

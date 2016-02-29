@@ -35,7 +35,7 @@ export default Ember.Controller.extend(DeploymentControllerMixin, DisableTabMixi
            );
   }),
 
-  isDisabledOpenShift: Ember.computed(
+  isDisabledCloudForms: Ember.computed(
     "satelliteInvalid",
     'isRhev',
     'isOpenStack',
@@ -49,22 +49,23 @@ export default Ember.Controller.extend(DeploymentControllerMixin, DisableTabMixi
     }
   ),
 
-  isDisabledCloudForms: Ember.computed(
+  isDisabledOpenShift: Ember.computed(
     "satelliteInvalid",
     'isRhev',
     'isOpenStack',
-    'isOpenShift',
     'validRhev',
     'validOpenStack',
-    'validOpenshift',
+    'isCloudForms',
+    'validCloudforms',
     function() {
       return (this.get('satelliteInvalid') ||
               (this.get('isRhev') && !(this.get('validRhev'))) ||
               (this.get('isOpenStack') && !(this.get('validOpenStack'))) ||
-              (this.get('isOpenShift') && !(this.get('validOpenshift')))
+              (this.get('isCloudForms') && !(this.get('validCloudforms')))
               );
     }
   ),
+
 
   isDisabledSubscriptions: Ember.computed(
     "satelliteInvalid",
