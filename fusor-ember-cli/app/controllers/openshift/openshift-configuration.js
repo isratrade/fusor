@@ -9,12 +9,9 @@ export default Ember.Controller.extend(NeedsDeploymentMixin, {
   isSubscriptions: Ember.computed.alias("deploymentController.isSubscriptions"),
 
   nextRouteNameAfterOpenshift: Ember.computed(
-    'isCloudForms',
     'isSubscriptions',
     function() {
-        if (this.get('isCloudForms')) {
-          return 'cloudforms';
-        } else if (this.get('isSubscriptions')) {
+        if (this.get('isSubscriptions')) {
           return 'subscriptions';
         } else {
           return 'review';

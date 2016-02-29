@@ -137,10 +137,10 @@ export default Ember.Controller.extend(NeedsDeploymentMixin, OpenshiftMixin, {
           return 'subscriptions.credentials';
         }
       } else {
-        if (this.get('isCloudForms')) {
-          return 'cloudforms.cfme-configuration';
-        } else if (this.get('isOpenShift')) {
+        if (this.get('isOpenShift')) {
           return 'openshift.openshift-configuration';
+        } else if (this.get('isCloudForms')) {
+          return 'cloudforms.cfme-configuration';
         } else if (this.get('isOpenStack')) {
           return 'openstack.overcloud';
         } else if (this.get('isRhev')) {

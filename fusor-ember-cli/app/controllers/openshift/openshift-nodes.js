@@ -32,7 +32,9 @@ export default Ember.Controller.extend(NeedsDeploymentMixin, OpenshiftMixin, {
   }),
 
   backRouteName: Ember.computed('isOpenStack', 'isRhev', function() {
-    if (this.get('isOpenStack')) {
+    if (this.get('isCloudForms')) {
+      return 'cloudforms.cfme-configuration';
+    } else if (this.get('isOpenStack')) {
       return 'openstack.overcloud';
     } else if (this.get('isRhev')) {
       return 'storage';
