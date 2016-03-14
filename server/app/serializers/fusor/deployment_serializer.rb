@@ -46,7 +46,6 @@ module Fusor
                :has_content_error,
                :cdn_url, :manifest_file,
                :openshift_install_loc,
-               :openshift_number_nodes,
                :openshift_storage_size,
                :openshift_username,
                :openshift_master_vcpu,
