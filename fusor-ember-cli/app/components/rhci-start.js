@@ -2,6 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
+  classNames: ['rhci-start-block'],
+
   setIsDisabledCfmeAndOpenshift: Ember.observer('isRhev', 'isOpenStack', function() {
     if (this.get('isRhev') || this.get('isOpenStack')) {
       this.set('isDisabledOpenShift', false);
