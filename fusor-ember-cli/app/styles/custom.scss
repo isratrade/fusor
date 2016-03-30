@@ -27,7 +27,7 @@ i.fa-check {
 }
 
 .rhci-item-selected {
-  background-color: #bee1f4;
+  background-color: #def3ff;
 }
 
 .product-item-checkbox {
@@ -53,7 +53,8 @@ i.fa-check {
   margin-top: 5px;
   padding: 10px 20px;
   height:400px;
-  overflow: auto;
+  overflow-x: visible;
+  overflow-y: auto;
 }
 
 .req-section {
