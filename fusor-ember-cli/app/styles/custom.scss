@@ -21,9 +21,25 @@ i.fa-check {
   color: #ffffff;
 }
 
+ul.req-list {
+  list-style: none;
+  padding: 0;
+}
+
+ul.req-list > li {
+  padding-left: 1.5em;
+}
+
+ul.req-list > li:before {
+  content: "\f00c"; /* FontAwesome Unicode */
+  font-family: FontAwesome;
+  display: inline-block;
+  margin-left: -1.5em; /* same as padding-left set on li */
+  width: 1.5em; /* same as padding-left set on li */
+}
+
 .rhci-start-block {
-  margin-left: 15px;
-  margin-right: -15px;
+  padding-left: 15px;
 }
 
 .rhci-item {
@@ -47,10 +63,6 @@ i.fa-check {
 
 .product-item-tagline {
   font-size: 14px;
-}
-
-.req-checkbox {
-  padding: 0 10px;
 }
 
 .req-block {
