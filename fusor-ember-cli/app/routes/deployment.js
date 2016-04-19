@@ -20,17 +20,11 @@ export default Ember.Route.extend(DeploymentRouteMixin, {
     controller.set('confirmCfmeAdminPassword', model.get('cfme_admin_password'));
     controller.set('confirmOvercloudPassword', model.get('openstack_overcloud_password'));
 
-<<<<<<< HEAD
-=======
     this.loadOpenStack(controller, model);
     this.loadOpenshiftDefaults(controller, model);
     this.loadCloudFormsDefaults(controller, model);
-<<<<<<< HEAD
->>>>>>> ffa1e1c... openshift web UI implementation
-=======
     this.loadDefaultDomainName(controller);
 
->>>>>>> de7cfa7... Add full OSE subdomain to review screen
     // copied from setupController in app/routes/subscriptions/credentials.js
     // to fix bug of Review Tab being disabled on refresh and needing to click
     // on subscriptions to enable it
@@ -54,10 +48,6 @@ export default Ember.Route.extend(DeploymentRouteMixin, {
 
   },
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
   loadDefaultDomainName(controller) {
     this.store.findAll('hostgroup').then(function(hostgroups) {
       return hostgroups.filterBy('name', 'Fusor Base').get('firstObject')
@@ -65,7 +55,6 @@ export default Ember.Route.extend(DeploymentRouteMixin, {
     }).then(domainName => controller.set('defaultDomainName', domainName));
   },
 
->>>>>>> de7cfa7... Add full OSE subdomain to review screen
   loadCloudFormsDefaults(controller, model) {
     // GET from API v2 CFME settings for Foreman/Sat6 - if CFME is selected
     if (model.get('deploy_cfme')) {
@@ -175,7 +164,6 @@ export default Ember.Route.extend(DeploymentRouteMixin, {
     }
   },
 
->>>>>>> ffa1e1c... openshift web UI implementation
   actions: {
     installDeployment() {
       var self = this;
@@ -192,7 +180,7 @@ export default Ember.Route.extend(DeploymentRouteMixin, {
       controller.set('showSpinner', true);
 
       request({
-        url: '/fusor/api/v21/deployments/' + deployment.get('id') + '/deploy',
+        url: '/fusor/api/v3/deployments/' + deployment.get('id') + '/deploy',
         type: "PUT",
         headers: {
           "Accept": "application/json",

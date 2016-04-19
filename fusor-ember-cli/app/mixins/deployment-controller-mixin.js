@@ -28,13 +28,8 @@ export default Ember.Mixin.create({
   // isOpenStack
   // isCloudForms
 
-<<<<<<< HEAD
-  disableNextOnStart: Ember.computed('isRhev', 'isOpenStack', 'isCloudForms', function () {
-    return (!(this.get('isRhev') || this.get('isOpenStack') || this.get('isCloudForms')));
-=======
   disableNextOnStart: Ember.computed('isRhev', 'isOpenStack', 'isCloudForms', 'isOpenShift', function () {
     return (!(this.get('isRhev') || this.get('isOpenStack') || this.get('isCloudForms') || this.get('isOpenShift')));
->>>>>>> ffa1e1c... openshift web UI implementation
   }),
 
   // names

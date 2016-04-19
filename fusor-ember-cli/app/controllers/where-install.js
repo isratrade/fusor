@@ -10,11 +10,7 @@ export default Ember.Controller.extend(NeedsDeploymentMixin, {
   isNotRhev: Ember.computed.not("isRhev"),
   isOpenStack: Ember.computed.alias("deploymentController.isOpenStack"),
   isNotOpenStack: Ember.computed.not("isOpenStack"),
-<<<<<<< HEAD
   fullnameOpenStack: Ember.computed.alias("deploymentController.fullnameOpenStack"),
-=======
-  isOpenStack: Ember.computed.alias("deploymentController.isOpenStack"),
->>>>>>> ffa1e1c... openshift web UI implementation
   isInvalidCfmeInstallLocation: Ember.computed.alias("cloudformsController.isInvalidCfmeInstallLocation"),
   isOpenShift: Ember.computed.alias("deploymentController.isOpenShift"),
 

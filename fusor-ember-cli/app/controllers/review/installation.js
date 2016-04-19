@@ -230,8 +230,6 @@ export default Ember.Controller.extend(NeedsDeploymentMixin, OpenshiftMixin, {
     }
   }),
 
-<<<<<<< HEAD
-<<<<<<< HEAD
   deploymentButtonAction: Ember.computed('hasSubscriptionsToAttach', function() {
     if (this.get('showWarningMessage')) {
         return "showContinueDeployModal";
@@ -241,7 +239,8 @@ export default Ember.Controller.extend(NeedsDeploymentMixin, OpenshiftMixin, {
     } else if (this.get('showWarningMessage')) {
         return "showContinueDeployModal";
     }
-=======
+  }),
+
   ramNeededGB: Ember.computed('ramNeeded', function() {
     return this.get('ramNeeded') + ' GB';
   }),
@@ -252,11 +251,8 @@ export default Ember.Controller.extend(NeedsDeploymentMixin, OpenshiftMixin, {
 
   storageSizeGB: Ember.computed('storageSize', function() {
     return this.get('storageSize') + ' GB';
->>>>>>> ffa1e1c... openshift web UI implementation
   }),
 
-=======
->>>>>>> 1163222... Revert "Merge pull request #746 from isratrade/new-modal"
   closeContinueDeployModal() {
     this.set('continueDeploymentModalOpen', false);
     this.set('continueDeploymentModalClosed', true);

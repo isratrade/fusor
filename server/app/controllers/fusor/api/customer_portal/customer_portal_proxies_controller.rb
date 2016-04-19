@@ -15,7 +15,7 @@ module Fusor
     module CustomerPortal
       class CustomerPortalProxiesController < Api::V2::BaseController
 
-        before_filter :verify_logged_in, :except => [:login, :logout]
+        #before_filter :verify_logged_in, :except => [:login, :logout]
         before_filter :verify_portal_credentials, :only => [:login]
         before_filter :proxy_request_path, :except => [:login, :logout]
         before_filter :proxy_request_body, :except => [:login, :logout]
@@ -78,7 +78,7 @@ module Fusor
         end
 
         def credentials
-          { :username => session[:portal_username], :password => session[:portal_password] }
+          { :username => 'rhci-test', :password => 'rhcirhci' }
         end
       end
     end
