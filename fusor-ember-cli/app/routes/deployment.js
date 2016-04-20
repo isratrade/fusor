@@ -105,7 +105,7 @@ export default Ember.Route.extend(DeploymentRouteMixin, {
         }
       });
 
-      // set default values 1 Master, 1 Worker, 20GB storage for OSE
+      // set default values 1 Master, 1 Worker, 30GB storage for OSE
       if (!(model.get('openshift_number_master_nodes') > 0)) {
         model.set('openshift_number_master_nodes', 1);
       }
@@ -113,7 +113,7 @@ export default Ember.Route.extend(DeploymentRouteMixin, {
         model.set('openshift_number_worker_nodes', 1);
       }
       if (!(model.get('openshift_storage_size') > 0)) {
-        model.set('openshift_storage_size', 20);
+        model.set('openshift_storage_size', 30);
       }
 
     }
