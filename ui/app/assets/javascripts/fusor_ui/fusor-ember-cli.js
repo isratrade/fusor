@@ -287,46 +287,17 @@ define('fusor-ember-cli/components/cancel-back-next', ['exports', 'ember'], func
 
       saveAndCancelDeployment: function saveAndCancelDeployment() {
         this.get('targetObject').send('saveAndCancelDeployment');
-        return this.set('openModal', false);
+        this.set('openModal', false);
       },
 
       cancelAndDeleteDeployment: function cancelAndDeleteDeployment() {
         this.get('targetObject').send('cancelAndDeleteDeployment');
-        return this.set('openModal', false);
+        this.set('openModal', false);
       },
 
       cancelAndRollbackNewDeployment: function cancelAndRollbackNewDeployment() {
         this.get('targetObject').send('cancelAndRollbackNewDeployment');
-        return this.set('openModal', false);
       }
-    }
-
-  });
-});
-define('fusor-ember-cli/components/cancel-deployment-modal', ['exports', 'ember'], function (exports, _ember) {
-  exports['default'] = _ember['default'].Component.extend({
-
-    actions: {
-
-      saveAndCancelDeployment: function saveAndCancelDeployment() {
-        this.set('openModal', false);
-        return this.get('targetObject').send('saveAndCancelDeployment');
-      },
-
-      cancelAndDeleteDeployment: function cancelAndDeleteDeployment() {
-        this.set('openModal', false);
-        return this.get('targetObject').send('cancelAndDeleteDeployment');
-      },
-
-      cancelAndRollbackNewDeployment: function cancelAndRollbackNewDeployment() {
-        this.set('openModal', false);
-        return this.get('targetObject').send('cancelAndRollbackNewDeployment');
-      },
-
-      closeModal: function closeModal() {
-        return this.set('openModal', false);
-      }
-
     }
 
   });
@@ -454,26 +425,6 @@ define('fusor-ember-cli/components/content-mirror-f', ['exports', 'ember', 'fuso
     }
   });
 });
-define('fusor-ember-cli/components/continue-deployment-modal', ['exports', 'ember'], function (exports, _ember) {
-  exports['default'] = _ember['default'].Component.extend({
-
-    title: _ember['default'].computed('deployment.name', function () {
-      return "Continue RHCI Deployment - " + this.get('deployment.name');
-    }),
-
-    actions: {
-      installDeployment: function installDeployment() {
-        this.set('openModal', false);
-        this.sendAction('installDeployment', this.get('deployment'));
-      },
-
-      cancelModal: function cancelModal() {
-        this.set('openModal', false);
-      }
-    }
-
-  });
-});
 define('fusor-ember-cli/components/debug-info', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Component.extend({
 
@@ -491,26 +442,6 @@ define('fusor-ember-cli/components/delete-deployment-button', ['exports', 'ember
 
     click: function click() {
       this.sendAction('action', this.get('deployment'));
-    }
-
-  });
-});
-define('fusor-ember-cli/components/delete-deployment-modal', ['exports', 'ember'], function (exports, _ember) {
-  exports['default'] = _ember['default'].Component.extend({
-
-    title: _ember['default'].computed('deployment.name', function () {
-      return "Delete RHCI Deployment - " + this.get('deployment.name');
-    }),
-
-    actions: {
-      deleteDeployment: function deleteDeployment() {
-        this.set('openModal', false);
-        this.sendAction('deleteDeployment', this.get('deployment'));
-      },
-
-      cancelModal: function cancelModal() {
-        this.set('openModal', false);
-      }
     }
 
   });
@@ -833,67 +764,6 @@ define('fusor-ember-cli/components/log-entry', ['exports', 'ember'], function (e
 define('fusor-ember-cli/components/markdown-to-html', ['exports', 'ember-cli-showdown/components/markdown-to-html'], function (exports, _emberCliShowdownComponentsMarkdownToHtml) {
   exports['default'] = _emberCliShowdownComponentsMarkdownToHtml['default'];
 });
-define('fusor-ember-cli/components/naming-scheme-modal', ['exports', 'ember'], function (exports, _ember) {
-  exports['default'] = _ember['default'].Component.extend({
-
-    isFreeform: _ember['default'].computed('hostNamingScheme', function () {
-      return this.get('hostNamingScheme') === 'Freeform';
-    }),
-
-    isMac: _ember['default'].computed('hostNamingScheme', function () {
-      return this.get('hostNamingScheme') === 'MAC address';
-    }),
-
-    isCustomScheme: _ember['default'].computed('hostNamingScheme', function () {
-      return this.get('hostNamingScheme') === 'Custom scheme';
-    }),
-
-    isHypervisorN: _ember['default'].computed('hostNamingScheme', function () {
-      return this.get('hostNamingScheme') === 'hypervisorN';
-    }),
-
-    actions: {
-      saveNamingScheme: function saveNamingScheme() {
-        this.set('openModal', false);
-        return this.sendAction('saveNamingScheme');
-      },
-
-      cancelNamingScheme: function cancelNamingScheme() {
-        this.set('openModal', false);
-        return this.sendAction('cancelNamingScheme');
-      }
-
-    }
-  });
-});
-define('fusor-ember-cli/components/new-environment-modal', ['exports', 'ember'], function (exports, _ember) {
-  exports['default'] = _ember['default'].Component.extend({
-
-    didInsertElement: function didInsertElement() {
-      this.set('name', null);
-      this.set('description', null);
-    },
-
-    envLabelName: _ember['default'].computed('name', function () {
-      if (this.get('name')) {
-        var label = this.get('name').underscore();
-        return label.replace(/[^A-Z0-9]/ig, "_");
-      }
-    }),
-
-    fields_env: {},
-
-    actions: {
-      createEnvironment: function createEnvironment() {
-        this.set('openModal', false); //this closes it
-        this.set('fields_env.name', this.get('name'));
-        this.set('fields_env.label', this.get('envLabelName'));
-        this.set('fields_env.description', this.get('description'));
-        this.sendAction('createEnvironment', this.get('fields_env'));
-      }
-    }
-  });
-});
 define('fusor-ember-cli/components/new-node-registration-mac-address', ['exports', 'ember', 'fusor-ember-cli/utils/validators'], function (exports, _ember, _fusorEmberCliUtilsValidators) {
   exports['default'] = _ember['default'].Component.extend({
     macAddressValidator: _fusorEmberCliUtilsValidators.MacAddressValidator.create({}),
@@ -905,24 +775,6 @@ define('fusor-ember-cli/components/new-node-registration-mac-address', ['exports
     cssId: _ember['default'].computed('index', function () {
       return 'newNodeManualMacAddressAddInput' + this.get('index');
     })
-  });
-});
-define('fusor-ember-cli/components/new-satellite-modal', ['exports', 'ember'], function (exports, _ember) {
-  exports['default'] = _ember['default'].Component.extend({
-
-    didInsertElement: function didInsertElement() {
-      this.set('newSatelliteName', null);
-    },
-
-    fields_env: {},
-
-    actions: {
-      createSatellite: function createSatellite() {
-        this.set('openModal', false);
-        this.sendAction('createSatellite', this.get('newSatelliteName'));
-      }
-    }
-
   });
 });
 define('fusor-ember-cli/components/node-details-block', ['exports', 'ember'], function (exports, _ember) {
@@ -1366,31 +1218,6 @@ define('fusor-ember-cli/components/osp-node', ['exports', 'ember'], function (ex
     }
 
   });
-});
-define('fusor-ember-cli/components/pf-modal-base', ['exports', 'ember'], function (exports, _ember) {
-    exports['default'] = _ember['default'].Component.extend({
-
-        openCloseModal: _ember['default'].observer('openModal', function () {
-            if (this.get('openModal')) {
-                return _ember['default'].$('#' + this.get('idModal')).modal('show');
-            } else {
-                return _ember['default'].$('#' + this.get('idModal')).modal('hide');
-            }
-        }),
-
-        actions: {
-            closeModal: function closeModal() {
-                return this.set('openModal', false);
-            }
-        }
-
-    });
-});
-define('fusor-ember-cli/components/pf-modal-body', ['exports', 'ember'], function (exports, _ember) {
-  exports['default'] = _ember['default'].Component.extend({});
-});
-define('fusor-ember-cli/components/pf-modal-footer', ['exports', 'ember'], function (exports, _ember) {
-  exports['default'] = _ember['default'].Component.extend({});
 });
 define('fusor-ember-cli/components/progress-bar', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Component.extend({
@@ -1908,7 +1735,7 @@ define('fusor-ember-cli/components/tr-deployment', ['exports', 'ember'], functio
     actions: {
       openDeploymentModal: function openDeploymentModal(item) {
         this.get('targetObject').set('deploymentInModal', item);
-        return this.get('targetObject').set('openModal', true);
+        return this.get('targetObject').set('isOpenModal', true);
       }
     }
 
@@ -2736,7 +2563,7 @@ define("fusor-ember-cli/controllers/configure-environment", ["exports", "ember",
     hasLifecycleEnvironment: _ember["default"].computed.alias("deploymentController.hasLifecycleEnvironment"),
     hasNoLifecycleEnvironment: _ember["default"].computed.alias("deploymentController.hasNoLifecycleEnvironment"),
     disableNextOnLifecycleEnvironment: _ember["default"].computed.alias("deploymentController.disableNextOnLifecycleEnvironment"),
-    openModal: false,
+    openNewEnvironmentModal: false,
 
     deployment: _ember["default"].computed.alias("deploymentController.model"),
 
@@ -2750,11 +2577,10 @@ define("fusor-ember-cli/controllers/configure-environment", ["exports", "ember",
       newEnvironment: function newEnvironment() {
         this.set('newEnvName', '');
         this.set('description', '');
-        // this opens it
-        this.set('openModal', true);
+        this.set('openNewEnvironmentModal', true);
       },
 
-      createEnvironment: function createEnvironment(fields_env) {
+      createEnvironment: function createEnvironment() {
         var self = this;
 
         var envName = this.get('newEnvName');
@@ -2764,7 +2590,9 @@ define("fusor-ember-cli/controllers/configure-environment", ["exports", "ember",
         }
 
         var selectedOrganization = this.get('selectedOrganization');
-        this.set('fields_env', fields_env);
+        this.set('fields_env.name', this.get('newEnvName'));
+        this.set('fields_env.label', this.get('envLabelName'));
+        this.set('fields_env.description', this.get('description'));
         this.set('fields_env.organization', selectedOrganization);
 
         var library = this.get('libraryEnv');
@@ -3134,8 +2962,18 @@ define('fusor-ember-cli/controllers/deployments', ['exports', 'ember'], function
       } else {
         return sortedDeployments;
       }
-    })
+    }),
 
+    // related to deleted-deployment-modal
+    isOpenModal: false,
+    deploymentInModal: null,
+
+    actions: {
+      openDeploymentModal: function openDeploymentModal(item) {
+        this.set('deploymentInModal', item);
+        return this.set('isOpenModal', true);
+      }
+    }
   });
 });
 define('fusor-ember-cli/controllers/engine/discovered-host', ['exports', 'ember', 'fusor-ember-cli/mixins/needs-deployment-mixin'], function (exports, _ember, _fusorEmberCliMixinsNeedsDeploymentMixin) {
@@ -3362,14 +3200,16 @@ define("fusor-ember-cli/controllers/hypervisor/discovered-host", ["exports", "em
       },
 
       openNamingSchemeModal: function openNamingSchemeModal() {
-        this.set('openModalNamingScheme', true);
+        this.set('isOpenNamingSchemeModal', true);
       },
 
       cancelNamingScheme: function cancelNamingScheme() {
+        this.set('isCloseNamingSchemeModal', true);
         this.get('deploymentController.model').rollback();
       },
 
       saveNamingScheme: function saveNamingScheme() {
+        this.set('isCloseNamingSchemeModal', true);
         this.get('deploymentController.model').save();
       },
 
@@ -3419,6 +3259,14 @@ define('fusor-ember-cli/controllers/openshift/openshift-configuration', ['export
     openshiftUsernameValidator: _ember['default'].computed.alias("openshiftController.openshiftUsernameValidator"),
     isValidOpenshiftConfiguration: _ember['default'].computed.alias("openshiftController.isValidOpenshiftConfiguration"),
     isInvalidOpenshiftConfiguration: _ember['default'].computed.alias("openshiftController.isInvalidOpenshiftConfiguration"),
+
+    userpassword: _ember['default'].computed.alias('model.openshift_user_password'),
+
+    passwordValidator: _fusorEmberCliUtilsValidators.PasswordValidator.create({}),
+
+    confirmUserpasswordValidator: _ember['default'].computed('userpassword', function () {
+      return _fusorEmberCliUtilsValidators.EqualityValidator.create({ equals: this.get('userpassword') });
+    }),
 
     hasEndingSlashInExportPath: _ember['default'].computed('model.openshift_export_path', function () {
       if (_ember['default'].isPresent(this.get('model.openshift_export_path'))) {
@@ -11132,6 +10980,9 @@ define('fusor-ember-cli/routes/index', ['exports', 'ember'], function (exports, 
 
   });
 });
+define('fusor-ember-cli/routes/new-environment', ['exports', 'ember'], function (exports, _ember) {
+  exports['default'] = _ember['default'].Route.extend({});
+});
 define('fusor-ember-cli/routes/new-organization', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Route.extend({
     setupController: function setupController(controller, model) {
@@ -14564,6 +14415,318 @@ define("fusor-ember-cli/templates/assign-nodes", ["exports"], function (exports)
     };
   })());
 });
+define("fusor-ember-cli/templates/cancel-deployment-modal", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    var child0 = (function () {
+      var child0 = (function () {
+        var child0 = (function () {
+          return {
+            meta: {
+              "revision": "Ember@1.13.10",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 3,
+                  "column": 8
+                },
+                "end": {
+                  "line": 5,
+                  "column": 8
+                }
+              },
+              "moduleName": "fusor-ember-cli/templates/cancel-deployment-modal.hbs"
+            },
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("            ");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createElement("span");
+              dom.setAttribute(el1, "aria-hidden", "true");
+              var el2 = dom.createTextNode("×");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createElement("span");
+              dom.setAttribute(el1, "class", "sr-only");
+              var el2 = dom.createTextNode("Close");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes() {
+              return [];
+            },
+            statements: [],
+            locals: [],
+            templates: []
+          };
+        })();
+        return {
+          meta: {
+            "revision": "Ember@1.13.10",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 2,
+                "column": 4
+              },
+              "end": {
+                "line": 7,
+                "column": 4
+              }
+            },
+            "moduleName": "fusor-ember-cli/templates/cancel-deployment-modal.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("        ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("h4");
+            dom.setAttribute(el1, "class", "modal-title");
+            var el2 = dom.createTextNode("Cancel QCI Deployment - ");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createComment("");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createTextNode(" ");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(2);
+            morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+            morphs[1] = dom.createMorphAt(dom.childAt(fragment, [2]), 1, 1);
+            dom.insertBoundary(fragment, 0);
+            return morphs;
+          },
+          statements: [["block", "em-modal-toggler", [], ["class", "close"], 0, null, ["loc", [null, [3, 8], [5, 29]]]], ["content", "deploymentName", ["loc", [null, [6, 56], [6, 74]]]]],
+          locals: [],
+          templates: [child0]
+        };
+      })();
+      var child1 = (function () {
+        return {
+          meta: {
+            "revision": "Ember@1.13.10",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 9,
+                "column": 4
+              },
+              "end": {
+                "line": 11,
+                "column": 4
+              }
+            },
+            "moduleName": "fusor-ember-cli/templates/cancel-deployment-modal.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("        What would you like to do with this deployment?\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      var child2 = (function () {
+        var child0 = (function () {
+          return {
+            meta: {
+              "revision": "Ember@1.13.10",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 20,
+                  "column": 8
+                },
+                "end": {
+                  "line": 22,
+                  "column": 8
+                }
+              },
+              "moduleName": "fusor-ember-cli/templates/cancel-deployment-modal.hbs"
+            },
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("          Continue Working\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes() {
+              return [];
+            },
+            statements: [],
+            locals: [],
+            templates: []
+          };
+        })();
+        return {
+          meta: {
+            "revision": "Ember@1.13.10",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 13,
+                "column": 4
+              },
+              "end": {
+                "line": 23,
+                "column": 4
+              }
+            },
+            "moduleName": "fusor-ember-cli/templates/cancel-deployment-modal.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("        ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("button");
+            dom.setAttribute(el1, "type", "submit");
+            dom.setAttribute(el1, "class", "btn btn-default");
+            var el2 = dom.createTextNode("\n          Exit and Delete\n        ");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n        ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("button");
+            dom.setAttribute(el1, "type", "submit");
+            dom.setAttribute(el1, "class", "btn btn-default");
+            var el2 = dom.createTextNode("\n          Exit and Save\n        ");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var element0 = dom.childAt(fragment, [1]);
+            var element1 = dom.childAt(fragment, [3]);
+            var morphs = new Array(3);
+            morphs[0] = dom.createElementMorph(element0);
+            morphs[1] = dom.createElementMorph(element1);
+            morphs[2] = dom.createMorphAt(fragment, 5, 5, contextualElement);
+            dom.insertBoundary(fragment, null);
+            return morphs;
+          },
+          statements: [["element", "action", ["cancelAndDeleteDeployment"], [], ["loc", [null, [14, 30], [14, 68]]]], ["element", "action", ["saveAndCancelDeployment"], [], ["loc", [null, [17, 30], [17, 66]]]], ["block", "em-modal-toggler", [], ["class", "btn btn-primary"], 0, null, ["loc", [null, [20, 8], [22, 29]]]]],
+          locals: [],
+          templates: [child0]
+        };
+      })();
+      return {
+        meta: {
+          "revision": "Ember@1.13.10",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 24,
+              "column": 0
+            }
+          },
+          "moduleName": "fusor-ember-cli/templates/cancel-deployment-modal.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(3);
+          morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+          morphs[1] = dom.createMorphAt(fragment, 2, 2, contextualElement);
+          morphs[2] = dom.createMorphAt(fragment, 4, 4, contextualElement);
+          dom.insertBoundary(fragment, 0);
+          dom.insertBoundary(fragment, null);
+          return morphs;
+        },
+        statements: [["block", "em-modal-title", [], [], 0, null, ["loc", [null, [2, 4], [7, 23]]]], ["block", "em-modal-body", [], [], 1, null, ["loc", [null, [9, 4], [11, 22]]]], ["block", "em-modal-footer", [], [], 2, null, ["loc", [null, [13, 4], [23, 24]]]]],
+        locals: [],
+        templates: [child0, child1, child2]
+      };
+    })();
+    return {
+      meta: {
+        "revision": "Ember@1.13.10",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 25,
+            "column": 0
+          }
+        },
+        "moduleName": "fusor-ember-cli/templates/cancel-deployment-modal.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+        dom.insertBoundary(fragment, 0);
+        dom.insertBoundary(fragment, null);
+        return morphs;
+      },
+      statements: [["block", "em-modal", [], ["configName", "bs", "id", "cancelDeploymentModal", "open-if", ["subexpr", "@mut", [["get", "openModal", ["loc", [null, [1, 63], [1, 72]]]]], [], []]], 0, null, ["loc", [null, [1, 0], [24, 13]]]]],
+      locals: [],
+      templates: [child0]
+    };
+  })());
+});
 define("fusor-ember-cli/templates/cloudforms/cfme-configuration", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -15936,187 +16099,6 @@ define("fusor-ember-cli/templates/components/cancel-back-next", ["exports"], fun
     };
   })());
 });
-define("fusor-ember-cli/templates/components/cancel-deployment-modal", ["exports"], function (exports) {
-  exports["default"] = Ember.HTMLBars.template((function () {
-    var child0 = (function () {
-      var child0 = (function () {
-        return {
-          meta: {
-            "revision": "Ember@1.13.10",
-            "loc": {
-              "source": null,
-              "start": {
-                "line": 5,
-                "column": 6
-              },
-              "end": {
-                "line": 7,
-                "column": 6
-              }
-            },
-            "moduleName": "fusor-ember-cli/templates/components/cancel-deployment-modal.hbs"
-          },
-          arity: 0,
-          cachedFragment: null,
-          hasRendered: false,
-          buildFragment: function buildFragment(dom) {
-            var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("          What would you like to do with this deployment?\n");
-            dom.appendChild(el0, el1);
-            return el0;
-          },
-          buildRenderNodes: function buildRenderNodes() {
-            return [];
-          },
-          statements: [],
-          locals: [],
-          templates: []
-        };
-      })();
-      var child1 = (function () {
-        return {
-          meta: {
-            "revision": "Ember@1.13.10",
-            "loc": {
-              "source": null,
-              "start": {
-                "line": 9,
-                "column": 6
-              },
-              "end": {
-                "line": 19,
-                "column": 6
-              }
-            },
-            "moduleName": "fusor-ember-cli/templates/components/cancel-deployment-modal.hbs"
-          },
-          arity: 0,
-          cachedFragment: null,
-          hasRendered: false,
-          buildFragment: function buildFragment(dom) {
-            var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("          ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createElement("button");
-            dom.setAttribute(el1, "class", "btn btn-default");
-            var el2 = dom.createTextNode("\n              Exit and Delete\n          ");
-            dom.appendChild(el1, el2);
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n          ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createElement("button");
-            dom.setAttribute(el1, "class", "btn btn-default");
-            var el2 = dom.createTextNode("\n              Exit and Save\n          ");
-            dom.appendChild(el1, el2);
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n          ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createElement("button");
-            dom.setAttribute(el1, "class", "btn btn-primary");
-            var el2 = dom.createTextNode("\n              Continue Working\n          ");
-            dom.appendChild(el1, el2);
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n");
-            dom.appendChild(el0, el1);
-            return el0;
-          },
-          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var element0 = dom.childAt(fragment, [1]);
-            var element1 = dom.childAt(fragment, [3]);
-            var element2 = dom.childAt(fragment, [5]);
-            var morphs = new Array(3);
-            morphs[0] = dom.createElementMorph(element0);
-            morphs[1] = dom.createElementMorph(element1);
-            morphs[2] = dom.createElementMorph(element2);
-            return morphs;
-          },
-          statements: [["element", "action", ["cancelAndDeleteDeployment"], [], ["loc", [null, [10, 18], [10, 56]]]], ["element", "action", ["saveAndCancelDeployment"], [], ["loc", [null, [13, 18], [13, 54]]]], ["element", "action", ["closeModal"], [], ["loc", [null, [16, 18], [16, 41]]]]],
-          locals: [],
-          templates: []
-        };
-      })();
-      return {
-        meta: {
-          "revision": "Ember@1.13.10",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 1,
-              "column": 0
-            },
-            "end": {
-              "line": 21,
-              "column": 0
-            }
-          },
-          "moduleName": "fusor-ember-cli/templates/components/cancel-deployment-modal.hbs"
-        },
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-          var morphs = new Array(2);
-          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
-          morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
-          return morphs;
-        },
-        statements: [["block", "pf-modal-body", [], [], 0, null, ["loc", [null, [5, 6], [7, 24]]]], ["block", "pf-modal-footer", [], [], 1, null, ["loc", [null, [9, 6], [19, 26]]]]],
-        locals: [],
-        templates: [child0, child1]
-      };
-    })();
-    return {
-      meta: {
-        "revision": "Ember@1.13.10",
-        "loc": {
-          "source": null,
-          "start": {
-            "line": 1,
-            "column": 0
-          },
-          "end": {
-            "line": 22,
-            "column": 0
-          }
-        },
-        "moduleName": "fusor-ember-cli/templates/components/cancel-deployment-modal.hbs"
-      },
-      arity: 0,
-      cachedFragment: null,
-      hasRendered: false,
-      buildFragment: function buildFragment(dom) {
-        var el0 = dom.createDocumentFragment();
-        var el1 = dom.createComment("");
-        dom.appendChild(el0, el1);
-        return el0;
-      },
-      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
-        dom.insertBoundary(fragment, 0);
-        dom.insertBoundary(fragment, null);
-        return morphs;
-      },
-      statements: [["block", "pf-modal-base", [], ["idModal", "cancelDeploymentModal", "openModal", ["subexpr", "@mut", [["get", "openModal", ["loc", [null, [2, 27], [2, 36]]]]], [], []], "title", "Cancel RHCI Deployment"], 0, null, ["loc", [null, [1, 0], [21, 18]]]]],
-      locals: [],
-      templates: [child0]
-    };
-  })());
-});
 define("fusor-ember-cli/templates/components/check-f", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
@@ -16454,184 +16436,6 @@ define("fusor-ember-cli/templates/components/content-mirror-f", ["exports"], fun
     };
   })());
 });
-define("fusor-ember-cli/templates/components/continue-deployment-modal", ["exports"], function (exports) {
-  exports["default"] = Ember.HTMLBars.template((function () {
-    var child0 = (function () {
-      var child0 = (function () {
-        return {
-          meta: {
-            "revision": "Ember@1.13.10",
-            "loc": {
-              "source": null,
-              "start": {
-                "line": 5,
-                "column": 6
-              },
-              "end": {
-                "line": 11,
-                "column": 6
-              }
-            },
-            "moduleName": "fusor-ember-cli/templates/components/continue-deployment-modal.hbs"
-          },
-          arity: 0,
-          cachedFragment: null,
-          hasRendered: false,
-          buildFragment: function buildFragment(dom) {
-            var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("\n        Are you sure that you want to deploy ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createComment("");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("? There\n        are warnings that were found that could cause problems during the\n        deployment.\n\n");
-            dom.appendChild(el0, el1);
-            return el0;
-          },
-          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var morphs = new Array(1);
-            morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
-            return morphs;
-          },
-          statements: [["content", "deployment.name", ["loc", [null, [7, 45], [7, 64]]]]],
-          locals: [],
-          templates: []
-        };
-      })();
-      var child1 = (function () {
-        return {
-          meta: {
-            "revision": "Ember@1.13.10",
-            "loc": {
-              "source": null,
-              "start": {
-                "line": 13,
-                "column": 6
-              },
-              "end": {
-                "line": 20,
-                "column": 6
-              }
-            },
-            "moduleName": "fusor-ember-cli/templates/components/continue-deployment-modal.hbs"
-          },
-          arity: 0,
-          cachedFragment: null,
-          hasRendered: false,
-          buildFragment: function buildFragment(dom) {
-            var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("          ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createElement("button");
-            dom.setAttribute(el1, "class", "btn btn-default");
-            var el2 = dom.createTextNode("\n              No\n          ");
-            dom.appendChild(el1, el2);
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n          ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createElement("button");
-            dom.setAttribute(el1, "class", "btn btn-warning");
-            var el2 = dom.createTextNode("\n              Yes, Continue\n          ");
-            dom.appendChild(el1, el2);
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n");
-            dom.appendChild(el0, el1);
-            return el0;
-          },
-          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var element0 = dom.childAt(fragment, [1]);
-            var element1 = dom.childAt(fragment, [3]);
-            var morphs = new Array(2);
-            morphs[0] = dom.createElementMorph(element0);
-            morphs[1] = dom.createElementMorph(element1);
-            return morphs;
-          },
-          statements: [["element", "action", ["cancelModal", ["get", "deployment", ["loc", [null, [14, 41], [14, 51]]]]], [], ["loc", [null, [14, 18], [14, 53]]]], ["element", "action", ["installDeployment", ["get", "deployment", ["loc", [null, [17, 47], [17, 57]]]]], [], ["loc", [null, [17, 18], [17, 59]]]]],
-          locals: [],
-          templates: []
-        };
-      })();
-      return {
-        meta: {
-          "revision": "Ember@1.13.10",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 1,
-              "column": 0
-            },
-            "end": {
-              "line": 22,
-              "column": 0
-            }
-          },
-          "moduleName": "fusor-ember-cli/templates/components/continue-deployment-modal.hbs"
-        },
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-          var morphs = new Array(2);
-          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
-          morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
-          return morphs;
-        },
-        statements: [["block", "pf-modal-body", [], [], 0, null, ["loc", [null, [5, 6], [11, 24]]]], ["block", "pf-modal-footer", [], [], 1, null, ["loc", [null, [13, 6], [20, 26]]]]],
-        locals: [],
-        templates: [child0, child1]
-      };
-    })();
-    return {
-      meta: {
-        "revision": "Ember@1.13.10",
-        "loc": {
-          "source": null,
-          "start": {
-            "line": 1,
-            "column": 0
-          },
-          "end": {
-            "line": 23,
-            "column": 0
-          }
-        },
-        "moduleName": "fusor-ember-cli/templates/components/continue-deployment-modal.hbs"
-      },
-      arity: 0,
-      cachedFragment: null,
-      hasRendered: false,
-      buildFragment: function buildFragment(dom) {
-        var el0 = dom.createDocumentFragment();
-        var el1 = dom.createComment("");
-        dom.appendChild(el0, el1);
-        return el0;
-      },
-      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
-        dom.insertBoundary(fragment, 0);
-        dom.insertBoundary(fragment, null);
-        return morphs;
-      },
-      statements: [["block", "pf-modal-base", [], ["idModal", "continueDeploymentModal", "openModal", ["subexpr", "@mut", [["get", "openModal", ["loc", [null, [2, 27], [2, 36]]]]], [], []], "title", ["subexpr", "@mut", [["get", "title", ["loc", [null, [3, 23], [3, 28]]]]], [], []]], 0, null, ["loc", [null, [1, 0], [22, 18]]]]],
-      locals: [],
-      templates: [child0]
-    };
-  })());
-});
 define("fusor-ember-cli/templates/components/debug-info", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
@@ -16784,184 +16588,6 @@ define("fusor-ember-cli/templates/components/delete-deployment-button", ["export
       statements: [],
       locals: [],
       templates: []
-    };
-  })());
-});
-define("fusor-ember-cli/templates/components/delete-deployment-modal", ["exports"], function (exports) {
-  exports["default"] = Ember.HTMLBars.template((function () {
-    var child0 = (function () {
-      var child0 = (function () {
-        return {
-          meta: {
-            "revision": "Ember@1.13.10",
-            "loc": {
-              "source": null,
-              "start": {
-                "line": 5,
-                "column": 6
-              },
-              "end": {
-                "line": 9,
-                "column": 6
-              }
-            },
-            "moduleName": "fusor-ember-cli/templates/components/delete-deployment-modal.hbs"
-          },
-          arity: 0,
-          cachedFragment: null,
-          hasRendered: false,
-          buildFragment: function buildFragment(dom) {
-            var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("\n        Are you sure that you want to delete this deployment - ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createComment("");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("?\n\n");
-            dom.appendChild(el0, el1);
-            return el0;
-          },
-          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var morphs = new Array(1);
-            morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
-            return morphs;
-          },
-          statements: [["content", "deployment.name", ["loc", [null, [7, 63], [7, 82]]]]],
-          locals: [],
-          templates: []
-        };
-      })();
-      var child1 = (function () {
-        return {
-          meta: {
-            "revision": "Ember@1.13.10",
-            "loc": {
-              "source": null,
-              "start": {
-                "line": 11,
-                "column": 6
-              },
-              "end": {
-                "line": 18,
-                "column": 6
-              }
-            },
-            "moduleName": "fusor-ember-cli/templates/components/delete-deployment-modal.hbs"
-          },
-          arity: 0,
-          cachedFragment: null,
-          hasRendered: false,
-          buildFragment: function buildFragment(dom) {
-            var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("          ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createElement("button");
-            dom.setAttribute(el1, "class", "btn btn-default");
-            var el2 = dom.createTextNode("\n              No\n          ");
-            dom.appendChild(el1, el2);
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n          ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createElement("button");
-            dom.setAttribute(el1, "class", "btn btn-primary");
-            var el2 = dom.createTextNode("\n              Yes, Delete Deployment\n          ");
-            dom.appendChild(el1, el2);
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n");
-            dom.appendChild(el0, el1);
-            return el0;
-          },
-          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var element0 = dom.childAt(fragment, [1]);
-            var element1 = dom.childAt(fragment, [3]);
-            var morphs = new Array(2);
-            morphs[0] = dom.createElementMorph(element0);
-            morphs[1] = dom.createElementMorph(element1);
-            return morphs;
-          },
-          statements: [["element", "action", ["cancelModal", ["get", "deployment", ["loc", [null, [12, 41], [12, 51]]]]], [], ["loc", [null, [12, 18], [12, 53]]]], ["element", "action", ["deleteDeployment", ["get", "deployment", ["loc", [null, [15, 46], [15, 56]]]]], [], ["loc", [null, [15, 18], [15, 58]]]]],
-          locals: [],
-          templates: []
-        };
-      })();
-      return {
-        meta: {
-          "revision": "Ember@1.13.10",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 1,
-              "column": 0
-            },
-            "end": {
-              "line": 20,
-              "column": 0
-            }
-          },
-          "moduleName": "fusor-ember-cli/templates/components/delete-deployment-modal.hbs"
-        },
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-          var morphs = new Array(2);
-          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
-          morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
-          return morphs;
-        },
-        statements: [["block", "pf-modal-body", [], [], 0, null, ["loc", [null, [5, 6], [9, 24]]]], ["block", "pf-modal-footer", [], [], 1, null, ["loc", [null, [11, 6], [18, 26]]]]],
-        locals: [],
-        templates: [child0, child1]
-      };
-    })();
-    return {
-      meta: {
-        "revision": "Ember@1.13.10",
-        "loc": {
-          "source": null,
-          "start": {
-            "line": 1,
-            "column": 0
-          },
-          "end": {
-            "line": 21,
-            "column": 0
-          }
-        },
-        "moduleName": "fusor-ember-cli/templates/components/delete-deployment-modal.hbs"
-      },
-      arity: 0,
-      cachedFragment: null,
-      hasRendered: false,
-      buildFragment: function buildFragment(dom) {
-        var el0 = dom.createDocumentFragment();
-        var el1 = dom.createComment("");
-        dom.appendChild(el0, el1);
-        return el0;
-      },
-      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
-        dom.insertBoundary(fragment, 0);
-        dom.insertBoundary(fragment, null);
-        return morphs;
-      },
-      statements: [["block", "pf-modal-base", [], ["idModal", "deleteDeploymentModal", "openModal", ["subexpr", "@mut", [["get", "openModal", ["loc", [null, [2, 27], [2, 36]]]]], [], []], "title", ["subexpr", "@mut", [["get", "title", ["loc", [null, [3, 23], [3, 28]]]]], [], []]], 0, null, ["loc", [null, [1, 0], [20, 18]]]]],
-      locals: [],
-      templates: [child0]
     };
   })());
 });
@@ -20493,584 +20119,6 @@ define("fusor-ember-cli/templates/components/markdown-to-html", ["exports"], fun
     };
   })());
 });
-define("fusor-ember-cli/templates/components/naming-scheme-modal", ["exports"], function (exports) {
-  exports["default"] = Ember.HTMLBars.template((function () {
-    var child0 = (function () {
-      var child0 = (function () {
-        var child0 = (function () {
-          var child0 = (function () {
-            return {
-              meta: {
-                "revision": "Ember@1.13.10",
-                "loc": {
-                  "source": null,
-                  "start": {
-                    "line": 27,
-                    "column": 20
-                  },
-                  "end": {
-                    "line": 32,
-                    "column": 20
-                  }
-                },
-                "moduleName": "fusor-ember-cli/templates/components/naming-scheme-modal.hbs"
-              },
-              arity: 0,
-              cachedFragment: null,
-              hasRendered: false,
-              buildFragment: function buildFragment(dom) {
-                var el0 = dom.createDocumentFragment();
-                var el1 = dom.createTextNode("                              ");
-                dom.appendChild(el0, el1);
-                var el1 = dom.createComment("");
-                dom.appendChild(el0, el1);
-                var el1 = dom.createTextNode("1");
-                dom.appendChild(el0, el1);
-                var el1 = dom.createElement("br");
-                dom.appendChild(el0, el1);
-                var el1 = dom.createTextNode("\n                              ");
-                dom.appendChild(el0, el1);
-                var el1 = dom.createComment("");
-                dom.appendChild(el0, el1);
-                var el1 = dom.createTextNode("2");
-                dom.appendChild(el0, el1);
-                var el1 = dom.createElement("br");
-                dom.appendChild(el0, el1);
-                var el1 = dom.createTextNode("\n                              ");
-                dom.appendChild(el0, el1);
-                var el1 = dom.createComment("");
-                dom.appendChild(el0, el1);
-                var el1 = dom.createTextNode("3");
-                dom.appendChild(el0, el1);
-                var el1 = dom.createElement("br");
-                dom.appendChild(el0, el1);
-                var el1 = dom.createTextNode("\n");
-                dom.appendChild(el0, el1);
-                return el0;
-              },
-              buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-                var morphs = new Array(3);
-                morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
-                morphs[1] = dom.createMorphAt(fragment, 5, 5, contextualElement);
-                morphs[2] = dom.createMorphAt(fragment, 9, 9, contextualElement);
-                return morphs;
-              },
-              statements: [["content", "customPreprendName", ["loc", [null, [29, 30], [29, 52]]]], ["content", "customPreprendName", ["loc", [null, [30, 30], [30, 52]]]], ["content", "customPreprendName", ["loc", [null, [31, 30], [31, 52]]]]],
-              locals: [],
-              templates: []
-            };
-          })();
-          return {
-            meta: {
-              "revision": "Ember@1.13.10",
-              "loc": {
-                "source": null,
-                "start": {
-                  "line": 19,
-                  "column": 16
-                },
-                "end": {
-                  "line": 33,
-                  "column": 16
-                }
-              },
-              "moduleName": "fusor-ember-cli/templates/components/naming-scheme-modal.hbs"
-            },
-            arity: 0,
-            cachedFragment: null,
-            hasRendered: false,
-            buildFragment: function buildFragment(dom) {
-              var el0 = dom.createDocumentFragment();
-              var el1 = dom.createTextNode("                    ");
-              dom.appendChild(el0, el1);
-              var el1 = dom.createComment("");
-              dom.appendChild(el0, el1);
-              var el1 = dom.createTextNode("\n\n");
-              dom.appendChild(el0, el1);
-              var el1 = dom.createComment("");
-              dom.appendChild(el0, el1);
-              return el0;
-            },
-            buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-              var morphs = new Array(2);
-              morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
-              morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
-              dom.insertBoundary(fragment, null);
-              return morphs;
-            },
-            statements: [["inline", "text-f", [], ["label", "Prepend host names with", "value", ["subexpr", "@mut", [["get", "customPreprendName", ["loc", [null, [21, 35], [21, 53]]]]], [], []], "disabled", ["subexpr", "@mut", [["get", "isStarted", ["loc", [null, [22, 38], [22, 47]]]]], [], []], "placeholder", "Enter custom prefix", "labelSize", "col-md-4", "inputSize", "col-md-5"], ["loc", [null, [20, 20], [25, 51]]]], ["block", "base-f", [], ["label", "Three host example", "labelSize", "col-md-4"], 0, null, ["loc", [null, [27, 20], [32, 31]]]]],
-            locals: [],
-            templates: [child0]
-          };
-        })();
-        var child1 = (function () {
-          var child0 = (function () {
-            return {
-              meta: {
-                "revision": "Ember@1.13.10",
-                "loc": {
-                  "source": null,
-                  "start": {
-                    "line": 36,
-                    "column": 20
-                  },
-                  "end": {
-                    "line": 40,
-                    "column": 20
-                  }
-                },
-                "moduleName": "fusor-ember-cli/templates/components/naming-scheme-modal.hbs"
-              },
-              arity: 0,
-              cachedFragment: null,
-              hasRendered: false,
-              buildFragment: function buildFragment(dom) {
-                var el0 = dom.createDocumentFragment();
-                var el1 = dom.createTextNode("                        hypervisor1");
-                dom.appendChild(el0, el1);
-                var el1 = dom.createElement("br");
-                dom.appendChild(el0, el1);
-                var el1 = dom.createTextNode("\n                        hypervisor2");
-                dom.appendChild(el0, el1);
-                var el1 = dom.createElement("br");
-                dom.appendChild(el0, el1);
-                var el1 = dom.createTextNode("\n                        hypervisor3");
-                dom.appendChild(el0, el1);
-                var el1 = dom.createElement("br");
-                dom.appendChild(el0, el1);
-                var el1 = dom.createTextNode("\n");
-                dom.appendChild(el0, el1);
-                return el0;
-              },
-              buildRenderNodes: function buildRenderNodes() {
-                return [];
-              },
-              statements: [],
-              locals: [],
-              templates: []
-            };
-          })();
-          return {
-            meta: {
-              "revision": "Ember@1.13.10",
-              "loc": {
-                "source": null,
-                "start": {
-                  "line": 35,
-                  "column": 16
-                },
-                "end": {
-                  "line": 41,
-                  "column": 16
-                }
-              },
-              "moduleName": "fusor-ember-cli/templates/components/naming-scheme-modal.hbs"
-            },
-            arity: 0,
-            cachedFragment: null,
-            hasRendered: false,
-            buildFragment: function buildFragment(dom) {
-              var el0 = dom.createDocumentFragment();
-              var el1 = dom.createComment("");
-              dom.appendChild(el0, el1);
-              return el0;
-            },
-            buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-              var morphs = new Array(1);
-              morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
-              dom.insertBoundary(fragment, 0);
-              dom.insertBoundary(fragment, null);
-              return morphs;
-            },
-            statements: [["block", "base-f", [], ["label", "Three host example", "labelSize", "col-md-4"], 0, null, ["loc", [null, [36, 20], [40, 31]]]]],
-            locals: [],
-            templates: [child0]
-          };
-        })();
-        return {
-          meta: {
-            "revision": "Ember@1.13.10",
-            "loc": {
-              "source": null,
-              "start": {
-                "line": 5,
-                "column": 6
-              },
-              "end": {
-                "line": 46,
-                "column": 6
-              }
-            },
-            "moduleName": "fusor-ember-cli/templates/components/naming-scheme-modal.hbs"
-          },
-          arity: 0,
-          cachedFragment: null,
-          hasRendered: false,
-          buildFragment: function buildFragment(dom) {
-            var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("            ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createElement("p");
-            var el2 = dom.createTextNode("\n            Enforcing a naming scheme will ensure all selected hypervisors get named automatically and consistently.\n            ");
-            dom.appendChild(el1, el2);
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n\n            ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createElement("form");
-            dom.setAttribute(el1, "class", "form-horizontal");
-            var el2 = dom.createTextNode("\n              ");
-            dom.appendChild(el1, el2);
-            var el2 = dom.createElement("div");
-            dom.setAttribute(el2, "class", "form-group");
-            var el3 = dom.createTextNode("\n                ");
-            dom.appendChild(el2, el3);
-            var el3 = dom.createComment("");
-            dom.appendChild(el2, el3);
-            var el3 = dom.createTextNode("\n\n");
-            dom.appendChild(el2, el3);
-            var el3 = dom.createComment("");
-            dom.appendChild(el2, el3);
-            var el3 = dom.createTextNode("\n");
-            dom.appendChild(el2, el3);
-            var el3 = dom.createComment("");
-            dom.appendChild(el2, el3);
-            var el3 = dom.createTextNode("\n\n              ");
-            dom.appendChild(el2, el3);
-            dom.appendChild(el1, el2);
-            var el2 = dom.createTextNode("\n            ");
-            dom.appendChild(el1, el2);
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n");
-            dom.appendChild(el0, el1);
-            return el0;
-          },
-          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var element2 = dom.childAt(fragment, [3, 1]);
-            var morphs = new Array(3);
-            morphs[0] = dom.createMorphAt(element2, 1, 1);
-            morphs[1] = dom.createMorphAt(element2, 3, 3);
-            morphs[2] = dom.createMorphAt(element2, 5, 5);
-            return morphs;
-          },
-          statements: [["inline", "select-simple-f", [], ["label", "Host naming scheme", "content", ["subexpr", "@mut", [["get", "namingOptions", ["loc", [null, [13, 42], [13, 55]]]]], [], []], "value", ["subexpr", "@mut", [["get", "hostNamingScheme", ["loc", [null, [14, 40], [14, 56]]]]], [], []], "disabled", ["subexpr", "@mut", [["get", "isStarted", ["loc", [null, [15, 43], [15, 52]]]]], [], []], "labelSize", "col-md-4", "inputSize", "col-md-5"], ["loc", [null, [12, 16], [17, 56]]]], ["block", "if", [["get", "isCustomScheme", ["loc", [null, [19, 22], [19, 36]]]]], [], 0, null, ["loc", [null, [19, 16], [33, 23]]]], ["block", "if", [["get", "isHypervisorN", ["loc", [null, [35, 22], [35, 35]]]]], [], 1, null, ["loc", [null, [35, 16], [41, 23]]]]],
-          locals: [],
-          templates: [child0, child1]
-        };
-      })();
-      var child1 = (function () {
-        return {
-          meta: {
-            "revision": "Ember@1.13.10",
-            "loc": {
-              "source": null,
-              "start": {
-                "line": 48,
-                "column": 6
-              },
-              "end": {
-                "line": 51,
-                "column": 6
-              }
-            },
-            "moduleName": "fusor-ember-cli/templates/components/naming-scheme-modal.hbs"
-          },
-          arity: 0,
-          cachedFragment: null,
-          hasRendered: false,
-          buildFragment: function buildFragment(dom) {
-            var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("        ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createElement("button");
-            dom.setAttribute(el1, "class", "btn btn-default");
-            var el2 = dom.createTextNode("Cancel");
-            dom.appendChild(el1, el2);
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n        ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createElement("button");
-            dom.setAttribute(el1, "class", "btn btn-primary");
-            var el2 = dom.createTextNode("Edit");
-            dom.appendChild(el1, el2);
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n");
-            dom.appendChild(el0, el1);
-            return el0;
-          },
-          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var element0 = dom.childAt(fragment, [1]);
-            var element1 = dom.childAt(fragment, [3]);
-            var morphs = new Array(2);
-            morphs[0] = dom.createElementMorph(element0);
-            morphs[1] = dom.createElementMorph(element1);
-            return morphs;
-          },
-          statements: [["element", "action", ["cancelNamingScheme"], [], ["loc", [null, [49, 16], [49, 47]]]], ["element", "action", ["saveNamingScheme"], [], ["loc", [null, [50, 16], [50, 45]]]]],
-          locals: [],
-          templates: []
-        };
-      })();
-      return {
-        meta: {
-          "revision": "Ember@1.13.10",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 1,
-              "column": 0
-            },
-            "end": {
-              "line": 53,
-              "column": 0
-            }
-          },
-          "moduleName": "fusor-ember-cli/templates/components/naming-scheme-modal.hbs"
-        },
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-          var morphs = new Array(2);
-          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
-          morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
-          return morphs;
-        },
-        statements: [["block", "pf-modal-body", [], [], 0, null, ["loc", [null, [5, 6], [46, 24]]]], ["block", "pf-modal-footer", [], [], 1, null, ["loc", [null, [48, 6], [51, 26]]]]],
-        locals: [],
-        templates: [child0, child1]
-      };
-    })();
-    return {
-      meta: {
-        "revision": "Ember@1.13.10",
-        "loc": {
-          "source": null,
-          "start": {
-            "line": 1,
-            "column": 0
-          },
-          "end": {
-            "line": 54,
-            "column": 0
-          }
-        },
-        "moduleName": "fusor-ember-cli/templates/components/naming-scheme-modal.hbs"
-      },
-      arity: 0,
-      cachedFragment: null,
-      hasRendered: false,
-      buildFragment: function buildFragment(dom) {
-        var el0 = dom.createDocumentFragment();
-        var el1 = dom.createComment("");
-        dom.appendChild(el0, el1);
-        return el0;
-      },
-      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
-        dom.insertBoundary(fragment, 0);
-        dom.insertBoundary(fragment, null);
-        return morphs;
-      },
-      statements: [["block", "pf-modal-base", [], ["idModal", "namingSchemeModal", "openModal", ["subexpr", "@mut", [["get", "openModal", ["loc", [null, [2, 27], [2, 36]]]]], [], []], "title", "Edit Naming Scheme"], 0, null, ["loc", [null, [1, 0], [53, 18]]]]],
-      locals: [],
-      templates: [child0]
-    };
-  })());
-});
-define("fusor-ember-cli/templates/components/new-environment-modal", ["exports"], function (exports) {
-  exports["default"] = Ember.HTMLBars.template((function () {
-    var child0 = (function () {
-      var child0 = (function () {
-        return {
-          meta: {
-            "revision": "Ember@1.13.10",
-            "loc": {
-              "source": null,
-              "start": {
-                "line": 5,
-                "column": 6
-              },
-              "end": {
-                "line": 9,
-                "column": 6
-              }
-            },
-            "moduleName": "fusor-ember-cli/templates/components/new-environment-modal.hbs"
-          },
-          arity: 0,
-          cachedFragment: null,
-          hasRendered: false,
-          buildFragment: function buildFragment(dom) {
-            var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("            ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createComment("");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n            ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createComment("");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n            ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createComment("");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n");
-            dom.appendChild(el0, el1);
-            return el0;
-          },
-          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var morphs = new Array(3);
-            morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
-            morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
-            morphs[2] = dom.createMorphAt(fragment, 5, 5, contextualElement);
-            return morphs;
-          },
-          statements: [["inline", "text-f", [], ["label", "Environment Name", "value", ["subexpr", "@mut", [["get", "name", ["loc", [null, [6, 52], [6, 56]]]]], [], []], "labelSize", "col-md-4", "inputSize", "col-md-8"], ["loc", [null, [6, 12], [6, 100]]]], ["inline", "text-f", [], ["label", "Label", "value", ["subexpr", "@mut", [["get", "envLabelName", ["loc", [null, [7, 41], [7, 53]]]]], [], []], "labelSize", "col-md-4", "inputSize", "col-md-8"], ["loc", [null, [7, 12], [7, 97]]]], ["inline", "textarea-f", [], ["label", "Description (Optional)", "value", ["subexpr", "@mut", [["get", "description", ["loc", [null, [8, 62], [8, 73]]]]], [], []], "labelSize", "col-md-4", "inputSize", "col-md-8"], ["loc", [null, [8, 12], [8, 117]]]]],
-          locals: [],
-          templates: []
-        };
-      })();
-      var child1 = (function () {
-        return {
-          meta: {
-            "revision": "Ember@1.13.10",
-            "loc": {
-              "source": null,
-              "start": {
-                "line": 11,
-                "column": 6
-              },
-              "end": {
-                "line": 15,
-                "column": 6
-              }
-            },
-            "moduleName": "fusor-ember-cli/templates/components/new-environment-modal.hbs"
-          },
-          arity: 0,
-          cachedFragment: null,
-          hasRendered: false,
-          buildFragment: function buildFragment(dom) {
-            var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("          ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createElement("button");
-            dom.setAttribute(el1, "class", "btn btn-primary");
-            var el2 = dom.createTextNode("\n              Submit\n          ");
-            dom.appendChild(el1, el2);
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n");
-            dom.appendChild(el0, el1);
-            return el0;
-          },
-          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var element0 = dom.childAt(fragment, [1]);
-            var morphs = new Array(1);
-            morphs[0] = dom.createElementMorph(element0);
-            return morphs;
-          },
-          statements: [["element", "action", ["createEnvironment"], [], ["loc", [null, [12, 18], [12, 48]]]]],
-          locals: [],
-          templates: []
-        };
-      })();
-      return {
-        meta: {
-          "revision": "Ember@1.13.10",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 1,
-              "column": 0
-            },
-            "end": {
-              "line": 17,
-              "column": 0
-            }
-          },
-          "moduleName": "fusor-ember-cli/templates/components/new-environment-modal.hbs"
-        },
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-          var morphs = new Array(2);
-          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
-          morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
-          return morphs;
-        },
-        statements: [["block", "pf-modal-body", [], [], 0, null, ["loc", [null, [5, 6], [9, 24]]]], ["block", "pf-modal-footer", [], [], 1, null, ["loc", [null, [11, 6], [15, 26]]]]],
-        locals: [],
-        templates: [child0, child1]
-      };
-    })();
-    return {
-      meta: {
-        "revision": "Ember@1.13.10",
-        "loc": {
-          "source": null,
-          "start": {
-            "line": 1,
-            "column": 0
-          },
-          "end": {
-            "line": 18,
-            "column": 0
-          }
-        },
-        "moduleName": "fusor-ember-cli/templates/components/new-environment-modal.hbs"
-      },
-      arity: 0,
-      cachedFragment: null,
-      hasRendered: false,
-      buildFragment: function buildFragment(dom) {
-        var el0 = dom.createDocumentFragment();
-        var el1 = dom.createComment("");
-        dom.appendChild(el0, el1);
-        return el0;
-      },
-      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
-        dom.insertBoundary(fragment, 0);
-        dom.insertBoundary(fragment, null);
-        return morphs;
-      },
-      statements: [["block", "pf-modal-base", [], ["idModal", "newLifecycleEnvironmentModal", "openModal", ["subexpr", "@mut", [["get", "openModal", ["loc", [null, [2, 27], [2, 36]]]]], [], []], "title", "Enter New Environment"], 0, null, ["loc", [null, [1, 0], [17, 18]]]]],
-      locals: [],
-      templates: [child0]
-    };
-  })());
-});
 define("fusor-ember-cli/templates/components/new-node-registration-mac-address", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
@@ -21138,175 +20186,6 @@ define("fusor-ember-cli/templates/components/new-node-registration-mac-address",
         return morphs;
       },
       statements: [["block", "text-f", [], ["cssId", ["subexpr", "@mut", [["get", "cssId", ["loc", [null, [1, 16], [1, 21]]]]], [], []], "label", ["subexpr", "@mut", [["get", "label", ["loc", [null, [2, 16], [2, 21]]]]], [], []], "labelSize", "form-label-nowrap col-xs-3", "inputSize", "col-xs-4", "value", ["subexpr", "@mut", [["get", "macAddress.value", ["loc", [null, [5, 16], [5, 32]]]]], [], []], "validator", ["subexpr", "@mut", [["get", "macAddressValidator", ["loc", [null, [6, 20], [6, 39]]]]], [], []], "isRequired", false], 0, null, ["loc", [null, [1, 0], [8, 11]]]]],
-      locals: [],
-      templates: [child0]
-    };
-  })());
-});
-define("fusor-ember-cli/templates/components/new-satellite-modal", ["exports"], function (exports) {
-  exports["default"] = Ember.HTMLBars.template((function () {
-    var child0 = (function () {
-      var child0 = (function () {
-        return {
-          meta: {
-            "revision": "Ember@1.13.10",
-            "loc": {
-              "source": null,
-              "start": {
-                "line": 5,
-                "column": 6
-              },
-              "end": {
-                "line": 7,
-                "column": 6
-              }
-            },
-            "moduleName": "fusor-ember-cli/templates/components/new-satellite-modal.hbs"
-          },
-          arity: 0,
-          cachedFragment: null,
-          hasRendered: false,
-          buildFragment: function buildFragment(dom) {
-            var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("            ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createComment("");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n");
-            dom.appendChild(el0, el1);
-            return el0;
-          },
-          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var morphs = new Array(1);
-            morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
-            return morphs;
-          },
-          statements: [["inline", "text-f", [], ["label", "Name", "value", ["subexpr", "@mut", [["get", "newSatelliteName", ["loc", [null, [6, 40], [6, 56]]]]], [], []], "labelSize", "col-md-4", "inputSize", "col-md-8"], ["loc", [null, [6, 12], [6, 100]]]]],
-          locals: [],
-          templates: []
-        };
-      })();
-      var child1 = (function () {
-        return {
-          meta: {
-            "revision": "Ember@1.13.10",
-            "loc": {
-              "source": null,
-              "start": {
-                "line": 9,
-                "column": 6
-              },
-              "end": {
-                "line": 13,
-                "column": 6
-              }
-            },
-            "moduleName": "fusor-ember-cli/templates/components/new-satellite-modal.hbs"
-          },
-          arity: 0,
-          cachedFragment: null,
-          hasRendered: false,
-          buildFragment: function buildFragment(dom) {
-            var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("          ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createElement("button");
-            dom.setAttribute(el1, "class", "btn btn-primary");
-            var el2 = dom.createTextNode("\n              Submit\n          ");
-            dom.appendChild(el1, el2);
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n");
-            dom.appendChild(el0, el1);
-            return el0;
-          },
-          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var element0 = dom.childAt(fragment, [1]);
-            var morphs = new Array(1);
-            morphs[0] = dom.createElementMorph(element0);
-            return morphs;
-          },
-          statements: [["element", "action", ["createSatellite"], [], ["loc", [null, [10, 18], [10, 46]]]]],
-          locals: [],
-          templates: []
-        };
-      })();
-      return {
-        meta: {
-          "revision": "Ember@1.13.10",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 1,
-              "column": 0
-            },
-            "end": {
-              "line": 15,
-              "column": 0
-            }
-          },
-          "moduleName": "fusor-ember-cli/templates/components/new-satellite-modal.hbs"
-        },
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-          var morphs = new Array(2);
-          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
-          morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
-          return morphs;
-        },
-        statements: [["block", "pf-modal-body", [], [], 0, null, ["loc", [null, [5, 6], [7, 24]]]], ["block", "pf-modal-footer", [], [], 1, null, ["loc", [null, [9, 6], [13, 26]]]]],
-        locals: [],
-        templates: [child0, child1]
-      };
-    })();
-    return {
-      meta: {
-        "revision": "Ember@1.13.10",
-        "loc": {
-          "source": null,
-          "start": {
-            "line": 1,
-            "column": 0
-          },
-          "end": {
-            "line": 16,
-            "column": 0
-          }
-        },
-        "moduleName": "fusor-ember-cli/templates/components/new-satellite-modal.hbs"
-      },
-      arity: 0,
-      cachedFragment: null,
-      hasRendered: false,
-      buildFragment: function buildFragment(dom) {
-        var el0 = dom.createDocumentFragment();
-        var el1 = dom.createComment("");
-        dom.appendChild(el0, el1);
-        return el0;
-      },
-      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
-        dom.insertBoundary(fragment, 0);
-        dom.insertBoundary(fragment, null);
-        return morphs;
-      },
-      statements: [["block", "pf-modal-base", [], ["idModal", "registerNewSatellite", "openModal", ["subexpr", "@mut", [["get", "openModal", ["loc", [null, [2, 27], [2, 36]]]]], [], []], "title", "New Subscription Management Application"], 0, null, ["loc", [null, [1, 0], [15, 18]]]]],
       locals: [],
       templates: [child0]
     };
@@ -23407,197 +22286,6 @@ define("fusor-ember-cli/templates/components/osp-node", ["exports"], function (e
       statements: [["block", "if", [["get", "isNodeReady", ["loc", [null, [3, 8], [3, 19]]]]], [], 0, 1, ["loc", [null, [3, 2], [11, 9]]]], ["attribute", "class", ["concat", [["get", "progressBarClass", ["loc", [null, [15, 18], [15, 34]]]]]]], ["attribute", "style", ["concat", ["width: ", ["get", "progressWidth", ["loc", [null, [15, 130], [15, 143]]]], ";"]]], ["content", "label", ["loc", [null, [16, 48], [16, 57]]]], ["attribute", "id", ["concat", ["deleteNodeButton", ["get", "safeLabel", ["loc", [null, [21, 48], [21, 57]]]]]]], ["element", "action", ["onDeleteClicked"], [], ["loc", [null, [21, 98], [21, 126]]]]],
       locals: [],
       templates: [child0, child1]
-    };
-  })());
-});
-define("fusor-ember-cli/templates/components/pf-modal-base", ["exports"], function (exports) {
-  exports["default"] = Ember.HTMLBars.template((function () {
-    return {
-      meta: {
-        "revision": "Ember@1.13.10",
-        "loc": {
-          "source": null,
-          "start": {
-            "line": 1,
-            "column": 0
-          },
-          "end": {
-            "line": 16,
-            "column": 0
-          }
-        },
-        "moduleName": "fusor-ember-cli/templates/components/pf-modal-base.hbs"
-      },
-      arity: 0,
-      cachedFragment: null,
-      hasRendered: false,
-      buildFragment: function buildFragment(dom) {
-        var el0 = dom.createDocumentFragment();
-        var el1 = dom.createElement("div");
-        dom.setAttribute(el1, "class", "modal fade");
-        dom.setAttribute(el1, "tabindex", "-1");
-        dom.setAttribute(el1, "role", "dialog");
-        var el2 = dom.createTextNode("\n  ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("div");
-        dom.setAttribute(el2, "class", "modal-dialog");
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("div");
-        dom.setAttribute(el3, "class", "modal-content");
-        var el4 = dom.createTextNode("\n\n        ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("div");
-        dom.setAttribute(el4, "class", "modal-header");
-        var el5 = dom.createTextNode("\n          ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("button");
-        dom.setAttribute(el5, "type", "button");
-        dom.setAttribute(el5, "class", "close");
-        var el6 = dom.createTextNode("\n            ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("span");
-        dom.setAttribute(el6, "class", "pficon pficon-close");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n          ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("h4");
-        dom.setAttribute(el5, "class", "modal-title");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n\n        ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createComment("");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n    ");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n  ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
-        dom.appendChild(el0, el1);
-        return el0;
-      },
-      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element0 = dom.childAt(fragment, [0]);
-        var element1 = dom.childAt(element0, [1, 1]);
-        var element2 = dom.childAt(element1, [1]);
-        var element3 = dom.childAt(element2, [1]);
-        var morphs = new Array(4);
-        morphs[0] = dom.createAttrMorph(element0, 'id');
-        morphs[1] = dom.createElementMorph(element3);
-        morphs[2] = dom.createMorphAt(dom.childAt(element2, [3]), 0, 0);
-        morphs[3] = dom.createMorphAt(element1, 3, 3);
-        return morphs;
-      },
-      statements: [["attribute", "id", ["concat", [["get", "idModal", ["loc", [null, [1, 30], [1, 37]]]]]]], ["element", "action", ["closeModal"], [], ["loc", [null, [6, 46], [6, 69]]]], ["content", "title", ["loc", [null, [9, 34], [9, 43]]]], ["content", "yield", ["loc", [null, [12, 8], [12, 17]]]]],
-      locals: [],
-      templates: []
-    };
-  })());
-});
-define("fusor-ember-cli/templates/components/pf-modal-body", ["exports"], function (exports) {
-  exports["default"] = Ember.HTMLBars.template((function () {
-    return {
-      meta: {
-        "revision": "Ember@1.13.10",
-        "loc": {
-          "source": null,
-          "start": {
-            "line": 1,
-            "column": 0
-          },
-          "end": {
-            "line": 4,
-            "column": 0
-          }
-        },
-        "moduleName": "fusor-ember-cli/templates/components/pf-modal-body.hbs"
-      },
-      arity: 0,
-      cachedFragment: null,
-      hasRendered: false,
-      buildFragment: function buildFragment(dom) {
-        var el0 = dom.createDocumentFragment();
-        var el1 = dom.createElement("div");
-        dom.setAttribute(el1, "class", "modal-body");
-        var el2 = dom.createTextNode("\n    ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createComment("");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
-        dom.appendChild(el0, el1);
-        return el0;
-      },
-      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0]), 1, 1);
-        return morphs;
-      },
-      statements: [["content", "yield", ["loc", [null, [2, 4], [2, 13]]]]],
-      locals: [],
-      templates: []
-    };
-  })());
-});
-define("fusor-ember-cli/templates/components/pf-modal-footer", ["exports"], function (exports) {
-  exports["default"] = Ember.HTMLBars.template((function () {
-    return {
-      meta: {
-        "revision": "Ember@1.13.10",
-        "loc": {
-          "source": null,
-          "start": {
-            "line": 1,
-            "column": 0
-          },
-          "end": {
-            "line": 4,
-            "column": 0
-          }
-        },
-        "moduleName": "fusor-ember-cli/templates/components/pf-modal-footer.hbs"
-      },
-      arity: 0,
-      cachedFragment: null,
-      hasRendered: false,
-      buildFragment: function buildFragment(dom) {
-        var el0 = dom.createDocumentFragment();
-        var el1 = dom.createElement("div");
-        dom.setAttribute(el1, "class", "modal-footer");
-        var el2 = dom.createTextNode("\n  ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createComment("");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
-        dom.appendChild(el0, el1);
-        return el0;
-      },
-      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0]), 1, 1);
-        return morphs;
-      },
-      statements: [["content", "yield", ["loc", [null, [2, 2], [2, 11]]]]],
-      locals: [],
-      templates: []
     };
   })());
 });
@@ -30534,6 +29222,314 @@ define("fusor-ember-cli/templates/consumer", ["exports"], function (exports) {
     };
   })());
 });
+define("fusor-ember-cli/templates/continue-deployment-modal", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    var child0 = (function () {
+      var child0 = (function () {
+        var child0 = (function () {
+          return {
+            meta: {
+              "revision": "Ember@1.13.10",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 3,
+                  "column": 8
+                },
+                "end": {
+                  "line": 5,
+                  "column": 8
+                }
+              },
+              "moduleName": "fusor-ember-cli/templates/continue-deployment-modal.hbs"
+            },
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("            ");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createElement("span");
+              dom.setAttribute(el1, "aria-hidden", "true");
+              var el2 = dom.createTextNode("×");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createElement("span");
+              dom.setAttribute(el1, "class", "sr-only");
+              var el2 = dom.createTextNode("Close");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes() {
+              return [];
+            },
+            statements: [],
+            locals: [],
+            templates: []
+          };
+        })();
+        return {
+          meta: {
+            "revision": "Ember@1.13.10",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 2,
+                "column": 4
+              },
+              "end": {
+                "line": 7,
+                "column": 4
+              }
+            },
+            "moduleName": "fusor-ember-cli/templates/continue-deployment-modal.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("        ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("h4");
+            dom.setAttribute(el1, "class", "modal-title");
+            var el2 = dom.createTextNode("Continue QCI Deployment - ");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createComment("");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createTextNode(" ");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(2);
+            morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+            morphs[1] = dom.createMorphAt(dom.childAt(fragment, [2]), 1, 1);
+            dom.insertBoundary(fragment, 0);
+            return morphs;
+          },
+          statements: [["block", "em-modal-toggler", [], ["class", "close"], 0, null, ["loc", [null, [3, 8], [5, 29]]]], ["content", "deploymentInModal.name", ["loc", [null, [6, 58], [6, 84]]]]],
+          locals: [],
+          templates: [child0]
+        };
+      })();
+      var child1 = (function () {
+        return {
+          meta: {
+            "revision": "Ember@1.13.10",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 9,
+                "column": 4
+              },
+              "end": {
+                "line": 13,
+                "column": 4
+              }
+            },
+            "moduleName": "fusor-ember-cli/templates/continue-deployment-modal.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("        Are you sure that you want to deploy ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("? There\n        are warnings that were found that could cause problems during the\n        deployment.\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+            return morphs;
+          },
+          statements: [["content", "deploymentInModal.name", ["loc", [null, [10, 45], [10, 71]]]]],
+          locals: [],
+          templates: []
+        };
+      })();
+      var child2 = (function () {
+        var child0 = (function () {
+          return {
+            meta: {
+              "revision": "Ember@1.13.10",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 16,
+                  "column": 8
+                },
+                "end": {
+                  "line": 18,
+                  "column": 8
+                }
+              },
+              "moduleName": "fusor-ember-cli/templates/continue-deployment-modal.hbs"
+            },
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("          Cancel\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes() {
+              return [];
+            },
+            statements: [],
+            locals: [],
+            templates: []
+          };
+        })();
+        return {
+          meta: {
+            "revision": "Ember@1.13.10",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 15,
+                "column": 4
+              },
+              "end": {
+                "line": 21,
+                "column": 4
+              }
+            },
+            "moduleName": "fusor-ember-cli/templates/continue-deployment-modal.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("        ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("button");
+            dom.setAttribute(el1, "type", "submit");
+            dom.setAttribute(el1, "class", "btn btn-warning");
+            var el2 = dom.createTextNode("Yes, Continue");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var element0 = dom.childAt(fragment, [2]);
+            var morphs = new Array(2);
+            morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+            morphs[1] = dom.createElementMorph(element0);
+            dom.insertBoundary(fragment, 0);
+            return morphs;
+          },
+          statements: [["block", "em-modal-toggler", [], ["class", "btn btn-default"], 0, null, ["loc", [null, [16, 8], [18, 29]]]], ["element", "action", ["installDeployment"], [], ["loc", [null, [19, 30], [19, 60]]]]],
+          locals: [],
+          templates: [child0]
+        };
+      })();
+      return {
+        meta: {
+          "revision": "Ember@1.13.10",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 22,
+              "column": 0
+            }
+          },
+          "moduleName": "fusor-ember-cli/templates/continue-deployment-modal.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(3);
+          morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+          morphs[1] = dom.createMorphAt(fragment, 2, 2, contextualElement);
+          morphs[2] = dom.createMorphAt(fragment, 4, 4, contextualElement);
+          dom.insertBoundary(fragment, 0);
+          dom.insertBoundary(fragment, null);
+          return morphs;
+        },
+        statements: [["block", "em-modal-title", [], [], 0, null, ["loc", [null, [2, 4], [7, 23]]]], ["block", "em-modal-body", [], [], 1, null, ["loc", [null, [9, 4], [13, 22]]]], ["block", "em-modal-footer", [], [], 2, null, ["loc", [null, [15, 4], [21, 24]]]]],
+        locals: [],
+        templates: [child0, child1, child2]
+      };
+    })();
+    return {
+      meta: {
+        "revision": "Ember@1.13.10",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 23,
+            "column": 0
+          }
+        },
+        "moduleName": "fusor-ember-cli/templates/continue-deployment-modal.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+        dom.insertBoundary(fragment, 0);
+        dom.insertBoundary(fragment, null);
+        return morphs;
+      },
+      statements: [["block", "em-modal", [], ["configName", "bs", "id", "continueDeploymentModal", "open-if", ["subexpr", "@mut", [["get", "continueDeploymentModalOpen", ["loc", [null, [1, 65], [1, 92]]]]], [], []], "close-if", ["subexpr", "@mut", [["get", "continueDeploymentModalClosed", ["loc", [null, [1, 102], [1, 131]]]]], [], []]], 0, null, ["loc", [null, [1, 0], [22, 13]]]]],
+      locals: [],
+      templates: [child0]
+    };
+  })());
+});
 define("fusor-ember-cli/templates/debug-deployment", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -30795,6 +29791,314 @@ define("fusor-ember-cli/templates/debug-deployment", ["exports"], function (expo
       statements: [["content", "id", ["loc", [null, [1, 4], [1, 10]]]], ["content", "isNew", ["loc", [null, [1, 20], [1, 29]]]], ["content", "description", ["loc", [null, [3, 6], [3, 21]]]], ["content", "organization.name", ["loc", [null, [5, 5], [5, 26]]]], ["content", "organization.id", ["loc", [null, [5, 35], [5, 54]]]], ["content", "organization", ["loc", [null, [5, 56], [5, 72]]]], ["content", "lifecycle_environment.name", ["loc", [null, [7, 5], [7, 35]]]], ["content", "lifecycle_environment.id", ["loc", [null, [7, 46], [7, 74]]]], ["content", "lifecycle_environment", ["loc", [null, [7, 76], [7, 101]]]], ["content", "hasName", ["loc", [null, [9, 9], [9, 20]]]], ["content", "hasOrganization", ["loc", [null, [11, 17], [11, 36]]]], ["content", "hasLifecycleEnvironment", ["loc", [null, [13, 25], [13, 52]]]], ["content", "disableTabConfigureOrganization", ["loc", [null, [15, 33], [15, 68]]]], ["content", "disableTabLifecycleEnvironment", ["loc", [null, [17, 32], [17, 66]]]], ["content", "disableAll", ["loc", [null, [19, 12], [19, 26]]]], ["content", "disableNextOnDeploymentName", ["loc", [null, [21, 29], [21, 60]]]], ["content", "disableNextOnConfigureOrganization", ["loc", [null, [23, 36], [23, 74]]]], ["content", "disableNextOnLifecycleEnvironment", ["loc", [null, [25, 35], [25, 72]]]], ["content", "isDisabledRhev", ["loc", [null, [28, 16], [28, 34]]]], ["content", "isDisabledOpenstack", ["loc", [null, [30, 21], [30, 44]]]], ["content", "isDisabledCloudForms", ["loc", [null, [32, 22], [32, 46]]]], ["content", "isDisabledSubscriptions", ["loc", [null, [34, 25], [34, 52]]]], ["content", "isDisabledReview", ["loc", [null, [36, 18], [36, 38]]]], ["content", "model.deploy_rhev", ["loc", [null, [38, 13], [38, 34]]]], ["content", "model.deploy_openstack", ["loc", [null, [40, 18], [40, 44]]]], ["content", "model.deploy_cfme", ["loc", [null, [42, 13], [42, 34]]]], ["content", "model.deploy_openshift", ["loc", [null, [44, 18], [44, 44]]]]],
       locals: [],
       templates: []
+    };
+  })());
+});
+define("fusor-ember-cli/templates/delete-deployment-modal", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    var child0 = (function () {
+      var child0 = (function () {
+        var child0 = (function () {
+          return {
+            meta: {
+              "revision": "Ember@1.13.10",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 3,
+                  "column": 8
+                },
+                "end": {
+                  "line": 5,
+                  "column": 8
+                }
+              },
+              "moduleName": "fusor-ember-cli/templates/delete-deployment-modal.hbs"
+            },
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("            ");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createElement("span");
+              dom.setAttribute(el1, "aria-hidden", "true");
+              var el2 = dom.createTextNode("×");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createElement("span");
+              dom.setAttribute(el1, "class", "sr-only");
+              var el2 = dom.createTextNode("Close");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes() {
+              return [];
+            },
+            statements: [],
+            locals: [],
+            templates: []
+          };
+        })();
+        return {
+          meta: {
+            "revision": "Ember@1.13.10",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 2,
+                "column": 4
+              },
+              "end": {
+                "line": 7,
+                "column": 4
+              }
+            },
+            "moduleName": "fusor-ember-cli/templates/delete-deployment-modal.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("        ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("h4");
+            dom.setAttribute(el1, "class", "modal-title");
+            var el2 = dom.createTextNode("Delete QCI Deployment - ");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createComment("");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createTextNode(" ");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(2);
+            morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+            morphs[1] = dom.createMorphAt(dom.childAt(fragment, [2]), 1, 1);
+            dom.insertBoundary(fragment, 0);
+            return morphs;
+          },
+          statements: [["block", "em-modal-toggler", [], ["class", "close"], 0, null, ["loc", [null, [3, 8], [5, 29]]]], ["content", "deploymentInModal.name", ["loc", [null, [6, 56], [6, 82]]]]],
+          locals: [],
+          templates: [child0]
+        };
+      })();
+      var child1 = (function () {
+        return {
+          meta: {
+            "revision": "Ember@1.13.10",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 9,
+                "column": 4
+              },
+              "end": {
+                "line": 11,
+                "column": 4
+              }
+            },
+            "moduleName": "fusor-ember-cli/templates/delete-deployment-modal.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("        Are you sure that you want to delete this deployment - ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("?\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+            return morphs;
+          },
+          statements: [["content", "deploymentInModal.name", ["loc", [null, [10, 63], [10, 89]]]]],
+          locals: [],
+          templates: []
+        };
+      })();
+      var child2 = (function () {
+        var child0 = (function () {
+          return {
+            meta: {
+              "revision": "Ember@1.13.10",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 14,
+                  "column": 8
+                },
+                "end": {
+                  "line": 16,
+                  "column": 8
+                }
+              },
+              "moduleName": "fusor-ember-cli/templates/delete-deployment-modal.hbs"
+            },
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("          No\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes() {
+              return [];
+            },
+            statements: [],
+            locals: [],
+            templates: []
+          };
+        })();
+        return {
+          meta: {
+            "revision": "Ember@1.13.10",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 13,
+                "column": 4
+              },
+              "end": {
+                "line": 19,
+                "column": 4
+              }
+            },
+            "moduleName": "fusor-ember-cli/templates/delete-deployment-modal.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("        ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("button");
+            dom.setAttribute(el1, "type", "submit");
+            dom.setAttribute(el1, "class", "btn btn-danger");
+            var el2 = dom.createTextNode("Yes, Delete Deployment");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var element0 = dom.childAt(fragment, [2]);
+            var morphs = new Array(2);
+            morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+            morphs[1] = dom.createElementMorph(element0);
+            dom.insertBoundary(fragment, 0);
+            return morphs;
+          },
+          statements: [["block", "em-modal-toggler", [], ["class", "btn btn-default"], 0, null, ["loc", [null, [14, 8], [16, 29]]]], ["element", "action", ["deleteDeployment", ["get", "deploymentInModal", ["loc", [null, [17, 58], [17, 75]]]]], [], ["loc", [null, [17, 30], [17, 77]]]]],
+          locals: [],
+          templates: [child0]
+        };
+      })();
+      return {
+        meta: {
+          "revision": "Ember@1.13.10",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 20,
+              "column": 0
+            }
+          },
+          "moduleName": "fusor-ember-cli/templates/delete-deployment-modal.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(3);
+          morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+          morphs[1] = dom.createMorphAt(fragment, 2, 2, contextualElement);
+          morphs[2] = dom.createMorphAt(fragment, 4, 4, contextualElement);
+          dom.insertBoundary(fragment, 0);
+          dom.insertBoundary(fragment, null);
+          return morphs;
+        },
+        statements: [["block", "em-modal-title", [], [], 0, null, ["loc", [null, [2, 4], [7, 23]]]], ["block", "em-modal-body", [], [], 1, null, ["loc", [null, [9, 4], [11, 22]]]], ["block", "em-modal-footer", [], [], 2, null, ["loc", [null, [13, 4], [19, 24]]]]],
+        locals: [],
+        templates: [child0, child1, child2]
+      };
+    })();
+    return {
+      meta: {
+        "revision": "Ember@1.13.10",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 21,
+            "column": 0
+          }
+        },
+        "moduleName": "fusor-ember-cli/templates/delete-deployment-modal.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+        dom.insertBoundary(fragment, 0);
+        dom.insertBoundary(fragment, null);
+        return morphs;
+      },
+      statements: [["block", "em-modal", [], ["configName", "bs", "id", "deleteDeploymentModal", "open-if", ["subexpr", "@mut", [["get", "isOpenModal", ["loc", [null, [1, 63], [1, 74]]]]], [], []], "close-if", ["subexpr", "@mut", [["get", "isCloseModal", ["loc", [null, [1, 84], [1, 96]]]]], [], []]], 0, null, ["loc", [null, [1, 0], [20, 13]]]]],
+      locals: [],
+      templates: [child0]
     };
   })());
 });
@@ -34616,6 +33920,924 @@ define("fusor-ember-cli/templates/mainmenu", ["exports"], function (exports) {
     };
   })());
 });
+define("fusor-ember-cli/templates/naming-scheme-modal", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    var child0 = (function () {
+      var child0 = (function () {
+        var child0 = (function () {
+          return {
+            meta: {
+              "revision": "Ember@1.13.10",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 9,
+                  "column": 8
+                },
+                "end": {
+                  "line": 11,
+                  "column": 8
+                }
+              },
+              "moduleName": "fusor-ember-cli/templates/naming-scheme-modal.hbs"
+            },
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("            ");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createElement("span");
+              dom.setAttribute(el1, "aria-hidden", "true");
+              var el2 = dom.createTextNode("×");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createElement("span");
+              dom.setAttribute(el1, "class", "sr-only");
+              var el2 = dom.createTextNode("Close");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes() {
+              return [];
+            },
+            statements: [],
+            locals: [],
+            templates: []
+          };
+        })();
+        return {
+          meta: {
+            "revision": "Ember@1.13.10",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 8,
+                "column": 4
+              },
+              "end": {
+                "line": 13,
+                "column": 4
+              }
+            },
+            "moduleName": "fusor-ember-cli/templates/naming-scheme-modal.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("        ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("h4");
+            dom.setAttribute(el1, "class", "modal-title");
+            var el2 = dom.createTextNode("Edit Naming Scheme");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+            dom.insertBoundary(fragment, 0);
+            return morphs;
+          },
+          statements: [["block", "em-modal-toggler", [], ["class", "close"], 0, null, ["loc", [null, [9, 8], [11, 29]]]]],
+          locals: [],
+          templates: [child0]
+        };
+      })();
+      var child1 = (function () {
+        var child0 = (function () {
+          return {
+            meta: {
+              "revision": "Ember@1.13.10",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 16,
+                  "column": 8
+                },
+                "end": {
+                  "line": 18,
+                  "column": 8
+                }
+              },
+              "moduleName": "fusor-ember-cli/templates/naming-scheme-modal.hbs"
+            },
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("            Submitting, please wait...\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes() {
+              return [];
+            },
+            statements: [],
+            locals: [],
+            templates: []
+          };
+        })();
+        var child1 = (function () {
+          var child0 = (function () {
+            var child0 = (function () {
+              return {
+                meta: {
+                  "revision": "Ember@1.13.10",
+                  "loc": {
+                    "source": null,
+                    "start": {
+                      "line": 40,
+                      "column": 20
+                    },
+                    "end": {
+                      "line": 45,
+                      "column": 20
+                    }
+                  },
+                  "moduleName": "fusor-ember-cli/templates/naming-scheme-modal.hbs"
+                },
+                arity: 0,
+                cachedFragment: null,
+                hasRendered: false,
+                buildFragment: function buildFragment(dom) {
+                  var el0 = dom.createDocumentFragment();
+                  var el1 = dom.createTextNode("                              ");
+                  dom.appendChild(el0, el1);
+                  var el1 = dom.createComment("");
+                  dom.appendChild(el0, el1);
+                  var el1 = dom.createTextNode("1");
+                  dom.appendChild(el0, el1);
+                  var el1 = dom.createElement("br");
+                  dom.appendChild(el0, el1);
+                  var el1 = dom.createTextNode("\n                              ");
+                  dom.appendChild(el0, el1);
+                  var el1 = dom.createComment("");
+                  dom.appendChild(el0, el1);
+                  var el1 = dom.createTextNode("2");
+                  dom.appendChild(el0, el1);
+                  var el1 = dom.createElement("br");
+                  dom.appendChild(el0, el1);
+                  var el1 = dom.createTextNode("\n                              ");
+                  dom.appendChild(el0, el1);
+                  var el1 = dom.createComment("");
+                  dom.appendChild(el0, el1);
+                  var el1 = dom.createTextNode("3");
+                  dom.appendChild(el0, el1);
+                  var el1 = dom.createElement("br");
+                  dom.appendChild(el0, el1);
+                  var el1 = dom.createTextNode("\n");
+                  dom.appendChild(el0, el1);
+                  return el0;
+                },
+                buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+                  var morphs = new Array(3);
+                  morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+                  morphs[1] = dom.createMorphAt(fragment, 5, 5, contextualElement);
+                  morphs[2] = dom.createMorphAt(fragment, 9, 9, contextualElement);
+                  return morphs;
+                },
+                statements: [["content", "customPreprendName", ["loc", [null, [42, 30], [42, 52]]]], ["content", "customPreprendName", ["loc", [null, [43, 30], [43, 52]]]], ["content", "customPreprendName", ["loc", [null, [44, 30], [44, 52]]]]],
+                locals: [],
+                templates: []
+              };
+            })();
+            return {
+              meta: {
+                "revision": "Ember@1.13.10",
+                "loc": {
+                  "source": null,
+                  "start": {
+                    "line": 32,
+                    "column": 16
+                  },
+                  "end": {
+                    "line": 46,
+                    "column": 16
+                  }
+                },
+                "moduleName": "fusor-ember-cli/templates/naming-scheme-modal.hbs"
+              },
+              arity: 0,
+              cachedFragment: null,
+              hasRendered: false,
+              buildFragment: function buildFragment(dom) {
+                var el0 = dom.createDocumentFragment();
+                var el1 = dom.createTextNode("                    ");
+                dom.appendChild(el0, el1);
+                var el1 = dom.createComment("");
+                dom.appendChild(el0, el1);
+                var el1 = dom.createTextNode("\n\n");
+                dom.appendChild(el0, el1);
+                var el1 = dom.createComment("");
+                dom.appendChild(el0, el1);
+                return el0;
+              },
+              buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+                var morphs = new Array(2);
+                morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+                morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
+                dom.insertBoundary(fragment, null);
+                return morphs;
+              },
+              statements: [["inline", "text-f", [], ["label", "Prepend host names with", "value", ["subexpr", "@mut", [["get", "customPreprendName", ["loc", [null, [34, 35], [34, 53]]]]], [], []], "disabled", ["subexpr", "@mut", [["get", "isStarted", ["loc", [null, [35, 38], [35, 47]]]]], [], []], "placeholder", "Enter custom prefix", "labelSize", "col-md-4", "inputSize", "col-md-5"], ["loc", [null, [33, 20], [38, 51]]]], ["block", "base-f", [], ["label", "Three host example", "labelSize", "col-md-4"], 0, null, ["loc", [null, [40, 20], [45, 31]]]]],
+              locals: [],
+              templates: [child0]
+            };
+          })();
+          var child1 = (function () {
+            var child0 = (function () {
+              return {
+                meta: {
+                  "revision": "Ember@1.13.10",
+                  "loc": {
+                    "source": null,
+                    "start": {
+                      "line": 49,
+                      "column": 20
+                    },
+                    "end": {
+                      "line": 53,
+                      "column": 20
+                    }
+                  },
+                  "moduleName": "fusor-ember-cli/templates/naming-scheme-modal.hbs"
+                },
+                arity: 0,
+                cachedFragment: null,
+                hasRendered: false,
+                buildFragment: function buildFragment(dom) {
+                  var el0 = dom.createDocumentFragment();
+                  var el1 = dom.createTextNode("                        hypervisor1");
+                  dom.appendChild(el0, el1);
+                  var el1 = dom.createElement("br");
+                  dom.appendChild(el0, el1);
+                  var el1 = dom.createTextNode("\n                        hypervisor2");
+                  dom.appendChild(el0, el1);
+                  var el1 = dom.createElement("br");
+                  dom.appendChild(el0, el1);
+                  var el1 = dom.createTextNode("\n                        hypervisor3");
+                  dom.appendChild(el0, el1);
+                  var el1 = dom.createElement("br");
+                  dom.appendChild(el0, el1);
+                  var el1 = dom.createTextNode("\n");
+                  dom.appendChild(el0, el1);
+                  return el0;
+                },
+                buildRenderNodes: function buildRenderNodes() {
+                  return [];
+                },
+                statements: [],
+                locals: [],
+                templates: []
+              };
+            })();
+            return {
+              meta: {
+                "revision": "Ember@1.13.10",
+                "loc": {
+                  "source": null,
+                  "start": {
+                    "line": 48,
+                    "column": 16
+                  },
+                  "end": {
+                    "line": 54,
+                    "column": 16
+                  }
+                },
+                "moduleName": "fusor-ember-cli/templates/naming-scheme-modal.hbs"
+              },
+              arity: 0,
+              cachedFragment: null,
+              hasRendered: false,
+              buildFragment: function buildFragment(dom) {
+                var el0 = dom.createDocumentFragment();
+                var el1 = dom.createComment("");
+                dom.appendChild(el0, el1);
+                return el0;
+              },
+              buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+                var morphs = new Array(1);
+                morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+                dom.insertBoundary(fragment, 0);
+                dom.insertBoundary(fragment, null);
+                return morphs;
+              },
+              statements: [["block", "base-f", [], ["label", "Three host example", "labelSize", "col-md-4"], 0, null, ["loc", [null, [49, 20], [53, 31]]]]],
+              locals: [],
+              templates: [child0]
+            };
+          })();
+          return {
+            meta: {
+              "revision": "Ember@1.13.10",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 18,
+                  "column": 8
+                },
+                "end": {
+                  "line": 59,
+                  "column": 8
+                }
+              },
+              "moduleName": "fusor-ember-cli/templates/naming-scheme-modal.hbs"
+            },
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("            ");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createElement("p");
+              var el2 = dom.createTextNode("\n            Enforcing a naming scheme will ensure all selected hypervisors get named automatically and consistently.\n            ");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n\n            ");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createElement("form");
+              dom.setAttribute(el1, "class", "form-horizontal");
+              var el2 = dom.createTextNode("\n              ");
+              dom.appendChild(el1, el2);
+              var el2 = dom.createElement("div");
+              dom.setAttribute(el2, "class", "form-group");
+              var el3 = dom.createTextNode("\n                ");
+              dom.appendChild(el2, el3);
+              var el3 = dom.createComment("");
+              dom.appendChild(el2, el3);
+              var el3 = dom.createTextNode("\n\n");
+              dom.appendChild(el2, el3);
+              var el3 = dom.createComment("");
+              dom.appendChild(el2, el3);
+              var el3 = dom.createTextNode("\n");
+              dom.appendChild(el2, el3);
+              var el3 = dom.createComment("");
+              dom.appendChild(el2, el3);
+              var el3 = dom.createTextNode("\n\n              ");
+              dom.appendChild(el2, el3);
+              dom.appendChild(el1, el2);
+              var el2 = dom.createTextNode("\n            ");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+              var element2 = dom.childAt(fragment, [3, 1]);
+              var morphs = new Array(3);
+              morphs[0] = dom.createMorphAt(element2, 1, 1);
+              morphs[1] = dom.createMorphAt(element2, 3, 3);
+              morphs[2] = dom.createMorphAt(element2, 5, 5);
+              return morphs;
+            },
+            statements: [["inline", "select-simple-f", [], ["label", "Host naming scheme", "content", ["subexpr", "@mut", [["get", "namingOptions", ["loc", [null, [26, 42], [26, 55]]]]], [], []], "value", ["subexpr", "@mut", [["get", "hostNamingScheme", ["loc", [null, [27, 40], [27, 56]]]]], [], []], "disabled", ["subexpr", "@mut", [["get", "isStarted", ["loc", [null, [28, 43], [28, 52]]]]], [], []], "labelSize", "col-md-4", "inputSize", "col-md-5"], ["loc", [null, [25, 16], [30, 56]]]], ["block", "if", [["get", "isCustomScheme", ["loc", [null, [32, 22], [32, 36]]]]], [], 0, null, ["loc", [null, [32, 16], [46, 23]]]], ["block", "if", [["get", "isHypervisorN", ["loc", [null, [48, 22], [48, 35]]]]], [], 1, null, ["loc", [null, [48, 16], [54, 23]]]]],
+            locals: [],
+            templates: [child0, child1]
+          };
+        })();
+        return {
+          meta: {
+            "revision": "Ember@1.13.10",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 15,
+                "column": 4
+              },
+              "end": {
+                "line": 60,
+                "column": 4
+              }
+            },
+            "moduleName": "fusor-ember-cli/templates/naming-scheme-modal.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+            dom.insertBoundary(fragment, 0);
+            dom.insertBoundary(fragment, null);
+            return morphs;
+          },
+          statements: [["block", "if", [["get", "async", ["loc", [null, [16, 14], [16, 19]]]]], [], 0, 1, ["loc", [null, [16, 8], [59, 15]]]]],
+          locals: [],
+          templates: [child0, child1]
+        };
+      })();
+      var child2 = (function () {
+        return {
+          meta: {
+            "revision": "Ember@1.13.10",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 62,
+                "column": 4
+              },
+              "end": {
+                "line": 65,
+                "column": 4
+              }
+            },
+            "moduleName": "fusor-ember-cli/templates/naming-scheme-modal.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("        ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("button");
+            dom.setAttribute(el1, "class", "btn btn-default");
+            var el2 = dom.createTextNode("Cancel");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n        ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("button");
+            dom.setAttribute(el1, "type", "submit");
+            dom.setAttribute(el1, "class", "btn btn-primary");
+            var el2 = dom.createTextNode("Edit");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var element0 = dom.childAt(fragment, [1]);
+            var element1 = dom.childAt(fragment, [3]);
+            var morphs = new Array(2);
+            morphs[0] = dom.createElementMorph(element0);
+            morphs[1] = dom.createAttrMorph(element1, 'disabled');
+            return morphs;
+          },
+          statements: [["element", "action", ["cancelNamingScheme"], [], ["loc", [null, [63, 16], [63, 47]]]], ["attribute", "disabled", ["get", "async", ["loc", [null, [64, 65], [64, 70]]]]]],
+          locals: [],
+          templates: []
+        };
+      })();
+      return {
+        meta: {
+          "revision": "Ember@1.13.10",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 67,
+              "column": 0
+            }
+          },
+          "moduleName": "fusor-ember-cli/templates/naming-scheme-modal.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(3);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
+          morphs[2] = dom.createMorphAt(fragment, 5, 5, contextualElement);
+          return morphs;
+        },
+        statements: [["block", "em-modal-title", [], [], 0, null, ["loc", [null, [8, 4], [13, 23]]]], ["block", "em-modal-body", [], [], 1, null, ["loc", [null, [15, 4], [60, 22]]]], ["block", "em-modal-footer", [], [], 2, null, ["loc", [null, [62, 4], [65, 24]]]]],
+        locals: [],
+        templates: [child0, child1, child2]
+      };
+    })();
+    return {
+      meta: {
+        "revision": "Ember@1.13.10",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 68,
+            "column": 0
+          }
+        },
+        "moduleName": "fusor-ember-cli/templates/naming-scheme-modal.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+        dom.insertBoundary(fragment, 0);
+        dom.insertBoundary(fragment, null);
+        return morphs;
+      },
+      statements: [["block", "em-modal-form", [], ["configName", "bs", "id", "namingSchemeModal", "open-if", ["subexpr", "@mut", [["get", "isOpenNamingSchemeModal", ["loc", [null, [3, 25], [3, 48]]]]], [], []], "close-if", ["subexpr", "@mut", [["get", "isCloseNamingSchemeModal", ["loc", [null, [4, 26], [4, 50]]]]], [], []], "on-submit", "saveNamingScheme", "in-async", ["subexpr", "@mut", [["get", "async", ["loc", [null, [6, 26], [6, 31]]]]], [], []]], 0, null, ["loc", [null, [1, 0], [67, 18]]]]],
+      locals: [],
+      templates: [child0]
+    };
+  })());
+});
+define("fusor-ember-cli/templates/new-environment", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    var child0 = (function () {
+      var child0 = (function () {
+        var child0 = (function () {
+          return {
+            meta: {
+              "revision": "Ember@1.13.10",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 8,
+                  "column": 8
+                },
+                "end": {
+                  "line": 10,
+                  "column": 8
+                }
+              },
+              "moduleName": "fusor-ember-cli/templates/new-environment.hbs"
+            },
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("            ");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createElement("span");
+              dom.setAttribute(el1, "aria-hidden", "true");
+              var el2 = dom.createTextNode("×");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createElement("span");
+              dom.setAttribute(el1, "class", "sr-only");
+              var el2 = dom.createTextNode("Close");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes() {
+              return [];
+            },
+            statements: [],
+            locals: [],
+            templates: []
+          };
+        })();
+        return {
+          meta: {
+            "revision": "Ember@1.13.10",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 7,
+                "column": 4
+              },
+              "end": {
+                "line": 12,
+                "column": 4
+              }
+            },
+            "moduleName": "fusor-ember-cli/templates/new-environment.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("        ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("h4");
+            dom.setAttribute(el1, "class", "modal-title");
+            var el2 = dom.createTextNode("Create Environment");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+            dom.insertBoundary(fragment, 0);
+            return morphs;
+          },
+          statements: [["block", "em-modal-toggler", [], ["class", "close"], 0, null, ["loc", [null, [8, 8], [10, 29]]]]],
+          locals: [],
+          templates: [child0]
+        };
+      })();
+      var child1 = (function () {
+        var child0 = (function () {
+          return {
+            meta: {
+              "revision": "Ember@1.13.10",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 15,
+                  "column": 8
+                },
+                "end": {
+                  "line": 17,
+                  "column": 8
+                }
+              },
+              "moduleName": "fusor-ember-cli/templates/new-environment.hbs"
+            },
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("            Submitting, please wait...\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes() {
+              return [];
+            },
+            statements: [],
+            locals: [],
+            templates: []
+          };
+        })();
+        var child1 = (function () {
+          return {
+            meta: {
+              "revision": "Ember@1.13.10",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 17,
+                  "column": 8
+                },
+                "end": {
+                  "line": 21,
+                  "column": 8
+                }
+              },
+              "moduleName": "fusor-ember-cli/templates/new-environment.hbs"
+            },
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("            ");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createComment("");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n            ");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createComment("");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n            ");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createComment("");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+              var morphs = new Array(3);
+              morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+              morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
+              morphs[2] = dom.createMorphAt(fragment, 5, 5, contextualElement);
+              return morphs;
+            },
+            statements: [["inline", "text-f", [], ["label", "Environment Name", "value", ["subexpr", "@mut", [["get", "newEnvName", ["loc", [null, [18, 52], [18, 62]]]]], [], []], "labelSize", "col-md-4", "inputSize", "col-md-8"], ["loc", [null, [18, 12], [18, 106]]]], ["inline", "text-f", [], ["label", "Label", "value", ["subexpr", "@mut", [["get", "envLabelName", ["loc", [null, [19, 41], [19, 53]]]]], [], []], "labelSize", "col-md-4", "inputSize", "col-md-8"], ["loc", [null, [19, 12], [19, 97]]]], ["inline", "textarea-f", [], ["label", "Description (Optional)", "value", ["subexpr", "@mut", [["get", "description", ["loc", [null, [20, 62], [20, 73]]]]], [], []], "labelSize", "col-md-4", "inputSize", "col-md-8"], ["loc", [null, [20, 12], [20, 117]]]]],
+            locals: [],
+            templates: []
+          };
+        })();
+        return {
+          meta: {
+            "revision": "Ember@1.13.10",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 14,
+                "column": 4
+              },
+              "end": {
+                "line": 22,
+                "column": 4
+              }
+            },
+            "moduleName": "fusor-ember-cli/templates/new-environment.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+            dom.insertBoundary(fragment, 0);
+            dom.insertBoundary(fragment, null);
+            return morphs;
+          },
+          statements: [["block", "if", [["get", "async", ["loc", [null, [15, 14], [15, 19]]]]], [], 0, 1, ["loc", [null, [15, 8], [21, 15]]]]],
+          locals: [],
+          templates: [child0, child1]
+        };
+      })();
+      var child2 = (function () {
+        return {
+          meta: {
+            "revision": "Ember@1.13.10",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 24,
+                "column": 4
+              },
+              "end": {
+                "line": 26,
+                "column": 4
+              }
+            },
+            "moduleName": "fusor-ember-cli/templates/new-environment.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("        ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("button");
+            dom.setAttribute(el1, "type", "submit");
+            dom.setAttribute(el1, "class", "btn btn-primary");
+            var el2 = dom.createTextNode("Submit");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var element0 = dom.childAt(fragment, [1]);
+            var morphs = new Array(1);
+            morphs[0] = dom.createAttrMorph(element0, 'disabled');
+            return morphs;
+          },
+          statements: [["attribute", "disabled", ["get", "async", ["loc", [null, [25, 65], [25, 70]]]]]],
+          locals: [],
+          templates: []
+        };
+      })();
+      return {
+        meta: {
+          "revision": "Ember@1.13.10",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 28,
+              "column": 0
+            }
+          },
+          "moduleName": "fusor-ember-cli/templates/new-environment.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(3);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
+          morphs[2] = dom.createMorphAt(fragment, 5, 5, contextualElement);
+          return morphs;
+        },
+        statements: [["block", "em-modal-title", [], [], 0, null, ["loc", [null, [7, 4], [12, 23]]]], ["block", "em-modal-body", [], [], 1, null, ["loc", [null, [14, 4], [22, 22]]]], ["block", "em-modal-footer", [], [], 2, null, ["loc", [null, [24, 4], [26, 24]]]]],
+        locals: [],
+        templates: [child0, child1, child2]
+      };
+    })();
+    return {
+      meta: {
+        "revision": "Ember@1.13.10",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 29,
+            "column": 0
+          }
+        },
+        "moduleName": "fusor-ember-cli/templates/new-environment.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+        dom.insertBoundary(fragment, 0);
+        dom.insertBoundary(fragment, null);
+        return morphs;
+      },
+      statements: [["block", "em-modal-form", [], ["configName", "bs", "id", "newLifecycleEnvironmentModal", "open-if", ["subexpr", "@mut", [["get", "openNewEnvironmentModal", ["loc", [null, [3, 25], [3, 48]]]]], [], []], "on-submit", "createEnvironment", "in-async", ["subexpr", "@mut", [["get", "async", ["loc", [null, [5, 26], [5, 31]]]]], [], []]], 0, null, ["loc", [null, [1, 0], [28, 18]]]]],
+      locals: [],
+      templates: [child0]
+    };
+  })());
+});
 define("fusor-ember-cli/templates/new-node-registration-auto", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
@@ -37620,6 +37842,384 @@ define("fusor-ember-cli/templates/new-organization", ["exports"], function (expo
         return morphs;
       },
       statements: [["block", "em-modal-form", [], ["configName", "bs", "id", "newOrganizationModal", "on-submit", "createOrganization", "in-async", ["subexpr", "@mut", [["get", "async", ["loc", [null, [1, 99], [1, 104]]]]], [], []]], 0, null, ["loc", [null, [1, 0], [24, 18]]]]],
+      locals: [],
+      templates: [child0]
+    };
+  })());
+});
+define("fusor-ember-cli/templates/new-satellite", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    var child0 = (function () {
+      var child0 = (function () {
+        var child0 = (function () {
+          return {
+            meta: {
+              "revision": "Ember@1.13.10",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 4,
+                  "column": 8
+                },
+                "end": {
+                  "line": 6,
+                  "column": 8
+                }
+              },
+              "moduleName": "fusor-ember-cli/templates/new-satellite.hbs"
+            },
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("            ");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createElement("span");
+              dom.setAttribute(el1, "aria-hidden", "true");
+              var el2 = dom.createTextNode("×");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createElement("span");
+              dom.setAttribute(el1, "class", "sr-only");
+              var el2 = dom.createTextNode("Close");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes() {
+              return [];
+            },
+            statements: [],
+            locals: [],
+            templates: []
+          };
+        })();
+        return {
+          meta: {
+            "revision": "Ember@1.13.10",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 3,
+                "column": 4
+              },
+              "end": {
+                "line": 8,
+                "column": 4
+              }
+            },
+            "moduleName": "fusor-ember-cli/templates/new-satellite.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("        ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("h4");
+            dom.setAttribute(el1, "class", "modal-title");
+            var el2 = dom.createTextNode("New Subscription Management Application");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+            dom.insertBoundary(fragment, 0);
+            return morphs;
+          },
+          statements: [["block", "em-modal-toggler", [], ["class", "close"], 0, null, ["loc", [null, [4, 8], [6, 29]]]]],
+          locals: [],
+          templates: [child0]
+        };
+      })();
+      var child1 = (function () {
+        var child0 = (function () {
+          return {
+            meta: {
+              "revision": "Ember@1.13.10",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 11,
+                  "column": 8
+                },
+                "end": {
+                  "line": 13,
+                  "column": 8
+                }
+              },
+              "moduleName": "fusor-ember-cli/templates/new-satellite.hbs"
+            },
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("            Submitting, please wait...\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes() {
+              return [];
+            },
+            statements: [],
+            locals: [],
+            templates: []
+          };
+        })();
+        var child1 = (function () {
+          return {
+            meta: {
+              "revision": "Ember@1.13.10",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 13,
+                  "column": 8
+                },
+                "end": {
+                  "line": 15,
+                  "column": 8
+                }
+              },
+              "moduleName": "fusor-ember-cli/templates/new-satellite.hbs"
+            },
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("            ");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createComment("");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+              var morphs = new Array(1);
+              morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+              return morphs;
+            },
+            statements: [["inline", "text-f", [], ["label", "Name", "value", ["subexpr", "@mut", [["get", "newSatelliteName", ["loc", [null, [14, 40], [14, 56]]]]], [], []], "labelSize", "col-md-4", "inputSize", "col-md-8"], ["loc", [null, [14, 12], [14, 101]]]]],
+            locals: [],
+            templates: []
+          };
+        })();
+        return {
+          meta: {
+            "revision": "Ember@1.13.10",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 10,
+                "column": 4
+              },
+              "end": {
+                "line": 16,
+                "column": 4
+              }
+            },
+            "moduleName": "fusor-ember-cli/templates/new-satellite.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var morphs = new Array(1);
+            morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+            dom.insertBoundary(fragment, 0);
+            dom.insertBoundary(fragment, null);
+            return morphs;
+          },
+          statements: [["block", "if", [["get", "async", ["loc", [null, [11, 14], [11, 19]]]]], [], 0, 1, ["loc", [null, [11, 8], [15, 15]]]]],
+          locals: [],
+          templates: [child0, child1]
+        };
+      })();
+      var child2 = (function () {
+        var child0 = (function () {
+          return {
+            meta: {
+              "revision": "Ember@1.13.10",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 19,
+                  "column": 8
+                },
+                "end": {
+                  "line": 19,
+                  "column": 59
+                }
+              },
+              "moduleName": "fusor-ember-cli/templates/new-satellite.hbs"
+            },
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("Cancel");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes() {
+              return [];
+            },
+            statements: [],
+            locals: [],
+            templates: []
+          };
+        })();
+        return {
+          meta: {
+            "revision": "Ember@1.13.10",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 18,
+                "column": 4
+              },
+              "end": {
+                "line": 21,
+                "column": 4
+              }
+            },
+            "moduleName": "fusor-ember-cli/templates/new-satellite.hbs"
+          },
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("        ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n        ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("button");
+            dom.setAttribute(el1, "type", "submit");
+            dom.setAttribute(el1, "class", "btn btn-primary");
+            var el2 = dom.createTextNode("Register");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var element0 = dom.childAt(fragment, [3]);
+            var morphs = new Array(2);
+            morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+            morphs[1] = dom.createAttrMorph(element0, 'disabled');
+            return morphs;
+          },
+          statements: [["block", "em-modal-toggler", [], ["class", "btn btn-default"], 0, null, ["loc", [null, [19, 8], [19, 80]]]], ["attribute", "disabled", ["get", "async", ["loc", [null, [20, 65], [20, 70]]]]]],
+          locals: [],
+          templates: [child0]
+        };
+      })();
+      return {
+        meta: {
+          "revision": "Ember@1.13.10",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 23,
+              "column": 0
+            }
+          },
+          "moduleName": "fusor-ember-cli/templates/new-satellite.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(3);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
+          morphs[2] = dom.createMorphAt(fragment, 5, 5, contextualElement);
+          return morphs;
+        },
+        statements: [["block", "em-modal-title", [], [], 0, null, ["loc", [null, [3, 4], [8, 23]]]], ["block", "em-modal-body", [], [], 1, null, ["loc", [null, [10, 4], [16, 22]]]], ["block", "em-modal-footer", [], [], 2, null, ["loc", [null, [18, 4], [21, 24]]]]],
+        locals: [],
+        templates: [child0, child1, child2]
+      };
+    })();
+    return {
+      meta: {
+        "revision": "Ember@1.13.10",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 24,
+            "column": 0
+          }
+        },
+        "moduleName": "fusor-ember-cli/templates/new-satellite.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+        dom.insertBoundary(fragment, 0);
+        dom.insertBoundary(fragment, null);
+        return morphs;
+      },
+      statements: [["block", "em-modal-form", [], ["configName", "bs", "id", "registerNewSatellite", "open-if", ["subexpr", "@mut", [["get", "openRegisterNewSatelliteModal", ["loc", [null, [1, 67], [1, 96]]]]], [], []], "on-submit", "createSatellite", "in-async", ["subexpr", "@mut", [["get", "async", ["loc", [null, [1, 134], [1, 139]]]]], [], []]], 0, null, ["loc", [null, [1, 0], [23, 18]]]]],
       locals: [],
       templates: [child0]
     };

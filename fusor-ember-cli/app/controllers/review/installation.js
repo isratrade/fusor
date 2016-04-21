@@ -58,11 +58,6 @@ export default Ember.Controller.extend(NeedsDeploymentMixin, OpenshiftMixin, {
     return this.get('validationErrors.length') > 0;
   }),
 
-  errorMsg: false,
-  showErrorMessage: Ember.isPresent('errorMsg'),
-  warningMsg: null,
-  showWarningMessage: Ember.isPresent('warningMsg'),
-
   foremanTasksURL: null,
   skipContent: Ember.computed.alias("deploymentController.skipContent"),
 
@@ -236,6 +231,7 @@ export default Ember.Controller.extend(NeedsDeploymentMixin, OpenshiftMixin, {
   }),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   deploymentButtonAction: Ember.computed('hasSubscriptionsToAttach', function() {
     if (this.get('showWarningMessage')) {
         return "showContinueDeployModal";
@@ -259,13 +255,20 @@ export default Ember.Controller.extend(NeedsDeploymentMixin, OpenshiftMixin, {
 >>>>>>> ffa1e1c... openshift web UI implementation
   }),
 
+=======
+>>>>>>> 1163222... Revert "Merge pull request #746 from isratrade/new-modal"
   closeContinueDeployModal() {
-    this.set('openModal', false);
+    this.set('continueDeploymentModalOpen', false);
+    this.set('continueDeploymentModalClosed', true);
+    this.set('modalOpen', false);
   },
 
   actions: {
     showContinueDeployModal() {
-      this.set('openModal', true);
+      this.set('deploymentInModal', this.get('model'));
+      this.set('continueDeploymentModalOpen', true);
+      this.set('continueDeploymentModalClosed', false);
+      this.set('modalOpen', true);
     },
 
     onDeployButton() {
