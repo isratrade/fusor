@@ -11,7 +11,11 @@ module Fusor
           self.set('openshift_master_disk', N_("Amount of Storage (GB) for each OSE Master Node"), 30),
           self.set('openshift_node_vcpu', N_("Number of vCPU's for each OSE Worker Node"), 1),
           self.set('openshift_node_ram', N_("Amount of RAM (GB) for each OSE Worker Node"), 8),
+<<<<<<< HEAD
           self.set('openshift_node_disk', N_("Amount of Storage (GB) for each OSE Worker Node"), 15)
+=======
+          self.set('openshift_node_disk', N_("Amount of Storage (GB) for each OSE Worker Node"), 15),
+>>>>>>> 8228254... Add default settings for CFME and OSE VMs editable by Satellite6
         ].each { |s| self.create! s.update(:category => "Setting::Openshift") }
       end
       true
