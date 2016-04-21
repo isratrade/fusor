@@ -15,14 +15,9 @@ module Fusor
 
     # on update because we don't want to validate the empty object when
     # it is first created
-    #TODO uncomment
-#    validates_with Fusor::Validators::DeploymentValidator, on: :update
+    validates_with Fusor::Validators::DeploymentValidator, on: :update
     belongs_to :organization
-    #TODO Katello::KTEnvironment
-    #belongs_to :lifecycle_environment, :class_name => "Environment" #Katello::KTEnvironment
-    def lifecycle_environment
-
-    end
+    belongs_to :lifecycle_environment, :class_name => Katello::KTEnvironment
 
     validates :name, :presence => true, :uniqueness => {:scope => :organization_id}
     validates :label, :presence => true, :uniqueness => {:scope => :organization_id}

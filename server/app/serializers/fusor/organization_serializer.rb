@@ -1,7 +1,7 @@
 module Fusor
   class DeploymentSerializer < ActiveModel::Serializer
 
-    type :deployments
+    type :organizations
 
     attributes :id, :name, :label, :description,
                :deploy_rhev, :deploy_cfme, :deploy_openstack, :deploy_openshift,

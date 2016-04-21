@@ -64,19 +64,15 @@ module Fusor
         security_block :fusor do
           permission :view_fusor_deployments, {
             :"fusor/api/v3/deployments" => [:index, :show],
-            :"fusor/api/v21/deployments" => [:index, :show]
           }, :resource_type => 'Fusor::Deployment'
           permission :create_fusor_deployments, {
             :"fusor/api/v3/deployments" => [:create],
-            :"fusor/api/v21/deployments" => [:create]
           }, :resource_type => 'Fusor::Deployment'
           permission :edit_fusor_deployments, {
             :"fusor/api/v3/deployments" => [:update],
-            :"fusor/api/v21/deployments" => [:update]
           }, :resource_type => 'Fusor::Deployment'
           permission :destroy_fusor_deployments, {
             :"fusor/api/v3/deployments" => [:destroy],
-            :"fusor/api/v21/deployments" => [:destroy]
           }, :resource_type => 'Fusor::Deployment'
         end
 
@@ -112,9 +108,9 @@ module Fusor
     end
 
     # show fusor packages in the installed packages box on /about
-    # initializer 'fusor.about.pkgs' do
-    #   Katello::Ping::PACKAGES.push("fusor")
-    # end
+    initializer 'fusor.about.pkgs' do
+      Katello::Ping::PACKAGES.push("fusor")
+    end
 
     rake_tasks do
       Rake::Task['db:seed'].enhance do
