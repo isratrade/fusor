@@ -405,5 +405,5 @@ module.exports = function(app) {
     res.status(204).end();
   });
 
-  app.use('/fusor/api/v3aaa/deployments', deploymentsRouter);
+  app.use('/fusor/api/v21/deployments', deploymentsRouter);
 };
