@@ -15,43 +15,45 @@ module Fusor
 
     # on update because we don't want to validate the empty object when
     # it is first created
-    validates_with Fusor::Validators::DeploymentValidator, on: :update
-    belongs_to :organization
-    belongs_to :lifecycle_environment, :class_name => "Katello::KTEnvironment"
+    #validates_with Fusor::Validators::DeploymentValidator, on: :update
+    # belongs_to :organization
+    # #belongs_to :lifecycle_environment, :class_name => "Katello::KTEnvironment"
+    # def lifecycle_environment
+    # end
 
-    validates :name, :presence => true, :uniqueness => {:scope => :organization_id}
-    validates :label, :presence => true, :uniqueness => {:scope => :organization_id}
-    validates :organization_id, :presence => true
-    validates :rhev_root_password, :allow_blank => true, :length => {:minimum => 8, :message => _('should be 8 characters or more')}
-    validates :cfme_root_password, :allow_blank => true, :length => {:minimum => 8, :message => _('should be 8 characters or more')}
-    validates :cfme_admin_password, :allow_blank => true, :length => {:minimum => 8, :message => _('should be 8 characters or more')}
-    validates :openshift_user_password, :allow_blank => true, :length => {:minimum => 8, :message => _('should be 8 characters or more')}
+    # validates :name, :presence => true, :uniqueness => {:scope => :organization_id}
+    # validates :label, :presence => true, :uniqueness => {:scope => :organization_id}
+    # validates :organization_id, :presence => true
+    # validates :rhev_root_password, :allow_blank => true, :length => {:minimum => 8, :message => _('should be 8 characters or more')}
+    # validates :cfme_root_password, :allow_blank => true, :length => {:minimum => 8, :message => _('should be 8 characters or more')}
+    # validates :cfme_admin_password, :allow_blank => true, :length => {:minimum => 8, :message => _('should be 8 characters or more')}
+    # validates :openshift_user_password, :allow_blank => true, :length => {:minimum => 8, :message => _('should be 8 characters or more')}
 
-    belongs_to :rhev_engine_host, :class_name => "::Host::Base", :foreign_key => :rhev_engine_host_id
-    # if we want to enforce discovered host uniqueness uncomment this line
-    #validates :rhev_engine_host_id, uniqueness: { :message => _('This Host is already a RHEV Engine for a different deployment') }
-    has_many :rhev_hypervisor_hosts, :class_name => "::Host::Base", :through => :deployment_hypervisor_hosts, :source => :discovered_host
-    validates_with ::Katello::Validators::KatelloNameFormatValidator, :attributes => :name
+    # belongs_to :rhev_engine_host, :class_name => "::Host::Base", :foreign_key => :rhev_engine_host_id
+    # # if we want to enforce discovered host uniqueness uncomment this line
+    # #validates :rhev_engine_host_id, uniqueness: { :message => _('This Host is already a RHEV Engine for a different deployment') }
+    # has_many :rhev_hypervisor_hosts, :class_name => "::Host::Base", :through => :deployment_hypervisor_hosts, :source => :discovered_host
+    # #validates_with ::Katello::Validators::KatelloNameFormatValidator, :attributes => :name
 
-    #TODO need to rename to hypervisor_hosts
-    belongs_to :discovered_host, :class_name => "::Host::Base", :foreign_key => :rhev_engine_host_id
-    has_many :deployment_hypervisor_hosts, :class_name => "Fusor::DeploymentHost", :conditions => {:deployment_host_type => 'rhev_hypervisor' }
-    has_many :discovered_hosts, :through => :deployment_hypervisor_hosts, :class_name => "::Host::Base", :source => :discovered_host
-    has_many :ose_deployment_master_hosts, :class_name => "Fusor::DeploymentHost", :conditions => {:deployment_host_type => 'ose_master' }
-    has_many :ose_master_hosts, :through => :ose_deployment_master_hosts, :class_name => "::Host::Base", :source => :discovered_host
-    has_many :ose_deployment_worker_hosts, :class_name => "Fusor::DeploymentHost", :conditions => {:deployment_host_type => 'ose_worker' }
-    has_many :ose_worker_hosts, :through => :ose_deployment_worker_hosts, :class_name => "::Host::Base", :source => :discovered_host
-    alias_attribute :discovered_host_id, :rhev_engine_host_id
-    attr_accessor :foreman_task_id
+    # #TODO need to rename to hypervisor_hosts
+    # belongs_to :discovered_host, :class_name => "::Host::Base", :foreign_key => :rhev_engine_host_id
+    # has_many :deployment_hypervisor_hosts, :class_name => "Fusor::DeploymentHost", :conditions => {:deployment_host_type => 'rhev_hypervisor' }
+    # has_many :discovered_hosts, :through => :deployment_hypervisor_hosts, :class_name => "::Host::Base", :source => :discovered_host
+    # has_many :ose_deployment_master_hosts, :class_name => "Fusor::DeploymentHost", :conditions => {:deployment_host_type => 'ose_master' }
+    # has_many :ose_master_hosts, :through => :ose_deployment_master_hosts, :class_name => "::Host::Base", :source => :discovered_host
+    # has_many :ose_deployment_worker_hosts, :class_name => "Fusor::DeploymentHost", :conditions => {:deployment_host_type => 'ose_worker' }
+    # has_many :ose_worker_hosts, :through => :ose_deployment_worker_hosts, :class_name => "::Host::Base", :source => :discovered_host
+    # alias_attribute :discovered_host_id, :rhev_engine_host_id
+    # attr_accessor :foreman_task_id
 
-    has_many :subscriptions, :class_name => "Fusor::Subscription", :foreign_key => :deployment_id
-    has_many :introspection_tasks, :class_name => 'Fusor::IntrospectionTask'
+    # has_many :subscriptions, :class_name => "Fusor::Subscription", :foreign_key => :deployment_id
+    # has_many :introspection_tasks, :class_name => 'Fusor::IntrospectionTask'
 
-    belongs_to :foreman_task, :class_name => "::ForemanTasks::Task", :foreign_key => :foreman_task_uuid
+    # belongs_to :foreman_task, :class_name => "::ForemanTasks::Task", :foreign_key => :foreman_task_uuid
 
-    after_initialize :setup_warnings
-    before_validation :update_label, on: :create  # we validate on create, so we need to do it before those validations
-    before_save :update_label, on: :update        # but we don't validate on update, so we need to call before_save
+    # after_initialize :setup_warnings
+    # before_validation :update_label, on: :create  # we validate on create, so we need to do it before those validations
+    # before_save :update_label, on: :update        # but we don't validate on update, so we need to call before_save
 
     scoped_search :on => [:id, :name], :complete_value => true
 

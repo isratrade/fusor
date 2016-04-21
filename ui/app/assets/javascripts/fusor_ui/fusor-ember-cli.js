@@ -6,11 +6,19 @@
 define('fusor-ember-cli/adapters/application', ['exports', 'ember-data', 'ember'], function (exports, _emberData, _ember) {
 
     var token = _ember['default'].$('meta[name="csrf-token"]').attr('content');
-    exports['default'] = _emberData['default'].ActiveModelAdapter.extend({
-        namespace: 'api/v21',
+    exports['default'] = _emberData['default'].JSONAPIAdapter.extend({
+        namespace: 'api/v3',
         headers: {
-            "X-CSRF-Token": token
+            "X-CSRF-Token": token,
+            "Accept": "application/json",
+            "Content-Type": "application/json"
         },
+
+        pathForType: function pathForType(modelName) {
+            var underscored = _ember['default'].String.underscore(modelName);
+            return _ember['default'].String.pluralize(underscored);
+        },
+
         shouldReloadRecord: function shouldReloadRecord(store, ticketSnapshot) {
             return true;
         },
@@ -27,8 +35,8 @@ define('fusor-ember-cli/adapters/application', ['exports', 'ember-data', 'ember'
         }
     });
 });
-define('fusor-ember-cli/adapters/deployment-plan', ['exports', 'fusor-ember-cli/adapters/application'], function (exports, _fusorEmberCliAdaptersApplication) {
-    exports['default'] = _fusorEmberCliAdaptersApplication['default'].extend({
+define('fusor-ember-cli/adapters/deployment-plan', ['exports', 'ember-data', 'ember'], function (exports, _emberData, _ember) {
+    exports['default'] = _emberData['default'].ActiveModelAdapter.extend({
 
         // 'overcloud' is harded
         // ex. /fusor/api/openstack/deployments/:id/deployment_plans/overcloud
@@ -40,7 +48,7 @@ define('fusor-ember-cli/adapters/deployment-plan', ['exports', 'fusor-ember-cli/
 });
 define('fusor-ember-cli/adapters/deployment', ['exports', 'fusor-ember-cli/adapters/application'], function (exports, _fusorEmberCliAdaptersApplication) {
   exports['default'] = _fusorEmberCliAdaptersApplication['default'].extend({
-    namespace: 'fusor/api/v21',
+    namespace: 'fusor/api/v3',
 
     urlForQueryRecord: function urlForQueryRecord(query, modelName) {
       if (query.id) {
@@ -50,8 +58,13 @@ define('fusor-ember-cli/adapters/deployment', ['exports', 'fusor-ember-cli/adapt
     }
   });
 });
-define('fusor-ember-cli/adapters/entitlement', ['exports', 'fusor-ember-cli/adapters/application'], function (exports, _fusorEmberCliAdaptersApplication) {
+define('fusor-ember-cli/adapters/discovered-host', ['exports', 'fusor-ember-cli/adapters/application'], function (exports, _fusorEmberCliAdaptersApplication) {
     exports['default'] = _fusorEmberCliAdaptersApplication['default'].extend({
+        namespace: 'fusor/api/v3'
+    });
+});
+define('fusor-ember-cli/adapters/entitlement', ['exports', 'ember-data', 'ember'], function (exports, _emberData, _ember) {
+    exports['default'] = _emberData['default'].ActiveModelAdapter.extend({
 
         urlForQuery: function urlForQuery(query, modelName) {
             // Use consumer UUID to get entitlements
@@ -61,8 +74,8 @@ define('fusor-ember-cli/adapters/entitlement', ['exports', 'fusor-ember-cli/adap
 
     });
 });
-define('fusor-ember-cli/adapters/flavor', ['exports', 'fusor-ember-cli/adapters/application'], function (exports, _fusorEmberCliAdaptersApplication) {
-    exports['default'] = _fusorEmberCliAdaptersApplication['default'].extend({
+define('fusor-ember-cli/adapters/flavor', ['exports', 'ember-data', 'ember'], function (exports, _emberData, _ember) {
+    exports['default'] = _emberData['default'].ActiveModelAdapter.extend({
 
         urlForQuery: function urlForQuery(query, modelName) {
             return '/fusor/api/openstack/deployments/' + query['deployment_id'] + '/flavors';
@@ -70,8 +83,13 @@ define('fusor-ember-cli/adapters/flavor', ['exports', 'fusor-ember-cli/adapters/
 
     });
 });
-define('fusor-ember-cli/adapters/image', ['exports', 'fusor-ember-cli/adapters/application'], function (exports, _fusorEmberCliAdaptersApplication) {
+define('fusor-ember-cli/adapters/foreman-task', ['exports', 'fusor-ember-cli/adapters/application'], function (exports, _fusorEmberCliAdaptersApplication) {
     exports['default'] = _fusorEmberCliAdaptersApplication['default'].extend({
+        namespace: 'fusor/api/v3'
+    });
+});
+define('fusor-ember-cli/adapters/image', ['exports', 'ember-data', 'ember'], function (exports, _emberData, _ember) {
+    exports['default'] = _emberData['default'].ActiveModelAdapter.extend({
 
         urlForQuery: function urlForQuery(query, modelName) {
             return '/fusor/api/openstack/deployments/' + query['deployment_id'] + '/images';
@@ -79,10 +97,14 @@ define('fusor-ember-cli/adapters/image', ['exports', 'fusor-ember-cli/adapters/a
 
     });
 });
-define('fusor-ember-cli/adapters/management-application', ['exports', 'fusor-ember-cli/adapters/application'], function (exports, _fusorEmberCliAdaptersApplication) {
+define('fusor-ember-cli/adapters/lifecycle-environment', ['exports', 'fusor-ember-cli/adapters/application'], function (exports, _fusorEmberCliAdaptersApplication) {
     exports['default'] = _fusorEmberCliAdaptersApplication['default'].extend({
+        namespace: 'fusor/api/v3'
+    });
+});
+define('fusor-ember-cli/adapters/management-application', ['exports', 'ember-data', 'ember'], function (exports, _emberData, _ember) {
+    exports['default'] = _emberData['default'].ActiveModelAdapter.extend({
 
-        namespace: '',
         urlForQuery: function urlForQuery(query, modelName) {
             // Use owner key to get consumers (subscription application manangers)
             // GET /customer_portal/owners/#{OWNER['key']}/consumers?type=satellite
@@ -91,8 +113,8 @@ define('fusor-ember-cli/adapters/management-application', ['exports', 'fusor-emb
 
     });
 });
-define('fusor-ember-cli/adapters/node', ['exports', 'fusor-ember-cli/adapters/application'], function (exports, _fusorEmberCliAdaptersApplication) {
-    exports['default'] = _fusorEmberCliAdaptersApplication['default'].extend({
+define('fusor-ember-cli/adapters/node', ['exports', 'ember-data', 'ember'], function (exports, _emberData, _ember) {
+    exports['default'] = _emberData['default'].ActiveModelAdapter.extend({
 
         urlForQuery: function urlForQuery(query, modelName) {
             return '/fusor/api/openstack/deployments/' + query['deployment_id'] + '/nodes';
@@ -100,10 +122,9 @@ define('fusor-ember-cli/adapters/node', ['exports', 'fusor-ember-cli/adapters/ap
 
     });
 });
-define('fusor-ember-cli/adapters/pool', ['exports', 'fusor-ember-cli/adapters/application'], function (exports, _fusorEmberCliAdaptersApplication) {
-    exports['default'] = _fusorEmberCliAdaptersApplication['default'].extend({
+define('fusor-ember-cli/adapters/pool', ['exports', 'ember-data', 'ember'], function (exports, _emberData, _ember) {
+    exports['default'] = _emberData['default'].ActiveModelAdapter.extend({
 
-        namespace: '',
         urlForQuery: function urlForQuery(query, modelName) {
             // Use consumer UUID to get pools
             // GET /customer_portal/pools?consumer=' + consumerUUID + '&listall=false');
@@ -119,7 +140,7 @@ define('fusor-ember-cli/adapters/session-portal', ['exports', 'ember-data'], fun
 });
 define('fusor-ember-cli/adapters/subscription', ['exports', 'fusor-ember-cli/adapters/application'], function (exports, _fusorEmberCliAdaptersApplication) {
     exports['default'] = _fusorEmberCliAdaptersApplication['default'].extend({
-        namespace: 'fusor/api/v21'
+        namespace: 'fusor/api/v3'
     });
 });
 define('fusor-ember-cli/app', ['exports', 'ember', 'ember/resolver', 'ember/load-initializers', 'fusor-ember-cli/config/environment'], function (exports, _ember, _emberResolver, _emberLoadInitializers, _fusorEmberCliConfigEnvironment) {
@@ -370,7 +391,7 @@ define('fusor-ember-cli/components/content-mirror-f', ['exports', 'ember', 'fuso
       this.set('validationTrigger', null);
 
       (0, _icAjax['default'])({
-        url: '/fusor/api/v21/deployments/' + deploymentId + '/validate_cdn',
+        url: '/fusor/api/v3/deployments/' + deploymentId + '/validate_cdn',
         headers: {
           "Accept": "application/json",
           "X-CSRF-Token": token
@@ -965,6 +986,42 @@ define('fusor-ember-cli/components/ose-env-summary', ['exports', 'ember'], funct
       return this.get('cfmeVcpu') + ' vCPUs, ' + this.get('cfmeRam') + 'GB RAM, ' + this.get('cfmeDisk') + 'GB Disk reserved for CloudForms';
     })
 
+  });
+});
+define('fusor-ember-cli/components/ose-host-review-link', ['exports', 'ember'], function (exports, _ember) {
+  exports['default'] = _ember['default'].Component.extend({
+    linkLabel: _ember['default'].computed('_infoObj', function () {
+      var info = this.get('_infoObj');
+      var labelPrefix = info.get('labelPrefix');
+      var hostId = info.get('hostId');
+
+      return labelPrefix + ' ' + hostId;
+    }),
+    linkValue: _ember['default'].computed('oseHost', function () {
+      return 'https://' + this.get('oseHost.name') + ':8443';
+    }),
+    linkIp: _ember['default'].computed('oseHost', function () {
+      return 'https://' + this.get('oseHost.ip') + ':8443';
+    }),
+    isWorkerNode: _ember['default'].computed('_infoObj', function () {
+      var info = this.get('_infoObj');
+      return info.get('labelPrefix') === 'Node';
+    }),
+    // Internal
+    _infoObj: _ember['default'].computed('oseHost', function () {
+      var extractionRegex = /ose-(master|node)(\d+)\./;
+      var hostName = this.get('oseHost.name');
+      var match = hostName.match(extractionRegex);
+
+      if (!match) {
+        throw "ASSERTION FAILED: Failed to extract regex from host name.";
+      }
+
+      return _ember['default'].Object.create({
+        labelPrefix: match[1] === 'master' ? 'Master' : 'Node',
+        hostId: match[2]
+      });
+    })
   });
 });
 define('fusor-ember-cli/components/ose-node-detail-line', ['exports', 'ember'], function (exports, _ember) {
@@ -4874,20 +4931,11 @@ define('fusor-ember-cli/controllers/review/summary', ['exports', 'ember', 'fusor
     selectedRhevEngine: _ember['default'].computed.alias("deploymentController.model.discovered_host"),
     deploymentLabel: _ember['default'].computed.alias('deploymentController.model.label'),
 
-    oseMasterUrl: _ember['default'].computed('oseMasterHost', function () {
-      var masterHost = this.get('oseMasterHost');
-      return 'https://' + masterHost.get('name') + ':8443';
-    }),
+    exampleAppUrl: _ember['default'].computed('deploymentController.defaultDomainName', function () {
+      var domainName = this.get('deploymentController.defaultDomainName');
+      var subdomainName = this.get('model.openshift_subdomain_name');
 
-    oseMasterIpUrl: _ember['default'].computed('deploymentLabel', function () {
-      var masterHost = this.get('oseMasterHost');
-      return 'https://' + masterHost.get('ip') + ':8443';
-    }),
-
-    oseMasterHosts: _ember['default'].computed.alias('deploymentController.model.openshift_master_hosts'),
-
-    oseMasterHost: _ember['default'].computed('oseMasterHosts', function () {
-      return this.get('oseMasterHosts')[0];
+      return 'http://hello-openshift.' + subdomainName + '.' + domainName;
     }),
 
     rhevEngineUrl: _ember['default'].computed('selectedRhevEngine', function () {
@@ -9682,6 +9730,7 @@ define('fusor-ember-cli/models/deployment', ['exports', 'ember-data', 'ember'], 
     openshift_storage_size: _emberData['default'].attr('number'),
     openshift_username: _emberData['default'].attr('string'),
     openshift_user_password: _emberData['default'].attr('string'),
+    openshift_root_password: _emberData['default'].attr('string'),
     openshift_master_vcpu: _emberData['default'].attr('number'),
     openshift_master_ram: _emberData['default'].attr('number'),
     openshift_master_disk: _emberData['default'].attr('number'),
@@ -9693,14 +9742,22 @@ define('fusor-ember-cli/models/deployment', ['exports', 'ember-data', 'ember'], 
     openshift_available_disk: _emberData['default'].attr('number'),
     openshift_storage_type: _emberData['default'].attr('string'),
     openshift_storage_name: _emberData['default'].attr('string'),
-    openshift_storage_desc: _emberData['default'].attr('string'),
+    openshift_storage_host: _emberData['default'].attr('string'),
     openshift_export_path: _emberData['default'].attr('string'),
     openshift_subdomain_name: _emberData['default'].attr('string'),
 
     openshift_hosts: _emberData['default'].hasMany('openshift-host', { async: true }),
     openshift_master_hosts: _ember['default'].computed('openshift_hosts', function () {
+      var regexFilter = /ose-master\d+\./;
       return this.get('openshift_hosts').filter(function (host) {
-        return host.get('name').indexOf('master') > -1;
+        return regexFilter.test(host.get('name'));
+      });
+    }),
+
+    openshift_worker_hosts: _ember['default'].computed('openshift_hosts', function () {
+      var regexFilter = /ose-node\d+\./;
+      return this.get('openshift_hosts').filter(function (host) {
+        return regexFilter.test(host.get('name'));
       });
     }),
 
@@ -10611,7 +10668,7 @@ define('fusor-ember-cli/routes/deployment', ['exports', 'ember', 'fusor-ember-cl
     loadCloudFormsDefaults: function loadCloudFormsDefaults(controller, model) {
       // GET from API v2 CFME settings for Foreman/Sat6 - if CFME is selected
       if (model.get('deploy_cfme')) {
-        (0, _icAjax['default'])('api/v2/settings?search=cloudforms').then(function (settings) {
+        (0, _icAjax['default'])('/api/v2/settings?search=cloudforms').then(function (settings) {
           var results = settings['results'];
           // overwrite values for deployment since Sat6 settings is only place to change CFME VM requirements
           model.set('cloudforms_vcpu', results.findBy('name', 'cloudforms_vcpu').value);
@@ -10625,7 +10682,7 @@ define('fusor-ember-cli/routes/deployment', ['exports', 'ember', 'fusor-ember-cl
     loadOpenshiftDefaults: function loadOpenshiftDefaults(controller, model) {
       // GET from API v2 OSE settings for Foreman/Sat6
       if (model.get('deploy_openshift')) {
-        (0, _icAjax['default'])('api/v2/settings?search=openshift').then(function (settings) {
+        (0, _icAjax['default'])('/api/v2/settings?search=openshift').then(function (settings) {
           var results = settings['results'];
           if (!(model.get('openshift_master_vcpu') > 0)) {
             model.set('openshift_master_vcpu', results.findBy('name', 'openshift_master_vcpu').value);
@@ -10647,7 +10704,7 @@ define('fusor-ember-cli/routes/deployment', ['exports', 'ember', 'fusor-ember-cl
           }
         });
 
-        // set default values 1 Master, 1 Worker, 20GB storage for OSE
+        // set default values 1 Master, 1 Worker, 30GB storage for OSE
         if (!(model.get('openshift_number_master_nodes') > 0)) {
           model.set('openshift_number_master_nodes', 1);
         }
@@ -10655,7 +10712,7 @@ define('fusor-ember-cli/routes/deployment', ['exports', 'ember', 'fusor-ember-cl
           model.set('openshift_number_worker_nodes', 1);
         }
         if (!(model.get('openshift_storage_size') > 0)) {
-          model.set('openshift_storage_size', 20);
+          model.set('openshift_storage_size', 30);
         }
       }
     },
@@ -11919,10 +11976,21 @@ define('fusor-ember-cli/routes/review/progress', ['exports', 'ember'], function 
 });
 define('fusor-ember-cli/routes/review/summary', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Route.extend({
+
     model: function model() {
       var deployment_id = this.modelFor('deployment').get('id');
-      return this.store.findRecord('deployment', deployment_id);
+      return _ember['default'].RSVP.hash({
+        deployment: this.store.findRecord('deployment', deployment_id),
+        fusorDomainName: this.store.findAll('hostgroup').then(function (hostgroups) {
+          return hostgroups.filterBy('name', 'Fusor Base').get('firstObject').get('domain.name');
+        })
+      });
+    },
+    setupController: function setupController(controller, model) {
+      controller.set('model', model.deployment);
+      controller.set('fusorDomainName', model.fusorDomainName);
     }
+
   });
 });
 define('fusor-ember-cli/routes/review', ['exports', 'ember'], function (exports, _ember) {
@@ -12517,6 +12585,21 @@ define('fusor-ember-cli/routes/where-install', ['exports', 'ember'], function (e
 
   });
 });
+define('fusor-ember-cli/serializers/application', ['exports', 'ember-data'], function (exports, _emberData) {
+  exports['default'] = _emberData['default'].JSONAPISerializer.extend({
+    isNewSerializerAPI: true,
+
+    // disable dasherize transformation
+    keyForAttribute: function keyForAttribute(attr) {
+      return Ember.String.underscore(attr);
+    },
+
+    keyForRelationship: function keyForRelationship(rawKey) {
+      return Ember.String.underscore(rawKey);
+    }
+
+  });
+});
 define('fusor-ember-cli/serializers/deployment-plan-parameter', ['exports', 'ember-data'], function (exports, _emberData) {
     exports['default'] = _emberData['default'].RESTSerializer.extend({
         primaryKey: 'name'
@@ -12535,16 +12618,6 @@ define('fusor-ember-cli/serializers/deployment-role', ['exports', 'ember-data'],
     exports['default'] = _emberData['default'].RESTSerializer.extend({
         primaryKey: 'uuid'
     });
-});
-define('fusor-ember-cli/serializers/deployment', ['exports', 'ember-data'], function (exports, _emberData) {
-  exports['default'] = _emberData['default'].ActiveModelSerializer.extend({
-    isNewSerializerAPI: true,
-
-    attrs: {
-      foreman_task_id: false
-    }
-
-  });
 });
 define('fusor-ember-cli/serializers/entitlement', ['exports', 'ember-data'], function (exports, _emberData) {
   exports['default'] = _emberData['default'].RESTSerializer.extend({
@@ -12577,14 +12650,6 @@ define('fusor-ember-cli/serializers/entitlement', ['exports', 'ember-data'], fun
       }
     }
 
-  });
-});
-define('fusor-ember-cli/serializers/foreman-task', ['exports', 'ember-data'], function (exports, _emberData) {
-  exports['default'] = _emberData['default'].ActiveModelSerializer.extend({
-    isNewSerializerAPI: true,
-    attrs: {
-      humanized: { embedded: 'always' }
-    }
   });
 });
 define('fusor-ember-cli/serializers/management-application', ['exports', 'ember-data'], function (exports, _emberData) {
@@ -12662,6 +12727,9 @@ define('fusor-ember-cli/serializers/pool', ['exports', 'ember-data'], function (
     }
 
   });
+});
+define('fusor-ember-cli/serializers/session-portal', ['exports', 'ember-data'], function (exports, _emberData) {
+  exports['default'] = _emberData['default'].RESTSerializer.extend({});
 });
 define('fusor-ember-cli/service-tests/ember-devtools', ['exports', 'ember-devtools/service-tests/ember-devtools'], function (exports, _emberDevtoolsServiceTestsEmberDevtools) {
   Object.defineProperty(exports, 'default', {
@@ -21396,6 +21464,126 @@ define("fusor-ember-cli/templates/components/ose-env-summary", ["exports"], func
       statements: [["content", "numNodes", ["loc", [null, [5, 18], [5, 30]]]], ["inline", "tool-tip", [], ["faIcon", "fa-info-circle", "title", ["subexpr", "@mut", [["get", "resourcesAvailableToolTip", ["loc", [null, [16, 24], [16, 49]]]]], [], []]], ["loc", [null, [15, 6], [16, 51]]]], ["inline", "ose-summary-needed-available", [], ["label", "vCPU", "needed", ["subexpr", "@mut", [["get", "vcpuNeeded", ["loc", [null, [24, 57], [24, 67]]]]], [], []], "available", ["subexpr", "@mut", [["get", "vcpuAvailable", ["loc", [null, [24, 78], [24, 91]]]]], [], []], "storageSize", ["subexpr", "@mut", [["get", "storageSize", ["loc", [null, [24, 104], [24, 115]]]]], [], []]], ["loc", [null, [24, 6], [24, 117]]]], ["inline", "ose-summary-needed-available", [], ["label", "RAM", "needed", ["subexpr", "@mut", [["get", "ramNeeded", ["loc", [null, [25, 56], [25, 65]]]]], [], []], "available", ["subexpr", "@mut", [["get", "ramAvailable", ["loc", [null, [25, 76], [25, 88]]]]], [], []], "suffix", "GB", "storageSize", ["subexpr", "@mut", [["get", "storageSize", ["loc", [null, [25, 113], [25, 124]]]]], [], []]], ["loc", [null, [25, 6], [25, 126]]]], ["inline", "ose-summary-needed-available", [], ["label", "Disk", "needed", ["subexpr", "@mut", [["get", "diskNeeded", ["loc", [null, [26, 57], [26, 67]]]]], [], []], "available", ["subexpr", "@mut", [["get", "diskAvailable", ["loc", [null, [26, 78], [26, 91]]]]], [], []], "suffix", "GB", "storageSize", ["subexpr", "@mut", [["get", "storageSize", ["loc", [null, [26, 116], [26, 127]]]]], [], []]], ["loc", [null, [26, 6], [26, 129]]]]],
       locals: [],
       templates: []
+    };
+  })());
+});
+define("fusor-ember-cli/templates/components/ose-host-review-link", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    var child0 = (function () {
+      return {
+        meta: {
+          "revision": "Ember@1.13.10",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 3,
+              "column": 0
+            }
+          },
+          "moduleName": "fusor-ember-cli/templates/components/ose-host-review-link.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          return morphs;
+        },
+        statements: [["inline", "review-link", [], ["label", ["subexpr", "@mut", [["get", "linkLabel", ["loc", [null, [2, 22], [2, 31]]]]], [], []], "value", ["subexpr", "@mut", [["get", "oseHost.name", ["loc", [null, [2, 38], [2, 50]]]]], [], []]], ["loc", [null, [2, 2], [2, 52]]]]],
+        locals: [],
+        templates: []
+      };
+    })();
+    var child1 = (function () {
+      return {
+        meta: {
+          "revision": "Ember@1.13.10",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 3,
+              "column": 0
+            },
+            "end": {
+              "line": 9,
+              "column": 0
+            }
+          },
+          "moduleName": "fusor-ember-cli/templates/components/ose-host-review-link.hbs"
+        },
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          return morphs;
+        },
+        statements: [["inline", "review-link", [], ["label", ["subexpr", "@mut", [["get", "linkLabel", ["loc", [null, [5, 10], [5, 19]]]]], [], []], "value", ["subexpr", "@mut", [["get", "linkValue", ["loc", [null, [6, 10], [6, 19]]]]], [], []], "isExternalURL", true, "ipAddress", ["subexpr", "@mut", [["get", "linkIp", ["loc", [null, [8, 14], [8, 20]]]]], [], []]], ["loc", [null, [4, 2], [8, 22]]]]],
+        locals: [],
+        templates: []
+      };
+    })();
+    return {
+      meta: {
+        "revision": "Ember@1.13.10",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 10,
+            "column": 0
+          }
+        },
+        "moduleName": "fusor-ember-cli/templates/components/ose-host-review-link.hbs"
+      },
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+        dom.insertBoundary(fragment, 0);
+        dom.insertBoundary(fragment, null);
+        return morphs;
+      },
+      statements: [["block", "if", [["get", "isWorkerNode", ["loc", [null, [1, 6], [1, 18]]]]], [], 0, 1, ["loc", [null, [1, 0], [9, 7]]]]],
+      locals: [],
+      templates: [child0, child1]
     };
   })());
 });
@@ -51053,11 +51241,11 @@ define('fusor-ember-cli/utils/validators', ['exports', 'ember'], function (expor
 /* jshint ignore:start */
 
 define('fusor-ember-cli/config/environment', ['ember'], function(Ember) {
-  return { 'default': {"modulePrefix":"fusor-ember-cli","environment":"development","baseURL":"/","locationType":"hash","EmberENV":{"FEATURES":{}},"contentSecurityPolicyHeader":"Disabled-Content-Security-Policy","emberDevTools":{"global":true},"APP":{"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_VIEW_LOOKUPS":true,"rootElement":"#ember-app","name":"fusor-ember-cli","version":"0.0.0+05cb0403"},"ember-cli-mirage":{"enabled":false,"usingProxy":false},"contentSecurityPolicy":{"default-src":"'none'","script-src":"'self' 'unsafe-eval'","font-src":"'self'","connect-src":"'self'","img-src":"'self'","style-src":"'self'","media-src":"'self'"},"ember-devtools":{"enabled":true,"global":false},"exportApplicationGlobal":true}};
+  return { 'default': {"modulePrefix":"fusor-ember-cli","environment":"development","baseURL":"/","locationType":"hash","EmberENV":{"FEATURES":{}},"contentSecurityPolicyHeader":"Disabled-Content-Security-Policy","emberDevTools":{"global":true},"APP":{"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_VIEW_LOOKUPS":true,"rootElement":"#ember-app","name":"fusor-ember-cli","version":"0.0.0+cbe6d5be"},"ember-cli-mirage":{"enabled":false,"usingProxy":true},"contentSecurityPolicy":{"default-src":"'none'","script-src":"'self' 'unsafe-eval'","font-src":"'self'","connect-src":"'self'","img-src":"'self'","style-src":"'self'","media-src":"'self'"},"ember-devtools":{"enabled":true,"global":false},"exportApplicationGlobal":true}};
 });
 
 if (!runningTests) {
-  require("fusor-ember-cli/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_VIEW_LOOKUPS":true,"rootElement":"#ember-app","name":"fusor-ember-cli","version":"0.0.0+05cb0403"});
+  require("fusor-ember-cli/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_VIEW_LOOKUPS":true,"rootElement":"#ember-app","name":"fusor-ember-cli","version":"0.0.0+cbe6d5be"});
 }
 
 /* jshint ignore:end */
