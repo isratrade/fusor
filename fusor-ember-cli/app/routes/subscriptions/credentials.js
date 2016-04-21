@@ -137,6 +137,7 @@ export default Ember.Route.extend({
       var token = Ember.$('meta[name="csrf-token"]').attr('content');
       var self = this;
       var url = '/customer_portal/users/' + identification + "/owners";
+
       return new Ember.RSVP.Promise(function (resolve, reject) {
         request({
             url: url,
