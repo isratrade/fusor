@@ -15,9 +15,7 @@ require 'egon'
 module Fusor
   module Api
     module Openstack
-#TODO CHANGE BACK TO
-#     class BaseController < ::Katello::Api::V2::ApiController
-      class BaseController < ::Api::V2::BaseController
+      class BaseController < ::Katello::Api::V2::ApiController
         before_filter :find_deployment
 
         # TODO: REMOVE CORS FILTER ONCE EMBER PROXY IS UNNEEDED

@@ -17,7 +17,7 @@ module Fusor
     # it is first created
     validates_with Fusor::Validators::DeploymentValidator, on: :update
     belongs_to :organization
-    belongs_to :lifecycle_environment, :class_name => Katello::KTEnvironment
+    belongs_to :lifecycle_environment, :class_name => "Katello::KTEnvironment"
 
     validates :name, :presence => true, :uniqueness => {:scope => :organization_id}
     validates :label, :presence => true, :uniqueness => {:scope => :organization_id}

@@ -83,6 +83,7 @@ module Fusor
     end
 
     initializer "fusor.apipie" do
+      Apipie.configuration.api_controllers_matcher << "#{Fusor::Engine.root}/app/controllers/fusor/api/v2/*.rb"
       Apipie.configuration.api_controllers_matcher << "#{Fusor::Engine.root}/app/controllers/fusor/api/v3/*.rb"
       Apipie.configuration.checksum_path += ['/fusor/api/']
     end

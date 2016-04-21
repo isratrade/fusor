@@ -13,9 +13,7 @@
 module Fusor
   module Api
     module V2
-#TODO CHANGE BACK TO
-#     class BaseController < ::Katello::Api::V2::ApiController
-      class BaseController < ::Api::V2::BaseController
+      class BaseController < ::Katello::Api::V2::ApiController
 
         include Api::V2::Rendering
 

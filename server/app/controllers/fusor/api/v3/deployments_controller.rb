@@ -129,7 +129,7 @@ module Fusor
       render json: {
         :validation => {
           :deployment_id => @deployment.id,
-          :errors => @deployment.errors.full_messages,
+          :errors => errors,
           :warnings => @deployment.warnings
         }
       }
@@ -270,7 +270,7 @@ module Fusor
       end
     end
 
-     def undercloud_handle
+    def undercloud_handle
       Overcloud::UndercloudHandle.new('admin', @deployment.openstack_undercloud_password, @deployment.openstack_undercloud_ip_addr, 5000)
     end
 
@@ -298,6 +298,5 @@ module Fusor
 
       @deployment.save(:validate => false)
     end
-
   end
 end
