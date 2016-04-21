@@ -4879,7 +4879,11 @@ define('fusor-ember-cli/controllers/review/summary', ['exports', 'ember', 'fusor
       return 'https://' + masterHost.get('name') + ':8443';
     }),
 
+<<<<<<< HEAD
     oseMasterIpUrl: _ember['default'].computed('deploymentLabel', 'fusorDomainName', function () {
+=======
+    oseMasterIpUrl: _ember['default'].computed('deploymentLabel', function () {
+>>>>>>> 9acbdf7... Compiled assets for OSE work.
       var masterHost = this.get('oseMasterHost');
       return 'https://' + masterHost.get('ip') + ':8443';
     }),
@@ -9681,6 +9685,10 @@ define('fusor-ember-cli/models/deployment', ['exports', 'ember-data', 'ember'], 
 
     openshift_storage_size: _emberData['default'].attr('number'),
     openshift_username: _emberData['default'].attr('string'),
+<<<<<<< HEAD
+=======
+    openshift_user_password: _emberData['default'].attr('string'),
+>>>>>>> 9acbdf7... Compiled assets for OSE work.
     openshift_master_vcpu: _emberData['default'].attr('number'),
     openshift_master_ram: _emberData['default'].attr('number'),
     openshift_master_disk: _emberData['default'].attr('number'),
@@ -10610,7 +10618,11 @@ define('fusor-ember-cli/routes/deployment', ['exports', 'ember', 'fusor-ember-cl
     loadCloudFormsDefaults: function loadCloudFormsDefaults(controller, model) {
       // GET from API v2 CFME settings for Foreman/Sat6 - if CFME is selected
       if (model.get('deploy_cfme')) {
+<<<<<<< HEAD
         (0, _icAjax['default'])('/api/v2/settings?search=cloudforms').then(function (settings) {
+=======
+        (0, _icAjax['default'])('api/v2/settings?search=cloudforms').then(function (settings) {
+>>>>>>> 9acbdf7... Compiled assets for OSE work.
           var results = settings['results'];
           // overwrite values for deployment since Sat6 settings is only place to change CFME VM requirements
           model.set('cloudforms_vcpu', results.findBy('name', 'cloudforms_vcpu').value);
@@ -10624,7 +10636,11 @@ define('fusor-ember-cli/routes/deployment', ['exports', 'ember', 'fusor-ember-cl
     loadOpenshiftDefaults: function loadOpenshiftDefaults(controller, model) {
       // GET from API v2 OSE settings for Foreman/Sat6
       if (model.get('deploy_openshift')) {
+<<<<<<< HEAD
         (0, _icAjax['default'])('/api/v2/settings?search=openshift').then(function (settings) {
+=======
+        (0, _icAjax['default'])('api/v2/settings?search=openshift').then(function (settings) {
+>>>>>>> 9acbdf7... Compiled assets for OSE work.
           var results = settings['results'];
           if (!(model.get('openshift_master_vcpu') > 0)) {
             model.set('openshift_master_vcpu', results.findBy('name', 'openshift_master_vcpu').value);
@@ -10646,7 +10662,11 @@ define('fusor-ember-cli/routes/deployment', ['exports', 'ember', 'fusor-ember-cl
           }
         });
 
+<<<<<<< HEAD
         // set default values 1 Master, 1 Worker, 30GB storage for OSE
+=======
+        // set default values 1 Master, 1 Worker, 20GB storage for OSE
+>>>>>>> 9acbdf7... Compiled assets for OSE work.
         if (!(model.get('openshift_number_master_nodes') > 0)) {
           model.set('openshift_number_master_nodes', 1);
         }
@@ -10654,7 +10674,11 @@ define('fusor-ember-cli/routes/deployment', ['exports', 'ember', 'fusor-ember-cl
           model.set('openshift_number_worker_nodes', 1);
         }
         if (!(model.get('openshift_storage_size') > 0)) {
+<<<<<<< HEAD
           model.set('openshift_storage_size', 30);
+=======
+          model.set('openshift_storage_size', 20);
+>>>>>>> 9acbdf7... Compiled assets for OSE work.
         }
       }
     },
@@ -11918,7 +11942,6 @@ define('fusor-ember-cli/routes/review/progress', ['exports', 'ember'], function 
 });
 define('fusor-ember-cli/routes/review/summary', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Route.extend({
-
     model: function model() {
       var deployment_id = this.modelFor('deployment').get('id');
       return _ember['default'].RSVP.hash({
@@ -11932,7 +11955,6 @@ define('fusor-ember-cli/routes/review/summary', ['exports', 'ember'], function (
       controller.set('model', model.deployment);
       controller.set('fusorDomainName', model.fusorDomainName);
     }
-
   });
 });
 define('fusor-ember-cli/routes/review', ['exports', 'ember'], function (exports, _ember) {
@@ -14261,6 +14283,48 @@ define("fusor-ember-cli/templates/assign-nodes", ["exports"], function (exports)
             dom.appendChild(el2, el3);
             dom.appendChild(el1, el2);
             var el2 = dom.createComment(" /col ");
+<<<<<<< HEAD
+=======
+            dom.appendChild(el1, el2);
+            var el2 = dom.createTextNode("\n  ");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment(" /row ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n  ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("div");
+            dom.setAttribute(el1, "class", "row");
+            var el2 = dom.createTextNode("\n      ");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createElement("div");
+            dom.setAttribute(el2, "class", "col-md-12");
+            var el3 = dom.createTextNode("\n          ");
+            dom.appendChild(el2, el3);
+            var el3 = dom.createElement("h2");
+            var el4 = dom.createTextNode("Flavors");
+            dom.appendChild(el3, el4);
+            dom.appendChild(el2, el3);
+            var el3 = dom.createTextNode("\n");
+            dom.appendChild(el2, el3);
+            var el3 = dom.createComment("");
+            dom.appendChild(el2, el3);
+            var el3 = dom.createTextNode("      ");
+            dom.appendChild(el2, el3);
+            dom.appendChild(el1, el2);
+            var el2 = dom.createTextNode("\n      ");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createElement("div");
+            dom.setAttribute(el2, "class", "col-sm-6 col-md-5");
+            var el3 = dom.createTextNode("\n          ");
+            dom.appendChild(el2, el3);
+            var el3 = dom.createComment(" a network topology is planned for this space ");
+            dom.appendChild(el2, el3);
+            var el3 = dom.createTextNode("\n      ");
+            dom.appendChild(el2, el3);
+            dom.appendChild(el1, el2);
+            var el2 = dom.createTextNode("\n  ");
+>>>>>>> 9acbdf7... Compiled assets for OSE work.
             dom.appendChild(el1, el2);
             var el2 = dom.createTextNode("\n  ");
             dom.appendChild(el1, el2);
@@ -14301,6 +14365,22 @@ define("fusor-ember-cli/templates/assign-nodes", ["exports"], function (exports)
             dom.appendChild(el1, el2);
             var el2 = dom.createTextNode("\n  ");
             dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n\n  ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n\n  ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n  ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n  ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createComment("");
             dom.appendChild(el0, el1);
             var el1 = dom.createTextNode("\n\n  ");
             dom.appendChild(el0, el1);
@@ -51063,11 +51143,19 @@ define('fusor-ember-cli/utils/validators', ['exports', 'ember'], function (expor
 /* jshint ignore:start */
 
 define('fusor-ember-cli/config/environment', ['ember'], function(Ember) {
+<<<<<<< HEAD
   return { 'default': {"modulePrefix":"fusor-ember-cli","environment":"development","baseURL":"/","locationType":"hash","EmberENV":{"FEATURES":{}},"contentSecurityPolicyHeader":"Disabled-Content-Security-Policy","emberDevTools":{"global":true},"APP":{"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_VIEW_LOOKUPS":true,"rootElement":"#ember-app","name":"fusor-ember-cli","version":"0.0.0+cbe6d5be"},"ember-cli-mirage":{"enabled":false,"usingProxy":true},"contentSecurityPolicy":{"default-src":"'none'","script-src":"'self' 'unsafe-eval'","font-src":"'self'","connect-src":"'self'","img-src":"'self'","style-src":"'self'","media-src":"'self'"},"ember-devtools":{"enabled":true,"global":false},"exportApplicationGlobal":true}};
 });
 
 if (!runningTests) {
   require("fusor-ember-cli/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_VIEW_LOOKUPS":true,"rootElement":"#ember-app","name":"fusor-ember-cli","version":"0.0.0+cbe6d5be"});
+=======
+  return { 'default': {"modulePrefix":"fusor-ember-cli","environment":"development","baseURL":"/","locationType":"hash","EmberENV":{"FEATURES":{}},"contentSecurityPolicyHeader":"Disabled-Content-Security-Policy","emberDevTools":{"global":true},"APP":{"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_VIEW_LOOKUPS":true,"rootElement":"#ember-app","name":"fusor-ember-cli","version":"0.0.0+05cb0403"},"ember-cli-mirage":{"enabled":false,"usingProxy":false},"contentSecurityPolicy":{"default-src":"'none'","script-src":"'self' 'unsafe-eval'","font-src":"'self'","connect-src":"'self'","img-src":"'self'","style-src":"'self'","media-src":"'self'"},"ember-devtools":{"enabled":true,"global":false},"exportApplicationGlobal":true}};
+});
+
+if (!runningTests) {
+  require("fusor-ember-cli/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_VIEW_LOOKUPS":true,"rootElement":"#ember-app","name":"fusor-ember-cli","version":"0.0.0+05cb0403"});
+>>>>>>> 9acbdf7... Compiled assets for OSE work.
 }
 
 /* jshint ignore:end */
