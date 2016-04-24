@@ -22,6 +22,7 @@ module.exports = function(defaults) {
   // these app.import lines are used in 'master' branch
   app.import('bower_components/patternfly/components/bootstrap/js/tooltip.js');
   app.import('bower_components/patternfly/components/bootstrap/js/popover.js');
+  app.import('bower_components/patternfly/components/bootstrap/js/modal.js');
   app.import('bower_components/jquery-csv/src/jquery.csv.js');
   app.import('bower_components/matchmedia/matchMedia.js');
 
@@ -30,7 +31,6 @@ module.exports = function(defaults) {
   /* Boostrap JS */
   app.import('bower_components/patternfly/components/bootstrap/js/alert.js');
   app.import('bower_components/patternfly/components/bootstrap/js/button.js');
-  app.import('bower_components/patternfly/components/bootstrap/js/modal.js');
   app.import('bower_components/patternfly/components/bootstrap/js/dropdown.js');
   app.import('bower_components/patternfly/components/bootstrap/js/tab.js');
   app.import('bower_components/patternfly/components/bootstrap-combobox/js/bootstrap-combobox.js');
