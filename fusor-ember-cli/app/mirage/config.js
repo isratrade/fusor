@@ -40,23 +40,23 @@ export default function() {
     return db.katello_organizations.find(id);
   });
 
-  this.get('/customer_portal/owners/:owner_key/consumers', function(db, request) {
+  this.get('/api/customer_portal/owners/:owner_key/consumers', function(db, request) {
     return db.management_applications;
   });
 
-  this.get('/customer_portal/consumers/:uuid/entitlements', function(db, request) {
+  this.get('/api/customer_portal/consumers/:uuid/entitlements', function(db, request) {
     return db.entitlements;
   });
 
-  this.get('/customer_portal/users/:username/owners', function(db, request) {
+  this.get('/api/customer_portal/users/:username/owners', function(db, request) {
     return db.owners;
   });
 
-  this.get('/customer_portal/pools', function(db, request) {
+  this.get('/api/customer_portal/pools', function(db, request) {
     return db.pools;
   });
 
-  this.post('/customer_portal/login', function(db, request) {
+  this.post('/api/customer_portal/login', function(db, request) {
     return {};
   });
 
@@ -133,7 +133,7 @@ export default function() {
   this.post('/fusor/api/v3/subscriptions');
 
 
-  this.post('/customer_portal/consumers/:uuid/entitlements');
+  this.post('/api/customer_portal/consumers/:uuid/entitlements');
 
   this.get('/api/v2/settings', function(db, request) {
     return {results: db.settings};

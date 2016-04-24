@@ -59,8 +59,8 @@ export default Ember.Controller.extend(NeedsDeploymentMixin, {
       var self = this;
 
 
-      //POST /customer_portal/consumers?owner=#{OWNER['key']}, {"name":"#{RHCI_DISTRIBUTOR_NAME}","type":"satellite","facts":{"distributor_version":"sat-6.0","system.certificate_version":"3.2"}}
-      var url = ('/customer_portal/consumers?=' + ownerKey);
+      //POST /api/customer_portal/consumers?owner=#{OWNER['key']}, {"name":"#{RHCI_DISTRIBUTOR_NAME}","type":"satellite","facts":{"distributor_version":"sat-6.0","system.certificate_version":"3.2"}}
+      var url = ('/api/customer_portal/consumers?=' + ownerKey);
 
       return new Ember.RSVP.Promise(function (resolve, reject) {
         if (self.get('isInvalidMgmtAppName')) {

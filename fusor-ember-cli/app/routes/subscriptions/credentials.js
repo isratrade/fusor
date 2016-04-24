@@ -27,7 +27,7 @@ export default Ember.Route.extend({
 
     if (model.get('isAuthenticated')) {
       // verify isAuthenticated: true is accurate, since Satellite session may have changed.
-      var urlVerify = '/customer_portal/users/' + model.get('identification') + "/owners";
+      var urlVerify = '/api/customer_portal/users/' + model.get('identification') + "/owners";
       Ember.$.getJSON(urlVerify).then(function(results) {
         //do nothing
       }, function(results) {
@@ -57,7 +57,7 @@ export default Ember.Route.extend({
       controller.set('nextButtonTitle', "Logging in ...");
       controller.set('disableCredentialsNext', true);
       request({
-            url:  '/customer_portal/login/',
+            url:  '/api/customer_portal/login/',
             type: "POST",
             data: JSON.stringify({username: identification, password: password}),
             headers: {
@@ -84,7 +84,7 @@ export default Ember.Route.extend({
 
       return new Ember.RSVP.Promise(function (resolve, reject) {
         request({
-            url: '/customer_portal/logout/',
+            url: '/api/customer_portal/logout/',
             type: "POST",
             headers: {
                 "Accept": "application/json",
@@ -136,7 +136,7 @@ export default Ember.Route.extend({
       var identification = controller.get('model.identification');
       var token = Ember.$('meta[name="csrf-token"]').attr('content');
       var self = this;
-      var url = '/customer_portal/users/' + identification + "/owners";
+      var url = '/api/customer_portal/users/' + identification + "/owners";
 
       return new Ember.RSVP.Promise(function (resolve, reject) {
         request({

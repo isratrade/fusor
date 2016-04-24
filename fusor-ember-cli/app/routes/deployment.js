@@ -251,8 +251,8 @@ export default Ember.Route.extend(DeploymentRouteMixin, {
 
         if (item.get('qtyToAttach') > 0) {
 
-          // POST /customer_portal/consumers/#{CONSUMER['uuid']}/entitlements?pool=#{POOL['id']}&quantity=#{QUANTITY}
-          var url = '/customer_portal/consumers/' + consumerUUID + "/entitlements?pool=" + item.get('id') + "&quantity=" + item.get('qtyToAttach');
+          // POST /api/customer_portal/consumers/#{CONSUMER['uuid']}/entitlements?pool=#{POOL['id']}&quantity=#{QUANTITY}
+          var url = '/api/customer_portal/consumers/' + consumerUUID + "/entitlements?pool=" + item.get('id') + "&quantity=" + item.get('qtyToAttach');
           console.log('POST attach subscriptions using following URL');
           console.log(url);
 
