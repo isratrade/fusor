@@ -2,9 +2,12 @@ module.exports = function(app) {
   var express = require('express');
   var discoveredHostsRouter = express.Router();
 
-  var discoveredHosts = [
-        {
-            "id": 2,
+  discoveredHostsRouter.get('/', function(req, res) {
+    res.send({
+      "data": [{
+        "id": "2",
+        "type": "discovered_hosts",
+        "attributes": {
             "name": "mac5254007d02be",
             "type": "Host::Discovered",
             "ip": "192.168.152.12",
@@ -23,9 +26,11 @@ module.exports = function(app) {
             "domain_name": null,
             "is_managed": false,
             "is_discovered": true
-        },
-        {
-            "id": 3,
+        }
+      }, {
+        "id": "3",
+        "type": "discovered_hosts",
+        "attributes": {
             "name": "mac525400ab9e78",
             "type": "Host::Discovered",
             "ip": "192.168.152.14",
@@ -44,9 +49,11 @@ module.exports = function(app) {
             "domain_name": null,
             "is_managed": false,
             "is_discovered": true
-        },
-        {
-            "id": 5,
+        }
+      }, {
+        "id": "4",
+        "type": "discovered_hosts",
+        "attributes": {
             "name": "mac525400c5fc31",
             "type": "Host::Discovered",
             "ip": "192.168.152.18",
@@ -65,9 +72,11 @@ module.exports = function(app) {
             "domain_name": null,
             "is_managed": false,
             "is_discovered": true
-        },
-        {
-            "id": 4,
+        }
+      }, {
+        "id": "5",
+        "type": "discovered_hosts",
+        "attributes": {
             "name": "mac525400ebc504",
             "type": "Host::Discovered",
             "ip": "192.168.152.16",
@@ -87,11 +96,9 @@ module.exports = function(app) {
             "is_managed": false,
             "is_discovered": true
         }
-  ];
-
-  discoveredHostsRouter.get('/', function(req, res) {
-    res.send({
-      'discovered_hosts': discoveredHosts
+      }
+    ],
+    "links": {}
     });
   });
 
@@ -101,7 +108,30 @@ module.exports = function(app) {
 
   discoveredHostsRouter.get('/:id', function(req, res) {
     res.send({
-        id: req.params.id
+      "data": {
+        "id": "2",
+        "type": "discovered_hosts",
+        "attributes": {
+            "name": "mac5254007d02be",
+            "type": "Host::Discovered",
+            "ip": "192.168.152.12",
+            "mac": "52:54:00:7d:02:be",
+            "created_at": "2015-10-18T13:27:59Z",
+            "updated_at": "2015-10-18T13:27:59Z",
+            "cpus": 1,
+            "memory_human_size": "1.96 GB",
+            "disks_human_size": "10 GB",
+            "disk_count": 1,
+            "subnet_to_s": "default (192.168.152.0/24)",
+            "is_virtual": "true",
+            "environment_name": null,
+            "hostgroup_name": null,
+            "compute_resource_name": null,
+            "domain_name": null,
+            "is_managed": false,
+            "is_discovered": true
+        }
+      }
     });
   });
 
@@ -113,9 +143,17 @@ module.exports = function(app) {
     });
   });
 
+  discoveredHostsRouter.put('/:id/rename', function(req, res) {
+    res.send({
+      'discovered_host': {
+        id: req.params.id
+      }
+    });
+  });
+
   discoveredHostsRouter.delete('/:id', function(req, res) {
     res.status(204).end();
   });
 
-  app.use('/api/v21/discovered_hosts', discoveredHostsRouter);
+  app.use('/fusor/api/v3/discovered_hosts', discoveredHostsRouter);
 };

@@ -230,6 +230,20 @@ export default Ember.Controller.extend(NeedsDeploymentMixin, OpenshiftMixin, {
     }
   }),
 
+<<<<<<< HEAD
+=======
+  deploymentButtonAction: Ember.computed('hasSubscriptionsToAttach', function() {
+    if (this.get('showWarningMessage')) {
+        return "showContinueDeployModal";
+    } else if (this.get('hasSubscriptionsToAttach')) {
+        return "attachSubscriptions";
+        return "installDeployment";
+    } else if (this.get('showWarningMessage')) {
+        return "showContinueDeployModal";
+    }
+  }),
+
+>>>>>>> d27ef33... api-v3 changes
   ramNeededGB: Ember.computed('ramNeeded', function() {
     return this.get('ramNeeded') + ' GB';
   }),
@@ -242,6 +256,7 @@ export default Ember.Controller.extend(NeedsDeploymentMixin, OpenshiftMixin, {
     return this.get('storageSize') + ' GB';
   }),
 
+<<<<<<< HEAD
   deploymentButtonAction: Ember.computed('hasSubscriptionsToAttach', function() {
     if (this.get('showWarningMessage')) {
         return "showContinueDeployModal";
@@ -253,6 +268,8 @@ export default Ember.Controller.extend(NeedsDeploymentMixin, OpenshiftMixin, {
     }
   }),
 
+=======
+>>>>>>> d27ef33... api-v3 changes
   closeContinueDeployModal() {
     this.set('continueDeploymentModalOpen', false);
     this.set('continueDeploymentModalClosed', true);
