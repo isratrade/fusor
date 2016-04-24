@@ -14,7 +14,7 @@ require "net/http"
 require "uri"
 
 module Fusor
-  class Api::V3::DeploymentsController < ::Api::V2::BaseController
+  class Api::V3::DeploymentsController < Api::V3::BaseController
 
     #include Api::Version3
 

@@ -11,7 +11,7 @@
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
 module Fusor
-  class Api::V3::SubscriptionsController < Api::V2::BaseController
+  class Api::V3::SubscriptionsController < Api::V3::BaseController
 
     #include Api::Version3
     skip_before_filter :check_content_type, :only => [:upload]
