@@ -2,9 +2,9 @@ module FusorUi
   class Engine < ::Rails::Engine
     engine_name 'fusor_ui'
 
-    # initializer "static assets", :before => :build_middleware_stack do |app|
-    #   app.middleware.insert_before(::ActionDispatch::Static, ::ActionDispatch::Static, "#{config.root}/public")
-    # end
+    initializer "static assets", :before => :build_middleware_stack do |app|
+      app.middleware.insert_before(::ActionDispatch::Static, ::ActionDispatch::Static, "#{config.root}/public")
+    end
 
     initializer 'fusor_ui.register_plugin', :before => :finisher_hook do |app|
       Foreman::Plugin.register :fusor_ui do
