@@ -4821,8 +4821,11 @@ define('fusor-ember-cli/controllers/review/progress/overview', ['exports', 'embe
           return _this.set('loadingRedeployment', false);
         });
       },
-      abandon: function abandon() {
+      abandonAndDelete: function abandonAndDelete() {
         this.set('isAbandonModalOpen', true);
+      },
+      abandon: function abandon() {
+        this.transitionToRoute('deployments');
       },
       executeAbandonment: function executeAbandonment() {
         var depl = this.get('deploymentController.model');
@@ -9878,7 +9881,12 @@ define('fusor-ember-cli/models/foreman-task', ['exports', 'ember', 'ember-data',
       var csrfToken = _ember['default'].$('meta[name="csrf-token"]').attr('content');
       var taskUtil = new _fusorEmberCliUtilsForemanTaskUtil['default'](csrfToken);
       return taskUtil.resume(this.get('id'));
-    }
+    },
+    subtasks: _ember['default'].computed('id', function () {
+      return this.store.query('foreman-task', {
+        search: 'parent_task_id = ' + this.get('id')
+      });
+    })
   });
 });
 define('fusor-ember-cli/models/host', ['exports', 'ember-data'], function (exports, _emberData) {
@@ -11878,6 +11886,7 @@ define('fusor-ember-cli/routes/review/progress/overview', ['exports', 'ember'], 
       controller.set('cfmeTask', model.cfmeTask);
       controller.set('openshiftTask', model.openshiftTask);
       controller.set('deployment', model.deployment);
+      controller.set('katelloSyncErrorTasks', null);
       controller.stopPolling();
 
       ////////////////////////////////////////////////////////////
@@ -11909,6 +11918,13 @@ define('fusor-ember-cli/routes/review/progress/overview', ['exports', 'ember'], 
         });
       } else if (!model.deployment.get('has_content_error')) {
         controller.startPolling();
+      } else {
+        // has_content_error == true and no contentErrorDiscovered, it's been reset
+        model.manageContentTask.get('subtasks').then(function (tasks) {
+          controller.set('katelloSyncErrorTasks', tasks.filter(function (task) {
+            return task.get('humanized_name') === 'Synchronize' && task.get('state') === 'stopped' && task.get('result') === 'warning';
+          }));
+        });
       }
     },
 
@@ -12931,7 +12947,7 @@ define("fusor-ember-cli/templates/abandon-deployment-modal", ["exports"], functi
             dom.appendChild(el0, el1);
             var el1 = dom.createElement("h4");
             dom.setAttribute(el1, "class", "modal-title");
-            var el2 = dom.createTextNode("Abandon QCI Deployment");
+            var el2 = dom.createTextNode("Delete QCI Deployment");
             dom.appendChild(el1, el2);
             dom.appendChild(el0, el1);
             var el1 = dom.createTextNode("\n");
@@ -12971,7 +12987,7 @@ define("fusor-ember-cli/templates/abandon-deployment-modal", ["exports"], functi
           hasRendered: false,
           buildFragment: function buildFragment(dom) {
             var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("        Are you sure that you want to abandon this deployment?\n");
+            var el1 = dom.createTextNode("        Are you sure that you want to delete this deployment?\n");
             dom.appendChild(el0, el1);
             return el0;
           },
@@ -13045,7 +13061,7 @@ define("fusor-ember-cli/templates/abandon-deployment-modal", ["exports"], functi
             dom.appendChild(el0, el1);
             var el1 = dom.createElement("button");
             dom.setAttribute(el1, "class", "btn btn-danger");
-            var el2 = dom.createTextNode("Yes, Abandon Deployment");
+            var el2 = dom.createTextNode("Yes, Delete Deployment");
             dom.appendChild(el1, el2);
             dom.appendChild(el0, el1);
             var el1 = dom.createTextNode("\n\n");
@@ -43923,12 +43939,12 @@ define("fusor-ember-cli/templates/review/progress/overview", ["exports"], functi
             "loc": {
               "source": null,
               "start": {
-                "line": 4,
-                "column": 2
+                "line": 5,
+                "column": 4
               },
               "end": {
-                "line": 7,
-                "column": 2
+                "line": 8,
+                "column": 4
               }
             },
             "moduleName": "fusor-ember-cli/templates/review/progress/overview.hbs"
@@ -43938,18 +43954,17 @@ define("fusor-ember-cli/templates/review/progress/overview", ["exports"], functi
           hasRendered: false,
           buildFragment: function buildFragment(dom) {
             var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("    ");
+            var el1 = dom.createTextNode("      ");
             dom.appendChild(el0, el1);
             var el1 = dom.createElement("h1");
-            dom.setAttribute(el1, "style", "float: left; margin: 0 15px 0 0");
+            dom.setAttribute(el1, "class", "pre-err-header");
             var el2 = dom.createTextNode("Content Error Occurred");
             dom.appendChild(el1, el2);
             dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n    ");
+            var el1 = dom.createTextNode("\n      ");
             dom.appendChild(el0, el1);
             var el1 = dom.createElement("div");
-            dom.setAttribute(el1, "style", "float: left; margin-top: 2px");
-            dom.setAttribute(el1, "class", "spinner spinner-md spinner-inline");
+            dom.setAttribute(el1, "class", "spinner spinner-md spinner-inline err-spinner");
             dom.appendChild(el0, el1);
             var el1 = dom.createTextNode("\n");
             dom.appendChild(el0, el1);
@@ -43964,18 +43979,109 @@ define("fusor-ember-cli/templates/review/progress/overview", ["exports"], functi
         };
       })();
       var child1 = (function () {
+        var child0 = (function () {
+          var child0 = (function () {
+            return {
+              meta: {
+                "revision": "Ember@1.13.10",
+                "loc": {
+                  "source": null,
+                  "start": {
+                    "line": 14,
+                    "column": 8
+                  },
+                  "end": {
+                    "line": 16,
+                    "column": 8
+                  }
+                },
+                "moduleName": "fusor-ember-cli/templates/review/progress/overview.hbs"
+              },
+              arity: 1,
+              cachedFragment: null,
+              hasRendered: false,
+              buildFragment: function buildFragment(dom) {
+                var el0 = dom.createDocumentFragment();
+                var el1 = dom.createTextNode("          ");
+                dom.appendChild(el0, el1);
+                var el1 = dom.createElement("a");
+                dom.setAttribute(el1, "class", "repo-link");
+                dom.setAttribute(el1, "target", "_blank");
+                var el2 = dom.createComment("");
+                dom.appendChild(el1, el2);
+                dom.appendChild(el0, el1);
+                var el1 = dom.createTextNode("\n");
+                dom.appendChild(el0, el1);
+                return el0;
+              },
+              buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+                var element0 = dom.childAt(fragment, [1]);
+                var morphs = new Array(2);
+                morphs[0] = dom.createAttrMorph(element0, 'href');
+                morphs[1] = dom.createMorphAt(element0, 0, 0);
+                return morphs;
+              },
+              statements: [["attribute", "href", ["get", "ktask.taskUrl", ["loc", [null, [15, 38], [15, 51]]]]], ["content", "ktask.repository", ["loc", [null, [15, 70], [15, 90]]]]],
+              locals: ["ktask"],
+              templates: []
+            };
+          })();
+          return {
+            meta: {
+              "revision": "Ember@1.13.10",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 11,
+                  "column": 6
+                },
+                "end": {
+                  "line": 17,
+                  "column": 6
+                }
+              },
+              "moduleName": "fusor-ember-cli/templates/review/progress/overview.hbs"
+            },
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("        ");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createElement("div");
+              var el2 = dom.createTextNode("The following repos failed to sync:");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n\n");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createComment("");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+              var morphs = new Array(1);
+              morphs[0] = dom.createMorphAt(fragment, 3, 3, contextualElement);
+              dom.insertBoundary(fragment, null);
+              return morphs;
+            },
+            statements: [["block", "each", [["get", "katelloSyncErrorTasks", ["loc", [null, [14, 16], [14, 37]]]]], [], 0, null, ["loc", [null, [14, 8], [16, 17]]]]],
+            locals: [],
+            templates: [child0]
+          };
+        })();
         return {
           meta: {
             "revision": "Ember@1.13.10",
             "loc": {
               "source": null,
               "start": {
-                "line": 7,
-                "column": 2
+                "line": 8,
+                "column": 4
               },
               "end": {
-                "line": 11,
-                "column": 2
+                "line": 24,
+                "column": 4
               }
             },
             "moduleName": "fusor-ember-cli/templates/review/progress/overview.hbs"
@@ -43985,24 +44091,42 @@ define("fusor-ember-cli/templates/review/progress/overview", ["exports"], functi
           hasRendered: false,
           buildFragment: function buildFragment(dom) {
             var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("    ");
+            var el1 = dom.createTextNode("      ");
             dom.appendChild(el0, el1);
             var el1 = dom.createElement("h1");
             var el2 = dom.createTextNode("Content Error Occurred");
             dom.appendChild(el1, el2);
             dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n    ");
+            var el1 = dom.createTextNode("\n\n");
             dom.appendChild(el0, el1);
-            var el1 = dom.createElement("button");
-            dom.setAttribute(el1, "class", "btn btn-default");
-            var el2 = dom.createTextNode("Abandon Deployment");
+            var el1 = dom.createComment("");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n      ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("div");
+            dom.setAttribute(el1, "style", "margin-top: 10px");
+            var el2 = dom.createTextNode("\n        ");
             dom.appendChild(el1, el2);
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n    ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createElement("button");
-            dom.setAttribute(el1, "class", "btn btn-primary");
-            var el2 = dom.createTextNode("Redeploy");
+            var el2 = dom.createElement("button");
+            dom.setAttribute(el2, "class", "btn btn-default");
+            var el3 = dom.createTextNode("Abandon");
+            dom.appendChild(el2, el3);
+            dom.appendChild(el1, el2);
+            var el2 = dom.createTextNode("\n        ");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createElement("button");
+            dom.setAttribute(el2, "class", "btn btn-default");
+            var el3 = dom.createTextNode("Abandon and Delete");
+            dom.appendChild(el2, el3);
+            dom.appendChild(el1, el2);
+            var el2 = dom.createTextNode("\n        ");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createElement("button");
+            dom.setAttribute(el2, "class", "btn btn-primary");
+            var el3 = dom.createTextNode("Redeploy");
+            dom.appendChild(el2, el3);
+            dom.appendChild(el1, el2);
+            var el2 = dom.createTextNode("\n      ");
             dom.appendChild(el1, el2);
             dom.appendChild(el0, el1);
             var el1 = dom.createTextNode("\n");
@@ -44010,16 +44134,20 @@ define("fusor-ember-cli/templates/review/progress/overview", ["exports"], functi
             return el0;
           },
           buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var element0 = dom.childAt(fragment, [3]);
             var element1 = dom.childAt(fragment, [5]);
-            var morphs = new Array(2);
-            morphs[0] = dom.createElementMorph(element0);
-            morphs[1] = dom.createElementMorph(element1);
+            var element2 = dom.childAt(element1, [1]);
+            var element3 = dom.childAt(element1, [3]);
+            var element4 = dom.childAt(element1, [5]);
+            var morphs = new Array(4);
+            morphs[0] = dom.createMorphAt(fragment, 3, 3, contextualElement);
+            morphs[1] = dom.createElementMorph(element2);
+            morphs[2] = dom.createElementMorph(element3);
+            morphs[3] = dom.createElementMorph(element4);
             return morphs;
           },
-          statements: [["element", "action", ["abandon"], [], ["loc", [null, [9, 36], [9, 56]]]], ["element", "action", ["redeploy"], [], ["loc", [null, [10, 36], [10, 57]]]]],
+          statements: [["block", "if", [["get", "katelloSyncErrorTasks", ["loc", [null, [11, 12], [11, 33]]]]], [], 0, null, ["loc", [null, [11, 6], [17, 13]]]], ["element", "action", ["abandon"], [], ["loc", [null, [20, 40], [20, 60]]]], ["element", "action", ["abandonAndDelete"], [], ["loc", [null, [21, 40], [21, 69]]]], ["element", "action", ["redeploy"], [], ["loc", [null, [22, 40], [22, 61]]]]],
           locals: [],
-          templates: []
+          templates: [child0]
         };
       })();
       return {
@@ -44032,7 +44160,7 @@ define("fusor-ember-cli/templates/review/progress/overview", ["exports"], functi
               "column": 0
             },
             "end": {
-              "line": 12,
+              "line": 26,
               "column": 0
             }
           },
@@ -44043,18 +44171,27 @@ define("fusor-ember-cli/templates/review/progress/overview", ["exports"], functi
         hasRendered: false,
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
-          var el1 = dom.createComment("");
+          var el1 = dom.createTextNode("  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createElement("div");
+          dom.setAttribute(el1, "class", "content-error-container");
+          var el2 = dom.createTextNode("\n");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createComment("");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("  ");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
           dom.appendChild(el0, el1);
           return el0;
         },
         buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
           var morphs = new Array(1);
-          morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
-          dom.insertBoundary(fragment, 0);
-          dom.insertBoundary(fragment, null);
+          morphs[0] = dom.createMorphAt(dom.childAt(fragment, [1]), 1, 1);
           return morphs;
         },
-        statements: [["block", "if", [["get", "loadingRedeployment", ["loc", [null, [4, 8], [4, 27]]]]], [], 0, 1, ["loc", [null, [4, 2], [11, 9]]]]],
+        statements: [["block", "if", [["get", "loadingRedeployment", ["loc", [null, [5, 10], [5, 29]]]]], [], 0, 1, ["loc", [null, [5, 4], [24, 11]]]]],
         locals: [],
         templates: [child0, child1]
       };
@@ -44067,11 +44204,11 @@ define("fusor-ember-cli/templates/review/progress/overview", ["exports"], functi
             "loc": {
               "source": null,
               "start": {
-                "line": 16,
+                "line": 30,
                 "column": 2
               },
               "end": {
-                "line": 18,
+                "line": 32,
                 "column": 2
               }
             },
@@ -44095,7 +44232,7 @@ define("fusor-ember-cli/templates/review/progress/overview", ["exports"], functi
             morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
             return morphs;
           },
-          statements: [["inline", "progress-bar", [], ["model", ["subexpr", "@mut", [["get", "rhevTask", ["loc", [null, [17, 25], [17, 33]]]]], [], []], "name", ["subexpr", "@mut", [["get", "nameRhev", ["loc", [null, [17, 39], [17, 47]]]]], [], []], "isSatelliteProgressBar", false], ["loc", [null, [17, 4], [17, 78]]]]],
+          statements: [["inline", "progress-bar", [], ["model", ["subexpr", "@mut", [["get", "rhevTask", ["loc", [null, [31, 25], [31, 33]]]]], [], []], "name", ["subexpr", "@mut", [["get", "nameRhev", ["loc", [null, [31, 39], [31, 47]]]]], [], []], "isSatelliteProgressBar", false], ["loc", [null, [31, 4], [31, 78]]]]],
           locals: [],
           templates: []
         };
@@ -44107,11 +44244,11 @@ define("fusor-ember-cli/templates/review/progress/overview", ["exports"], functi
             "loc": {
               "source": null,
               "start": {
-                "line": 20,
+                "line": 34,
                 "column": 2
               },
               "end": {
-                "line": 22,
+                "line": 36,
                 "column": 2
               }
             },
@@ -44135,7 +44272,7 @@ define("fusor-ember-cli/templates/review/progress/overview", ["exports"], functi
             morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
             return morphs;
           },
-          statements: [["inline", "progress-bar", [], ["model", ["subexpr", "@mut", [["get", "openstackTask", ["loc", [null, [21, 25], [21, 38]]]]], [], []], "name", ["subexpr", "@mut", [["get", "nameOpenStack", ["loc", [null, [21, 44], [21, 57]]]]], [], []], "isSatelliteProgressBar", false], ["loc", [null, [21, 4], [21, 88]]]]],
+          statements: [["inline", "progress-bar", [], ["model", ["subexpr", "@mut", [["get", "openstackTask", ["loc", [null, [35, 25], [35, 38]]]]], [], []], "name", ["subexpr", "@mut", [["get", "nameOpenStack", ["loc", [null, [35, 44], [35, 57]]]]], [], []], "isSatelliteProgressBar", false], ["loc", [null, [35, 4], [35, 88]]]]],
           locals: [],
           templates: []
         };
@@ -44147,11 +44284,11 @@ define("fusor-ember-cli/templates/review/progress/overview", ["exports"], functi
             "loc": {
               "source": null,
               "start": {
-                "line": 24,
+                "line": 38,
                 "column": 2
               },
               "end": {
-                "line": 26,
+                "line": 40,
                 "column": 2
               }
             },
@@ -44175,7 +44312,7 @@ define("fusor-ember-cli/templates/review/progress/overview", ["exports"], functi
             morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
             return morphs;
           },
-          statements: [["inline", "progress-bar", [], ["model", ["subexpr", "@mut", [["get", "cfmeTask", ["loc", [null, [25, 25], [25, 33]]]]], [], []], "name", ["subexpr", "@mut", [["get", "nameCloudForms", ["loc", [null, [25, 39], [25, 53]]]]], [], []], "isSatelliteProgressBar", false], ["loc", [null, [25, 4], [25, 84]]]]],
+          statements: [["inline", "progress-bar", [], ["model", ["subexpr", "@mut", [["get", "cfmeTask", ["loc", [null, [39, 25], [39, 33]]]]], [], []], "name", ["subexpr", "@mut", [["get", "nameCloudForms", ["loc", [null, [39, 39], [39, 53]]]]], [], []], "isSatelliteProgressBar", false], ["loc", [null, [39, 4], [39, 84]]]]],
           locals: [],
           templates: []
         };
@@ -44187,11 +44324,11 @@ define("fusor-ember-cli/templates/review/progress/overview", ["exports"], functi
             "loc": {
               "source": null,
               "start": {
-                "line": 28,
+                "line": 42,
                 "column": 2
               },
               "end": {
-                "line": 30,
+                "line": 44,
                 "column": 2
               }
             },
@@ -44215,7 +44352,7 @@ define("fusor-ember-cli/templates/review/progress/overview", ["exports"], functi
             morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
             return morphs;
           },
-          statements: [["inline", "progress-bar", [], ["model", ["subexpr", "@mut", [["get", "openshiftTask", ["loc", [null, [29, 25], [29, 38]]]]], [], []], "name", ["subexpr", "@mut", [["get", "nameOpenShift", ["loc", [null, [29, 44], [29, 57]]]]], [], []], "isSatelliteProgressBar", false], ["loc", [null, [29, 4], [29, 88]]]]],
+          statements: [["inline", "progress-bar", [], ["model", ["subexpr", "@mut", [["get", "openshiftTask", ["loc", [null, [43, 25], [43, 38]]]]], [], []], "name", ["subexpr", "@mut", [["get", "nameOpenShift", ["loc", [null, [43, 44], [43, 57]]]]], [], []], "isSatelliteProgressBar", false], ["loc", [null, [43, 4], [43, 88]]]]],
           locals: [],
           templates: []
         };
@@ -44227,11 +44364,11 @@ define("fusor-ember-cli/templates/review/progress/overview", ["exports"], functi
             "loc": {
               "source": null,
               "start": {
-                "line": 32,
+                "line": 46,
                 "column": 2
               },
               "end": {
-                "line": 34,
+                "line": 48,
                 "column": 2
               }
             },
@@ -44255,7 +44392,7 @@ define("fusor-ember-cli/templates/review/progress/overview", ["exports"], functi
             morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
             return morphs;
           },
-          statements: [["inline", "progress-bar", [], ["model", ["subexpr", "@mut", [["get", "deployTask", ["loc", [null, [33, 25], [33, 35]]]]], [], []], "name", "Total Deployment", "isSatelliteProgressBar", false], ["loc", [null, [33, 4], [33, 90]]]]],
+          statements: [["inline", "progress-bar", [], ["model", ["subexpr", "@mut", [["get", "deployTask", ["loc", [null, [47, 25], [47, 35]]]]], [], []], "name", "Total Deployment", "isSatelliteProgressBar", false], ["loc", [null, [47, 4], [47, 90]]]]],
           locals: [],
           templates: []
         };
@@ -44266,11 +44403,11 @@ define("fusor-ember-cli/templates/review/progress/overview", ["exports"], functi
           "loc": {
             "source": null,
             "start": {
-              "line": 12,
+              "line": 26,
               "column": 0
             },
             "end": {
-              "line": 36,
+              "line": 50,
               "column": 0
             }
           },
@@ -44301,7 +44438,7 @@ define("fusor-ember-cli/templates/review/progress/overview", ["exports"], functi
           dom.appendChild(el0, el1);
           var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("  \n");
+          var el1 = dom.createTextNode("\n");
           dom.appendChild(el0, el1);
           var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
@@ -44319,7 +44456,7 @@ define("fusor-ember-cli/templates/review/progress/overview", ["exports"], functi
           morphs[5] = dom.createMorphAt(fragment, 11, 11, contextualElement);
           return morphs;
         },
-        statements: [["inline", "progress-bar", [], ["model", ["subexpr", "@mut", [["get", "manageContentTask", ["loc", [null, [14, 23], [14, 40]]]]], [], []], "name", ["subexpr", "@mut", [["get", "nameSatellite", ["loc", [null, [14, 46], [14, 59]]]]], [], []], "isSatelliteProgressBar", true], ["loc", [null, [14, 2], [14, 89]]]], ["block", "if", [["get", "isRhev", ["loc", [null, [16, 8], [16, 14]]]]], [], 0, null, ["loc", [null, [16, 2], [18, 9]]]], ["block", "if", [["get", "isOpenStack", ["loc", [null, [20, 8], [20, 19]]]]], [], 1, null, ["loc", [null, [20, 2], [22, 9]]]], ["block", "if", [["get", "isCloudForms", ["loc", [null, [24, 8], [24, 20]]]]], [], 2, null, ["loc", [null, [24, 2], [26, 9]]]], ["block", "if", [["get", "isOpenShift", ["loc", [null, [28, 8], [28, 19]]]]], [], 3, null, ["loc", [null, [28, 2], [30, 9]]]], ["block", "if", [["get", "showDeployTaskProgressBar", ["loc", [null, [32, 8], [32, 33]]]]], [], 4, null, ["loc", [null, [32, 2], [34, 9]]]]],
+        statements: [["inline", "progress-bar", [], ["model", ["subexpr", "@mut", [["get", "manageContentTask", ["loc", [null, [28, 23], [28, 40]]]]], [], []], "name", ["subexpr", "@mut", [["get", "nameSatellite", ["loc", [null, [28, 46], [28, 59]]]]], [], []], "isSatelliteProgressBar", true], ["loc", [null, [28, 2], [28, 89]]]], ["block", "if", [["get", "isRhev", ["loc", [null, [30, 8], [30, 14]]]]], [], 0, null, ["loc", [null, [30, 2], [32, 9]]]], ["block", "if", [["get", "isOpenStack", ["loc", [null, [34, 8], [34, 19]]]]], [], 1, null, ["loc", [null, [34, 2], [36, 9]]]], ["block", "if", [["get", "isCloudForms", ["loc", [null, [38, 8], [38, 20]]]]], [], 2, null, ["loc", [null, [38, 2], [40, 9]]]], ["block", "if", [["get", "isOpenShift", ["loc", [null, [42, 8], [42, 19]]]]], [], 3, null, ["loc", [null, [42, 2], [44, 9]]]], ["block", "if", [["get", "showDeployTaskProgressBar", ["loc", [null, [46, 8], [46, 33]]]]], [], 4, null, ["loc", [null, [46, 2], [48, 9]]]]],
         locals: [],
         templates: [child0, child1, child2, child3, child4]
       };
@@ -44334,7 +44471,7 @@ define("fusor-ember-cli/templates/review/progress/overview", ["exports"], functi
             "column": 0
           },
           "end": {
-            "line": 39,
+            "line": 53,
             "column": 0
           }
         },
@@ -44365,7 +44502,7 @@ define("fusor-ember-cli/templates/review/progress/overview", ["exports"], functi
         morphs[1] = dom.createMorphAt(fragment, 4, 4, contextualElement);
         return morphs;
       },
-      statements: [["block", "if", [["get", "deployment.has_content_error", ["loc", [null, [3, 6], [3, 34]]]]], [], 0, 1, ["loc", [null, [3, 0], [36, 7]]]], ["inline", "partial", ["abandon-deployment-modal"], [], ["loc", [null, [38, 0], [38, 38]]]]],
+      statements: [["block", "if", [["get", "deployment.has_content_error", ["loc", [null, [3, 6], [3, 34]]]]], [], 0, 1, ["loc", [null, [3, 0], [50, 7]]]], ["inline", "partial", ["abandon-deployment-modal"], [], ["loc", [null, [52, 0], [52, 38]]]]],
       locals: [],
       templates: [child0, child1]
     };
@@ -51309,11 +51446,11 @@ define('fusor-ember-cli/utils/validators', ['exports', 'ember'], function (expor
 /* jshint ignore:start */
 
 define('fusor-ember-cli/config/environment', ['ember'], function(Ember) {
-  return { 'default': {"modulePrefix":"fusor-ember-cli","environment":"development","baseURL":"/","locationType":"hash","EmberENV":{"FEATURES":{}},"contentSecurityPolicyHeader":"Disabled-Content-Security-Policy","emberDevTools":{"global":true},"APP":{"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_VIEW_LOOKUPS":true,"rootElement":"#ember-app","name":"fusor-ember-cli","version":"0.0.0+40117ae7"},"ember-cli-mirage":{"enabled":false,"usingProxy":false},"contentSecurityPolicy":{"default-src":"'none'","script-src":"'self' 'unsafe-eval'","font-src":"'self'","connect-src":"'self'","img-src":"'self'","style-src":"'self'","media-src":"'self'"},"ember-devtools":{"enabled":true,"global":false},"exportApplicationGlobal":true}};
+  return { 'default': {"modulePrefix":"fusor-ember-cli","environment":"development","baseURL":"/","locationType":"hash","EmberENV":{"FEATURES":{}},"contentSecurityPolicyHeader":"Disabled-Content-Security-Policy","emberDevTools":{"global":true},"APP":{"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_VIEW_LOOKUPS":true,"rootElement":"#ember-app","name":"fusor-ember-cli","version":"0.0.0+95ddea68"},"ember-cli-mirage":{"enabled":false,"usingProxy":true},"contentSecurityPolicy":{"default-src":"'none'","script-src":"'self' 'unsafe-eval'","font-src":"'self'","connect-src":"'self'","img-src":"'self'","style-src":"'self'","media-src":"'self'"},"ember-devtools":{"enabled":true,"global":false},"exportApplicationGlobal":true}};
 });
 
 if (!runningTests) {
-  require("fusor-ember-cli/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_VIEW_LOOKUPS":true,"rootElement":"#ember-app","name":"fusor-ember-cli","version":"0.0.0+40117ae7"});
+  require("fusor-ember-cli/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_VIEW_LOOKUPS":true,"rootElement":"#ember-app","name":"fusor-ember-cli","version":"0.0.0+95ddea68"});
 }
 
 /* jshint ignore:end */
