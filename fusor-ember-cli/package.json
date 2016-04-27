@@ -55,10 +55,5 @@
     "glob": "^4.5.3",
     "morgan": "^1.6.0",
     "phantomjs": "~1.9.18"
-  },
-  "ember-addon": {
-    "paths": [
-      "lib/copy-assets"
-    ]
   }
 }
