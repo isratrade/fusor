@@ -7,8 +7,6 @@
       {{hostNumber}}.
     </label>
     {{#if multipleMacAddresses}}
-      {{view "select" id=selectId class="form-control new-node-detect-select"
-        prompt="Select an interface" disabled=deselected content=host.macAddresses value=host.value}}
     {{else}}
       <span class="new-node-detect-mac-address new-node-form-span {{deselectedTextClass}}">{{host.value}}</span>
     {{/if}}
