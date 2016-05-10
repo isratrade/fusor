@@ -804,7 +804,8 @@ h1.num-ose-node {
   color: #fff;
 }
 
-a.hanging-indent {
-  text-indent: 24px;
-  margin-left: -12px;
+span.hanging-indent{
+    display:block;
+    text-indent: -1.6em;  /*this pulls the first line to the left*/
+    padding-left: 1.6em;  /*this pushes the wrapped text to the right*/
 }
