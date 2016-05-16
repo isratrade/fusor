@@ -11,7 +11,7 @@
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
 module Fusor
-  class Api::V21::OpenstackDeploymentsController < Api::V2::BaseController
+  class Api::V3::OpenstackDeploymentsController < Api::V3::BaseController
 
     def index
       if params[:deployment_id]
