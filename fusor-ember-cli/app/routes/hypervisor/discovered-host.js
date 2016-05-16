@@ -27,6 +27,28 @@ export default Ember.Route.extend(DiscoveredHostRouteMixin, NeedsDiscoveredHosts
         console.log(err);
       }).finally(() => {
         transition.retry();
+
+    saveHyperVisors(redirectPath) {
+      var self = this;
+      var deployment = this.modelFor('deployment');
+      var hypervisorModelIds = this.controllerFor('hypervisor/discovered-host').get('hypervisorModelIds');
+      var token = Ember.$('meta[name="csrf-token"]').attr('content');
+      request({
+        url: '/fusor/api/v21/deployments/' + deployment.get('id'),
+        type: "PATCH",
+        data: JSON.stringify({data: {attributes: { 'discovered_host_ids': hypervisorModelIds } } }),
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "X-CSRF-Token": token,
+          "Authorization": "Basic " + self.get('session.basicAuthToken')
+        }
+      }).then(function(response) {
+        if (redirectPath) {
+          self.transitionTo('rhev-options');
+        }
+      }, function(error) {
+        console.log(error);
       });
     }
   }
