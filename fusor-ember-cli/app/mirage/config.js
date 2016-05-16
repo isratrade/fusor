@@ -8,54 +8,160 @@ export default function() {
   });
 
   this.get('/fusor/api/v21/deployments', function(db, request) {
-    return {deployments: db.deployments,
-            meta: {
-              total: 107,
-              total_pages: 5,
-              page: 1
-            }
-           };
+    return {
+      data: db.deployments.map(attrs => (
+        { type: 'deployments', id: attrs.id, attributes: attrs }
+      ))
+    };
   });
 
-  this.post('/fusor/api/v21/deployments');
-  this.get('/fusor/api/v21/deployments/:id');
-  this.put('/fusor/api/v21/deployments/:id');
-  this.del('/fusor/api/v21/deployments/:id');
-  this.get('/fusor/api/v21/deployments/:id/openshift_disk_space',
-    function(db, request) {
-      return { openshift_disk_space: 1024 * 250 };
-    }
-  );
-  this.get('/fusor/api/v21/deployments/:id/check_mount_point',
-    function(db, request) {
-      return { mounted: true };
-    }
-  );
+  this.get('/fusor/api/v21/deployments/:id', function(db, request) {
+    let id = request.params.id;
 
-  this.get('/fusor/api/v21/openstack_deployments');
+    return {
+      data: {
+        type: 'deployments',
+        id: id,
+        attributes: db.deployments.find(id)
+      }
+    };
+  });
+  this.post('/fusor/api/v21/deployments', function(db, request) {
+    let id = 123456789;
+
+    return {
+      data: {
+        type: 'deployments',
+        id: id,
+        attributes: db.deployments.find(id)
+      }
+    };
+  });
+  this.put('/fusor/api/v21/deployments/:id', function(db, request) {
+    let id = request.params.id;
+
+    return {
+      data: {
+        type: 'deployments',
+        id: id,
+        attributes: db.deployments.find(id)
+      }
+    };
+  });
+  this.patch('/fusor/api/v21/deployments/:id', function(db, request) {
+    let id = request.params.id;
+
+    return {
+      data: {
+        type: 'deployments',
+        id: id,
+        attributes: db.openstack_deployments.find(id)
+      }
+    };
+  });
+
+  this.del('/fusor/api/v21/deployments/:id');
+
+  this.get('/fusor/api/v21/openstack_deployments', function(db, request) {
+    return {
+      data: db.openstack_deployments.map(attrs => (
+        { type: 'openstack_deployments', id: attrs.id, attributes: attrs }
+      ))
+    };
+  });
+
+  this.get('/fusor/api/v21/openstack_deployments/:id', function(db, request) {
+    let id = request.params.id;
+
+    return {
+      data: {
+        type: 'openstack_deployments',
+        id: id,
+        attributes: db.openstack_deployments.find(id)
+      }
+    };
+  });
+
   this.post('/fusor/api/v21/openstack_deployments');
-  this.get('/fusor/api/v21/openstack_deployments/:id');
   this.put('/fusor/api/v21/openstack_deployments/:id');
   this.del('/fusor/api/v21/openstack_deployments/:id');
 
-  this.get('/api/v21/organizations');
-  this.get('/api/v21/organizations/:id');
+  this.get('/api/v21/organizations', function(db, request) {
+    return {
+      data: db.organizations.map(attrs => (
+        { type: 'organizations', id: attrs.id, attributes: attrs }
+      ))
+    };
+  });
 
-  this.get('/api/v21/lifecycle_environments');
-  this.get('/api/v21/lifecycle_environments/:id');
-  this.post('/api/v21/lifecycle_environments', function(db, request) {
+  this.get('/api/v21/organizations/:id', function(db, request) {
+    let id = request.params.id;
+
+    return {
+      data: {
+        type: 'organizations',
+        id: id,
+        attributes: db.organizations.find(id)
+      }
+    };
+  });
+
+  this.get('/fusor/api/v21/lifecycle_environments', function(db, request) {
+    return {
+      data: db.lifecycle_environments.map(attrs => (
+        { type: 'lifecycle_environments', id: attrs.id, attributes: attrs }
+      ))
+    };
+  });
+
+  this.get('/fusor/api/v21/lifecycle_environments/:id', function(db, request) {
+    let id = request.params.id;
+
+    return {
+      data: {
+        type: 'lifecycle_environments',
+        id: id,
+        attributes: db.lifecycle_environments.find(id)
+      }
+    };
+  });
+
+  this.post('/fusor/api/v21/lifecycle_environments', function(db, request) {
+
     var attrs = JSON.parse(request.requestBody).lifecycle_environment;
     attrs['prior_id'] = 1;
     var record = db.lifecycle_environments.insert(attrs);
     console.log(record);
     return {
-      lifecycle_environment: record
+      data: {
+        type: 'lifecycle_environments',
+        id: id,
+        attributes: record
+      }
     };
   });
 
-  this.get('/api/v21/discovered_hosts');
-  this.get('/api/v21/discovered_hosts/:id');
-  this.put('/api/v21/discovered_hosts/:id/rename', function(db, request) {
+  this.get('/fusor/api/v21/discovered_hosts', function(db, request) {
+    return {
+      data: db.discovered_hosts.map(attrs => (
+        { type: 'discovered_hosts', id: attrs.id, attributes: attrs }
+      ))
+    };
+  });
+
+  this.get('/fusor/api/v21/discovered_hosts/:id', function(db, request) {
+    let id = request.params.id;
+
+    return {
+      data: {
+        type: 'discovered_hosts',
+        id: id,
+        attributes: db.discovered_hosts.find(id)
+      }
+    };
+  });
+
+  this.patch('/fusor/api/v21/discovered_hosts/:id/rename', function(db, request) {
     var id = request.params.id;
     return db.discovered_hosts.find(id);
   });
@@ -90,30 +196,81 @@ export default function() {
   });
 
   this.get('/fusor/api/v21/subscriptions', function(db, request) {
-    var id = request.params.deployment_id;
-    console.log(request.params);
-    return db.subscriptions;
+    return {
+      data: db.subscriptions.map(attrs => (
+        { type: 'subscriptions', id: attrs.id, attributes: attrs }
+      ))
+    };
+  });
+  this.post('/fusor/api/v21/subscriptions');
+
+  this.get('/api/v21/hostgroups', function(db, request) {
+    return {
+      data: db.hostgroups.map(attrs => (
+        { type: 'hostgroups', id: attrs.id, attributes: attrs }
+      ))
+    };
   });
 
-  this.get('/api/v21/hostgroups');
-  this.get('/api/v21/hostgroups/:id');
+  this.get('/api/v21/hostgroups/:id', function(db, request) {
+    let id = request.params.id;
 
-  this.get('/api/v21/domains');
-  this.get('/api/v21/domains/:id');
+    return {
+      data: {
+        type: 'hostgroups',
+        id: id,
+        attributes: db.hostgroups.find(id)
+      }
+    };
+  });
 
-  this.get('fusor/api/v21/deployments/:id/validate', function(db, request) {
+  this.get('/api/v21/domains', function(db, request) {
+    return {
+      data: db.domains.map(attrs => (
+        { type: 'domains', id: attrs.id, attributes: attrs }
+      ))
+    };
+  });
+
+  this.get('/api/v21/domains/:id', function(db, request) {
+    let id = request.params.id;
+
+    return {
+      data: {
+        type: 'domains',
+        id: id,
+        attributes: db.domains.find(id)
+      }
+    };
+  });
+
+  this.get('/fusor/api/v21/deployments/:id/validate', function(db, request) {
     var id = request.params.id;
     return {validation:{deployment_id: id, errors:[], warnings:[]}};
   });
 
-  this.put('fusor/api/v21/deployments/:id/deploy', function(db, request) {
+  this.put('/fusor/api/v21/deployments/:id/deploy', function(db, request) {
     return db.foreman_tasks.find('db25a76f-e344-48ba-ac77-f29303586dbe');
   });
 
-  this.get('/api/v21/foreman_tasks');
-  this.get('/api/v21/foreman_tasks/:id', function(db, request) {
-    var id = request.params.id;
-    return db.foreman_tasks.find(id);
+  this.get('/fusor/api/v21/foreman_tasks', function(db, request) {
+    return {
+      data: db.foreman_tasks.map(attrs => (
+        { type: 'foreman_tasks', id: attrs.id, attributes: attrs }
+      ))
+    };
+  });
+
+  this.get('/fusor/api/v21/foreman_tasks/:id', function(db, request) {
+    let id = request.params.id;
+
+    return {
+      data: {
+        type: 'foreman_tasks',
+        id: id,
+        attributes: db.foreman_tasks.find(id)
+      }
+    };
   });
 
   this.post('/fusor/api/openstack/deployments/:id/underclouds', function(db, request) {
@@ -166,10 +323,6 @@ export default function() {
   });
 
   this.post('/fusor/api/v21/openstack_deployments/:id/sync_openstack');
-
-  this.get('/fusor/api/v21/subscriptions');
-  this.post('/fusor/api/v21/subscriptions');
-
 
   this.post('/customer_portal/consumers/:uuid/entitlements');
 
