@@ -15,21 +15,21 @@ module Fusor
 
     #include Api::Version3
 
-    before_filter :find_organization, :only => [:show, :update, :destroy]
+    before_filter :find_organization, :only => [:show]
 
     def index
       @organizations = ::Organization.all
-      render :json => @organizations, :each_serializer => OrganizationSerializer
+      render :json => @organizations, :each_serializer => Fusor::OrganizationSerializer
     end
 
     def show
-      render :json => @organization, :serializer => OrganizationSerializer
+      render :json => @organization, :serializer => Fusor::OrganizationSerializer
     end
 
     private
 
     def find_organization
-      @organization = ::Organization.find_by_id(params[:organization_id])
+      @organization = ::Organization.find_by_id(params[:id])
       return @organization if @organization
       return :json => {:error => "Couldn't find organization" }
     end

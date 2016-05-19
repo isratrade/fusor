@@ -20,11 +20,11 @@ module Fusor
 
     def index
       @lifecycle_environments = ::Katello::KTEnvironment.readable.where(:organization_id => @organization.id)
-      render :json => @lifecycle_environments, :each_serializer => LifecycleEnvironmentSerializer
+      render :json => @lifecycle_environments, :each_serializer => Fusor::LifecycleEnvironmentSerializer
     end
 
     def show
-      render :json => @lifecycle_environment, :serializer => LifecycleEnvironmentSerializer
+      render :json => @lifecycle_environment, :serializer => Fusor::LifecycleEnvironmentSerializer
     end
 
     def create
@@ -33,7 +33,7 @@ module Fusor
         ## Add environment to Org
         #@organization.kt_environments << @environment
         #@organization.save!
-        render :json => @lifecycle_environment, :serializer => LifecycleEnvironmentSerializer
+        render :json => @lifecycle_environment, :serializer => Fusor::LifecycleEnvironmentSerializer
       else
         render json: {errors: @lifecycle_environment.errors}, status: 422
       end
@@ -44,7 +44,7 @@ module Fusor
         ## Add environment to Org
         #@organization.kt_environments << @environment
         #@organization.save!
-        render :json => @lifecycle_environment, :serializer => LifecycleEnvironmentSerializer
+        render :json => @lifecycle_environment, :serializer => Fusor::LifecycleEnvironmentSerializer
       else
         render json: {errors: @lifecycle_environment.errors}, status: 422
       end
