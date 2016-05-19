@@ -6,8 +6,14 @@
 import Mirage/*, {faker} */ from 'ember-cli-mirage';
 
 export default Mirage.Factory.extend({
-  name: function(i) {                  // and functions
+  name(i) {
     return 'deployment_number_' + i;
+  },
+  organization(i) {
+    return null;
+  },
+  lifecycle_environment(i) {
+    return null;
   },
   is_disconnected: false,
   rhev_is_self_hosted: false,

@@ -22,6 +22,7 @@ Fusor::Engine.routes.draw do
           patch :rename, :on => :member
         end
 
+        resources :organizations, :except => [:new, :edit]
         resources :lifecycle_environments, :except => [:new, :edit]
 
         resources :foreman_tasks, :except => [:new, :edit]
