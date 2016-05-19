@@ -69,7 +69,6 @@ test('deployment name, org, env names are correct', function(assert) {
     server.createList('deployment', 1, {organization_id: org.id, lifecycle_environment_id: env.id});
 
     visit('/deployments');
-
     andThen(function() {
         assert.equal(find('tr.deployment-row').length, 1);
 

@@ -19,7 +19,7 @@ Fusor::Engine.routes.draw do
         end
 
         resources :discovered_hosts, :except => [:new, :edit] do
-          put :rename, :on => :member
+          patch :rename, :on => :member
         end
 
         resources :lifecycle_environments, :except => [:new, :edit]
