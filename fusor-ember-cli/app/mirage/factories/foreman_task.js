@@ -6,7 +6,7 @@
 import Mirage/*, {faker} */ from 'ember-cli-mirage';
 
 export default Mirage.Factory.extend({
-  id: function(i) {
+  id(i) {
     return 'foreman_uuid_9a2b47f2-4006__' + i;
   },
   label: 'Actions::Katello::ContentView::CapsuleGenerateAndSync',

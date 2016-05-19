@@ -3,7 +3,7 @@ module Fusor
 
     type :organizations
 
-    attributes :id, :name
-
-  end
+    attributes :id, :name, :title, :parent_id, :parent_name, :created_at, :updated_at,
+               :ancestry, :description
+   end
 end
