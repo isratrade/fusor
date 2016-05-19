@@ -56,6 +56,8 @@ export default Ember.Controller.extend(ConfigureEnvironmentMixin, NeedsDeploymen
       var library = this.get('libraryEnv');
       // assign library to prior db attribute
       this.set('fields_env.prior', library.get('id'));
+      console.log('333333333333333');
+      console.log(this.get('fields_env'));
       var environment = this.store.createRecord('lifecycle-environment', this.get('fields_env'));
       environment.save().then(function(result) {
         //success

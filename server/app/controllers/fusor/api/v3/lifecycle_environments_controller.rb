@@ -65,9 +65,16 @@ module Fusor
     end
 
     def environment_params
-      attrs = [:name, :description, :organization_id, :label, :prior]
-      parms = params.require(:lifecycle_environment).permit(*attrs)
-      parms
+      # add belongs_to attribute: organization_id
+      if params[:data][:relationships]
+        if (organization = params[:data][:relationships][:organization])
+          organization_id = organization[:data] ? organization[:data][:id] : nil
+          params[:data][:attributes][:organization_id] = organization_id
+        end
+      end
+
+      params.require(:data).require(:attributes).permit(:name,
+        :description, :label, :prior, :organization_id)
     end
 
   end
