@@ -19,7 +19,7 @@ module Fusor
       else
         @openstack_deployments = OpenstackDeployment.all
       end
-      render :json => @openstack_deployments, :each_serializer => Fusor::OpenstackDeploymentSerializer, :serializer => RootArraySerializer
+      render :json => @openstack_deployments, :each_serializer => Fusor::OpenstackDeploymentSerializer
     end
 
     def create
