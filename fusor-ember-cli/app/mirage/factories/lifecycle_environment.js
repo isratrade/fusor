@@ -15,7 +15,7 @@ export default Mirage.Factory.extend({
   description: null,
   library: false,
   prior_id: null,
-  created_at: "2016-05-19T10:56:37.929+03:00",
-  updated_at: "2016-05-19T10:56:37.929+03:00"
+  created_at: "2016-05-19",
+  updated_at: "2016-05-19"
 
 });

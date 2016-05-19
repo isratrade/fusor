@@ -14,8 +14,8 @@ export default Mirage.Factory.extend({
   },
   parent_id: null,
   parent_name: null,
-  created_at: "2016-05-19T10:56:37.929+03:00",
-  updated_at: "2016-05-19T10:56:37.929+03:00",
+  created_at: "2016-05-19",
+  updated_at: "2016-05-19",
   ancestry: null,
   description: null
 
