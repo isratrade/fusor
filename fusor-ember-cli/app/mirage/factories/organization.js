@@ -12,11 +12,11 @@ export default Mirage.Factory.extend({
   title(i) {
     return 'org ' + i;
   },
-  parent_id: null,
-  parent_name: null,
+  label(i) {
+    return 'org_' + i;
+  },
   created_at: "2016-05-19",
   updated_at: "2016-05-19",
-  ancestry: null,
   description: null
 
 });
