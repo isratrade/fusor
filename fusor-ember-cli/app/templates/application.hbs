@@ -2,8 +2,10 @@
   {{partial "mainmenu"}}
 {{/if}}
 
-<div class="{{if isContainer 'container' 'container-fluid'}}">
-  {{outlet}}
+<div id="main">
+  <div id="content" class="container">
+    {{outlet}}
+  </div>
 </div>
 
 {{error-modal}}
