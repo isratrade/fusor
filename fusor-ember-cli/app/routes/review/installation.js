@@ -85,21 +85,22 @@ export default Ember.Route.extend(NeedsExistingManifestHelpers, {
 
     controller.set('validationErrors', []);
     controller.set('validationWarnings', []);
+    let self = this;
 
     if (!model.get('isStarted')) {
       // the PUT request from saveDeployment was firing too late and the server was syncing/validating stale data.
       // the model.save ensures the server has the most recent version of deployment before proceeding.
       controller.set('showSpinner', true);
-      this.validate()
-        .then(() => this.syncOpenStack())
-        .catch(error => {
-          console.log('error', error);
-          controller.set('errorMsg', error.jqXHR.responseText);
-          controller.set('showErrorMessage', true);
-        })
-        .finally(() => {
-          controller.set('showSpinner', false);
+      this.validate().then(function () {
+        return self.validateDiscoveredHostsPoweredOn().then(function () {
+            return self.syncOpenStack();
         });
+      })
+      .catch(error => {
+        console.log('error', error);
+        controller.set('errorMsg', error.jqXHR.responseText);
+        controller.set('showErrorMessage', true);
+      });
     }
   },
 
@@ -121,8 +122,47 @@ export default Ember.Route.extend(NeedsExistingManifestHelpers, {
       },
       data: {}
     }).then(response => {
-      controller.set('validationErrors', response.validation.errors);
-      controller.set('validationWarnings', response.validation.warnings);
+       if (Ember.isPresent(response.validation)) {
+         controller.set('validationErrors', response.validation.errors);
+         controller.set('validationWarnings', response.validation.warnings);
+       }
+       console.log('validate() was successful');
+       return Ember.RSVP.Promise.resolve('validate() was successful');
+    })
+  },
+
+  validateDiscoveredHostsPoweredOn() {
+    let controller = this.get('controller');
+    let deployment = this.get('controller.model');
+    let token = Ember.$('meta[name="csrf-token"]').attr('content');
+    if (!deployment.get('deploy_rhev') || Ember.isPresent(controller.get('validationErrors'))) {
+      return Ember.RSVP.Promise.resolve('all discovered hosts are powered on');
+    }
+
+    return deployment.get('discovered_hosts').then(function(results) {
+      var discoveredHostIds = results.getEach('id');
+      discoveredHostIds.push(deployment.get('rhev_engine_host_id'));
+      controller.set('showSpinner', true);
+      controller.set('spinnerTextMessage', "Ensuring discovered hosts are powered on...");
+      discoveredHostIds.forEach(function (hostId) {
+        request({
+          url: `/api/v2/discovered_hosts/${hostId}/refresh_facts`,
+          type: "PUT",
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "X-CSRF-Token": token
+          },
+          data: {}
+        }).then(function () {
+          console.log('validateDiscoveredHostsPoweredOn() was successful');
+          return Ember.RSVP.Promise.resolve('validateDiscoveredHostsPoweredOn() was successful');
+        }).catch(error => {
+            controller.set('showSpinner', false);
+            controller.set('errorMsg', 'Discovered host id ' + hostId + ' selected for RHEV deployment is turned off');
+            controller.set('showErrorMessage', true);
+        });
+      });
     });
   },
 
