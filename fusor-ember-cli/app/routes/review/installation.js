@@ -78,17 +78,17 @@ export default Ember.Route.extend(NeedsExistingManifestHelpers, {
     if (!model.get('isStarted')) {
       // the PUT request from saveDeployment was firing too late and the server was syncing/validating stale data.
       // the model.save ensures the server has the most recent version of deployment before proceeding.
-      controller.set('showSpinner', true);
-      this.validate()
-        .then(() => this.syncOpenStack())
-        .catch(error => {
-          console.log('error', error);
-          controller.set('errorMsg', error.jqXHR.responseText);
-          controller.set('showErrorMessage', true);
-        })
-        .finally(() => {
-          controller.set('showSpinner', false);
-        });
+      // controller.set('showSpinner', true);
+      // this.validate()
+      //   .then(() => this.syncOpenStack())
+      //   .catch(error => {
+      //     console.log('error', error);
+      //     controller.set('errorMsg', error.jqXHR.responseText);
+      //     controller.set('showErrorMessage', true);
+      //   })
+      //   .finally(() => {
+      //     controller.set('showSpinner', false);
+      //   });
     }
   },
 
