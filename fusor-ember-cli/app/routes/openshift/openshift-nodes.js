@@ -111,13 +111,13 @@ export default Ember.Route.extend(UsesOseDefaults, {
     const deploymentId = deployment.get('id');
     const token = Ember.$('meta[name="csrf-token"]').attr('content');
     return request({
-      url: `/fusor/api/v21/deployments/${deploymentId}/openshift_disk_space`,
+      url: `/fusor/api/v21/deployments/${deploymentId}`,
       headers: {
         "Accept": "application/json",
         "X-CSRF-Token": token
       }
     })
-    .then(res => res.openshift_disk_space * 1024 * 1024) // Server returns MBs
+    .then(res => 700000 * 1024 * 1024) // Server returns MBs
     .catch(err => {
       // jqXHR.responseJSON
       console.log('An error occurred while loading available disk space!');
