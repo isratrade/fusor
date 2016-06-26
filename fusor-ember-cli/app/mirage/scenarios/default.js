@@ -89,4 +89,7 @@ export default function(server) {
                                       discovered_host_ids: [hypervisor1.id, hypervisor2.id]
                                      });
 
+  server.createList('deployment', 22);
+
+
 }
