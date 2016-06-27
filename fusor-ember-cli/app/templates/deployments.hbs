@@ -39,6 +39,16 @@
   </tbody>
 </table>
 
+{{#unless hasMoreContent}}
+  You're at the end of the line.
+{{/unless}}
+<hr>
+hasMoreContent - {{hasMoreContent}}
+<hr>
+{{#unless infiniteScrollAvailable}}
+  <button {{action 'turnOnInfiniteScroll'}}>Show More</button>
+{{/unless}}
+
 <p class='displaying-entries'>
   Displaying <strong>{{filteredDeployments.length}} of {{model.length}}</strong> entries
 </p>
