@@ -2,9 +2,19 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  sortedDeployments: Ember.computed('model.[]', 'model.@each.name', function() {
-    return this.get('model').sortBy('name');
+  queryParams: ['sort', 'dir'],
+  sort: 'name',
+  dir: 'desc',
+
+  sortedDeployments: Ember.computed('model.[]', 'model.@each.name', 'sort', function() {
+    return this.get('model').sortBy(this.get('sort'), 'desc');
   }),
+
+  sortOrder: Ember.computed('sort', 'dir', function() {
+    return [this.get('sort')+':'+this.get('dir')];
+  }),
+
+  sortedDeployments: Ember.computed.sort('model', 'sortOrder'),
 
   searchDeploymentString: '',
 
