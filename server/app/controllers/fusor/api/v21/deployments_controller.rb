@@ -30,7 +30,7 @@ module Fusor
       render :json => @deployments,
              :each_serializer => Fusor::DeploymentSerializer,
              :serializer => RootArraySerializer,
-             :meta => {:total => 10}
+             :meta => {:total => @deployments.count}
     end
 
     def show
