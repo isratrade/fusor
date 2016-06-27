@@ -4,7 +4,7 @@ import InfinityRoute from "ember-infinity/mixins/route";
 export default Ember.Route.extend(InfinityRoute, {
   model() {
     /* Load pages of the Product Model, starting from page 1, in groups of 12. */
-    return this.infinityModel("deployment", { perPage: 12, startingPage: 1 });
+    return this.infinityModel("deployment", { perPage: 4, startingPage: 1 });
     // return Ember.RSVP.hash({
     //   deployments: this.infinityModel("deployment", {
     //     perPage: 12,
