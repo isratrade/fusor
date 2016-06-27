@@ -35,6 +35,7 @@
   {{#each filteredDeployments as |deployment|}}
       {{tr-deployment deployment=deployment}}
   {{/each}}
+  {{infinite-scroll}}
   </tbody>
 </table>
 
@@ -42,7 +43,7 @@
   Displaying <strong>{{filteredDeployments.length}} of {{model.length}}</strong> entries
 </p>
 
-{{outlet}}
+{{ember-cli-infinite-scroll}}
 
 {{delete-deployment-modal openModal=openModal
                           deployment=deploymentInModal
