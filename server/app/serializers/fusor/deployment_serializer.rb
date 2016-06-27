@@ -1,7 +1,7 @@
 module Fusor
   class DeploymentSerializer < ActiveModel::Serializer
 
-    meta: 10,
+    meta: {total: 10},
 
     embed :ids, include: true
     attributes :id, :name, :label, :description,
