@@ -35,6 +35,9 @@
   {{#each filteredDeployments as |deployment|}}
       {{tr-deployment deployment=deployment}}
   {{/each}}
+
+  {{infinity-loader infinityModel=model}}
+
   </tbody>
 </table>
 
@@ -47,3 +50,4 @@
 {{delete-deployment-modal openModal=openModal
                           deployment=deploymentInModal
                           deleteDeployment='deleteDeployment'}}
+

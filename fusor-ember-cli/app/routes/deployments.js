@@ -1,8 +1,17 @@
 import Ember from 'ember';
+import InfinityRoute from "ember-infinity/mixins/route";
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(InfinityRoute, {
   model() {
-    return this.store.findAll('deployment');
+    /* Load pages of the Product Model, starting from page 1, in groups of 12. */
+    return this.infinityModel("deployment", { perPage: 12, startingPage: 1 });
+    // return Ember.RSVP.hash({
+    //   deployments: this.infinityModel("deployment", {
+    //     perPage: 12,
+    //     startingPage: 1,
+    //     modelPath: 'controller.model.deployments'
+    //   })
+    // })
   },
 
   actions: {
