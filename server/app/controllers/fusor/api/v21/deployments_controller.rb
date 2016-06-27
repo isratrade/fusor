@@ -31,7 +31,7 @@ module Fusor
       render :json => @deployments,
              :each_serializer => Fusor::DeploymentSerializer,
              :serializer => RootArraySerializer,
-             :meta => {:total => Deployment.count}
+             :meta => {:total_pages => (Deployment.count / 25).to_i}
     end
 
     def show
