@@ -6,6 +6,7 @@ export default Ember.Route.extend(InfinityRoute, {
     return this.infinityModel("deployment", { perPage: 20, startingPage: 1 });
   },
 
+
   actions: {
     deleteDeployment(item) {
       return this.store.findRecord('deployment', item.get('id')).then(function(deployment) {
