@@ -6,6 +6,10 @@ export default Ember.Route.extend(InfinityRoute, {
     return this.infinityModel("deployment", { perPage: 20, startingPage: 1 });
   },
 
+  setupController(controller, model) {
+    controller.set('model', model);
+    controller.set('totalDeployments', model.get('meta.total'));
+  },
 
   actions: {
     deleteDeployment(item) {
