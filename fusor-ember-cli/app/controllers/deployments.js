@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  queryParams: ['sort_by', 'dir', 'sort_by2', 'dir2', 'perPage', 'startingPage', 'search'],
+  queryParams: ['sort_by', 'dir', 'search', 'perPage', 'startingPage'],
   startingPage: 1,
   perPage: 20,
 
@@ -14,35 +14,17 @@ export default Ember.Controller.extend({
     }
   }),
 
-  sortByDirection2: Ember.computed('dir2', function() {
-    if (this.get('dir2') === 'DESC') {
-      return 'ASC';
-    } else {
-      return 'DESC';
-    }
-  }),
-
-  clientSideSortOrder: Ember.computed('sort_by2', 'dir2', function() {
-    return [this.get('sort_by2')+':'+this.get('dir2')];
+  clientSideSortOrder: Ember.computed('sort_by', 'dir', function() {
+    return [this.get('sort_by')+':'+this.get('dir')];
   }),
 
   clientSideSortedDeployments: Ember.computed.sort('model', 'clientSideSortOrder'),
 
-  modelResults: Ember.computed('isFullyLoaded', 'clientSideSortedDeployments', 'model',
-    'sort_by2', 'dir2', 'sort_by', 'dir', 'search', function() {
+  modelResults: Ember.computed('isFullyLoaded', 'clientSideSortedDeployments', 'model', function() {
     if (this.get('isFullyLoaded')) {
       return this.get('clientSideSortedDeployments');
     } else {
       return this.get('model');
-    }
-  }),
-
-  modelResultsText: Ember.computed('isFullyLoaded', 'clientSideSortedDeployments', 'model',
-    'sort_by2', 'dir2', 'sort_by', 'dir', 'search', function() {
-    if (this.get('isFullyLoaded')) {
-      return 'clientSideSortedDeployments';
-    } else {
-      return 'model';
     }
   }),
 

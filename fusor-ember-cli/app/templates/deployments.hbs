@@ -27,26 +27,19 @@
   <thead>
     <tr>
       <th>
-        {{#if isFullyLoaded}}
-          {{#link-to 'deployments' (query-params sort_by2="name" dir2=sortByDirection2)}}
-            Name
-          {{/link-to}}
-        {{else}}
-          {{#link-to 'deployments' (query-params sort_by="name" dir=sortByDirection)}}
-            Name
-          {{/link-to}}
-        {{/if}}
+        {{#link-to 'deployments' (query-params sort_by="name" dir=sortByDirection)}}
+          Name
+        {{/link-to}}
       </th>
-      <th>
-        {{#if isFullyLoaded}}
-          {{#link-to 'deployments' (query-params sort_by2="environment" dir2=sortByDirection2)}}Environment{{/link-to}}
-        {{else}}
-          {{#link-to 'deployments' (query-params sort_by="environment" dir=sortByDirection)}}Environment{{/link-to}}
-        {{/if}}
-      </th>
+      <th> Environment </th>
       <th> Organization </th>
       <th> Status </th>
-      <th> </th>
+      <th>
+        {{#link-to 'deployments' (query-params sort_by="created_at" dir=sortByDirection)}}
+          Created
+        {{/link-to}}
+      </th>
+      <th></th>
     </tr>
   </thead>
 
