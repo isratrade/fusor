@@ -2,14 +2,17 @@ import Ember from 'ember';
 import InfinityRoute from "ember-infinity/mixins/route";
 
 export default Ember.Route.extend(InfinityRoute, {
-  // queryParams: {
-  //   order: {
-  //     refreshModel: true
-  //   }
-  // },
+  queryParams: {
+    dir: {
+      refreshModel: true
+    },
+    sort_by: {
+      refreshModel: true
+    }
+  },
 
-  model() {
-    return this.infinityModel("deployment", { perPage: 20, startingPage: 1, order:'name ASC' });
+  model(params) {
+    return this.infinityModel("deployment", params);
   },
 
   setupController(controller, model) {

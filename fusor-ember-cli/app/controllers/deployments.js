@@ -2,7 +2,18 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  // queryParams: ['order'],
+  queryParams: ['perPage', 'startingPage', 'sort_by', 'dir', 'order'],
+  perPage: 20,
+  startingPage: 1,
+  sortBy: Ember.computed('sort_by', function() {
+    return this.getWithDefault(this.get('sort_by'), 'name');
+  }),
+  directionBy: Ember.computed('dir', function() {
+    return this.getWithDefault(this.get('dir'), 'ASC');
+  }),
+  // order: Ember.computed('sortBy', 'directionBy', function() {
+  //   return this.get('sortBy') + ' ' + this.get('directionBy');
+  // }),
 
   // sortByColumn: Ember.computed('order', function() {
   //   if (Ember.isPresent(this.get('order'))) {
@@ -15,22 +26,14 @@ export default Ember.Controller.extend({
 
   // }),
 
-  // sortByDirection: Ember.computed('order', function() {
-  //   if (Ember.isPresent(this.get('order'))) {
-  //     let dir = this.get('order').split('+')[1];
-  //     if (dir === 'DESC') {
-  //       return 'ASC';
-  //     } else {
-  //       return 'DESC';
-  //     }
-  //   } else {
+  // sortByDirection: Ember.computed('dir', function() {
+  //   if (this.get('dir') === 'DESC') {
   //     return 'ASC';
+  //   } else {
+  //     return 'DESC';
   //   }
   // }),
 
-  order: Ember.computed('sortByColumn', 'sortByDirection', function() {
-    return [this.get('sortByColumn')+':'+this.get('oppositeSortByDirection')];
-  }),
 
   // sortedDeployments: Ember.computed.sort('model', 'sortOrder'),
 
