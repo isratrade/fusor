@@ -12,6 +12,10 @@ export default Ember.Route.extend(InfinityRoute, {
   },
 
   model(params) {
+    // server-side deployments controller uses scoped search params[:order] for sorting
+    let sort_by = params['sort_by'] || 'name';
+    let dir = params['dir'] || 'ASC';
+    params['order'] = sort_by + ' ' + dir;
     return this.infinityModel("deployment", params);
   },
 

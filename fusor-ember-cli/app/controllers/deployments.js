@@ -2,38 +2,23 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  queryParams: ['perPage', 'startingPage', 'sort_by', 'dir', 'order'],
+  queryParams: ['perPage', 'startingPage', 'sort_by', 'dir'],
   perPage: 20,
   startingPage: 1,
+
   sortBy: Ember.computed('sort_by', function() {
-    return this.getWithDefault(this.get('sort_by'), 'name');
+    return this.getWithDefault('sort_by', 'name');
   }),
   directionBy: Ember.computed('dir', function() {
-    return this.getWithDefault(this.get('dir'), 'ASC');
+    return this.getWithDefault('dir', 'ASC');
   }),
-  // order: Ember.computed('sortBy', 'directionBy', function() {
-  //   return this.get('sortBy') + ' ' + this.get('directionBy');
-  // }),
-
-  // sortByColumn: Ember.computed('order', function() {
-  //   if (Ember.isPresent(this.get('order'))) {
-  //     console.log(this.get('order').split('+')[0]);
-  //     return this.get('order').split('+')[0];
-  //   } else {
-  //     console.log('name');
-  //     return 'name';
-  //   }
-
-  // }),
-
-  // sortByDirection: Ember.computed('dir', function() {
-  //   if (this.get('dir') === 'DESC') {
-  //     return 'ASC';
-  //   } else {
-  //     return 'DESC';
-  //   }
-  // }),
-
+  sortByDirection: Ember.computed('dir', function() {
+    if (this.get('dir') === 'DESC') {
+      return 'ASC';
+    } else {
+      return 'DESC';
+    }
+  }),
 
   // sortedDeployments: Ember.computed.sort('model', 'sortOrder'),
 
