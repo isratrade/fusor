@@ -2,24 +2,34 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  queryParams: ['order'],
-  // sort: 'name',
-  order: 'name+asc',
+  // queryParams: ['order'],
 
-  // sortedDeployments: Ember.computed('model.[]', 'model.@each.name', 'order', function() {
-  //   return this.get('model').sortBy(this.get('sort'), 'desc');
+  // sortByColumn: Ember.computed('order', function() {
+  //   if (Ember.isPresent(this.get('order'))) {
+  //     console.log(this.get('order').split('+')[0]);
+  //     return this.get('order').split('+')[0];
+  //   } else {
+  //     console.log('name');
+  //     return 'name';
+  //   }
+
   // }),
 
-  dirSort: Ember.computed('sort', 'order', function() {
-    if (this.get('order') === 'desc') {
-      return 'asc';
-    } else {
-      return 'desc';
-    }
-  }),
+  // sortByDirection: Ember.computed('order', function() {
+  //   if (Ember.isPresent(this.get('order'))) {
+  //     let dir = this.get('order').split('+')[1];
+  //     if (dir === 'DESC') {
+  //       return 'ASC';
+  //     } else {
+  //       return 'DESC';
+  //     }
+  //   } else {
+  //     return 'ASC';
+  //   }
+  // }),
 
-  sortOrder: Ember.computed('sort', 'dir', function() {
-    return [this.get('sort')+':'+this.get('dir')];
+  order: Ember.computed('sortByColumn', 'sortByDirection', function() {
+    return [this.get('sortByColumn')+':'+this.get('oppositeSortByDirection')];
   }),
 
   // sortedDeployments: Ember.computed.sort('model', 'sortOrder'),
@@ -31,7 +41,7 @@ export default Ember.Controller.extend({
     var rx = new RegExp(searchDeploymentString, 'gi');
     var model = this.get('model');
 
-    if (sortedDeployments.get('length') > 1) {
+    if (model.get('length') > 1) {
       return model.filter(function(record) {
         if (Ember.isPresent(record.get('name'))) {
           return record.get('name').match(rx);
