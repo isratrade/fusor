@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import InfinityRoute from "ember-infinity/mixins/route";
+const ISLOADED = false;
 
 export default Ember.Route.extend(InfinityRoute, {
   queryParams: {
@@ -7,6 +8,9 @@ export default Ember.Route.extend(InfinityRoute, {
       refreshModel: true
     },
     sort_by: {
+      refreshModel: true
+    }
+    perPage: {
       refreshModel: true
     }
   },
@@ -23,6 +27,10 @@ export default Ember.Route.extend(InfinityRoute, {
   setupController(controller, model) {
     controller.set('model', model);
     controller.set('totalDeployments', model.get('meta.total'));
+  },
+
+  infinityModelLoaded(lastPageLoaded, totalPages, infinityModel) {
+    this.get('controller').set('isFullyLoaded', true);
   },
 
   actions: {

@@ -1,5 +1,5 @@
 <h1>Deployments</h1>
-
+isFullyLoaded - {{isFullyLoaded}}
 <div class='new-deployment-button'>
   {{#link-to 'deployment-new.start' class='btn btn-success'}}
       New Deployment
@@ -20,13 +20,29 @@
 </div>
 </form>
 <p class='displaying-entries'>
-  {{if isFiltered 'Found' 'Displaying'}} <strong>{{filteredDeployments.length}} of {{totalDeployments}}</strong> entries
+  {{if isFiltered 'Found' 'Displaying'}} <strong>{{filteredDeployments.length}} of {{totalDeployments}}</strong> entries {{#link-to 'deployments' (query-params perPage=10000)}}       Show All{{/link-to}}
 </p>
 <table class="table table-bordered table-striped small deployments-table">
   <thead>
     <tr>
-      <th> {{#link-to 'deployments' (query-params sort_by="name" dir=sortByDirection)}}Name{{/link-to}} </th>
-      <th> {{#link-to 'deployments' (query-params sort_by="environment" dir=sortByDirection)}}Environment{{/link-to}} </th>
+      <th>
+        {{#if isFullyLoaded}}
+          {{#link-to 'deployments' (query-params sort_by2="name" dir2=sortByDirection2)}}
+            Name
+          {{/link-to}}
+        {{else}}
+          {{#link-to 'deployments' (query-params sort_by="name" dir=sortByDirection)}}
+            Name
+          {{/link-to}}
+        {{/if}}
+      </th>
+      <th>
+        {{#if isFullyLoaded}}
+          {{#link-to 'deployments' (query-params sort_by2="environment" dir2=sortByDirection2)}}Environment{{/link-to}}
+        {{else}}
+          {{#link-to 'deployments' (query-params sort_by="environment" dir=sortByDirection)}}Environment{{/link-to}}
+        {{/if}}
+      </th>
       <th> Organization </th>
       <th> Status </th>
       <th> </th>
@@ -49,7 +65,7 @@
 {{/infinity-loader}}
 
 <p class='displaying-entries'>
-  {{if isFiltered 'Found' 'Displaying'}} <strong>{{filteredDeployments.length}} of {{totalDeployments}}</strong> entries
+  {{if isFiltered 'Found' 'Displaying'}} <strong>{{filteredDeployments.length}} of {{totalDeployments}}</strong> entries <a {{action 'loadAll'}}>Show All</a>
 </p>
 
 {{delete-deployment-modal openModal=openModal
