@@ -2,9 +2,18 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  queryParams: ['perPage', 'startingPage', 'sort_by', 'dir', 'sort_by2', 'dir2'],
-  perPage: 20,
+  queryParams: ['sort_by', 'dir', 'sort_by2', 'dir2', 'perPage', 'startingPage', 'search'],
   startingPage: 1,
+  perPage: 20,
+  // perPage: Ember.computed('isFullyLoaded', 'search', function() {
+  //   if (this.get('isFullyLoaded')) {
+  //     return 20;
+  //   } else if (Ember.isPresent(this.get('search'))) {
+  //     return 10000;
+  //   } else {
+  //     return 20;
+  //   }
+  // }),
 
   sortByDirection: Ember.computed('dir', function() {
     if (this.get('dir') === 'DESC') {
@@ -29,7 +38,7 @@ export default Ember.Controller.extend({
   clientSideSortedDeployments: Ember.computed.sort('model', 'clientSideSortOrder'),
 
   modelResults: Ember.computed('isFullyLoaded', 'clientSideSortedDeployments', 'model',
-    'sort_by2', 'dir2', 'sort_by', 'dir', function() {
+    'sort_by2', 'dir2', 'sort_by', 'dir', 'search', function() {
     if (this.get('isFullyLoaded')) {
       return this.get('clientSideSortedDeployments');
     } else {
@@ -37,11 +46,11 @@ export default Ember.Controller.extend({
     }
   }),
 
-  searchDeploymentString: '',
+  search: '',
 
-  filteredDeployments: Ember.computed('modelResults', 'searchDeploymentString', 'model.[]', function(){
-    var searchDeploymentString = this.get('searchDeploymentString');
-    var rx = new RegExp(searchDeploymentString, 'gi');
+  filteredDeployments: Ember.computed('modelResults', 'search', 'model.[]', function(){
+    var search = this.get('search');
+    var rx = new RegExp(search, 'gi');
     var modelResults = this.get('modelResults');
 
     if (modelResults.get('length') > 1) {
@@ -55,8 +64,8 @@ export default Ember.Controller.extend({
     }
   }),
 
-  isFiltered: Ember.computed('searchDeploymentString', function () {
-    return Ember.isPresent(this.get('searchDeploymentString'));
+  isFiltered: Ember.computed('search', function () {
+    return Ember.isPresent(this.get('search'));
   }),
 
   actions: {
