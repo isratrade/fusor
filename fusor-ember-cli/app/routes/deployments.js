@@ -16,6 +16,7 @@ export default Ember.Route.extend(InfinityRoute, {
     let sort_by = params['sort_by'] || 'name';
     let dir = params['dir'] || 'ASC';
     params['order'] = sort_by + ' ' + dir;
+    // this.
     return this.infinityModel("deployment", params);
   },
 
