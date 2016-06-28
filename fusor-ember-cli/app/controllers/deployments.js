@@ -2,35 +2,43 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  queryParams: ['sort', 'dir'],
-  sort: 'name',
-  dir: 'desc',
+  queryParams: ['order'],
+  // sort: 'name',
+  order: 'name+asc',
 
-  sortedDeployments: Ember.computed('model.[]', 'model.@each.name', 'sort', function() {
-    return this.get('model').sortBy(this.get('sort'), 'desc');
+  // sortedDeployments: Ember.computed('model.[]', 'model.@each.name', 'order', function() {
+  //   return this.get('model').sortBy(this.get('sort'), 'desc');
+  // }),
+
+  dirSort: Ember.computed('sort', 'order', function() {
+    if (this.get('order') === 'desc') {
+      return 'asc';
+    } else {
+      return 'desc';
+    }
   }),
 
   sortOrder: Ember.computed('sort', 'dir', function() {
     return [this.get('sort')+':'+this.get('dir')];
   }),
 
-  sortedDeployments: Ember.computed.sort('model', 'sortOrder'),
+  // sortedDeployments: Ember.computed.sort('model', 'sortOrder'),
 
   searchDeploymentString: '',
 
-  filteredDeployments: Ember.computed('sortedDeployments', 'searchDeploymentString', 'model.[]', function(){
+  filteredDeployments: Ember.computed('model', 'searchDeploymentString', 'model.[]', function(){
     var searchDeploymentString = this.get('searchDeploymentString');
     var rx = new RegExp(searchDeploymentString, 'gi');
-    var sortedDeployments = this.get('sortedDeployments');
+    var model = this.get('model');
 
     if (sortedDeployments.get('length') > 1) {
-      return sortedDeployments.filter(function(record) {
+      return model.filter(function(record) {
         if (Ember.isPresent(record.get('name'))) {
           return record.get('name').match(rx);
         }
       });
     } else {
-      return sortedDeployments;
+      return model;
     }
   }),
 
