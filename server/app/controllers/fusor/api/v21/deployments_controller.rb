@@ -23,11 +23,19 @@ module Fusor
     rescue_from Encoding::UndefinedConversionError, :with => :ignore_it
 
     def index
+      if params[:perPage] == '10000' || params[:perPage].to_i == 10000
+      @deployments = Deployment.includes(:organization, :lifecycle_environment, :discovered_host,
+                                         :discovered_hosts, :ose_master_hosts, :ose_worker_hosts, :subscriptions,
+                                         :introspection_tasks, :foreman_task, :openstack_deployment)
+                                .search_for(params[:search], :order => params[:order]).by_id(params[:id])
+      else
       @deployments = Deployment.includes(:organization, :lifecycle_environment, :discovered_host,
                                          :discovered_hosts, :ose_master_hosts, :ose_worker_hosts, :subscriptions,
                                          :introspection_tasks, :foreman_task, :openstack_deployment)
                                 .page(params[:page])
                                 .search_for(params[:search], :order => params[:order]).by_id(params[:id])
+      end
+
       render :json => @deployments,
              :each_serializer => Fusor::DeploymentSerializer,
              :serializer => RootArraySerializer,
