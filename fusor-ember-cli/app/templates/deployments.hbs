@@ -1,5 +1,4 @@
 <h1>Deployments</h1>
-isFullyLoaded - {{isFullyLoaded}}
 <div class='new-deployment-button'>
   {{#link-to 'deployment-new.start' class='btn btn-success'}}
       New Deployment
@@ -20,8 +19,9 @@ isFullyLoaded - {{isFullyLoaded}}
 </div>
 </form>
 <p class='displaying-entries'>
-  {{if isFiltered 'Found' 'Displaying'}} <strong>{{filteredDeployments.length}} of {{totalDeployments}}</strong> entries {{#link-to 'deployments' (query-params perPage=10000)}}       Show All{{/link-to}}
+  {{if isFiltered 'Found' 'Displaying'}} <strong>{{filteredDeployments.length}} of {{totalDeployments}}</strong> entries
 </p>
+<div class='table-responsive'>
 <table class="table table-bordered table-striped small deployments-table">
   <thead>
     <tr>
@@ -55,6 +55,7 @@ isFullyLoaded - {{isFullyLoaded}}
   {{/each}}
   </tbody>
 </table>
+</div>
 
 {{#infinity-loader infinityModel=model destroyOnInfinity=true}}
   <div class="spinner spinner-md spinner-inline"></div>
@@ -65,7 +66,7 @@ isFullyLoaded - {{isFullyLoaded}}
 {{/infinity-loader}}
 
 <p class='displaying-entries'>
-  {{if isFiltered 'Found' 'Displaying'}} <strong>{{filteredDeployments.length}} of {{totalDeployments}}</strong> entries <a {{action 'loadAll'}}>Show All</a>
+  {{if isFiltered 'Found' 'Displaying'}} <strong>{{filteredDeployments.length}} of {{totalDeployments}}</strong> entries
 </p>
 
 {{delete-deployment-modal openModal=openModal

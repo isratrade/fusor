@@ -10,9 +10,6 @@ export default Ember.Route.extend(InfinityRoute, {
     sort_by: {
       refreshModel: true
     }
-    perPage: {
-      refreshModel: true
-    }
   },
 
   model(params) {

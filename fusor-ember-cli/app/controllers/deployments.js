@@ -6,12 +6,6 @@ export default Ember.Controller.extend({
   perPage: 20,
   startingPage: 1,
 
-  // sortBy: Ember.computed('sort_by', function() {
-  //   return this.getWithDefault('sort_by', 'name');
-  // }),
-  // directionBy: Ember.computed('dir', function() {
-  //   return this.getWithDefault('dir', 'ASC');
-  // }),
   sortByDirection: Ember.computed('dir', function() {
     if (this.get('dir') === 'DESC') {
       return 'ASC';
@@ -28,10 +22,6 @@ export default Ember.Controller.extend({
     }
   }),
 
-  // sortedDeployments: Ember.computed('model.[]', 'model.@each.name', 'sort_by', 'dir', function() {
-  //   return this.get('model').sortBy(this.get('sort_by'), this.get('dir'));
-  // }),
-
   clientSideSortOrder: Ember.computed('sort_by2', 'dir2', function() {
     return [this.get('sort_by2')+':'+this.get('dir2')];
   }),
@@ -46,8 +36,6 @@ export default Ember.Controller.extend({
       return this.get('model');
     }
   }),
-
-  // sortedDeployments: Ember.computed.sort('model', 'sortOrder'),
 
   searchDeploymentString: '',
 
