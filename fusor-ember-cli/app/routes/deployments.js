@@ -12,6 +12,9 @@ export default Ember.Route.extend(InfinityRoute, {
     },
     search: {
       refreshModel: true
+    },
+    perPage: {
+      refreshModel: true
     }
   },
 
@@ -20,6 +23,7 @@ export default Ember.Route.extend(InfinityRoute, {
     let sort_by = params['sort_by'] || 'name';
     let dir = params['dir'] || 'ASC';
     params['order'] = sort_by + ' ' + dir;
+    alert(params['perPage']);
     return this.infinityModel("deployment", params);
   },
 

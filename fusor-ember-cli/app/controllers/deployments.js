@@ -4,12 +4,18 @@ export default Ember.Controller.extend({
 
   queryParams: ['sort_by', 'dir', 'sort_by2', 'dir2', 'perPage', 'startingPage', 'search'],
   startingPage: 1,
-  perPage: Ember.computed('search', function() {
-    if (Ember.isPresent(this.get('search'))) {
+
+  isFiltered: Ember.computed('search', function () {
+    return Ember.isPresent(this.get('search'));
+  }),
+
+  perPage: Ember.computed('isFiltered', function() {
+    // alert(this.get('isFiltered'));
+    // if (this.get('isFiltered')) {
       return 10000;
-    } else {
-      return 20;
-    }
+    // } else {
+    //   return 20;
+    // }
   }),
 
   sortByDirection: Ember.computed('dir', function() {
@@ -52,8 +58,6 @@ export default Ember.Controller.extend({
     }
   }),
 
-  search: '',
-
   filteredDeployments: Ember.computed('modelResults', 'search', 'model.[]', function(){
     var search = this.get('search');
     var rx = new RegExp(search, 'gi');
@@ -68,16 +72,6 @@ export default Ember.Controller.extend({
     } else {
       return modelResults;
     }
-  }),
-
-  isFiltered: Ember.computed('search', function () {
-    return Ember.isPresent(this.get('search'));
-  }),
-
-  actions: {
-    loadAll() {
-      return this.set('per_page', 10000);
-    }
-  }
+  })
 
 });

@@ -24,11 +24,13 @@ module Fusor
 
     def index
       if params[:perPage] == '10000' || params[:perPage].to_i == 10000
+        perPage = 10000.0
       @deployments = Deployment.includes(:organization, :lifecycle_environment, :discovered_host,
                                          :discovered_hosts, :ose_master_hosts, :ose_worker_hosts, :subscriptions,
                                          :introspection_tasks, :foreman_task, :openstack_deployment)
                                 .search_for(params[:search], :order => params[:order]).by_id(params[:id])
       else
+        perPage = 20.0
       @deployments = Deployment.includes(:organization, :lifecycle_environment, :discovered_host,
                                          :discovered_hosts, :ose_master_hosts, :ose_worker_hosts, :subscriptions,
                                          :introspection_tasks, :foreman_task, :openstack_deployment)
@@ -40,7 +42,7 @@ module Fusor
              :each_serializer => Fusor::DeploymentSerializer,
              :serializer => RootArraySerializer,
              :meta => {:total => Deployment.count,
-                       :total_pages => (Deployment.count / 20.0).ceil
+                       :total_pages => (Deployment.count / perPage).ceil
                       }
     end
 
