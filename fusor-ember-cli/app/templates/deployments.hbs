@@ -55,21 +55,23 @@
   </div>
 </div>
 
-<div class="col-md-7">
-  <ul class="pagination pull-right">
-    <li class="prev previous_page {{if disablePrevPage 'disabled'}}">
-      {{#link-to 'deployments' (query-params page=prevPage) disabled=disablePrevPage}}«{{/link-to}}
-    </li>
-    {{#each pageRange as |num|}}
-      <li>
-        {{#link-to 'deployments' (query-params page=num)}}{{num}}{{/link-to}}
+{{#if showPagination}}
+  <div class="col-md-7">
+    <ul class="pagination pull-right">
+      <li class="prev previous_page {{if disablePrevPage 'disabled'}}">
+        {{#link-to 'deployments' (query-params page=prevPage) disabled=disablePrevPage}}«{{/link-to}}
       </li>
-    {{/each}}
-    <li class="next next_page {{if disableNextPage 'disabled'}}">
-      {{#link-to 'deployments' (query-params page=nextPage) disabled=disableNextPage}}»{{/link-to}}
-    </li>
-  </ul>
-</div>
+      {{#each pageRange as |num|}}
+        <li>
+          {{#link-to 'deployments' (query-params page=num)}}{{num}}{{/link-to}}
+        </li>
+      {{/each}}
+      <li class="next next_page {{if disableNextPage 'disabled'}}">
+        {{#link-to 'deployments' (query-params page=nextPage) disabled=disableNextPage}}»{{/link-to}}
+      </li>
+    </ul>
+  </div>
+{{/if}}
 
 {{delete-deployment-modal openModal=openModal
                           deployment=deploymentInModal
