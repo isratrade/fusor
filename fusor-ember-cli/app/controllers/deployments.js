@@ -62,7 +62,7 @@ export default Ember.Controller.extend({
     if (parseInt(this.get('totalDeployments') === 0)) {
       return 'No entries found';
     } else if (parseInt(this.get('totalPages') < 2)) {
-      return `Displaying <strong>all ${totalDeployments}</strong> entries`.htmlSafe();;
+      return `Displaying <strong>all ${totalDeployments}</strong> entries`.htmlSafe();
     } else {
       return `Displaying entries <strong>${this.get('entriesFrom')} - ${this.get('entriesTo')}</strong> of <strong>${this.get('totalDeployments')}</strong> in total`.htmlSafe();
     }
