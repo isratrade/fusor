@@ -2,25 +2,31 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  sortedDeployments: Ember.computed('model.[]', 'model.@each.name', function() {
-    return this.get('model').sortBy('name');
+  queryParams: ['sort_by', 'dir', 'search'],
+
+  sortByDirection: Ember.computed('dir', function() {
+    if (this.get('dir') === 'DESC') {
+      return 'ASC';
+    } else {
+      return 'DESC';
+    }
   }),
 
-  searchDeploymentString: '',
+  isFiltered: Ember.computed.notEmpty('search'),
 
-  filteredDeployments: Ember.computed('sortedDeployments', 'searchDeploymentString', 'model.[]', function(){
-    var searchDeploymentString = this.get('searchDeploymentString');
-    var rx = new RegExp(searchDeploymentString, 'gi');
-    var sortedDeployments = this.get('sortedDeployments');
+  filteredDeployments: Ember.computed('model', 'search', 'model.[]', function(){
+    var search = this.get('search');
+    var rx = new RegExp(search, 'gi');
+    var model = this.get('model');
 
-    if (sortedDeployments.get('length') > 1) {
-      return sortedDeployments.filter(function(record) {
+    if (model.get('length') > 1) {
+      return model.filter(function(record) {
         if (Ember.isPresent(record.get('name'))) {
           return record.get('name').match(rx);
         }
       });
     } else {
-      return sortedDeployments;
+      return model;
     }
   })
 

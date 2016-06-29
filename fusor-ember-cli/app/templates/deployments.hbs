@@ -13,21 +13,33 @@
      <div class='col-md-5'>
        {{input type='text' class='form-control filter-input'
                            placeholder='Filter ...'
-                           value=searchDeploymentString}}
+                           value=search}}
      </div>
      <button class='btn btn-default' style='margin-left:-20px'><i class="fa fa-search"></i> Search</button>
    </div>
 </div>
 </form>
-<br />
+<p class='displaying-entries'>
+  {{if isFiltered 'Found' 'Displaying'}} <strong>{{filteredDeployments.length}} of {{totalDeployments}}</strong> entries
+</p>
+<div class='table-responsive'>
 <table class="table table-bordered table-striped small deployments-table">
   <thead>
     <tr>
-      <th> Name </th>
+      <th>
+        {{#link-to 'deployments' (query-params sort_by="name" dir=sortByDirection)}}
+          Name
+        {{/link-to}}
+      </th>
       <th> Environment </th>
       <th> Organization </th>
       <th> Status </th>
-      <th> </th>
+      <th>
+        {{#link-to 'deployments' (query-params sort_by="created_at" dir=sortByDirection)}}
+          Created
+        {{/link-to}}
+      </th>
+      <th></th>
     </tr>
   </thead>
 
@@ -37,12 +49,34 @@
   {{/each}}
   </tbody>
 </table>
+</div>
 
 <p class='displaying-entries'>
-  Displaying <strong>{{filteredDeployments.length}} of {{model.length}}</strong> entries
+  {{if isFiltered 'Found' 'Displaying'}} <strong>{{filteredDeployments.length}} of {{totalDeployments}}</strong> entries
 </p>
 
-{{outlet}}
+<div class="col-md-5 hidden-xs">
+  <div class="pull-left pull-bottom darkgray pagination">
+    Displaying entries <b>1 - 20</b> of <b>83</b> in total
+  </div>
+</div>
+
+<div class="col-md-7">
+  <ul class="pagination pull-right">
+    <li class="prev previous_page disabled">
+      <a href="#">«</a>
+    </li>
+    <li class="active">
+      <a rel="start" href="/puppetclass_lookup_keys?page=1&amp;search=">1</a></li> <li><a rel="next" href="/puppetclass_lookup_keys?page=2&amp;search=">2</a>
+    </li>
+    <li>
+      <a href="/puppetclass_lookup_keys?page=3&amp;search=">3</a>
+    </li>
+    <li class="next next_page ">
+      <a rel="next" href="/puppetclass_lookup_keys?page=2&amp;search=">»</a>
+    </li>
+  </ul>
+</div>
 
 {{delete-deployment-modal openModal=openModal
                           deployment=deploymentInModal
