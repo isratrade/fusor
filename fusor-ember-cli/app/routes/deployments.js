@@ -27,7 +27,7 @@ export default Ember.Route.extend({
   setupController(controller, model) {
     controller.set('model', model);
     controller.set('totalDeployments', model.get('meta.total'));
-    controller.set('pageNumber', model.get('meta.page'));
+    controller.set('pageNumber', model.get('meta.page') || 1);
     controller.set('totalPages', model.get('meta.total_pages'));
     controller.set('pageRange', _.range(1, model.get('meta.total_pages') + 1));
   },
