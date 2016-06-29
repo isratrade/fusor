@@ -59,13 +59,13 @@ export default Ember.Controller.extend({
   }),
 
   showPagination: Ember.computed('totalPages', function() {
-    return parseInt(this.get('totalPages') > 1);
+    return (parseInt(this.get('totalPages')) > 1);
   }),
 
   displayingEntries: Ember.computed('totalDeployments', 'totalPages', 'entriesFrom', 'entriesTo', function() {
     if (parseInt(this.get('totalDeployments') === 0)) {
       return 'No entries found';
-    } else if (parseInt(this.get('totalPages') < 2)) {
+    } else if (parseInt(this.get('totalPages')) < 2) {
       return `Displaying <strong>all ${totalDeployments}</strong> entries`.htmlSafe();
     } else {
       return `Displaying entries <strong>${this.get('entriesFrom')} - ${this.get('entriesTo')}</strong> of <strong>${this.get('totalDeployments')}</strong> in total`.htmlSafe();
