@@ -47,11 +47,7 @@ export default Ember.Controller.extend({
   }),
 
   entriesFrom: Ember.computed('pageNumber', 'totalPages', 'totalDeployments', function() {
-    if (parseInt(this.get('pageNumber')) === parseInt(this.get('totalPages'))) {
-      return this.get('totalDeployments');
-    } else {
-      return ((parseInt(this.get('pageNumber')) * 20) - 19);
-    }
+    return ((parseInt(this.get('pageNumber')) * 20) - 19);
   }),
 
   entriesTo: Ember.computed('pageNumber', 'totalPages', 'totalDeployments', function() {
@@ -66,9 +62,9 @@ export default Ember.Controller.extend({
     if (parseInt(this.get('totalDeployments') === 0)) {
       return 'No entries found';
     } else if (parseInt(this.get('totalPages') < 2)) {
-      return `Displaying <b>all ${totalDeployments}</b> entries`;
+      return `Displaying <strong>all ${totalDeployments}</strong> entries`.htmlSafe();;
     } else {
-      return `Displaying entries <b>${this.get('entriesFrom')} - ${this.get('entriesTo')}</b> of <b>${this.get('totalDeployments')}</b> in total`;
+      return `Displaying entries <strong>${this.get('entriesFrom')} - ${this.get('entriesTo')}</strong> of <strong>${this.get('totalDeployments')}</strong> in total`.htmlSafe();
     }
   })
 
