@@ -28,6 +28,48 @@ export default Ember.Controller.extend({
     } else {
       return model;
     }
+  }),
+
+  prevPage: Ember.computed('pageNumber', function() {
+    return parseInt(this.get('pageNumber')) - 1;
+  }),
+
+  nextPage: Ember.computed('nextPage', function() {
+    return parseInt(this.get('pageNumber')) + 1;
+  }),
+
+  disablePrevPage: Ember.computed('pageNumber', function() {
+    return parseInt(this.get('pageNumber')) === 1 || Ember.isBlank(this.get('pageNumber'));
+  }),
+
+  disableNextPage: Ember.computed('pageNumber', 'totalPages', function() {
+    return parseInt(this.get('pageNumber')) === parseInt(this.get('totalPages'));
+  }),
+
+  entriesFrom: Ember.computed('pageNumber', 'totalPages', 'totalDeployments', function() {
+    if (parseInt(this.get('pageNumber')) === parseInt(this.get('totalPages'))) {
+      return this.get('totalDeployments');
+    } else {
+      return ((parseInt(this.get('pageNumber')) * 20) - 19);
+    }
+  }),
+
+  entriesTo: Ember.computed('pageNumber', 'totalPages', 'totalDeployments', function() {
+    if (parseInt(this.get('pageNumber')) === parseInt(this.get('totalPages'))) {
+      return this.get('totalDeployments');
+    } else {
+      return (parseInt(this.get('pageNumber')) * 20);
+    }
+  }),
+
+  displayingEntries: Ember.computed('totalDeployments', 'totalPages', 'entriesFrom', 'entriesTo', function() {
+    if (parseInt(this.get('totalDeployments') === 0)) {
+      return 'No entries found';
+    } else if (parseInt(this.get('totalPages') < 2)) {
+      return `Displaying <b>all ${totalDeployments}</b> entries`;
+    } else {
+      return `Displaying entries <b>${this.get('entriesFrom')} - ${this.get('entriesTo')}</b> of <b>${this.get('totalDeployments')}</b> in total`;
+    }
   })
 
 });

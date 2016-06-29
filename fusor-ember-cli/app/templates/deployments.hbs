@@ -49,39 +49,32 @@
 </table>
 </div>
 
-<p class='displaying-entries'>
+<p class=''>
   {{if isFiltered 'Found' 'Displaying'}} <strong>{{filteredDeployments.length}} of {{totalDeployments}}</strong> entries
 </p>
 
-<div class="col-md-5 hidden-xs">
+<div class='displaying-entries col-md-5'>
   <div class="pull-left pull-bottom darkgray pagination">
-    Displaying entries <b>1 - 20</b> of <b>83</b> in total
+    {{displayingEntries}}
   </div>
 </div>
 
 <div class="col-md-7">
   <ul class="pagination pull-right">
-    <li class="prev previous_page disabled">
-      <a href="#">«</a>
+    <li class="prev previous_page {{if disablePrevPage 'disabled'}}">
+      {{#link-to 'deployments' (query-params page=prevPage) disabled=disablePrevPage}}«{{/link-to}}
     </li>
-    <li class="">
-      {{#link-to 'deployments' (query-params page=2) }}2{{/link-to}}
-    </li>
-    <li>
-      {{#link-to 'deployments' (query-params page=3) }}3{{/link-to}}
-    </li>
-    <li>
-      {{#link-to 'deployments' (query-params page=3) }}4{{/link-to}}
-    </li>
-    <li class="next next_page ">
-      <a rel="next" href="/puppetclass_lookup_keys?page=2&amp;search=">»</a>
+    {{#each pageRange as |num|}}
+      <li>
+        {{#link-to 'deployments' (query-params page=num)}}{{num}}{{/link-to}}
+      </li>
+    {{/each}}
+    <li class="next next_page {{if disableNextPage 'disabled'}}">
+      {{#link-to 'deployments' (query-params page=nextPage) disabled=disableNextPage}}»{{/link-to}}
     </li>
   </ul>
 </div>
 
-  {{#each pageNumbers as |pageNumber|}}
-      {{pageNumber}} |
-  {{/each}}
 {{delete-deployment-modal openModal=openModal
                           deployment=deploymentInModal
                           deleteDeployment='deleteDeployment'}}

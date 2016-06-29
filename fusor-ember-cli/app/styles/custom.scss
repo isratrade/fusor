@@ -952,3 +952,24 @@ span.hanging-indent{
 .deployments-table> tbody > tr > td:first-child {
     width: 40%;
 }
+
+.pagination {
+  display: table-cell;
+  vertical-align: bottom;
+  float: none;
+}
+
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus
+.pagination > li > a,
+.pagination > li > span {
+  background-image: none;
+}
+
+.darkgrey, .darkgray {
+  color: #606060 !important;
+}
