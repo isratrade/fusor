@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  queryParams: ['sort_by', 'dir', 'search'],
+  queryParams: ['search', 'page', 'sort_by', 'dir', ],
 
   sortByDirection: Ember.computed('dir', function() {
     if (this.get('dir') === 'DESC') {

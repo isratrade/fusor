@@ -10,6 +10,9 @@ export default Ember.Route.extend({
     },
     search: {
       refreshModel: true
+    },
+    page: {
+      refreshModel: true
     }
   },
 

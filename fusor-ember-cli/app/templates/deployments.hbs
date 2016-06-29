@@ -33,8 +33,8 @@
       <th> Organization </th>
       <th> Status </th>
       <th>
-        {{#link-to 'deployments' (query-params sort_by="created_at" dir=sortByDirection)}}
-          Created
+        {{#link-to 'deployments' (query-params sort_by="updated_at" dir=sortByDirection)}}
+          Last Updated
         {{/link-to}}
       </th>
       <th></th>
@@ -64,11 +64,14 @@
     <li class="prev previous_page disabled">
       <a href="#">«</a>
     </li>
-    <li class="active">
-      <a rel="start" href="/puppetclass_lookup_keys?page=1&amp;search=">1</a></li> <li><a rel="next" href="/puppetclass_lookup_keys?page=2&amp;search=">2</a>
+    <li class="">
+      {{#link-to 'deployments' (query-params page=2) }}2{{/link-to}}
     </li>
     <li>
-      <a href="/puppetclass_lookup_keys?page=3&amp;search=">3</a>
+      {{#link-to 'deployments' (query-params page=3) }}3{{/link-to}}
+    </li>
+    <li>
+      {{#link-to 'deployments' (query-params page=3) }}4{{/link-to}}
     </li>
     <li class="next next_page ">
       <a rel="next" href="/puppetclass_lookup_keys?page=2&amp;search=">»</a>
