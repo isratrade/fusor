@@ -79,6 +79,9 @@
   </ul>
 </div>
 
+  {{#each pageNumbers as |pageNumber|}}
+      {{pageNumber}} |
+  {{/each}}
 {{delete-deployment-modal openModal=openModal
                           deployment=deploymentInModal
                           deleteDeployment='deleteDeployment'}}
