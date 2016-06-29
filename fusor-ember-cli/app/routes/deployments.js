@@ -15,8 +15,8 @@ export default Ember.Route.extend({
 
   model(params) {
     // server-side deployments controller uses scoped search params[:order] for sorting
-    let sort_by = params['sort_by'] || 'name';
-    let dir = params['dir'] || 'ASC';
+    let sort_by = params['sort_by'] || 'updated_at';
+    let dir = params['dir'] || 'DESC';
     params['order'] = sort_by + ' ' + dir;
     return this.store.query('deployment', params);
   },
