@@ -27,7 +27,14 @@ module Fusor
                                          :discovered_hosts, :ose_master_hosts, :ose_worker_hosts, :subscriptions,
                                          :introspection_tasks, :foreman_task, :openstack_deployment)
                                 .search_for(params[:search], :order => params[:order]).by_id(params[:id])
-      render :json => @deployments, :each_serializer => Fusor::DeploymentSerializer, :serializer => RootArraySerializer
+                                .paginate(:page => params[:page])
+      render :json => @deployments,
+             :each_serializer => Fusor::DeploymentSerializer,
+             :serializer => RootArraySerializer,
+             :meta => {:total => Deployment.count,
+                       :page => params[:page],
+                       :total_pages => (Deployment.count / 20.0).ceil
+                      }
     end
 
     def show
