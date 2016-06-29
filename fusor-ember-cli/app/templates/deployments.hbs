@@ -13,21 +13,31 @@
      <div class='col-md-5'>
        {{input type='text' class='form-control filter-input'
                            placeholder='Filter ...'
-                           value=searchDeploymentString}}
+                           value=search}}
      </div>
      <button class='btn btn-default' style='margin-left:-20px'><i class="fa fa-search"></i> Search</button>
    </div>
 </div>
 </form>
-<br />
+
+<div class='table-responsive'>
 <table class="table table-bordered table-striped small deployments-table">
   <thead>
     <tr>
-      <th> Name </th>
+      <th>
+        {{#link-to 'deployments' (query-params sort_by="name" dir=sortByDirection)}}
+          Name
+        {{/link-to}}
+      </th>
       <th> Environment </th>
       <th> Organization </th>
       <th> Status </th>
-      <th> </th>
+      <th>
+        {{#link-to 'deployments' (query-params sort_by="updated_at" dir=sortByDirection)}}
+          Last Updated
+        {{/link-to}}
+      </th>
+      <th></th>
     </tr>
   </thead>
 
@@ -37,12 +47,31 @@
   {{/each}}
   </tbody>
 </table>
+</div>
 
-<p class='displaying-entries'>
-  Displaying <strong>{{filteredDeployments.length}} of {{model.length}}</strong> entries
-</p>
+<div class='displaying-entries col-md-5'>
+  <div class="pull-left pull-bottom darkgray pagination">
+    {{displayingEntries}}
+  </div>
+</div>
 
-{{outlet}}
+{{#if showPagination}}
+  <div class="col-md-7">
+    <ul class="pagination pull-right">
+      <li class="prev previous_page {{if disablePrevPage 'disabled'}}">
+        {{#link-to 'deployments' (query-params page=prevPage) disabled=disablePrevPage}}«{{/link-to}}
+      </li>
+      {{#each pageRange as |num|}}
+        <li>
+          {{#link-to 'deployments' (query-params page=num)}}{{num}}{{/link-to}}
+        </li>
+      {{/each}}
+      <li class="next next_page {{if disableNextPage 'disabled'}}">
+        {{#link-to 'deployments' (query-params page=nextPage) disabled=disableNextPage}}»{{/link-to}}
+      </li>
+    </ul>
+  </div>
+{{/if}}
 
 {{delete-deployment-modal openModal=openModal
                           deployment=deploymentInModal
