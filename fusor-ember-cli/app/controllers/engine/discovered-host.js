@@ -36,9 +36,9 @@ export default Ember.Controller.extend(NeedsDeploymentMixin, {
     }
   }),
 
-  filteredHosts: Ember.computed('availableHosts.[]', 'searchString', 'isStarted', function(){
-    var searchString = this.get('searchString');
-    var rx = new RegExp(searchString, 'gi');
+  filteredHosts: Ember.computed('availableHosts.[]', 'search', 'isStarted', function(){
+    var search = this.get('search');
+    var rx = new RegExp(search, 'gi');
     var availableHosts = this.get('availableHosts');
 
     if (this.get('isStarted')) {
@@ -91,8 +91,6 @@ export default Ember.Controller.extend(NeedsDeploymentMixin, {
   }),
 
   entriesTo: Ember.computed('pageNumber', 'totalPages', 'totalDiscoveredHosts', function() {
-    alert(this.get('pageNumber'));
-    alert(this.get('totalDiscoveredHosts'));
     if (parseInt(this.get('pageNumber')) === parseInt(this.get('totalPages'))) {
       return this.get('totalDiscoveredHosts');
     } else {
