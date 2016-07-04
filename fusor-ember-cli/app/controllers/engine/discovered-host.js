@@ -73,7 +73,7 @@ export default Ember.Controller.extend(NeedsDeploymentMixin, {
   actions: {
     onEngineChanged(newlySelectedHost, isInvalidHostname) {
       this.set('isSelectedEngineHostnameInvalid', isInvalidHostname);
-      this.set('deploymentController.model.discovered_host', newlySelectedHost);
+      this.set('deploymentController.model.discovered_host.discovered_host', newlySelectedHost);
     },
     setIfHostnameInvalid(bool, hostId) {
       let discoveredHost = this.get('deploymentController.model.discovered_host');

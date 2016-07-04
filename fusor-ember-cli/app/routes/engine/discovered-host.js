@@ -1,16 +1,30 @@
 import Ember from 'ember';
 import DiscoveredHostRouteMixin from "../../mixins/discovered-host-route-mixin";
+import _ from 'lodash/lodash';
 
 export default Ember.Route.extend(DiscoveredHostRouteMixin, {
   model(params) {
-    const deployment = this.modelFor('openshift');
-    const discovered_host = this.modelFor('deployment').get('discovered_host');
+    const engine_host = this.modelFor('deployment').get('discovered_host');
+    const discovered_hosts = this.getDiscoveredHosts(params);
     return Ember.RSVP.hash({
-      discovered_host,
-      maxResources: this.loadMaxResources(deployment)
+      engine_host,
+      discovered_hosts
     });
+  },
 
-    Ember.RSVP.hash()
+  getDiscoveredHosts(params) {
+    var controller = this.controllerFor('engine/discovered_host');
+    if (this.modelFor('deployment').get('isNotStarted')) {
+      controller.set('isLoadingHosts', true);
+      return this.store.query('discovered-host', params).then(function(results) {
+        controller.set('allDiscoveredHosts', results.filterBy('is_discovered', true));
+        controller.set('totalDiscoveredHosts', results.get('meta.total'));
+        controller.set('pageNumber', results.get('meta.page'));
+        controller.set('totalPages', results.get('meta.total_pages'));
+        controller.set('pageRange', _.range(1, results.get('meta.total_pages') + 1));
+        controller.set('isLoadingHosts', false);
+      });
+    }
   },
 
   deactivate() {
