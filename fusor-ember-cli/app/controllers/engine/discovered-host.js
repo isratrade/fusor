@@ -86,13 +86,15 @@ export default Ember.Controller.extend(NeedsDeploymentMixin, {
     return parseInt(this.get('pageNumber')) === parseInt(this.get('totalPages'));
   }),
 
-  entriesFrom: Ember.computed('pageNumber', 'totalPages', 'totalDeployments', function() {
+  entriesFrom: Ember.computed('pageNumber', 'totalPages', 'totalDiscoveredHosts', function() {
     return ((parseInt(this.get('pageNumber')) * 20) - 19);
   }),
 
-  entriesTo: Ember.computed('pageNumber', 'totalPages', 'totalDeployments', function() {
+  entriesTo: Ember.computed('pageNumber', 'totalPages', 'totalDiscoveredHosts', function() {
+    alert(this.get('pageNumber'));
+    alert(this.get('totalDiscoveredHosts'));
     if (parseInt(this.get('pageNumber')) === parseInt(this.get('totalPages'))) {
-      return this.get('totalDeployments');
+      return this.get('totalDiscoveredHosts');
     } else {
       return (parseInt(this.get('pageNumber')) * 20);
     }
@@ -102,13 +104,13 @@ export default Ember.Controller.extend(NeedsDeploymentMixin, {
     return (parseInt(this.get('totalPages')) > 1);
   }),
 
-  displayingEntries: Ember.computed('totalDeployments', 'totalPages', 'entriesFrom', 'entriesTo', function() {
-    if (parseInt(this.get('totalDeployments') === 0)) {
+  displayingEntries: Ember.computed('totalDiscoveredHosts', 'totalPages', 'entriesFrom', 'entriesTo', function() {
+    if (parseInt(this.get('totalDiscoveredHosts') === 0)) {
       return 'No entries found';
     } else if (parseInt(this.get('totalPages')) < 2) {
-      return `Displaying <strong>all ${this.get('totalDeployments')}</strong> entries`.htmlSafe();
+      return `Displaying <strong>all ${this.get('totalDiscoveredHosts')}</strong> entries`.htmlSafe();
     } else {
-      return `Displaying entries <strong>${this.get('entriesFrom')} - ${this.get('entriesTo')}</strong> of <strong>${this.get('totalDeployments')}</strong> in total`.htmlSafe();
+      return `Displaying entries <strong>${this.get('entriesFrom')} - ${this.get('entriesTo')}</strong> of <strong>${this.get('totalDiscoveredHosts')}</strong> in total`.htmlSafe();
     }
   }),
 
