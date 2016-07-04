@@ -32,7 +32,7 @@ module Fusor
              :each_serializer => Fusor::DeploymentSerializer,
              :serializer => RootArraySerializer,
              :meta => {:total => Deployment.count,
-                       :page => params[:page],
+                       :page => params[:page].present? ? params[:page].to_i : 1,
                        :total_pages => (Deployment.count / 20.0).ceil
                       }
     end
