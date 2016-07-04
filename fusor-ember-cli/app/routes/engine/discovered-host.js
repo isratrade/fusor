@@ -15,6 +15,10 @@ export default Ember.Route.extend(DiscoveredHostRouteMixin, {
   getDiscoveredHosts(params) {
     var controller = this.controllerFor('engine/discovered_host');
     if (this.modelFor('deployment').get('isNotStarted')) {
+      let sort_by = params['sort_by'] || 'name';
+      let dir = params['dir'] || 'ASC';
+      let page = params['page'] || 1;
+      params['order'] = sort_by + ' ' + dir;
       controller.set('isLoadingHosts', true);
       return this.store.query('discovered-host', params).then(function(results) {
         controller.set('allDiscoveredHosts', results.filterBy('is_discovered', true));
