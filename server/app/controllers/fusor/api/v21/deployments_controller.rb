@@ -33,7 +33,7 @@ module Fusor
              :serializer => RootArraySerializer,
              :meta => {:total => Deployment.count,
                        :page => params[:page].present? ? params[:page].to_i : 1,
-                       :total_pages => (Deployment.count / 20.0).ceil
+                       :total_pages => (@deployments.count / 20.0).ceil
                       }
     end
 
