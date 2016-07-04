@@ -8,6 +8,8 @@ import {
 
 export default Ember.Controller.extend(NeedsDeploymentMixin, {
 
+  queryParams: ['search', 'page', 'sort_by', 'dir'],
+
   selectedRhevEngine: Ember.computed.alias("deploymentController.model.discovered_host"),
   rhevIsSelfHosted: Ember.computed.alias("deploymentController.model.rhev_is_self_hosted"),
 

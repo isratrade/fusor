@@ -3,6 +3,8 @@ import NeedsDeploymentMixin from "../../mixins/needs-deployment-mixin";
 
 export default Ember.Controller.extend(NeedsDeploymentMixin, {
 
+  queryParams: ['search', 'page', 'sort_by', 'dir'],
+
   rhevController: Ember.inject.controller('rhev'),
 
   selectedRhevEngineHost: Ember.computed.alias("model"),
