@@ -20,10 +20,10 @@ export default Ember.Mixin.create({
   actions: {
     refreshDiscoveredHosts() {
       console.log('refresh allDiscoveredHosts');
-      var controller = this.get('controller');
+      var self = this;
+      var controller = this.controllerFor('engine/discovered_host');
       controller.set('isLoadingHosts', true);
-      this.store.findAll('discovered-host').then(function(results) {
-        controller.set('allDiscoveredHosts', results.filterBy('is_discovered', true));
+      this.store.query('discovered-host', {}).then(function(results) {
         controller.set('isLoadingHosts', false);
         controller.set('allDiscoveredHosts', results.filterBy('is_discovered', true));
         controller.set('totalDiscoveredHosts', results.get('meta.total'));
