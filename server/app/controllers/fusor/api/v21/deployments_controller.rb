@@ -28,10 +28,11 @@ module Fusor
                                          :introspection_tasks, :foreman_task, :openstack_deployment)
                                 .search_for(params[:search], :order => params[:order]).by_id(params[:id])
                                 .paginate(:page => params[:page])
+      cnt = Deployment.search_for(params[:search], :order => params[:order]).count
       render :json => @deployments,
              :each_serializer => Fusor::DeploymentSerializer,
              :serializer => RootArraySerializer,
-             :meta => {:total => Deployment.count,
+             :meta => {:total => cnt,
                        :page => params[:page].present? ? params[:page].to_i : 1,
                        :total_pages => (@deployments.count / 20.0).ceil
                       }
