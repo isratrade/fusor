@@ -25,7 +25,6 @@ export default Ember.Mixin.create({
       this.store.findAll('discovered-host').then(function(results) {
         controller.set('allDiscoveredHosts', results.filterBy('is_discovered', true));
         controller.set('isLoadingHosts', false);
-        controller.set('aaa', 'aaa');
         controller.set('allDiscoveredHosts', results.filterBy('is_discovered', true));
         controller.set('totalDiscoveredHosts', results.get('meta.total'));
         controller.set('pageNumber', results.get('meta.page'));
