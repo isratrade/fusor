@@ -33,7 +33,7 @@
     <tr>
       <th>
         {{#link-to 'deployments' (query-params sort_by="name" dir=sortByDirection)}}
-          Name
+          {{column-name name='Name' col_name="name" sort_by=sort_by dir=dir}}
         {{/link-to}}
       </th>
       <th> Environment </th>
@@ -41,7 +41,7 @@
       <th> Status </th>
       <th>
         {{#link-to 'deployments' (query-params sort_by="updated_at" dir=sortByDirection)}}
-          Last Updated
+          {{column-name name='Last Updated' col_name="updated_at" sort_by=sort_by dir=dir}}
         {{/link-to}}
       </th>
       <th></th>
