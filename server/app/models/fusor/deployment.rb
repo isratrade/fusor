@@ -60,6 +60,7 @@ module Fusor
     scoped_search :on => [:id, :name, :updated_at], :complete_value => true
     scoped_search :in => :organization, :on => :name, :rename => :organization
     scoped_search :in => :lifecycle_environment, :on => :name, :rename => :lifecycle_environment
+    scoped_search :in => :status, :on => :foreman_task, :rename => :status
 
     # used by ember-data for .find('model', {id: [1,2,3]})
     scope :by_id, proc { |n| where(:id => n) if n.present? }
