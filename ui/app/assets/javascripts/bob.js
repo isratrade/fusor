@@ -1,4 +1,4 @@
-alert('hi bob.js');
+alert('hi bob22.js');
 // stupid dirty hack until we get rid of turbolinks and its twisted tricks that break
 // the web :()
 (function() {
