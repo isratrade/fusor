@@ -38,10 +38,10 @@ module FusorUi
       SETTINGS[:fusor_ui][:assets][:precompile] = [
         'fusor_ui/fusor-ember-cli.css',
         'fusor_ui/fusor-ember-cli.js',
-        'fusor_ui/vendor.js',
-        'application.js',
-        'bob.js'
+        'fusor_ui/vendor.js'
       ]
+
+      Rails.application.config.assets.precompile += %w(bob.js)
     end
 
   end
