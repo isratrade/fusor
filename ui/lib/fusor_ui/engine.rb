@@ -42,6 +42,12 @@ module FusorUi
         'application.js',
         'bob.js'
       ]
+
+      SETTINGS[:assets][:precompile] = [
+        'application.js',
+        'bob.js'
+      ]
+
     end
 
   end
