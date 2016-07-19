@@ -1,1 +1,1 @@
-alert('hi bob');
+alert('hi bob.js');
