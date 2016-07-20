@@ -6,6 +6,7 @@ import {
   PresenceValidator,
   AlphaNumericDashUnderscoreValidator,
   HostnameValidator,
+  NoSpacesValidator,
   NfsPathValidator,
   GlusterPathValidator
 } from '../utils/validators';
@@ -140,6 +141,7 @@ export default Ember.Controller.extend(NeedsDeploymentMixin, {
   computerNameValidator: AllValidator.create({
     validators: [
       PresenceValidator.create({}),
+      NoSpacesValidator.create({}),
       AlphaNumericDashUnderscoreValidator.create({})
     ]
   }),
@@ -147,6 +149,7 @@ export default Ember.Controller.extend(NeedsDeploymentMixin, {
   hostnameValidator: AllValidator.create({
     validators: [
       PresenceValidator.create({}),
+      NoSpacesValidator.create({}),
       HostnameValidator.create({})
     ]
   }),
