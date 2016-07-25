@@ -38,7 +38,7 @@ i.e.
 
 If you want to use use API mock responses for development only using ember-cli, please apply [this commit](https://github.com/fusor/fusor/commit/367fbb466c2a7a14f1b12c1f3a4ee9f3f15bb6bc).
 
-## Develoment Requirements for QE Automated Testing
+## Requirements for QE Automated Testing
 
 Quality Engineering (QE) requires that a unique data attribute called `data-qci` is assigned to each <input> tag for automated testing. Developers should manually add `data-qci` or alternatively, the {{text-f}} component helper will automatically add `data-qci` if a local variable called `cssId` is passed. For example:
 
