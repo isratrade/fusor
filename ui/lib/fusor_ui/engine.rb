@@ -34,6 +34,12 @@ module FusorUi
       end
     end
 
+    initializer 'fusor_ui.assets.precompile' do |app|
+      %w(stylesheets javascripts fonts images).each do |sub|
+        app.config.assets.paths << root.join('assets', sub).to_s
+      end
+    end
+
     initializer "fusor_ui.plugin", :group => :all do |app|
       SETTINGS[:fusor_ui] = {:assets => {}} if SETTINGS[:fusor_ui].nil?
 
