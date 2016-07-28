@@ -982,6 +982,10 @@ span.hanging-indent{
 
 @font-face {
     font-family: 'PatternFlyIcons';
-    src: url('/assets/PatternFlyIcons-webfont.woff') format('woff'),
-         url('/assets/PatternFlyIcons-webfont.ttf') format('truetype');
+    src: url('/assets/PatternFlyIcons.eot');
+    src: url('/assets/PatternFlyIcons.eot?iefix') format('eot'),
+         url('/assets/PatternFlyIcons.woff') format('woff'),
+         url('/assets/PatternFlyIcons.ttf') format('truetype'),
+         url('/assets/PatternFlyIcons.svg#webfont') format('svg');
 }
+
