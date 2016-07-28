@@ -41,8 +41,8 @@ module FusorUi
         'fusor_ui/fusor-ember-cli.css',
         'fusor_ui/fusor-ember-cli.js',
         'fusor_ui/vendor.js',
-        'fusor_ui/fonts/PatternFlyIcons-webfont.ttf',
-        'fusor_ui/fonts/PatternFlyIcons-webfont.woff'
+        'fusor_ui/PatternFlyIcons-webfont.ttf',
+        'fusor_ui/PatternFlyIcons-webfont.woff'
       ]
     end
 
