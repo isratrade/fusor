@@ -40,7 +40,7 @@ then
     cp ./dist/assets/fusor-ember-cli.map     ../ui/app/assets/javascripts/fusor_ui/;
 fi
 
-cp ./dist/fonts/*.*                          ../ui/public/fusor_ui/fonts/;
+cp ./dist/fonts/*.*                          ../ui/app/assets/fonts/;
 
 if [ "${COMMIT_ASSETS}" -eq "1" ]
 then
