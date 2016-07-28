@@ -27,6 +27,8 @@ module.exports = function(defaults) {
   app.import('bower_components/matchmedia/matchMedia.js');
   app.import('bower_components/filesize/lib/filesize.js');
   app.import('bower_components/ip-address/dist/ip-address-globals.js');
+  app.import('bower_components/patternfly/dist/fonts/PatternFlyIcons-webfont.ttf', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/PatternFlyIcons-webfont.woff', {destDir: 'fonts'});
 
   // any app.import lines below are should ONLY appear in development ember-cli branches and not in 'master branch'
 
@@ -63,8 +65,6 @@ module.exports = function(defaults) {
   app.import('bower_components/patternfly/dist/fonts/OpenSans-Semibold-webfont.woff', {destDir: 'fonts'});
   app.import('bower_components/patternfly/dist/fonts/OpenSans-SemiboldItalic-webfont.ttf', {destDir: 'fonts'});
   app.import('bower_components/patternfly/dist/fonts/OpenSans-SemiboldItalic-webfont.woff', {destDir: 'fonts'});
-  app.import('bower_components/patternfly/dist/fonts/PatternFlyIcons-webfont.ttf', {destDir: 'fonts'});
-  app.import('bower_components/patternfly/dist/fonts/PatternFlyIcons-webfont.woff', {destDir: 'fonts'});
   app.import('bower_components/patternfly/components/font-awesome/fonts/fontawesome-webfont.ttf', {destDir: 'components/font-awesome/fonts'});
   app.import('bower_components/patternfly/components/font-awesome/fonts/fontawesome-webfont.woff', {destDir: 'components/font-awesome/fonts'});
   app.import('bower_components/patternfly/components/font-awesome/fonts/fontawesome-webfont.woff2', {destDir: 'components/font-awesome/fonts'});
