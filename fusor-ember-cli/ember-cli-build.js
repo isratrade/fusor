@@ -27,6 +27,10 @@ module.exports = function(defaults) {
   app.import('bower_components/matchmedia/matchMedia.js');
   app.import('bower_components/filesize/lib/filesize.js');
   app.import('bower_components/ip-address/dist/ip-address-globals.js');
+  app.import('bower_components/patternfly/dist/fonts/PatternFlyIcons-webfont.ttf', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/PatternFlyIcons-webfont.woff', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/PatternFlyIcons-webfont.eot', {destDir: 'fonts'});
+  app.import('bower_components/patternfly/dist/fonts/PatternFlyIcons-webfont.svg', {destDir: 'fonts'});
 
   return app.toTree();
 };
