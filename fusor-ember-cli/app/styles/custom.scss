@@ -979,3 +979,13 @@ span.hanging-indent{
   display: inline-block;
   padding: 0px 8px 8px 0px;
 }
+
+@font-face {
+    font-family: 'PatternFlyIcons';
+    src: url('/assets/PatternFlyIcons.eot');
+    src: url('/assets/PatternFlyIcons.eot?iefix') format('eot'),
+         url('/assets/PatternFlyIcons.woff') format('woff'),
+         url('/assets/PatternFlyIcons.ttf') format('truetype'),
+         url('/assets/PatternFlyIcons.svg#webfont') format('svg');
+}
+
