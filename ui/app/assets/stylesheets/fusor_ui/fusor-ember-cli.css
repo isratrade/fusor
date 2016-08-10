@@ -932,6 +932,13 @@ span.hanging-indent {
   display: inline-block;
   padding: 0px 8px 8px 0px; }
 
+@font-face {
+  font-family: 'PatternFlyIcons-webfont';
+  src: url("/assets/fusor_ui/PatternFlyIcons.eot");
+  src: url("/assets/fusor_ui/PatternFlyIcons.eot?iefix") format("eot"), url("/assets/fusor_ui/PatternFlyIcons.woff") format("woff"), url("/assets/fusor_ui/PatternFlyIcons.ttf") format("truetype"), url("/assets/fusor_ui/PatternFlyIcons.svg#webfont") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
 /* wizard.scss */
 .page-header-rhci {
   background: #fafafa;
