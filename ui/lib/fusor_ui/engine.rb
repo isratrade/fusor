@@ -37,6 +37,7 @@ module FusorUi
     initializer 'fusor_ui.assets.precompile' do |app|
       %w(stylesheets javascripts fonts images).each do |sub|
         app.config.assets.paths << root.join('assets', sub).to_s
+        app.config.assets.precompile += ['*.eot','*.woff', '*.ttf', '*.svg']
       end
     end
 
