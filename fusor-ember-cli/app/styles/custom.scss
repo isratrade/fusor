@@ -980,24 +980,17 @@ span.hanging-indent{
   padding: 0px 8px 8px 0px;
 }
 
-/*@font-face {
-    font-family: 'PatternFlyIcons-webfont';
-    src: url('/assets/fusor_ui/PatternFlyIcons.eot');
-    src: url('/assets/fusor_ui/PatternFlyIcons.eot?iefix') format('eot'),
-         url('/assets/fusor_ui/PatternFlyIcons.woff') format('woff'),
-         url('/assets/fusor_ui/PatternFlyIcons.ttf') format('truetype'),
-         url('/assets/fusor_ui/PatternFlyIcons.svg#webfont') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}*/
+/* import patterfly v2.10 icons that are not in Sat 6.2
+   pficon-virtual-machine is needed
+*/
 
 @font-face {
   font-family: 'PatternFlyIcons-webfont';
-  src: font-url('PatternFlyIcons-webfont.eot');
-  src: font-url('PatternFlyIcons-webfont.eot?#iefix') format('embedded-opentype'),
-       font-url('PatternFlyIcons-webfont.ttf') format('truetype'),
-       font-url('PatternFlyIcons-webfont.woff') format('woff'),
-       font-url('PatternFlyIcons-webfont.svg#PatternFlyIcons-webfont') format('svg');
+  src: url('/fusor_ui/fonts/PatternFlyIcons-webfont.eot');
+  src: url('/fusor_ui/fonts/PatternFlyIcons-webfont.eot?#iefix') format('embedded-opentype'),
+       url('/fusor_ui/fonts/PatternFlyIcons-webfont.ttf') format('truetype'),
+       url('/fusor_ui/fonts/PatternFlyIcons-webfont.woff') format('woff'),
+       url('/fusor_ui/fonts/PatternFlyIcons-webfont.svg#PatternFlyIcons-webfont') format('svg');
 }
 
 [class^="pficon-"],
@@ -1018,5 +1011,3 @@ span.hanging-indent{
 .pficon-virtual-machine:before {
   content: "\e90f";
 }
-
-
