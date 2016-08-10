@@ -65,8 +65,6 @@ module.exports = function(defaults) {
   app.import('bower_components/patternfly/dist/fonts/OpenSans-Semibold-webfont.woff', {destDir: 'fonts'});
   app.import('bower_components/patternfly/dist/fonts/OpenSans-SemiboldItalic-webfont.ttf', {destDir: 'fonts'});
   app.import('bower_components/patternfly/dist/fonts/OpenSans-SemiboldItalic-webfont.woff', {destDir: 'fonts'});
-  app.import('bower_components/patternfly/dist/fonts/PatternFlyIcons-webfont.ttf', {destDir: 'fonts'});
-  app.import('bower_components/patternfly/dist/fonts/PatternFlyIcons-webfont.woff', {destDir: 'fonts'});
   app.import('bower_components/patternfly/components/font-awesome/fonts/fontawesome-webfont.ttf', {destDir: 'components/font-awesome/fonts'});
   app.import('bower_components/patternfly/components/font-awesome/fonts/fontawesome-webfont.woff', {destDir: 'components/font-awesome/fonts'});
   app.import('bower_components/patternfly/components/font-awesome/fonts/fontawesome-webfont.woff2', {destDir: 'components/font-awesome/fonts'});
