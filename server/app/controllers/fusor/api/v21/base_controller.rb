@@ -10,27 +10,13 @@
 # have received a copy of GPLv2 along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-require 'egon'
-
 module Fusor
   module Api
-    module Openstack
-      class StacksController < Api::Openstack::BaseController
+    module V21
+      class BaseController < ::Api::V2::BaseController
 
-        def index
-          stacks = undercloud_handle.list_stacks
-          render :json => stacks
-        end
+        include Api::Jsonapi
 
-        def show
-          render :json => {:stack => undercloud_handle.get_stack_by_name(params[:id])}
-        end
-
-        def destroy
-          stack = undercloud_handle.get_stack_by_name(params[:id])
-          undercloud_handle.delete_stack(stack) if stack
-          render json: {}, status: 204
-        end
       end
     end
   end

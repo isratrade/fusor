@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.files += Dir["config/fusor.yaml"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "active_model_serializers", '~> 0.9.0'
+  s.add_dependency "active_model_serializers", '~> 0.10.0'
   s.add_dependency "rubyipmi"
   s.add_dependency "ruby-ip"
   s.add_dependency "rubyzip"

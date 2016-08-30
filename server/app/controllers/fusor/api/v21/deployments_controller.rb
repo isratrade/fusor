@@ -13,9 +13,11 @@
 require "net/http"
 require "sys/filesystem"
 require "uri"
+require 'fusor/password_filter'
+require 'fusor/deployment_logger'
 
 module Fusor
-  class Api::V21::DeploymentsController < Api::V2::DeploymentsController
+  class Api::V21::DeploymentsController < Api::V21::BaseController
 
     before_filter :find_deployment, :only => [:destroy, :show, :update, :check_mount_point,
                                               :deploy, :redeploy, :validate, :log, :openshift_disk_space]
@@ -31,7 +33,6 @@ module Fusor
       cnt_search = Deployment.search_for(params[:search], :order => params[:order]).count
       render :json => @deployments,
              :each_serializer => Fusor::DeploymentSerializer,
-             :serializer => RootArraySerializer,
              :meta => {:total => cnt_search,
                        :page => params[:page].present? ? params[:page].to_i : 1,
                        :total_pages => (cnt_search / 20.0).ceil
