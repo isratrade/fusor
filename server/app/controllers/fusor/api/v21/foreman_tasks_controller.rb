@@ -13,7 +13,7 @@
 module Fusor
   class Api::V21::ForemanTasksController < ::ForemanTasks::Api::TasksController
 
-    include Api::Jsonapi
+    include Fusor::Api::Jsonapi
 
     def index
       @foreman_tasks = ForemanTasks::Task.search_for(params[:search]).select('DISTINCT foreman_tasks_tasks.*')

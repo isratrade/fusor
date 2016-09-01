@@ -15,7 +15,7 @@ module Fusor
     module V21
       class BaseController < ::Api::V2::BaseController
 
-        include Api::Jsonapi
+        include Fusor::Api::Jsonapi
 
       end
     end
