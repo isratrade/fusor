@@ -1,3 +1,6 @@
+ActiveModelSerializers.config.adapter = :json_api
+ActiveModelSerializers.config.key_transform = :unaltered
+
 module Fusor
   class Engine < ::Rails::Engine
     isolate_namespace Fusor
@@ -8,9 +11,6 @@ module Fusor
     config.autoload_paths += Dir["#{config.root}/app/overrides"]
     config.autoload_paths += Dir["#{config.root}/app/serializers"]
     config.autoload_paths += Dir["#{config.root}/lib/modules"]
-
-    #ActiveModelSerializers.config.adapter = :json_api
-    #ActiveModelSerializers.config.key_transform = :unaltered
 
     # Add any db migrations
     initializer "fusor.load_app_instance_data" do |app|
