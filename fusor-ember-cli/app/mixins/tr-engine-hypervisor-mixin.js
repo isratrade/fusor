@@ -50,7 +50,7 @@ export default Ember.Mixin.create({
       if (this.get('isValidHostname')) {
         request({
           url: '/fusor/api/v21/discovered_hosts/' + host.get('id') + '/rename',
-          type: "PATCH",
+          type: "PUT",
           data: JSON.stringify({'data': {'attributes': { 'name': host.get('name') } } }),
           headers: {
             "Accept": "application/json",
