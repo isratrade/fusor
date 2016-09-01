@@ -1,3 +1,4 @@
+require 'active_model_serializers'
 
 module Fusor
   class Engine < ::Rails::Engine
