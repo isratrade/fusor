@@ -1,6 +1,6 @@
 module Fusor
   module Api
-    module Version3
+    module Jsonapi
       extend ActiveSupport::Concern
 
       included do
