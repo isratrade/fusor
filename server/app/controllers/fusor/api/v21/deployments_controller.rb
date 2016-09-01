@@ -246,14 +246,14 @@ module Fusor
       # strong params will filter the value so it does not impact an update.
       # See discussion: https://github.com/rails/rails/issues/13766
       #############################################################
-      if params[:deployment][:discovered_host_ids].nil?
+      if params[:data][:attributes][:discovered_host_ids].nil?
         allowed << :discovered_host_ids
       else
         allowed << { :discovered_host_ids => [] }
       end
       #############################################################
 
-      params.require(:deployment).permit(*allowed)
+      params.require(:data).require(:attributes).permit(*allowed)
     end
 
     def find_deployment
