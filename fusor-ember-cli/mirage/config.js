@@ -92,10 +92,10 @@ export default function() {
   this.patch('/fusor/api/v21/subscriptions/:id');
   this.put('/fusor/api/v21/subscriptions/:id');
   this.get('/fusor/api/v21/subscriptions/validate', (schema, request) => {
-    return {};
+    return {valid: true};
   });
   this.put('/fusor/api/v21/subscriptions/upload', (schema, request) => {
-    return {};
+    return {manifest_file: '/file/path/to/manifest'};
   });
 
   this.get('/api/v21/hostgroups');
@@ -103,6 +103,10 @@ export default function() {
 
   this.get('/api/v21/domains');
   this.get('/api/v21/domains/:id');
+
+  this.get('/fusor/api/v21/deployments/:id/validate_cdn', (schema, request) => {
+    return {cdn_url_code: '200'};
+  });
 
   this.get('/fusor/api/v21/deployments/:id/validate', (schema, request) => {
     var id = request.params.id;
