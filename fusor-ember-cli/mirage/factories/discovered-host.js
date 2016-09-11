@@ -3,9 +3,9 @@
 
   Create more files in this directory to define additional factories.
 */
-import Mirage from 'ember-cli-mirage';
+import { Factory, faker } from 'ember-cli-mirage';
 
-export default Mirage.Factory.extend({
+export default Factory.extend({
   name(i) {
     return 'mac' + i + '254000f6568';
   },
@@ -17,12 +17,12 @@ export default Mirage.Factory.extend({
     return i + '2:54:00:0f:65:68';
   },
   cpus: 4,
-  memory_human_size: "7.8 GB",
-  disks_human_size: "10 GB",
-  disk_count: 1,
-  subnet_to_s: "default (192.168.152.0/24)",
-  is_virtual: true,
-  is_managed: false,
-  is_discovered: true
+  memoryHumanSize: "7.8 GB",
+  disksHumanSize: "10 GB",
+  diskCount: 1,
+  subnetToS: "default (192.168.152.0/24)",
+  isVirtual: true,
+  isManaged: false,
+  isDiscovered: true
 
 });
