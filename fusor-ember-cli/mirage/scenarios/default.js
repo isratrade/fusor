@@ -6,89 +6,94 @@ export default function(server) {
   server.loadFixtures();
 
   var org = server.create('organization', {name: 'Default Organization'});
-  var env = server.create('lifecycle_environment', {name: 'Library',
+  var env = server.create('lifecycle-environment', {name: 'Library',
                                                     label: 'Library',
                                                     library: true});
 
-  var engine = server.create('discovered_host', {is_virtual: true});
-  var hypervisor1 = server.create('discovered_host', {is_virtual: false, memory_human_size: '21.8 GB'});
-  var hypervisor2 = server.create('discovered_host', {is_virtual: true, memory_human_size: '21.8 GB'});
+  var engine = server.create('discovered-host', {isVirtual: true});
+  var hypervisor1 = server.create('discovered-host', {name: 'hypervisor1', isVirtual: false, memory_human_size: '21.8 GB'});
+  var hypervisor2 = server.create('discovered-host', {name: 'hypervisor2', isVirtual: true, memoryHumanSize: '21.8 GB'});
 
-  server.createList('discovered_host', 2, {is_virtual: true});
-  server.createList('discovered_host', 2, {is_virtual: false});
+  server.createList('discovered-host', 2, {isVirtual: true});
+  server.createList('discovered-host', 2, {isVirtual: false});
 
   var domain = server.create('domain', {name: 'example.com'});
   var hostgroup = server.create('hostgroup', {name: 'Fusor Base', domain_id: domain.id});
 
-  server.create('deployment', {name: 'rhev_only',
-                                      deploy_rhev: true,
-                                      organization_id: org.id,
-                                      lifecycle_environment_id: env.id,
-                                      discovered_host_id: engine.id,
-                                      discovered_host_ids: [hypervisor1.id, hypervisor2.id]
-                                     });
+  server.create('deployment', { name: 'rhev_only',
+                                deployRhev: true,
+                                organization: org,
+                                lifecycleEnvironment: env,
+                                discoveredHost: engine,
+                                discoveredHosts: [hypervisor1, hypervisor2]
+                              });
 
-  var osp_d1 = server.create('openstack_deployment');
+  var osp_d1 = server.create('openstack-deployment');
+  var osp_d2 = server.create('openstack-deployment');
 
-  server.create('deployment', {name: 'osp_only',
-                                      deploy_openstack: true,
-                                      organization_id: org.id,
-                                      lifecycle_environment_id: env.id,
-                                      openstack_deployment_id: osp_d1.id
-                                     });
+  server.create('deployment', { name: 'osp_only',
+                                deployRhev: false,
+                                deployOpenstack: true,
+                                organization: org,
+                                lifecycleEnvironment: env,
+                                openstackDeployment: osp_d1
+                              });
 
-  server.create('deployment', {name: 'rhev_and_cfme_deployment',
-                                      deploy_rhev: true,
-                                      deploy_cfme: true,
-                                      organization_id: org.id,
-                                      lifecycle_environment_id: env.id,
-                                      discovered_host_id: engine.id,
-                                      discovered_host_ids: [hypervisor2.id]
-                                     });
+  server.create('deployment', { name: 'rhev_and_cfme_deployment',
+                                deployRhev: true,
+                                deployCfme: true,
+                                organization: org,
+                                lifecycleEnvironment: env,
+                                discoveredHost: engine,
+                                discoveredHosts: [hypervisor1, hypervisor2]
+                              });
 
-  var osp_d2 = server.create('openstack_deployment');
+  server.create('deployment', { name: 'osp_and_cfme_deployment',
+                                deployRhev: false,
+                                deployOpenstack: true,
+                                deployCfme: true,
+                                organization: org,
+                                lifecycleEnvironment: env,
+                                openstackDeployment: osp_d2
+                              });
 
-  server.create('deployment', {
-    name: 'osp_and_cfme_deployment',
-    deploy_openstack: true,
-    deploy_cfme: true,
-    organization_id: org.id,
-    lifecycle_environment_id: env.id,
-    openstack_deployment_id: osp_d2.id
-  });
+  server.create('deployment', { name: 'rhev_and_openshift_deployment',
+                                deployRhev: true,
+                                deployOpenshift: true,
+                                organization: org,
+                                lifecycleEnvironment: env,
+                                discoveredHost: engine,
+                                discoveredHosts: [hypervisor1, hypervisor2]
+                              });
 
-  server.create('deployment', {name: 'rhev_and_openshift_deployment',
-                                      deploy_rhev: true,
-                                      deploy_openshift: true,
-                                      organization_id: org.id,
-                                      lifecycle_environment_id: env.id,
-                                      discovered_host_id: engine.id,
-                                      discovered_host_ids: [hypervisor1.id, hypervisor2.id]
-                                     });
+  server.create('deployment', { name: 'rhev_openshift_cfme_deployment',
+                                deployRhev: true,
+                                deploy_openshift: true,
+                                deployCfme: true,
+                                organization: org,
+                                lifecycleEnvironment: env,
+                                discoveredHost: engine,
+                                discoveredHosts: [hypervisor1, hypervisor2]
+                              });
 
-  server.create('deployment', {name: 'rhev_openshift_cfme_deployment',
-                                      deploy_rhev: true,
-                                      deploy_openshift: true,
-                                      deploy_cfme: true,
-                                      organization_id: org.id,
-                                      lifecycle_environment_id: env.id,
-                                      discovered_host_id: engine.id,
-                                      discovered_host_ids: [hypervisor1.id, hypervisor2.id]
-                                     });
+  server.create('deployment', {  name: 'all 4 products',
+                                deployRhev: true,
+                                deployOpenstack: true,
+                                deploy_openshift: true,
+                                deployCfme: true,
+                                organization: org,
+                                lifecycleEnvironment: env,
+                                openstackDeployment: osp_d1,
+                                openshiftInstallLoc: 'RHEV',
+                                discoveredHost: engine,
+                                discoveredHosts: [hypervisor1, hypervisor2]
+                              });
 
-  server.create('deployment', {name: 'all 4 products',
-                                      deploy_rhev: true,
-                                      deploy_openstack: true,
-                                      deploy_openshift: true,
-                                      deploy_cfme: true,
-                                      organization_id: org.id,
-                                      lifecycle_environment_id: env.id,
-                                      openstack_deployment_id: osp_d1.id,
-                                      openshift_install_loc: 'RHEV',
-                                      discovered_host_id: engine.id,
-                                      discovered_host_ids: [hypervisor1.id, hypervisor2.id]
-                                     });
+  server.createList('deployment', 50, { deployRhev: true,
+                                        organization: org,
+                                        lifecycleEnvironment: env
+                                       });
 
-  server.createList('deployment', 100);
+//  server.createList('subscription', 2);
 
 }

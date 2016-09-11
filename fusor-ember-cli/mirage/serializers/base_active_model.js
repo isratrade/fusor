@@ -1,7 +1,7 @@
-import { JSONAPISerializer } from 'ember-cli-mirage';
+import { ActiveModelSerializer } from 'ember-cli-mirage';
 const { underscore } = Ember.String;
 
-export default JSONAPISerializer.extend({
+export default ActiveModelSerializer.extend({
 
   keyForAttribute(attr) {
     return underscore(attr);
@@ -14,13 +14,5 @@ export default JSONAPISerializer.extend({
   keyForRelationshipIds(relationship) {
     return underscore(relationship) + '_ids';
   }
-
-  // keyForModel(modelName) {
-  //   return underscore(modelName);
-  // },
-
-  // keyForCollection(modelName) {
-  //   return pluralize(underscore(modelName));
-  // },
 
 });

@@ -3,9 +3,9 @@
 
   Create more files in this directory to define additional factories.
 */
-import Mirage from 'ember-cli-mirage';
+import { Factory, faker } from 'ember-cli-mirage';
 
-export default Mirage.Factory.extend({
+export default Factory.extend({
   name(i) {
     return 'env ' + i;
   },
@@ -14,8 +14,8 @@ export default Mirage.Factory.extend({
   },
   description: null,
   library: false,
-  prior_id: null,
-  created_at: "2016-05-19",
-  updated_at: "2016-05-19"
+  priorId: null,
+  createdAt: "2016-05-19",
+  updatedAt: "2016-05-19"
 
 });
