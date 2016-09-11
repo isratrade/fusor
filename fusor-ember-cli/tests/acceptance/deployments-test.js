@@ -24,8 +24,8 @@ test('visiting /deployments', function(assert) {
 test('user should see all elements on deployments page', function(assert) {
 
     var org = server.create('organization');
-    var env = server.create('lifecycle_environment');
-    server.createList('deployment', 10, {organization_id: org.id, lifecycle_environment_id: env.id});
+    var env = server.create('lifecycle-environment');
+    server.createList('deployment', 10, {organization: org, lifecycleEnvironment: env});
 
     visit('/deployments');
 
@@ -47,13 +47,13 @@ test('user should see all elements on deployments page', function(assert) {
         assert.equal($.trim(find('table.deployments-table > thead > tr > th:nth-child(4)').text()),
                      'Status');
         assert.equal(find('tr.deployment-row').length, 10);
-        assert.equal($.trim(find('.displaying-entries').text()), 'Displaying entries 1 - 20 of 107 in total');
+        assert.equal($.trim(find('.displaying-entries').text()), 'Displaying all 10 entries');
     });
 });
 
 test('user clicks on New Deployment button', function(assert) {
     var org = server.create('organization');
-    var env = server.create('lifecycle_environment');
+    var env = server.create('lifecycle-environment');
 
     visit('/deployments');
     click('.new-deployment-button a');
@@ -65,8 +65,8 @@ test('user clicks on New Deployment button', function(assert) {
 
 test('deployment name, org, env names are correct', function(assert) {
     var org = server.create('organization');
-    var env = server.create('lifecycle_environment');
-    server.createList('deployment', 1, {organization_id: org.id, lifecycle_environment_id: env.id});
+    var env = server.create('lifecycle-environment');
+    server.createList('deployment', 1, {organization: org, lifecycleEnvironment: env});
 
     visit('/deployments');
     andThen(function() {
@@ -84,8 +84,8 @@ test('deployment name, org, env names are correct', function(assert) {
 
 test('user can filter list of deployments', function(assert) {
     var org = server.create('organization');
-    var env = server.create('lifecycle_environment');
-    server.createList('deployment', 11, {organization_id: org.id, lifecycle_environment_id: env.id});
+    var env = server.create('lifecycle-environment');
+    server.createList('deployment', 11, {organization: org, lifecycleEnvironment: env});
 
     visit('/deployments');
 
