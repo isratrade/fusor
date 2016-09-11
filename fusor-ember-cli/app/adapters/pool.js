@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 import Ember from 'ember';
 
-export default DS.ActiveModelAdapter.extend({
+export default DS.RESTAdapter.extend({
 
   urlForQuery(query, modelName) {
     // Use consumer UUID to get pools

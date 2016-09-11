@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 import Ember from 'ember';
 
-export default DS.ActiveModelAdapter.extend({
+export default DS.RESTAdapter.extend({
 
   // 'overcloud' is hard coded
   // ex. /fusor/api/openstack/deployments/:id/deployment_plans/overcloud
