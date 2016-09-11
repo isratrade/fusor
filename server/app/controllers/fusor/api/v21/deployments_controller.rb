@@ -64,9 +64,43 @@ module Fusor
     end
 
     def deploy
-      # just inherit from V2
       begin
-        super
+        # If we're deploying then the deployment object needs to be valid.
+        # This should be the only time we run the DeploymentValidator.
+        if @deployment.invalid?
+          raise ::ActiveRecord::RecordInvalid.new @deployment
+        end
+
+        ::Fusor.log_change_deployment(@deployment)
+
+        # update the provider with the url
+        ::Fusor.log.debug "setting provider url to [#{@deployment.cdn_url}]"
+        provider = @deployment.organization.redhat_provider
+        # just in case save it on the @deployment.org as well
+        @deployment.organization.redhat_provider.repository_url = @deployment.cdn_url
+        provider.repository_url = @deployment.cdn_url
+        provider.save!
+
+        save_deployment_attributes
+
+        manifest_task = sync_task(::Actions::Fusor::Subscription::ManageManifest,
+                                  @deployment,
+                                  customer_portal_credentials)
+
+        # If the manifest action failed, there is no need to continue with
+        # the deploy actions, since it requires subscriptions & content
+        # both of which are enabled by the manifest.
+        unless manifest_task["result"] == "error"
+          task = async_task(::Actions::Fusor::Deploy,
+                            @deployment,
+                            params[:skip_content])
+          @deployment.foreman_task_uuid = task.id
+          @deployment.save
+        end
+
+        raise "ManageManifest task failed" unless task
+
+        render :json => @deployment, :serializer => Fusor::DeploymentSerializer
       rescue ::ActiveRecord::RecordInvalid
         render json: {errors: @deployment.errors}, status: 422
       end

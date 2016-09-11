@@ -13,9 +13,9 @@
 module Fusor
   module Api
     module V21
-      class BaseController < ::Api::V2::BaseController
+      class BaseController < ::Katello::Api::V2::ApiController
 
-        #include Api::Jsonapi
+        include Api::Jsonapi
 
       end
     end

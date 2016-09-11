@@ -13,7 +13,7 @@
 module Fusor
   class Api::V21::DiscoveredHostsController < ::Api::V2::DiscoveredHostsController
 
-    #include Api::Jsonapi
+    include Api::Jsonapi
 
     def index
       super
