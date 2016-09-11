@@ -1,7 +1,6 @@
 import DS from 'ember-data';
 
 export default DS.JSONAPISerializer.extend({
-  isNewSerializerAPI: true,
 
   // disable dasherize transformation
   keyForAttribute: function(attr) {
