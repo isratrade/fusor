@@ -10,28 +10,24 @@
 # have received a copy of GPLv2 along with this software; if not, see
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
 
-require 'egon'
-
 module Fusor
-  module Api
-    module Openstack
-      class StacksController < Api::Openstack::BaseController
+  module Concerns
+    module Api::Jsonapi
+      extend ActiveSupport::Concern
 
-        def index
-          stacks = undercloud_handle.list_stacks
-          render :json => stacks
-        end
-
-        def show
-          render :json => {:stack => undercloud_handle.get_stack_by_name(params[:id])}
-        end
-
-        def destroy
-          stack = undercloud_handle.get_stack_by_name(params[:id])
-          undercloud_handle.delete_stack(stack) if stack
-          render json: {}, status: 204
+      included do
+        resource_description do
+          resource_id 'fusor'
+          api_version 'v21'
+          api_base_url '/fusor/api'
+          app_info N_("Fusor v21 API version is based on JSONAPI.org spec. You need to use v21 by either passing 'version=21' in the Accept Header or using /fusor/api/v21/ in the URL.")
         end
       end
+
+      def api_version
+        '21'
+      end
+
     end
   end
 end
