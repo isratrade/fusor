@@ -23,11 +23,18 @@ export default function() {
 
   this.del('/fusor/api/v21/deployments/:id');
 
-  this.get('/fusor/api/v21/openstack_deployments');
-  this.get('/fusor/api/v21/openstack_deployments/:id');
-  this.post('/fusor/api/v21/openstack_deployments');
-  this.put('/fusor/api/v21/openstack_deployments/:id');
-  this.del('/fusor/api/v21/openstack_deployments/:id');
+  this.get('/fusor/api/v21/openstack_deployments', (schema, request) => {
+    return schema.db.deploymentPlans[0];
+  });
+
+  this.get('/fusor/api/v21/openstack_deployments/:id', (schema, request) => {
+    return { deployment_plan: schema.db.deploymentPlans[0] };
+  });
+
+  // this.post('/fusor/api/v21/openstack_deployments');
+  // this.put('/fusor/api/v21/openstack_deployments/:id');
+  // this.patch('/fusor/api/v21/openstack_deployments/:id');
+  // this.del('/fusor/api/v21/openstack_deployments/:id');
 
   this.get('/api/v21/organizations');
   this.get('/api/v21/organizations/:id');

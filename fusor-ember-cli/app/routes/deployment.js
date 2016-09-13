@@ -9,6 +9,7 @@ export default Ember.Route.extend(DeploymentRouteMixin, {
   },
 
   setupController(controller, model) {
+    debugger
     controller.set('model', model);
     controller.set('satelliteTabRouteName', 'satellite.index');
     controller.set('lifecycleEnvironmentTabRouteName', 'configure-environment');

@@ -3,7 +3,9 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
   model() {
-    return this.modelFor('deployment').get('openstack_deployment');
+    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaa');
+    console.log(this.modelFor('deployment').get('openstack_deployment'));
+    return this.modelFor('deployment'); //.get('openstack_deployment');
   },
 
   actions: {

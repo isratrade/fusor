@@ -5,7 +5,7 @@ module Fusor
 
     def setup
       @deployment = fusor_deployments(:rhev)
-      # magic, without this some of the routes don't resolve for some reason
+      # magic, attr_writer :attr_namesithout this some of the routes don't resolve for some reason
       setup_fusor_routes
       @controller = ::Fusor::Api::V21::DeploymentsController.new
     end

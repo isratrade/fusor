@@ -32,6 +32,9 @@ module Fusor
                                 .paginate(:page => params[:page])
       cnt_search = Deployment.search_for(params[:search], :order => params[:order]).count
       render :json => @deployments,
+             :include => [:organization, :lifecycle_environment, :discovered_host,
+                                         :discovered_hosts, :ose_master_hosts, :ose_worker_hosts, :subscriptions,
+                                         :introspection_tasks, :foreman_task, :openstack_deployment],
              :each_serializer => Fusor::DeploymentSerializer,
              :meta => {:total => cnt_search,
                        :page => params[:page].present? ? params[:page].to_i : 1,
@@ -40,7 +43,11 @@ module Fusor
     end
 
     def show
-      render :json => @deployment, :serializer => Fusor::DeploymentSerializer
+      render :json => @deployment,
+                          :include => [:organization, :lifecycle_environment, :discovered_host,
+                                         :discovered_hosts, :ose_master_hosts, :ose_worker_hosts, :subscriptions,
+                                         :introspection_tasks, :foreman_task, :openstack_deployment],
+             :serializer => Fusor::DeploymentSerializer
     end
 
     def create
