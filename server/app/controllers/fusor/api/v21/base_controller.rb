@@ -12,16 +12,10 @@
 
 module Fusor
   module Api
-    module V2
+    module V21
       class BaseController < ::Katello::Api::V2::ApiController
 
-        include Api::V2::Rendering
-
-        resource_description do
-          resource_id 'fusor'
-          api_version 'v2'
-          api_base_url '/fusor/api'
-        end
+        #include Api::Jsonapi
 
       end
     end
