@@ -108,8 +108,10 @@ export default Ember.Route.extend(PollingPromise, {
   loadIntrospectionTasks() {
     let controller = this.get('controller');
     let deploymentId = this.get('controller.deployment.id');
-    return this.store.findRecord('deployment', deploymentId, {reload: true}).then(deployment => {
-      controller.set('introspectionTasks', deployment.get('introspection_tasks'));
+    return this.store.peekRecord('deployment', deploymentId).then(deployment => {
+      //controller.set('introspectionTasks', deployment.get('introspection_tasks'));
+    }, function(error) {
+      alert(error);
     });
   },
 

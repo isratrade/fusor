@@ -50,7 +50,7 @@ module Fusor
                :cloudforms_db_disk_size,
                :created_at, :updated_at
 
-    has_one :organization, serializer: ::OrganizationSerializer
+    has_one :organization, serializer: OrganizationSerializer
     has_one :lifecycle_environment, serializer: LifecycleEnvironmentSerializer
     # has one engine
     has_one :discovered_host, serializer: DiscoveredHostSerializer

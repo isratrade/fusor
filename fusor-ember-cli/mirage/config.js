@@ -3,6 +3,8 @@ import Mirage, { faker } from 'ember-cli-mirage';
 
 export default function() {
 
+  this.timing = 5; // default is 400
+
   // route to prevent js console error by ember-cli-blanket
   this.post('/write-blanket-coverage', (schema, request) => {
     return {};
