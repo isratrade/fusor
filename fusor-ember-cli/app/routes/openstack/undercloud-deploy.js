@@ -94,14 +94,15 @@ export default Ember.Route.extend(PollingPromise, {
       if (this.get('controller.applicationController.isEmberCliMode')) {
         // only used for development to enabled OSP tabs (disableOspTab: false)
         openstackDeployment.set('openstack_undercloud_password', 'this-passwd-is-populated by fusor/server');
+        openstackDeployment.set('undercloud_admin_password', 'this-passwd-is-populated by fusor/server');
         this.send('saveOpenstackDeployment', null);
       }
     });
   },
 
   displayDeployUndercloudStatus() {
-    let deploymentId = this.get('controller.deploymentId');
-
+    let deploymeniId = this.get('controller.deploymentId');
+    let self = this;
     this.set('controller.errorMsg', null);
     this.set('controller.loadingSpinnerText', `Checking deployment status ...`);
     this.set('controller.showLoadingSpinner', true);
@@ -114,6 +115,7 @@ export default Ember.Route.extend(PollingPromise, {
         contentType: 'application/json'
       }).then(response => {
         if (response.deployed) {
+          self.set('undercloud_admin_password', '12312312');
           resolve(null);
         } else {
           reject('There was an issue deploying the undercloud.  Please check foreman logs.');
