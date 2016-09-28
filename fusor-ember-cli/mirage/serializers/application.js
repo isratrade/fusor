@@ -9,6 +9,8 @@ export default JSONAPISerializer.extend({
   },
 
   keyForRelationship(relationship) {
+    console.log("relationship is " + relationship);
+    console.log(underscore(relationship));
     return underscore(relationship);
   },
 
