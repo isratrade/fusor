@@ -2,7 +2,6 @@
 import Mirage, { faker } from 'ember-cli-mirage';
 import ENV from 'fusor-ember-cli/config/environment';
 
-
 export default function() {
 
   this.timing = 5; // default is 400
