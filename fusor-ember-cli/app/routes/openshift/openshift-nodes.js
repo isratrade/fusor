@@ -10,8 +10,8 @@ export default Ember.Route.extend(UsesOseDefaults, {
     // of mounting and reading available disk space on the specified NFS mount
     // If the deployment is not saved, can end up in a race condition and
     // the server load will fail on first route.
-   const deployment = this.modelFor('openshift');
-   return deployment.save();
+    const deployment = this.modelFor('openshift');
+    return deployment.save();
   },
 
   model() {

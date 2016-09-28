@@ -24,5 +24,4 @@ export default JSONAPISerializer.extend({
     return underscore(Ember.String.pluralize(model.modelName));
   }
 
-
 });
