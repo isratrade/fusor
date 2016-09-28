@@ -101,8 +101,8 @@ export default Ember.Route.extend(PollingPromise, {
   },
 
   displayDeployUndercloudStatus() {
-    let deploymeniId = this.get('controller.deploymentId');
-    let self = this;
+    let deploymentId = this.get('controller.deploymentId');
+
     this.set('controller.errorMsg', null);
     this.set('controller.loadingSpinnerText', `Checking deployment status ...`);
     this.set('controller.showLoadingSpinner', true);
@@ -115,7 +115,6 @@ export default Ember.Route.extend(PollingPromise, {
         contentType: 'application/json'
       }).then(response => {
         if (response.deployed) {
-          self.set('undercloud_admin_password', '12312312');
           resolve(null);
         } else {
           reject('There was an issue deploying the undercloud.  Please check foreman logs.');
