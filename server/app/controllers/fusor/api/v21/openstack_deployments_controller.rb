@@ -141,7 +141,7 @@ module Fusor
     end
 
     def openstack_deployment_params
-      params.fetch(:openstack_deployment, {}).permit(:undercloud_admin_password,
+      params.require(:data).require(:attributes).permit(:undercloud_admin_password,
                                                    :undercloud_ip_address,
                                                    :undercloud_ssh_username,
                                                    :undercloud_ssh_password,

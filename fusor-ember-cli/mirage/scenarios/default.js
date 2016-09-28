@@ -1,9 +1,12 @@
+import ENV from 'fusor-ember-cli/config/environment';
+
 export default function(server) {
 
   // Seed your development database using your factories. This
   // data will not be loaded in your tests.
-
   server.loadFixtures();
+
+if (ENV.environment === 'mocks-enabled') {
 
   var org = server.create('organization', {name: 'Default Organization'});
   var env = server.create('lifecycle-environment', {name: 'Library',
@@ -95,5 +98,6 @@ export default function(server) {
                                        });
 
 //  server.createList('subscription', 2);
+}
 
 }
